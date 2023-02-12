@@ -42,7 +42,7 @@ List<ProductModel> listProductDummy = [
     ],
   ),
   ProductModel(
-    originalPrice: '129',
+    originalPrice: '',
     quantity: 100,
     id: 2,
     price: '95',

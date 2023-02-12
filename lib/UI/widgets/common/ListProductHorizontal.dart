@@ -4,10 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/product_item_horizontal.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 
 class ListProductHorizontal extends StatefulWidget {
-  const ListProductHorizontal({super.key});
+  const ListProductHorizontal({
+    super.key,
+    required this.title,
+    this.isShowSeeAll,
+    required this.listProduct,
+  });
+
+  final String title;
+  final bool? isShowSeeAll;
+  final List<ProductModel> listProduct;
 
   @override
   State<ListProductHorizontal> createState() => _ListProductHorizontalState();
@@ -17,14 +26,14 @@ class _ListProductHorizontalState extends State<ListProductHorizontal> {
   List<Widget> renderListChild() {
     List<Widget> list = [];
 
-    for (var i = 0; i < listProductDummy.length; i++) {
+    for (var i = 0; i < widget.listProduct.length; i++) {
       EdgeInsets padding = EdgeInsets.only(right: 13);
 
       if (i == 0) {
         padding = EdgeInsets.only(right: 13, left: AppDimension.contentPadding);
       }
 
-      if (i == listProductDummy.length - 1) {
+      if (i == widget.listProduct.length - 1) {
         padding = EdgeInsets.only(right: AppDimension.contentPadding);
       }
 
@@ -32,7 +41,7 @@ class _ListProductHorizontalState extends State<ListProductHorizontal> {
         Container(
           padding: padding,
           child: ProductItemHorizontal(
-            productItem: listProductDummy[i],
+            productItem: widget.listProduct[i],
           ),
         ),
       );
@@ -54,30 +63,31 @@ class _ListProductHorizontalState extends State<ListProductHorizontal> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'New Arrivals',
+                widget.title,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              GestureDetector(
-                onTap: () {},
-                child: Row(
-                  children: [
-                    Text(
-                      'See all',
-                      style: TextStyle(
+              if (widget.isShowSeeAll ?? false)
+                GestureDetector(
+                  onTap: () {},
+                  child: Row(
+                    children: [
+                      Text(
+                        'See all',
+                        style: TextStyle(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      Icon(
+                        Icons.chevron_right,
+                        size: 21,
                         color: AppColors.primary,
                       ),
-                    ),
-                    Icon(
-                      Icons.chevron_right,
-                      size: 21,
-                      color: AppColors.primary,
-                    ),
-                  ],
-                ),
-              )
+                    ],
+                  ),
+                )
             ],
           ),
         ),

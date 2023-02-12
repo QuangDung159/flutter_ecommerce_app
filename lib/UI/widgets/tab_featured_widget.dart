@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/UI/widgets/common/ListProductHorizontal.da
 import 'package:flutter_ecommerce_app/UI/widgets/list_category.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 
 class TabFeaturedWidget extends StatefulWidget {
@@ -74,7 +75,19 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
             SizedBox(
               height: 30,
             ),
-            ListProductHorizontal(),
+            ListProductHorizontal(
+              title: 'New Arrivals',
+              listProduct: listProductDummy,
+              isShowSeeAll: true,
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            ListProductHorizontal(
+              title: 'Sale Items',
+              listProduct: listProductDummy,
+              isShowSeeAll: true,
+            ),
           ],
         ),
       ),
