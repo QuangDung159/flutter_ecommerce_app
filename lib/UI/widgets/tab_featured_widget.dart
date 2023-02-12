@@ -42,7 +42,7 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
                 ),
               ),
             ),
-            renderTopPanel(),
+            renderTopPanel('Under Amour', AssetHelper.panelHome1),
             SizedBox(
               height: 24,
             ),
@@ -88,22 +88,115 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
               listProduct: listProductDummy,
               isShowSeeAll: true,
             ),
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimension.contentPadding,
+              ),
+              child: renderTopPanel(
+                'New Arrivals',
+                AssetHelper.panelHome2,
+                hasBorderRadius: true,
+                titlePadding: 16,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            ListProductHorizontal(
+              title: 'Recently Viewed',
+              listProduct: listProductDummy,
+              isShowSeeAll: true,
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                bottom: 30,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimension.contentPadding,
+              ),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(AssetHelper.panelHome3),
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(AssetHelper.gradientHome),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: AppDimension.contentPadding,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Stay active at home with videos and audio workouts, all free with your membership!',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Container(
+                          height: 48,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: AppColors.primary,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Explore LevelUP Benefits',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
     );
   }
 
-  Widget renderTopPanel() {
+  Widget renderTopPanel(String leftText, String imagePath,
+      {bool? hasBorderRadius, double? titlePadding}) {
     return Stack(
       children: [
-        Image.asset(AssetHelper.panelHome1),
+        ClipRRect(
+          borderRadius: hasBorderRadius ?? false
+              ? BorderRadius.circular(12)
+              : BorderRadius.zero,
+          child: Image.asset(imagePath),
+        ),
         Positioned(
           bottom: 0,
           left: 0,
           right: 0,
           child: ClipRRect(
             // Clip it cleanly.
+            borderRadius: hasBorderRadius ?? false
+                ? BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
+                  )
+                : BorderRadius.zero,
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
               child: Container(
@@ -113,13 +206,13 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
                 height: 50,
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: AppDimension.contentPadding,
+                    horizontal: titlePadding ?? AppDimension.contentPadding,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Under Amour',
+                        leftText,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
