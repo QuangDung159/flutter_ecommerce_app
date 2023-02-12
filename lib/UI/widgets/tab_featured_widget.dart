@@ -4,8 +4,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_category.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/product_item_horizontal.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 
 class TabFeaturedWidget extends StatefulWidget {
@@ -16,6 +18,33 @@ class TabFeaturedWidget extends StatefulWidget {
 }
 
 class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
+  List<Widget> renderList() {
+    List<Widget> list = [];
+
+    for (var i = 0; i < listProductDummy.length; i++) {
+      EdgeInsets padding = EdgeInsets.only(right: 13);
+
+      if (i == 0) {
+        padding = EdgeInsets.only(right: 13, left: AppDimension.contentPadding);
+      }
+
+      if (i == listProductDummy.length - 1) {
+        padding = EdgeInsets.only(right: AppDimension.contentPadding);
+      }
+
+      list.add(
+        Container(
+          padding: padding,
+          child: ProductItemHorizontal(
+            productItem: listProductDummy[i],
+          ),
+        ),
+      );
+    }
+
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -112,34 +141,13 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
             SizedBox(
               height: 18,
             ),
-            SizedBox(
-              width: 130,
-              child: Column(
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.asset(AssetHelper.productImage),
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    'Nike One',
-                  ),
-                  Text(
-                    'Women\'s Mid-Rise Leggings',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: AppColors.greyScale,
-                    ),
-                  ),
-                  Text(
-                    '\$59',
-                  ),
-                ],
+                children: renderList(),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -204,6 +212,25 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
             ),
           ),
         ),
+      ],
+    );
+  }
+}
+
+class ListProduct extends StatelessWidget {
+  const ListProduct({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: Colors.amber,
+          height: 12,
+          width: 123,
+        )
       ],
     );
   }

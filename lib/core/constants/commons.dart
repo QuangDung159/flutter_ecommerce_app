@@ -8,7 +8,7 @@ List<ProductModel> listProductDummy = [
     id: 1,
     price: '99',
     name:
-        'Matador FreeRain24 2.0 Packable Backpack (Advanced Series) (Charcoal)',
+        'Matador',
     productInfo: '',
     description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
     shippingInfo: '',
