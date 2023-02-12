@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_const_constructors
-
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 
@@ -18,12 +17,25 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: AppColors.blackPrimary,
       body: Center(
-        child: Text(
-          'Flutter E-Commerce App',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'E-Commerce App',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 26,
+              ),
+            ),
+            Text(
+              'Version 1.0.0 (build 1)',
+              style: TextStyle(
+                fontSize: 8,
+                color: Colors.white,
+              ),
+            )
+          ],
         ),
       ),
     );
