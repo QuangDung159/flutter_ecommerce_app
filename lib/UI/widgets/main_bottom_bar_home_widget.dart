@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar_store.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/tab_featured_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/tab_new_arrivals_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/tab_sale_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 
 class MainBottomBarHomeWidget extends StatefulWidget {
@@ -60,9 +63,9 @@ class _MainBottomBarHomeWidgetState extends State<MainBottomBarHomeWidget>
             child: TabBarView(
               controller: _tabController,
               children: [
-                Container(child: Center(child: Text('people'))),
-                Text('Person'),
-                Text('Person'),
+                TabFeaturedWidget(),
+                TabNewArrivalsWidget(),
+                TabSaleWidget(),
               ],
             ),
           ),
