@@ -70,6 +70,76 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
               height: 18,
             ),
             ListCategory(),
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimension.contentPadding,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'New Arrivals',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Text(
+                          'See all',
+                          style: TextStyle(
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        Icon(
+                          Icons.chevron_right,
+                          size: 21,
+                          color: AppColors.primary,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 18,
+            ),
+            SizedBox(
+              width: 130,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: Image.asset(AssetHelper.productImage),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'Nike One',
+                  ),
+                  Text(
+                    'Women\'s Mid-Rise Leggings',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: AppColors.greyScale,
+                    ),
+                  ),
+                  Text(
+                    '\$59',
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
