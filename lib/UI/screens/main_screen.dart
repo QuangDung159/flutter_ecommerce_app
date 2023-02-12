@@ -30,54 +30,58 @@ class _MainScreenState extends State<MainScreen> {
           MainBottomBarProfileWidget(),
         ],
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: AppColors.greyScale.withOpacity(0.2),
-              blurRadius: 4,
+      bottomNavigationBar: renderBottomTab(),
+    );
+  }
+
+  Widget renderBottomTab() {
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: AppColors.greyScale.withOpacity(0.2),
+            blurRadius: 4,
+          ),
+        ],
+      ),
+      child: Container(
+        color: Colors.white,
+        child: SalomonBottomBar(
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          currentIndex: _currentIndex,
+          selectedItemColor: AppColors.primary,
+          unselectedItemColor: AppColors.greyScale,
+          margin: EdgeInsets.symmetric(
+            horizontal: 28,
+            vertical: 10,
+          ),
+          items: [
+            SalomonBottomBarItem(
+              icon: Icon(
+                Icons.shopify_outlined,
+                size: 20,
+              ),
+              title: Text('Deals'),
+            ),
+            SalomonBottomBarItem(
+              icon: Icon(
+                Icons.home_sharp,
+                size: 20,
+              ),
+              title: Text('Home'),
+            ),
+            SalomonBottomBarItem(
+              icon: Icon(
+                Icons.account_circle,
+                size: 20,
+              ),
+              title: Text('Booking'),
             ),
           ],
-        ),
-        child: Container(
-          color: Colors.white,
-          child: SalomonBottomBar(
-            onTap: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            currentIndex: _currentIndex,
-            selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.greyScale,
-            margin: EdgeInsets.symmetric(
-              horizontal: 28,
-              vertical: 10,
-            ),
-            items: [
-              SalomonBottomBarItem(
-                icon: Icon(
-                  Icons.shopify_outlined,
-                  size: 20,
-                ),
-                title: Text('Deals'),
-              ),
-              SalomonBottomBarItem(
-                icon: Icon(
-                  Icons.home_sharp,
-                  size: 20,
-                ),
-                title: Text('Home'),
-              ),
-              SalomonBottomBarItem(
-                icon: Icon(
-                  Icons.account_circle,
-                  size: 20,
-                ),
-                title: Text('Booking'),
-              ),
-            ],
-          ),
         ),
       ),
     );

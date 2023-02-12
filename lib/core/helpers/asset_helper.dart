@@ -9,4 +9,5 @@ class AssetHelper {
   static const String panelTrain = '$imageDir/panel_train.png';
   static const String panelYoga = '$imageDir/panel_yoga.png';
   static const String panelEquipment = '$imageDir/panel_equipment.png';
+  static const String productImage = '$imageDir/product_image.png';
 }
