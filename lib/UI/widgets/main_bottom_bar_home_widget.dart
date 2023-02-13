@@ -37,27 +37,30 @@ class _MainBottomBarHomeWidgetState extends State<MainBottomBarHomeWidget>
       child: Column(
         children: [
           AppBarStore(),
-          TabBar(
-            unselectedLabelColor: AppColors.greyScale,
-            labelColor: AppColors.primary,
-            labelStyle: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+          Container(
+            color: Colors.white,
+            child: TabBar(
+              unselectedLabelColor: AppColors.greyScale,
+              labelColor: AppColors.primary,
+              labelStyle: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+              tabs: [
+                Tab(
+                  text: 'Featured',
+                ),
+                Tab(
+                  text: 'New Arrivals',
+                ),
+                Tab(
+                  text: 'Sale',
+                )
+              ],
+              controller: _tabController,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorColor: AppColors.primary,
             ),
-            tabs: [
-              Tab(
-                text: 'Featured',
-              ),
-              Tab(
-                text: 'New Arrivals',
-              ),
-              Tab(
-                text: 'Sale',
-              )
-            ],
-            controller: _tabController,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorColor: AppColors.primary,
           ),
           Expanded(
             child: TabBarView(
