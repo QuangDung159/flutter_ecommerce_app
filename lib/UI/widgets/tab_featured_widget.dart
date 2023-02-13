@@ -17,9 +17,11 @@ class TabFeaturedWidget extends StatefulWidget {
   State<TabFeaturedWidget> createState() => _TabFeaturedWidgetState();
 }
 
-class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
+class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SingleChildScrollView(
       child: Container(
         color: Colors.white,
@@ -248,6 +250,9 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget> {
       ],
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class ListProduct extends StatelessWidget {

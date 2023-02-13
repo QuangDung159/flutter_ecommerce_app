@@ -11,7 +11,8 @@ class TabNewArrivalsWidget extends StatefulWidget {
   State<TabNewArrivalsWidget> createState() => _TabNewArrivalsWidgetState();
 }
 
-class _TabNewArrivalsWidgetState extends State<TabNewArrivalsWidget> {
+class _TabNewArrivalsWidgetState extends State<TabNewArrivalsWidget>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
@@ -19,10 +20,14 @@ class _TabNewArrivalsWidgetState extends State<TabNewArrivalsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SingleChildScrollView(
       child: ListProduct2Col(
         listProduct: listProductDummy,
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
