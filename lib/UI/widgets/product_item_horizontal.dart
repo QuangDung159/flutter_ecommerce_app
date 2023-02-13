@@ -8,7 +8,10 @@ class ProductItemHorizontal extends StatelessWidget {
   const ProductItemHorizontal({
     Key? key,
     required this.productItem,
+    this.width,
   }) : super(key: key);
+
+  final double? width;
 
   final ProductModel productItem;
 
@@ -16,7 +19,7 @@ class ProductItemHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     bool hasOriginalPrice = productItem.originalPrice != '';
     return SizedBox(
-      width: 130,
+      width: width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -35,9 +38,7 @@ class ProductItemHorizontal extends StatelessWidget {
               if (hasOriginalPrice)
                 Text(
                   '\$${productItem.originalPrice} ',
-                  style: TextStyle(
-                    decoration: TextDecoration.lineThrough
-                  ),
+                  style: TextStyle(decoration: TextDecoration.lineThrough),
                 ),
               Text(
                 '\$${productItem.price}',
