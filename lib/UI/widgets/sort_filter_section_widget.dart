@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/filter_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/sort_bottom_sheet.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
@@ -58,10 +59,13 @@ class _SortFilterSectionWidgetState extends State<SortFilterSectionWidget> {
             ),
           ],
         ),
-        Image.asset(
-          AssetHelper.iconFilter,
-          width: 20,
-          height: 20,
+        GestureDetector(
+          onTap: () => Get.to(() => FilterScreen()),
+          child: Image.asset(
+            AssetHelper.iconFilter,
+            width: 20,
+            height: 20,
+          ),
         )
       ],
     );
