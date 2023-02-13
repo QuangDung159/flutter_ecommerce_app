@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/filter_bottom_sheet.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/sort_bottom_sheet.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
@@ -39,7 +39,7 @@ class _SortFilterSectionWidgetState extends State<SortFilterSectionWidget> {
                         topRight: Radius.circular(12),
                       ),
                     ),
-                    child: FilterBottomSheet(),
+                    child: SortBottomSheet(),
                   ),
                 );
               },

@@ -9,14 +9,14 @@ import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
-class FilterBottomSheet extends StatefulWidget {
-  const FilterBottomSheet({super.key});
+class SortBottomSheet extends StatefulWidget {
+  const SortBottomSheet({super.key});
 
   @override
-  State<FilterBottomSheet> createState() => _FilterBottomSheetState();
+  State<SortBottomSheet> createState() => _SortBottomSheetState();
 }
 
-class _FilterBottomSheetState extends State<FilterBottomSheet> {
+class _SortBottomSheetState extends State<SortBottomSheet> {
   GetxAppController getxAppController = Get.find<GetxAppController>();
 
   List<Widget> renderListSortItem() {
