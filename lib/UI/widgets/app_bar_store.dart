@@ -9,6 +9,8 @@ class AppBarStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int numberCartItem = 100;
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 26),
       width: MediaQuery.of(context).size.width,
@@ -37,13 +39,13 @@ class AppBarStore extends StatelessWidget {
                   size: 32,
                 ),
                 Positioned(
-                  top: 14,
-                  left: 8,
-                  child: Text(
-                    '99+',
-                    style: TextStyle(
-                      fontSize: 8,
-                      fontWeight: FontWeight.bold,
+                  top: 12,
+                  left: 8.5,
+                  child: SizedBox(
+                    width: 16,
+                    height: 14,
+                    child: Center(
+                      child: renderNumberCartItem(numberCartItem),
                     ),
                   ),
                 )
@@ -51,6 +53,21 @@ class AppBarStore extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget renderNumberCartItem(int numberCartItem) {
+    double fontSize = 10;
+    if (numberCartItem > 99) {
+      fontSize = 7.5;
+    }
+
+    return Text(
+      numberCartItem > 99 ? '99+' : numberCartItem.toString(),
+      style: TextStyle(
+        fontSize: fontSize,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
