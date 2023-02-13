@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -18,7 +19,16 @@ class _FilterScreenState extends State<FilterScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              MyAppBar(),
+              MyAppBar(
+                title: 'Filter',
+                action: Text(
+                  'Reset all',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.orangeSecondary,
+                  ),
+                ),
+              ),
               Center(
                 child: Text('Filter'),
               ),

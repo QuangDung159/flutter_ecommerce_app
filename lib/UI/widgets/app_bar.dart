@@ -1,11 +1,17 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:get/get.dart';
 
 class MyAppBar extends StatefulWidget {
   const MyAppBar({
     Key? key,
+    this.action, required this.title,
   }) : super(key: key);
+
+  final Widget? action;
+  final String title;
 
   @override
   State<MyAppBar> createState() => _MyAppBarState();
@@ -14,47 +20,58 @@ class MyAppBar extends StatefulWidget {
 class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
-    int numberCartItem = 100;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 26),
       width: MediaQuery.of(context).size.width,
-      color: Colors.amber,
+      decoration: BoxDecoration(
+        // color: Colors.amber,
+        border: Border(
+          bottom: BorderSide(
+            width: 1,
+            color: AppColors.border,
+          ),
+        ),
+      ),
       height: 50,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.search,
-              size: 32,
-            ),
-          ),
-          Text(
-            'Store',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: Stack(
-              children: [
-                Icon(
-                  Icons.shopping_bag_outlined,
+          Expanded(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.chevron_left_outlined,
                   size: 32,
                 ),
-                Positioned(
-                  top: 12,
-                  left: 8.5,
-                  child: SizedBox(
-                    width: 16,
-                    height: 14,
-                    child: Center(
-                      child: renderNumberCartItem(numberCartItem),
-                    ),
-                  ),
-                )
-              ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(
+                widget.title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                onTap: () {},
+                child: widget.action,
+              ),
             ),
           ),
         ],
