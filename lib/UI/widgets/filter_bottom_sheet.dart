@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/sort_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:get/get.dart';
 
 class FilterBottomSheet extends StatefulWidget {
   const FilterBottomSheet({super.key});
@@ -14,21 +17,20 @@ class FilterBottomSheet extends StatefulWidget {
 }
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
-  String sortSelectedValue = 'recommended';
+  GetxAppController getxAppController = Get.find<GetxAppController>();
 
   List<Widget> renderListSortItem() {
+    SortItemModel sortSelected = getxAppController.sortSelected.value;
     List<Widget> listSortItemRender = [];
     for (var i = 0; i < listSortDummy.length; i++) {
       listSortItemRender.add(
         GestureDetector(
           onTap: () {
-            setState(() {
-              sortSelectedValue = listSortDummy[i].value;
-            });
+            getxAppController.setData(sortSelected: listSortDummy[i]);
           },
           child: ShortItem(
             sortItemModel: listSortDummy[i],
-            isChecked: sortSelectedValue == listSortDummy[i].value,
+            isChecked: sortSelected.value == listSortDummy[i].value,
           ),
         ),
       );
@@ -66,8 +68,10 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           padding: EdgeInsets.symmetric(
             horizontal: AppDimension.contentPadding,
           ),
-          child: Column(
-            children: renderListSortItem(),
+          child: Obx(
+            () => Column(
+              children: renderListSortItem(),
+            ),
           ),
         ),
         SizedBox(
