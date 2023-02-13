@@ -10,4 +10,5 @@ class AppColors {
   static Color yellowLight = Color(0xffFFE9BC);
   static Color orangeSecondary = Color(0xffEE7B50);
   static Color scaffoldBackgroundColor = Color(0xffF5F5F5);
+  static Color border = Color(0xffDCDCDC);
 }

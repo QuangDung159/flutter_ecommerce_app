@@ -15,4 +15,7 @@ class AssetHelper {
   static const String panelHome3 = '$imageDir/panel_home_3.png';
 
   static const String iconFilter = '$iconDir/icon_filter.png';
+  static const String iconBottomSheet = '$iconDir/icon_bottom_sheet.png';
+  static const String iconCheck = '$iconDir/icon_check.png';
+  static const String iconUncheck = '$iconDir/icon_uncheck.png';
 }
