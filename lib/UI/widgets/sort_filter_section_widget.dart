@@ -2,17 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_bottom_sheet.dart';
-import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SortFilterSectionWidget extends StatefulWidget {
   const SortFilterSectionWidget({
     Key? key,
-    required this.sortItemModel,
   }) : super(key: key);
-
-  final SortItemModel sortItemModel;
 
   @override
   State<SortFilterSectionWidget> createState() =>
@@ -20,6 +18,8 @@ class SortFilterSectionWidget extends StatefulWidget {
 }
 
 class _SortFilterSectionWidgetState extends State<SortFilterSectionWidget> {
+  GetxAppController getxAppController = Get.find<GetxAppController>();
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -43,10 +43,12 @@ class _SortFilterSectionWidgetState extends State<SortFilterSectionWidget> {
                   ),
                 );
               },
-              child: Text(
-                widget.sortItemModel.title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+              child: Obx(
+                () => Text(
+                  getxAppController.sortSelected.value.title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

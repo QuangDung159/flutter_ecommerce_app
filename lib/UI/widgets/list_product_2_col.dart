@@ -5,8 +5,10 @@ import 'package:flutter_ecommerce_app/UI/widgets/product_item_horizontal.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/sort_filter_section_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
+import 'package:get/get.dart';
 
 class ListProduct2Col extends StatefulWidget {
   const ListProduct2Col({
@@ -120,12 +122,7 @@ class _ListProduct2ColState extends State<ListProduct2Col> {
           SizedBox(
             height: 18,
           ),
-          SortFilterSectionWidget(
-            sortItemModel: SortItemModel(
-              title: 'Sale',
-              value: 'sale',
-            ),
-          ),
+          SortFilterSectionWidget(),
           SizedBox(
             height: 18,
           ),
