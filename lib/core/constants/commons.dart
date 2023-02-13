@@ -1,5 +1,6 @@
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 
 List<ProductModel> listProductDummy = [
   ProductModel(
@@ -7,8 +8,7 @@ List<ProductModel> listProductDummy = [
     quantity: 100,
     id: 1,
     price: '99',
-    name:
-        'Matador',
+    name: 'Matador',
     productInfo: '',
     description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
     shippingInfo: '',
@@ -81,8 +81,7 @@ List<ProductModel> listProductDummy = [
     quantity: 100,
     id: 3,
     price: '99',
-    name:
-        'Matador FreeFly16 Packable Backpack (Advanced Series) (Charcoal)',
+    name: 'Matador FreeFly16 Packable Backpack (Advanced Series) (Charcoal)',
     productInfo: '',
     description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
     shippingInfo: '',
@@ -311,8 +310,7 @@ List<ProductModel> listProductDummy = [
     quantity: 100,
     id: 9,
     price: '99',
-    name:
-        'FreeRain24 2.0 Packable Backpack (Advanced Series) (Charcoal)',
+    name: 'FreeRain24 2.0 Packable Backpack (Advanced Series) (Charcoal)',
     productInfo: '',
     description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
     shippingInfo: '',
@@ -345,4 +343,12 @@ List<ProductModel> listProductDummy = [
       ),
     ],
   ),
+];
+
+List<SortItemModel> listSortDummy = [
+  SortItemModel(title: 'Recommended', value: 'recommended'),
+  SortItemModel(title: 'Latest', value: 'latest'),
+  SortItemModel(title: 'Price (high)', value: 'price_high'),
+  SortItemModel(title: 'Price (low)', value: 'price_low'),
+  SortItemModel(title: 'Sale', value: 'sale'),
 ];

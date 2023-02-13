@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/sort_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -14,6 +15,20 @@ class SortFilterSectionWidget extends StatelessWidget {
   }) : super(key: key);
 
   final SortItemModel sortItemModel;
+
+  List<Widget> renderListSortItem() {
+    List<Widget> listSortItemRender = [];
+
+    for (var i = 0; i < listSortDummy.length; i++) {
+      listSortItemRender.add(
+        ShortItem(
+          sortItemModel: listSortDummy[i],
+        ),
+      );
+    }
+
+    return listSortItemRender;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,15 +77,12 @@ class SortFilterSectionWidget extends StatelessWidget {
                             horizontal: AppDimension.contentPadding,
                           ),
                           child: Column(
-                            children: [
-                              ShortItem(),
-                              ShortItem(),
-                              ShortItem(),
-                              ShortItem(),
-                              ShortItem(),
-                            ],
+                            children: renderListSortItem(),
                           ),
-                        )
+                        ),
+                        SizedBox(
+                          height: 36,
+                        ),
                       ],
                     ),
                   ),
