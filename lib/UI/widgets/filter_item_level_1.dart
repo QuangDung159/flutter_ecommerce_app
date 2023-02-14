@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/expanded_section.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_2.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
@@ -34,30 +35,6 @@ class _FilterItemLevel1State extends State<FilterItemLevel1> {
     } else {
       listSelected.add(filterItem.id);
     }
-  }
-
-  Widget renderList() {
-    if (showListLevel2) {
-      return Column(
-        children: [
-          SizedBox(
-            height: 18,
-          ),
-          Obx(
-            () => GridView.count(
-              primary: false,
-              crossAxisCount: 3,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              shrinkWrap: true,
-              childAspectRatio: (102 / 34),
-              children: renderListFilterLevel2(),
-            ),
-          ),
-        ],
-      );
-    }
-    return Container();
   }
 
   List<Widget> renderListFilterLevel2() {
@@ -109,7 +86,27 @@ class _FilterItemLevel1State extends State<FilterItemLevel1> {
             ),
           ],
         ),
-        renderList(),
+        ExpandedSection(
+          expand: showListLevel2,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 18,
+              ),
+              Obx(
+                () => GridView.count(
+                  primary: false,
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  shrinkWrap: true,
+                  childAspectRatio: (102 / 34),
+                  children: renderListFilterLevel2(),
+                ),
+              ),
+            ],
+          ),
+        ),
         Container(
           height: 18,
           decoration: BoxDecoration(
