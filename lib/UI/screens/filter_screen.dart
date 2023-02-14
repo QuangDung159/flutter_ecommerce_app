@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -32,31 +33,6 @@ class _FilterScreenState extends State<FilterScreen> {
     }
 
     return listFilterLevel1Render;
-  }
-
-  Widget renderButton() {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimension.contentPadding,
-      ),
-      child: Container(
-        height: 48,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: AppColors.primary,
-        ),
-        child: Center(
-          child: Text(
-            'Search',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
@@ -104,7 +80,20 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
                 ),
-                renderButton()
+                Container(
+                  padding: EdgeInsets.only(
+                    left: AppDimension.contentPadding,
+                    right: AppDimension.contentPadding,
+                    bottom: 30,
+                    top: 15,
+                  ),
+                  child: ButtonWidget(
+                    title: 'Search',
+                    opTap: () {
+                      print(getxAppController.listFilterSelected);
+                    },
+                  ),
+                )
               ],
             ),
           ),
