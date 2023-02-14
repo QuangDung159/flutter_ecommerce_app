@@ -22,6 +22,8 @@ class FilterItemLevel1 extends StatefulWidget {
 }
 
 class _FilterItemLevel1State extends State<FilterItemLevel1> {
+  bool showListLevel2 = false;
+
   void onTapFilterItem(listFilterSelected, filterItem) {
     List<int> listSelected = listFilterSelected;
     if (SortFilterServices.isFilterSelected(
@@ -32,6 +34,30 @@ class _FilterItemLevel1State extends State<FilterItemLevel1> {
     } else {
       listSelected.add(filterItem.id);
     }
+  }
+
+  Widget renderList() {
+    if (showListLevel2) {
+      return Column(
+        children: [
+          SizedBox(
+            height: 18,
+          ),
+          Obx(
+            () => GridView.count(
+              primary: false,
+              crossAxisCount: 3,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              shrinkWrap: true,
+              childAspectRatio: (102 / 34),
+              children: renderListFilterLevel2(),
+            ),
+          ),
+        ],
+      );
+    }
+    return Container();
   }
 
   List<Widget> renderListFilterLevel2() {
@@ -70,28 +96,22 @@ class _FilterItemLevel1State extends State<FilterItemLevel1> {
                 fontSize: 16,
               ),
             ),
-            Image.asset(
-              AssetHelper.iconChevronUp,
-              width: 10,
+            GestureDetector(
+              onTap: () => setState(() {
+                showListLevel2 = !showListLevel2;
+              }),
+              child: Image.asset(
+                showListLevel2
+                    ? AssetHelper.iconChevronUp
+                    : AssetHelper.iconChevronDown,
+                width: 10,
+              ),
             ),
           ],
         ),
-        SizedBox(
-          height: 18,
-        ),
-        Obx(
-          () => GridView.count(
-            primary: false,
-            crossAxisCount: 3,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            shrinkWrap: true,
-            childAspectRatio: (102 / 34),
-            children: renderListFilterLevel2(),
-          ),
-        ),
+        renderList(),
         Container(
-          height: 24,
+          height: 18,
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
