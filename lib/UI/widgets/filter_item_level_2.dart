@@ -35,7 +35,7 @@ class _FilterItemLevel2State extends State<FilterItemLevel2> {
     return isSelected;
   }
 
-  Container renderListFilterLevel2() {
+  Widget renderListFilterLevel2() {
     GetxAppController getxAppController = Get.find<GetxAppController>();
 
     List listFilterSelected = getxAppController.listFilterSelected;
