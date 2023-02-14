@@ -46,7 +46,15 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
                 ),
               ),
             ),
-            renderTopPanel('Under Amour', AssetHelper.panelHome1),
+            renderTopPanel(
+              'Under Amour',
+              AssetHelper.panelHome1,
+              onTapShopNow: () => Get.to(
+                () => ListProductScreen(
+                  title: 'Under Amour',
+                ),
+              ),
+            ),
             SizedBox(
               height: 24,
             ),
@@ -110,6 +118,11 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
                 AssetHelper.panelHome2,
                 hasBorderRadius: true,
                 titlePadding: 16,
+                onTapShopNow: () => Get.to(
+                  () => ListProductScreen(
+                    title: 'New Arrivals',
+                  ),
+                ),
               ),
             ),
             SizedBox(
@@ -188,8 +201,13 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
     );
   }
 
-  Widget renderTopPanel(String leftText, String imagePath,
-      {bool? hasBorderRadius, double? titlePadding}) {
+  Widget renderTopPanel(
+    String leftText,
+    String imagePath, {
+    bool? hasBorderRadius,
+    double? titlePadding,
+    Function()? onTapShopNow,
+  }) {
     return Stack(
       children: [
         ClipRRect(
@@ -213,7 +231,6 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
               child: Container(
-                // width: MediaQuery.of(context).size.width,
                 color: Colors.grey.withOpacity(0.1),
                 alignment: Alignment.center,
                 height: 50,
@@ -233,7 +250,11 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          if (onTapShopNow != null) {
+                            onTapShopNow();
+                          }
+                        },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
