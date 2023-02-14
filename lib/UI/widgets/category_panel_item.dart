@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
+import 'package:get/get.dart';
 
 class CategoryPanelItem extends StatelessWidget {
   const CategoryPanelItem({
-    Key? key, required this.title, required this.imagePath,
+    Key? key,
+    required this.title,
+    required this.imagePath,
   }) : super(key: key);
 
   final String title;
@@ -12,25 +16,28 @@ class CategoryPanelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
-      ),
+    return GestureDetector(
+      onTap: () => Get.to(() => ListProductScreen()),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.3),
           borderRadius: BorderRadius.circular(12),
+          image: DecorationImage(
+            image: AssetImage(imagePath),
+            fit: BoxFit.cover,
+          ),
         ),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

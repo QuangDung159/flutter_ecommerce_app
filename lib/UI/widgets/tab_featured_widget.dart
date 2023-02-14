@@ -254,22 +254,3 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
   @override
   bool get wantKeepAlive => true;
 }
-
-class ListProduct extends StatelessWidget {
-  const ListProduct({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          color: Colors.amber,
-          height: 12,
-          width: 123,
-        )
-      ],
-    );
-  }
-}

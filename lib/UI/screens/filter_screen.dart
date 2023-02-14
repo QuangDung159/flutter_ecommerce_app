@@ -39,65 +39,61 @@ class _FilterScreenState extends State<FilterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          SafeArea(
-            child: Column(
-              children: [
-                MyAppBar(
-                  title: 'Filter',
-                  action: GestureDetector(
-                    onTap: () {
-                      getxAppController.setData(listFilterSelected: []);
-                    },
-                    child: Text(
-                      'Reset all',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: AppColors.orangeSecondary,
+      body: SafeArea(
+        child: Column(
+          children: [
+            MyAppBar(
+              title: 'Filter',
+              action: GestureDetector(
+                onTap: () {
+                  getxAppController.setData(listFilterSelected: []);
+                },
+                child: Text(
+                  'Reset all',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.orangeSecondary,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimension.contentPadding,
+                      ),
+                      child: Obx(
+                        () => Column(
+                          children: renderListFilterLevel1(),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppDimension.contentPadding,
-                          ),
-                          child: Obx(
-                            () => Column(
-                              children: renderListFilterLevel1(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                    left: AppDimension.contentPadding,
-                    right: AppDimension.contentPadding,
-                    bottom: 30,
-                    top: 15,
-                  ),
-                  child: ButtonWidget(
-                    title: 'Search',
-                    opTap: () {
-                      print(getxAppController.listFilterSelected);
-                    },
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
-        ],
+            Container(
+              padding: EdgeInsets.only(
+                left: AppDimension.contentPadding,
+                right: AppDimension.contentPadding,
+                bottom: 30,
+                top: 15,
+              ),
+              child: ButtonWidget(
+                title: 'Search',
+                opTap: () {
+                  print(getxAppController.listFilterSelected);
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
