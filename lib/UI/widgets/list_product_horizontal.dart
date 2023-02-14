@@ -12,11 +12,13 @@ class ListProductHorizontal extends StatefulWidget {
     required this.title,
     this.isShowSeeAll,
     required this.listProduct,
+    this.onTapSeeAll,
   });
 
   final String title;
   final bool? isShowSeeAll;
   final List<ProductModel> listProduct;
+  final Function()? onTapSeeAll;
 
   @override
   State<ListProductHorizontal> createState() => _ListProductHorizontalState();
@@ -72,7 +74,11 @@ class _ListProductHorizontalState extends State<ListProductHorizontal> {
               ),
               if (widget.isShowSeeAll ?? false)
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    if (widget.onTapSeeAll != null) {
+                      widget.onTapSeeAll!();
+                    }
+                  },
                   child: Row(
                     children: [
                       Text(

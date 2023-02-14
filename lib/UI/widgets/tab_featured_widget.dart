@@ -3,12 +3,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_product_horizontal.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_category.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:get/get.dart';
 
 class TabFeaturedWidget extends StatefulWidget {
   const TabFeaturedWidget({super.key});
@@ -81,6 +83,9 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
               title: 'New Arrivals',
               listProduct: listProductDummy,
               isShowSeeAll: true,
+              onTapSeeAll: () => Get.to(
+                () => ListProductScreen(title: 'New Arrivals'),
+              ),
             ),
             SizedBox(
               height: 30,
@@ -89,6 +94,9 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
               title: 'Sale Items',
               listProduct: listProductDummy,
               isShowSeeAll: true,
+              onTapSeeAll: () => Get.to(
+                () => ListProductScreen(title: 'Sale Items'),
+              ),
             ),
             SizedBox(
               height: 30,
@@ -111,6 +119,9 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
               title: 'Recently Viewed',
               listProduct: listProductDummy,
               isShowSeeAll: true,
+              onTapSeeAll: () => Get.to(
+                () => ListProductScreen(title: 'Recently Viewed'),
+              ),
             ),
             SizedBox(
               height: 30,

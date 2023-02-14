@@ -55,7 +55,7 @@ class _MyAppBarState extends State<MyAppBar> {
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Container(
               alignment: Alignment.center,
               child: Text(
