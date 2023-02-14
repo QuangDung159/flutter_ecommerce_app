@@ -34,51 +34,84 @@ class _FilterScreenState extends State<FilterScreen> {
     return listFilterLevel1Render;
   }
 
+  Widget renderButton() {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppDimension.contentPadding,
+        ),
+        child: Container(
+          height: 48,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: AppColors.primary,
+          ),
+          child: Center(
+            child: Text(
+              'Search',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: SafeArea(
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 80,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 80,
                       ),
-                      child: Obx(
-                        () => Column(
-                          children: renderListFilterLevel1(),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppDimension.contentPadding,
+                        ),
+                        child: Obx(
+                          () => Column(
+                            children: renderListFilterLevel1(),
+                          ),
                         ),
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              MyAppBar(
-                title: 'Filter',
-                action: GestureDetector(
-                  onTap: () {
-                    getxAppController.setData(listFilterSelected: []);
-                  },
-                  child: Text(
-                    'Reset all',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.orangeSecondary,
+                MyAppBar(
+                  title: 'Filter',
+                  action: GestureDetector(
+                    onTap: () {
+                      getxAppController.setData(listFilterSelected: []);
+                    },
+                    child: Text(
+                      'Reset all',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: AppColors.orangeSecondary,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+          renderButton(),
+        ],
       ),
     );
   }
