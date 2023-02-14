@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
 import 'package:get/get.dart';
 
-class CategoryPanelItem extends StatelessWidget {
+class CategoryPanelItem extends StatefulWidget {
   const CategoryPanelItem({
     Key? key,
     required this.title,
@@ -15,14 +15,23 @@ class CategoryPanelItem extends StatelessWidget {
   final String imagePath;
 
   @override
+  State<CategoryPanelItem> createState() => _CategoryPanelItemState();
+}
+
+class _CategoryPanelItemState extends State<CategoryPanelItem> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(() => ListProductScreen()),
+      onTap: () => Get.to(
+        () => ListProductScreen(
+          title: widget.title,
+        ),
+      ),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
-            image: AssetImage(imagePath),
+            image: AssetImage(widget.imagePath),
             fit: BoxFit.cover,
           ),
         ),
@@ -33,7 +42,7 @@ class CategoryPanelItem extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              title,
+              widget.title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
