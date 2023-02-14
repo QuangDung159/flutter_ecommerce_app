@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/profile_menu_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:get/get.dart';
@@ -43,40 +44,23 @@ class _MoreScreenState extends State<MoreScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      height: 200,
-                      color: Colors.grey,
-                    ),
                     SizedBox(
-                      height: 10,
+                      height: 34,
                     ),
-                    Container(
-                      height: 200,
-                      color: Colors.grey,
+                    ProfileMenuItem(
+                      title: 'Edit profile',
                     ),
-                    SizedBox(
-                      height: 10,
+                    ProfileMenuItem(
+                      title: 'My purchase',
                     ),
-                    Container(
-                      height: 200,
-                      color: Colors.grey,
+                    ProfileMenuItem(
+                      title: 'My transaction',
                     ),
-                    SizedBox(
-                      height: 10,
+                    ProfileMenuItem(
+                      title: 'Payment methods',
                     ),
-                    Container(
-                      height: 200,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 200,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(
-                      height: 10,
+                    ProfileMenuItem(
+                      title: 'Settings',
                     ),
                   ],
                 ),

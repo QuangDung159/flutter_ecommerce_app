@@ -21,4 +21,5 @@ class AssetHelper {
   static const String iconChevronUp = '$iconDir/icon_chevron_up.png';
   static const String iconChevronDown = '$iconDir/icon_chevron_down.png';
   static const String iconMore = '$iconDir/icon_more.png';
+  static const String iconChevronRight = '$iconDir/icon_chevron_right.png';
 }
