@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/more_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:get/get.dart';
 
 class MainBottomBarProfileWidget extends StatefulWidget {
   const MainBottomBarProfileWidget({super.key});
@@ -23,10 +25,9 @@ class _MainBottomBarProfileWidgetState
         child: Column(
           children: [
             MyAppBar(
-              hasBackButton: true,
               title: 'Profile',
               action: GestureDetector(
-                onTap: () {},
+                onTap: () => Get.to(() => MoreScreen()),
                 child: Image.asset(
                   AssetHelper.iconMore,
                   width: 20,
