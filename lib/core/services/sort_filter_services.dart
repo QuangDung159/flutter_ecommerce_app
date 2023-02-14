@@ -23,4 +23,18 @@ class SortFilterServices {
       listFilterLevel2: listLevel2,
     );
   }
+
+  static bool isFilterSelected(
+    List listFilterSelected,
+    FilterItemModel filterItem,
+  ) {
+    bool isSelected = false;
+    for (var item in listFilterSelected) {
+      if (item == filterItem.id) {
+        isSelected = true;
+        break;
+      }
+    }
+    return isSelected;
+  }
 }

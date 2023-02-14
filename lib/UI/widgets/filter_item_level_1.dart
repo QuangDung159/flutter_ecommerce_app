@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
 import 'package:get/get.dart';
 
 class FilterItemLevel1 extends StatefulWidget {
@@ -21,17 +22,33 @@ class FilterItemLevel1 extends StatefulWidget {
 }
 
 class _FilterItemLevel1State extends State<FilterItemLevel1> {
+  void onTapFilterItem(listFilterSelected, filterItem) {
+    List<int> listSelected = listFilterSelected;
+    if (SortFilterServices.isFilterSelected(
+      listFilterSelected,
+      filterItem,
+    )) {
+      listSelected.remove(filterItem.id);
+    } else {
+      listSelected.add(filterItem.id);
+    }
+  }
+
   List<Widget> renderListFilterLevel2() {
     GetxAppController getxAppController = Get.find<GetxAppController>();
     List<Widget> listLevel2Render = [];
     List listFilterLevel2 = getxAppController.listFilterLevel2;
+    List<int> listFilterSelected =
+        getxAppController.listFilterSelected.cast<int>();
 
     for (FilterItemModel item in listFilterLevel2) {
       if (item.parentId == widget.filterItemLevel1.id) {
         listLevel2Render.add(
-          FilterItemLevel2(
-            isSelected: true,
-            filterItemLevel2: item,
+          GestureDetector(
+            onTap: () => onTapFilterItem(listFilterSelected, item),
+            child: FilterItemLevel2(
+              filterItemLevel2: item,
+            ),
           ),
         );
       }
