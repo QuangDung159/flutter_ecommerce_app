@@ -71,27 +71,8 @@ class _FilterScreenState extends State<FilterScreen> {
       body: Stack(
         children: [
           SafeArea(
-            child: Stack(
+            child: Column(
               children: [
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 80,
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: AppDimension.contentPadding,
-                        ),
-                        child: Obx(
-                          () => Column(
-                            children: renderListFilterLevel1(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 MyAppBar(
                   title: 'Filter',
                   action: GestureDetector(
@@ -104,6 +85,27 @@ class _FilterScreenState extends State<FilterScreen> {
                         fontSize: 16,
                         color: AppColors.orangeSecondary,
                       ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppDimension.contentPadding,
+                          ),
+                          child: Obx(
+                            () => Column(
+                              children: renderListFilterLevel1(),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
