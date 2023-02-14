@@ -377,4 +377,10 @@ List<FilterItemModel> listFilterDummy = [
   FilterItemModel(id: 19, name: 'Short', slug: 'short', parentId: 4),
   FilterItemModel(id: 20, name: 'Bags', slug: 'bags', parentId: 5),
   FilterItemModel(id: 21, name: 'Tanks', slug: 'tanks', parentId: 5),
+    FilterItemModel(id: 22, name: 'Bags', slug: 'bags', parentId: 5),
+  FilterItemModel(id: 23, name: 'Tanks', slug: 'tanks', parentId: 5),
+    FilterItemModel(id: 24, name: 'Bags', slug: 'bags', parentId: 5),
+  FilterItemModel(id: 25, name: 'Tanks', slug: 'tanks', parentId: 5),
+    FilterItemModel(id: 26, name: 'Bags', slug: 'bags', parentId: 5),
+  FilterItemModel(id: 27, name: 'Tanks', slug: 'tanks', parentId: 5),
 ];

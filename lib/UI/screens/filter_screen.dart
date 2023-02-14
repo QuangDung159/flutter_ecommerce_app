@@ -35,28 +35,23 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   Widget renderButton() {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
+      ),
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: AppDimension.contentPadding,
+        height: 48,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: AppColors.primary,
         ),
-        child: Container(
-          height: 48,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: AppColors.primary,
-          ),
-          child: Center(
-            child: Text(
-              'Search',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+        child: Center(
+          child: Text(
+            'Search',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
         ),
@@ -109,10 +104,10 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
                 ),
+                renderButton()
               ],
             ),
           ),
-          renderButton(),
         ],
       ),
     );
