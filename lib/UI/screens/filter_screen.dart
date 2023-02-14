@@ -20,44 +20,45 @@ class _FilterScreenState extends State<FilterScreen> {
       body: Container(
         color: Colors.white,
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                MyAppBar(
-                  title: 'Filter',
-                  action: Text(
-                    'Reset all',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.orangeSecondary,
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 80,
                     ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimension.contentPadding,
+                      ),
+                      child: Column(
+                        children: [
+                          FilterItemLevel1(),
+                          FilterItemLevel1(),
+                          FilterItemLevel1(),
+                          FilterItemLevel1(),
+                          FilterItemLevel1(),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              MyAppBar(
+                title: 'Filter',
+                action: Text(
+                  'Reset all',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.orangeSecondary,
                   ),
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppDimension.contentPadding,
-                  ),
-                  child: Column(
-                    children: [
-                      FilterItemLevel1(),
-                      FilterItemLevel1(),
-                      FilterItemLevel1(),
-                      FilterItemLevel1(),
-                      FilterItemLevel1(),
-                      FilterItemLevel1(),
-                    ],
-                  ),
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
-
-

@@ -2,12 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:get/get.dart';
 
 class MyAppBar extends StatefulWidget {
   const MyAppBar({
     Key? key,
-    this.action, required this.title,
+    this.action,
+    required this.title,
   }) : super(key: key);
 
   final Widget? action;
@@ -21,10 +23,12 @@ class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 26),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
+      ),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        // color: Colors.amber,
+        color: Colors.white,
         border: Border(
           bottom: BorderSide(
             width: 1,
