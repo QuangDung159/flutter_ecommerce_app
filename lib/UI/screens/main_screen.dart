@@ -79,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
                 Icons.account_circle,
                 size: 20,
               ),
-              title: Text('Booking'),
+              title: Text('Profile'),
             ),
           ],
         ),

@@ -31,6 +31,7 @@ class _ListProductScreenState extends State<ListProductScreen> {
         child: Column(
           children: [
             MyAppBar(
+              hasBackButton: true,
               title: widget.title,
             ),
             Expanded(

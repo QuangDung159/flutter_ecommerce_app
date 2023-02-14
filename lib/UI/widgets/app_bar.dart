@@ -10,10 +10,12 @@ class MyAppBar extends StatefulWidget {
     Key? key,
     this.action,
     required this.title,
+    this.hasBackButton,
   }) : super(key: key);
 
   final Widget? action;
   final String title;
+  final bool? hasBackButton;
 
   @override
   State<MyAppBar> createState() => _MyAppBarState();
@@ -41,18 +43,20 @@ class _MyAppBarState extends State<MyAppBar> {
         children: [
           Expanded(
             flex: 1,
-            child: Container(
-              alignment: Alignment.centerLeft,
-              child: GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Icons.chevron_left_outlined,
-                  size: 32,
-                ),
-              ),
-            ),
+            child: widget.hasBackButton ?? false
+                ? Container(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Icon(
+                        Icons.chevron_left_outlined,
+                        size: 32,
+                      ),
+                    ),
+                  )
+                : Container(),
           ),
           Expanded(
             flex: 2,

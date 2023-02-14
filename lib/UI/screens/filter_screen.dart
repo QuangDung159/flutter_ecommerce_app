@@ -43,6 +43,7 @@ class _FilterScreenState extends State<FilterScreen> {
         child: Column(
           children: [
             MyAppBar(
+              hasBackButton: true,
               title: 'Filter',
               action: GestureDetector(
                 onTap: () {
