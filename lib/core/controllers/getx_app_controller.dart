@@ -15,7 +15,7 @@ class GetxAppController extends GetxController {
     SortItemModel? sortSelected,
     List<FilterItemModel>? listFilterLevel1,
     List<FilterItemModel>? listFilterLevel2,
-    List<FilterItemModel>? listFilterSelected,
+    List<int>? listFilterSelected,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;

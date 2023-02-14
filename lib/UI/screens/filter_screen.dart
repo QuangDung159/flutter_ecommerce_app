@@ -63,11 +63,16 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
               MyAppBar(
                 title: 'Filter',
-                action: Text(
-                  'Reset all',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppColors.orangeSecondary,
+                action: GestureDetector(
+                  onTap: () {
+                    getxAppController.setData(listFilterSelected: []);
+                  },
+                  child: Text(
+                    'Reset all',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.orangeSecondary,
+                    ),
                   ),
                 ),
               ),
