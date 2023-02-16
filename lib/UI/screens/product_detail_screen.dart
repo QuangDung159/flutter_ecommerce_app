@@ -40,10 +40,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     bool isSale = product.originalPrice != '';
 
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          renderMainContent(context, product, isSale),
-          renderTopBar(statusBarHeight),
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              children: [
+                renderMainContent(context, product, isSale),
+                renderTopBar(statusBarHeight),
+              ],
+            ),
+          ),
         ],
       ),
     );
