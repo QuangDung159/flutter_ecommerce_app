@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/bottom_button.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -79,19 +79,9 @@ class _FilterScreenState extends State<FilterScreen> {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(
-                left: AppDimension.contentPadding,
-                right: AppDimension.contentPadding,
-                bottom: 30,
-                top: 15,
-              ),
-              child: ButtonWidget(
-                title: 'Search',
-                opTap: () {
-                  print(getxAppController.listFilterSelected);
-                },
-              ),
+            BottomButton(
+              title: 'Search',
+              onTap: () {},
             )
           ],
         ),
