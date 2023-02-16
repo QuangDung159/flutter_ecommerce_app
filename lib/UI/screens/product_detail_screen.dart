@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/cart_number_icon.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/cart_icon.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
@@ -84,29 +84,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               borderRadius: BorderRadius.circular(15),
                               color: AppColors.greyDark.withOpacity(0.6),
                             ),
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Stack(
-                                children: [
-                                  Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 32,
-                                  ),
-                                  Positioned(
-                                    top: 12,
-                                    left: 8.5,
-                                    child: SizedBox(
-                                      width: 16,
-                                      height: 14,
-                                      child: Center(
-                                        child: CartNumberIcon(
-                                          numberOfCartItem: 100,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
+                            child: CartIcon(
+                              color: Colors.white,
                             ),
                           ),
                         ],
