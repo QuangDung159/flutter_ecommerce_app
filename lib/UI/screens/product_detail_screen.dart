@@ -40,7 +40,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     bool isSale = product.originalPrice != '';
 
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Column(
+        children: [
+          renderTopBar(statusBarHeight),
+          renderMainContent(context, product, isSale),
+        ],
+      ),
+    );
+  }
+
+  Widget renderMainContent(
+    BuildContext context,
+    ProductModel product,
+    bool isSale,
+  ) {
+    return Expanded(
+      child: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
@@ -54,7 +69,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                 ),
                 renderDotIndicator(context, product),
-                renderTopBar(statusBarHeight)
+                // renderTopBar(statusBarHeight),
               ],
             ),
             Container(
