@@ -39,6 +39,7 @@ dependencies:
   salomon_bottom_bar: ^3.3.1
   get: ^4.6.5
   modal_bottom_sheet: ^2.1.2
+  smooth_page_indicator: ^1.0.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.11.0
