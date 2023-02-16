@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:get/get.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({
@@ -45,27 +46,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 30,
-                        height: 30,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.greyDark.withOpacity(0.6),
-                        ),
-                        child: Image.asset(
-                          AssetHelper.iconChevronLeft,
-                          width: 8,
+                      GestureDetector(
+                        onTap: () => Get.back(),
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: AppColors.greyDark.withOpacity(0.6),
+                          ),
+                          child: Image.asset(
+                            AssetHelper.iconChevronLeft,
+                            width: 8,
+                          ),
                         ),
                       ),
                       Row(
                         children: [
                           Container(
-                            width: 30,
-                            height: 30,
+                            width: 32,
+                            height: 32,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(16),
                               color: AppColors.greyDark.withOpacity(0.6),
                             ),
                             child: Image.asset(
@@ -77,11 +81,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             width: 6,
                           ),
                           Container(
-                            width: 30,
-                            height: 30,
+                            width: 32,
+                            height: 32,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(16),
                               color: AppColors.greyDark.withOpacity(0.6),
                             ),
                             child: CartIcon(

@@ -17,11 +17,11 @@ class CartIcon extends StatefulWidget {
 }
 
 class _CartIconState extends State<CartIcon> {
-  int cartItemCount = 100;
+  int cartItemCount = 900;
   Widget renderNumberCartItem(int numberCartItem) {
     double fontSize = 10;
     if (numberCartItem > 99) {
-      fontSize = 6;
+      fontSize = 7;
     }
 
     return Text(
@@ -42,17 +42,17 @@ class _CartIconState extends State<CartIcon> {
         children: [
           Image.asset(
             AssetHelper.iconCartBag,
-            width: 20,
-            height: 20,
+            width: 26,
+            height: 26,
             color: widget.color ?? AppColors.blackPrimary,
           ),
           Positioned(
             bottom: 2.5,
-            left: 1,
+            left: 0,
             right: 0,
             child: SizedBox(
-              width: 12,
-              height: 12,
+              width: 18,
+              height: 18,
               child: Center(
                 child: renderNumberCartItem(cartItemCount),
               ),
