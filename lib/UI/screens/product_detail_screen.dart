@@ -40,10 +40,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     bool isSale = product.originalPrice != '';
 
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          renderTopBar(statusBarHeight),
           renderMainContent(context, product, isSale),
+          renderTopBar(statusBarHeight),
         ],
       ),
     );
@@ -54,7 +54,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     ProductModel product,
     bool isSale,
   ) {
-    return Expanded(
+    return Positioned.fill(
       child: SingleChildScrollView(
         child: Column(
           children: [
