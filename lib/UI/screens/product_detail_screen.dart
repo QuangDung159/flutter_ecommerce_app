@@ -49,11 +49,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       GestureDetector(
                         onTap: () => Get.back(),
                         child: Container(
-                          width: 30,
-                          height: 30,
+                          width: 34,
+                          height: 34,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(18),
                             color: AppColors.greyDark.withOpacity(0.6),
                           ),
                           child: Image.asset(
@@ -65,11 +65,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Row(
                         children: [
                           Container(
-                            width: 32,
-                            height: 32,
+                            width: 34,
+                            height: 34,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(18),
                               color: AppColors.greyDark.withOpacity(0.6),
                             ),
                             child: Image.asset(
@@ -81,11 +81,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             width: 6,
                           ),
                           Container(
-                            width: 32,
-                            height: 32,
+                            width: 34,
+                            height: 34,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(18),
                               color: AppColors.greyDark.withOpacity(0.6),
                             ),
                             child: CartIcon(
