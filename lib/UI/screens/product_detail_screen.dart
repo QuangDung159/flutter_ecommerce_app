@@ -42,7 +42,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   padding: EdgeInsets.symmetric(
                     horizontal: AppDimension.contentPadding,
                   ),
-                  color: Colors.amber,
+                  // color: Colors.amber,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
