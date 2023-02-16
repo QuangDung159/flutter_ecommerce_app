@@ -1,11 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_icon.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
@@ -31,7 +30,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     super.initState();
   }
 
-  Widget renderDotIndicator(BuildContext context) {
+  Widget renderDotIndicator(BuildContext context, ProductModel product) {
     return Positioned(
       bottom: 7,
       child: SizedBox(
@@ -41,7 +40,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           children: [
             SmoothPageIndicator(
               controller: _pageController,
-              count: 3,
+              count: product.productImages.length,
               effect: ExpandingDotsEffect(
                 dotWidth: 4,
                 dotHeight: 4,
@@ -121,6 +120,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
+  List<Widget> renderListImage(List<ProductImageModel> listImage) {
+    List<Widget> listRender = [];
+    for (ProductImageModel item in listImage) {
+      listRender.add(
+        Image.network(
+          item.url,
+        ),
+      );
+    }
+    return listRender;
+  }
+
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -136,20 +147,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 height: MediaQuery.of(context).size.width,
                 child: PageView(
                   controller: _pageController,
-                  children: [
-                    Image.network(
-                      product.productImages[0].url,
-                    ),
-                    Image.network(
-                      product.productImages[1].url,
-                    ),
-                    Image.network(
-                      product.productImages[2].url,
-                    ),
-                  ],
+                  children: renderListImage(product.productImages),
                 ),
               ),
-              renderDotIndicator(context),
+              renderDotIndicator(context, product),
               renderTopBar(statusBarHeight)
             ],
           )
