@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/cart_number_icon.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({
@@ -18,10 +22,101 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+    ProductModel product = widget.product;
+
     return Scaffold(
       body: Column(
         children: [
-          Text(widget.product.name),
+          Stack(
+            children: [
+              Image.network(
+                product.productImages[0].url,
+              ),
+              Positioned(
+                top: statusBarHeight,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppDimension.contentPadding,
+                  ),
+                  color: Colors.amber,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 30,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: AppColors.greyDark.withOpacity(0.6),
+                        ),
+                        child: Image.asset(
+                          AssetHelper.iconChevronLeft,
+                          width: 8,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            width: 30,
+                            height: 30,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: AppColors.greyDark.withOpacity(0.6),
+                            ),
+                            child: Image.asset(
+                              AssetHelper.iconSearch,
+                              width: 14,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 6,
+                          ),
+                          Container(
+                            width: 30,
+                            height: 30,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: AppColors.greyDark.withOpacity(0.6),
+                            ),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Stack(
+                                children: [
+                                  Icon(
+                                    Icons.shopping_bag_outlined,
+                                    size: 32,
+                                  ),
+                                  Positioned(
+                                    top: 12,
+                                    left: 8.5,
+                                    child: SizedBox(
+                                      width: 16,
+                                      height: 14,
+                                      child: Center(
+                                        child: CartNumberIcon(
+                                          numberOfCartItem: 100,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          )
         ],
       ),
     );

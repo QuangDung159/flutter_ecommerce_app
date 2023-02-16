@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/cart_number_icon.dart';
 
 class AppBarStore extends StatelessWidget {
   const AppBarStore({
@@ -9,8 +10,6 @@ class AppBarStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int numberCartItem = 100;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 26),
       width: MediaQuery.of(context).size.width,
@@ -45,7 +44,7 @@ class AppBarStore extends StatelessWidget {
                     width: 16,
                     height: 14,
                     child: Center(
-                      child: renderNumberCartItem(numberCartItem),
+                      child: CartNumberIcon(numberOfCartItem: 999),
                     ),
                   ),
                 )
@@ -53,21 +52,6 @@ class AppBarStore extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget renderNumberCartItem(int numberCartItem) {
-    double fontSize = 10;
-    if (numberCartItem > 99) {
-      fontSize = 7.5;
-    }
-
-    return Text(
-      numberCartItem > 99 ? '99+' : numberCartItem.toString(),
-      style: TextStyle(
-        fontSize: fontSize,
-        fontWeight: FontWeight.bold,
       ),
     );
   }
