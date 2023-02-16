@@ -7,6 +7,8 @@ import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -132,10 +134,29 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return listRender;
   }
 
+  Widget renderDesc(String productDesc) {
+    Widget html = Html(
+      data: productDesc,
+      style: {
+        'body': Style(
+          padding: EdgeInsets.zero,
+          margin: EdgeInsets.zero,
+        ),
+        'p': Style(
+          padding: EdgeInsets.zero,
+          margin: EdgeInsets.zero,
+        ),
+      },
+    );
+    return html;
+  }
+
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     ProductModel product = widget.product;
+
+    bool isSale = product.originalPrice != '';
 
     return Scaffold(
       body: Column(
@@ -153,6 +174,101 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               renderDotIndicator(context, product),
               renderTopBar(statusBarHeight)
             ],
+          ),
+          Container(
+            height: AppDimension.contentPadding,
+            color: Colors.white,
+          ),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimension.contentPadding,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      Text(
+                        product.name,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Row(
+                        children: [
+                          if (isSale)
+                            Text(
+                              '${formatPrice(product.originalPrice)} ',
+                              style: TextStyle(
+                                decoration: TextDecoration.lineThrough,
+                                fontSize: 16,
+                              ),
+                            ),
+                          Text(
+                            formatPrice(product.price),
+                            style: TextStyle(
+                              color: isSale ? AppColors.primary : Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: AppDimension.contentPadding,
+                      )
+                    ],
+                  ),
+                ),
+                Image.asset(
+                  AssetHelper.iconShare,
+                  width: 24,
+                  height: 24,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimension.contentPadding,
+              vertical: AppDimension.contentPadding,
+            ),
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Product Information',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  height: 12,
+                  margin: EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: AppColors.border,
+                      ),
+                    ),
+                  ),
+                ),
+                renderDesc(product.description),
+              ],
+            ),
           )
         ],
       ),
