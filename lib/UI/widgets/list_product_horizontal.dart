@@ -44,7 +44,7 @@ class _ListProductHorizontalState extends State<ListProductHorizontal> {
           padding: padding,
           child: ProductItemHorizontal(
             productItem: widget.listProduct[i],
-            width: 130,
+            width: 200,
           ),
         ),
       );

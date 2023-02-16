@@ -40,18 +40,27 @@ class ProductItemHorizontal extends StatelessWidget {
             ),
             Text(
               productItem.name,
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
+            SizedBox(
+              height: 4,
             ),
             Row(
               children: [
                 if (hasOriginalPrice)
                   Text(
                     '\$${productItem.originalPrice} ',
-                    style: TextStyle(decoration: TextDecoration.lineThrough),
+                    style: TextStyle(
+                      decoration: TextDecoration.lineThrough,
+                    ),
                   ),
                 Text(
                   '\$${productItem.price}',
                   style: TextStyle(
                     color: hasOriginalPrice ? AppColors.primary : Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
