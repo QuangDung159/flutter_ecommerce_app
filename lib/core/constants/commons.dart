@@ -13,7 +13,8 @@ List<ProductModel> listProductDummy = [
     productInfo: '',
     description:
         '<p>INTRODUCING THE ADVANCED SERIES from Matador 1231</p><p>INTRODUCING THE ADVANCED SERIES from Matador INTRODUCING THE ADVANCED SERIES from Mat123ador INTRODUCING THE ADVANCED SERIES from Matador INTRODUCING THE ADVANCED SERIES from Matador INTRODUCING THE ADVANCED SERIES from Matador</p>',
-    shippingInfo: '',
+    shippingInfo:
+        '<p>The Nike Air Mock is a cropped fleece style that sits at your hips for a comfortable feel and easy styling.Its roomy fit features a mock-neck design and curved blocking inspired by movement.The blocking details and Air graphic are accented with a printed outline.</p><p>· Colour Shown: Pink Oxford/Rust Pink/White</p><p>· Style: DD5434-601</p>',
     thumbnail:
         'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/image_upload/image/2831/MATFR242001BK_1.jpg',
     productImages: [

@@ -32,6 +32,109 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     super.initState();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+    ProductModel product = widget.product;
+
+    bool isSale = product.originalPrice != '';
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width,
+                  child: PageView(
+                    controller: _pageController,
+                    children: renderListImage(product.productImages),
+                  ),
+                ),
+                renderDotIndicator(context, product),
+                renderTopBar(statusBarHeight)
+              ],
+            ),
+            Container(
+              height: AppDimension.contentPadding,
+              color: Colors.white,
+            ),
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimension.contentPadding,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Text(
+                          product.name,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Row(
+                          children: [
+                            if (isSale)
+                              Text(
+                                '${formatPrice(product.originalPrice)} ',
+                                style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            Text(
+                              formatPrice(product.price),
+                              style: TextStyle(
+                                color:
+                                    isSale ? AppColors.primary : Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: AppDimension.contentPadding,
+                        )
+                      ],
+                    ),
+                  ),
+                  Image.asset(
+                    AssetHelper.iconShare,
+                    width: 24,
+                    height: 24,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            renderInfoSection(
+              'Product Information',
+              product.description,
+            ),
+            renderInfoSection(
+              'Delivery & Return Policy',
+              product.shippingInfo,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget renderDotIndicator(BuildContext context, ProductModel product) {
     return Positioned(
       bottom: 7,
@@ -134,7 +237,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return listRender;
   }
 
-  Widget renderDesc(String productDesc) {
+  Widget renderHtml(String productDesc) {
+    if (productDesc == '') {
+      return Text('No information');
+    }
     Widget html = Html(
       data: productDesc,
       style: {
@@ -151,127 +257,45 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return html;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    double statusBarHeight = MediaQuery.of(context).padding.top;
-    ProductModel product = widget.product;
-
-    bool isSale = product.originalPrice != '';
-
-    return Scaffold(
-      body: Column(
-        children: [
-          Stack(
+  Widget renderInfoSection(String title, String content) {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimension.contentPadding,
+            vertical: AppDimension.contentPadding,
+          ),
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width,
-                child: PageView(
-                  controller: _pageController,
-                  children: renderListImage(product.productImages),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              renderDotIndicator(context, product),
-              renderTopBar(statusBarHeight)
-            ],
-          ),
-          Container(
-            height: AppDimension.contentPadding,
-            color: Colors.white,
-          ),
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              horizontal: AppDimension.contentPadding,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      Text(
-                        product.name,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Row(
-                        children: [
-                          if (isSale)
-                            Text(
-                              '${formatPrice(product.originalPrice)} ',
-                              style: TextStyle(
-                                decoration: TextDecoration.lineThrough,
-                                fontSize: 16,
-                              ),
-                            ),
-                          Text(
-                            formatPrice(product.price),
-                            style: TextStyle(
-                              color: isSale ? AppColors.primary : Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: AppDimension.contentPadding,
-                      )
-                    ],
-                  ),
-                ),
-                Image.asset(
-                  AssetHelper.iconShare,
-                  width: 24,
-                  height: 24,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppDimension.contentPadding,
-              vertical: AppDimension.contentPadding,
-            ),
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Product Information',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  height: 12,
-                  margin: EdgeInsets.only(bottom: 12),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        width: 1,
-                        color: AppColors.border,
-                      ),
+              Container(
+                height: 12,
+                margin: EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      width: 1,
+                      color: AppColors.border,
                     ),
                   ),
                 ),
-                renderDesc(product.description),
-              ],
-            ),
-          )
-        ],
-      ),
+              ),
+              renderHtml(content),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 12,
+        ),
+      ],
     );
   }
 }
