@@ -176,7 +176,7 @@ class _CartItemState extends State<CartItem> {
                             width: 30,
                           ),
                           Text(
-                            '1',
+                            widget.cartItem.quantity.toString(),
                             style: TextStyle(
                               fontSize: 16,
                               color: AppColors.grey,
