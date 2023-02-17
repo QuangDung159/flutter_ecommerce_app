@@ -5,8 +5,11 @@ import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/bottom_button.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:get/get.dart';
 
 class CartScreen extends StatefulWidget {
@@ -37,7 +40,6 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
       body: SizedBox(
         child: Column(
           children: [
@@ -55,48 +57,55 @@ class _CartScreenState extends State<CartScreen> {
                   children: [
                     Container(
                       color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
+                      margin: EdgeInsets.only(top: 12),
+                      padding: EdgeInsets.only(
+                        right: AppDimension.contentPadding,
+                        left: AppDimension.contentPadding / 2,
+                        top: 12,
+                        bottom: 12,
                       ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 24,
+                              ),
+                              Image.asset(
+                                AssetHelper.iconUncheck,
+                                width: 18,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: AppDimension.contentPadding / 2,
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: Image.network(
+                              listCartItemDummy[1].product.thumbnail,
+                              width: 90,
+                              height: 90,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 14,
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  listCartItemDummy[1].product.name,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
                     ),
                   ],
                 ),
