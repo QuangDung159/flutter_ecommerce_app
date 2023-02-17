@@ -184,6 +184,10 @@ class _CartItemState extends State<CartItem> {
                         children: [
                           GestureDetector(
                             onTap: () {
+                              if (widget.cartItem.quantity == 1) {
+                                return;
+                              }
+
                               CartServices.removeCart(
                                 product: widget.cartItem.product,
                                 quantity: 1,

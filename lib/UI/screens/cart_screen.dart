@@ -118,6 +118,17 @@ class _CartScreenState extends State<CartScreen> {
   List<Widget> renderListCartItem(List listCartItem) {
     List<Widget> listRender = [];
 
+    if (listCartItem.isEmpty) {
+      return [
+        SizedBox(
+          height: AppDimension.contentPadding,
+        ),
+        Center(
+          child: Text('Cart empty'),
+        )
+      ];
+    }
+
     for (var item in listCartItem) {
       listRender.add(
         CartItem(cartItem: item),
