@@ -43,4 +43,42 @@ class CartServices {
       );
     }
   }
+
+  static removeCart({
+    required ProductModel product,
+    required int quantity,
+    bool? isShowSnackBar,
+    bool? removeAll,
+  }) {
+    GetxAppController getxAppController = Get.find<GetxAppController>();
+    List listCart = getxAppController.listCartItem;
+
+    int theSameItemId =
+        listCart.indexWhere((element) => element.id == product.id);
+
+    if (theSameItemId != -1) {
+      if (removeAll ?? false) {
+        listCart.removeAt(theSameItemId);
+      } else {
+        listCart.replaceRange(
+          theSameItemId,
+          theSameItemId + 1,
+          [
+            CartItemModel(
+              id: product.id,
+              product: product,
+              quantity: listCart[theSameItemId].quantity - 1,
+            ),
+          ],
+        );
+      }
+    }
+
+    if (isShowSnackBar ?? true) {
+      showSnackBar(
+        title: 'Remove product success',
+        content: product.name,
+      );
+    }
+  }
 }

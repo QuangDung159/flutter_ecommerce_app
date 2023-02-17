@@ -40,12 +40,21 @@ class _CartItemState extends State<CartItem> {
             motion: BehindMotion(),
             children: [
               Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  color: AppColors.orangeSecondary,
-                  child: Image.asset(
-                    AssetHelper.iconTrash,
-                    width: 24,
+                child: GestureDetector(
+                  onTap: () {
+                    CartServices.removeCart(
+                      product: widget.cartItem.product,
+                      quantity: 1,
+                      removeAll: true,
+                    );
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    color: AppColors.orangeSecondary,
+                    child: Image.asset(
+                      AssetHelper.iconTrash,
+                      width: 24,
+                    ),
                   ),
                 ),
               ),
@@ -174,7 +183,13 @@ class _CartItemState extends State<CartItem> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              CartServices.removeCart(
+                                product: widget.cartItem.product,
+                                quantity: 1,
+                                isShowSnackBar: false,
+                              );
+                            },
                             child: Image.asset(
                               AssetHelper.iconDecreaseCart,
                               width: 30,
