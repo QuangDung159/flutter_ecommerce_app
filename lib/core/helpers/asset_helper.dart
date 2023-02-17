@@ -31,4 +31,5 @@ class AssetHelper {
   static const String iconTrash = '$iconDir/icon_trash.png';
   static const String iconDelivery = '$iconDir/icon_delivery.png';
   static const String iconMap = '$iconDir/icon_map.png';
+  static const String iconCancel = '$iconDir/icon_cancel.png';
 }

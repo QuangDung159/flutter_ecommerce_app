@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/bottom_button.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/cart_info_row_text.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_item_delivery.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/shipping_policy_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
@@ -12,7 +13,6 @@ import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
-import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
@@ -118,33 +118,110 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               ),
             ),
           ),
+          renderTotalSection(),
+        ],
+      ),
+    );
+  }
+
+  Widget renderTotalSection() {
+    GetxAppController getxAppController = Get.find<GetxAppController>();
+
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
+        vertical: AppDimension.contentPadding,
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '5OFF',
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Image.asset(
+                AssetHelper.iconCancel,
+                width: 15,
+              )
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          CartInfoRowText(title: 'Subtitle', value: '123'),
+          CartInfoRowText(title: 'Delivery', value: 'Standard free'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Discount',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: AppColors.orangeSecondary,
+                ),
+              ),
+              Text(
+                '-59',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: AppColors.orangeSecondary,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          ),
           Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              horizontal: AppDimension.contentPadding,
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('asd'),
-                    Text('asd'),
-                  ],
+            height: 12,
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  width: 1,
+                  color: AppColors.border,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('asd'),
-                    Text('asd'),
-                  ],
-                ),
-              ],
+              ),
             ),
           ),
-          BottomButton(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Total',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                '1000',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: AppColors.orangeSecondary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: AppDimension.contentPadding,
+          ),
+          ButtonWidget(
             title: 'Payment',
-            onTap: () {},
+            backgroundColor: getxAppController.listCartItem.isEmpty
+                ? AppColors.greyMid
+                : AppColors.primary,
+            opTap: () {
+              if (getxAppController.listCartItem.isNotEmpty) {
+                Get.to(() => DeliveryScreen());
+              }
+            },
           ),
         ],
       ),
