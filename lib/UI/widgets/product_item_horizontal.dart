@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
 
 class ProductItemHorizontal extends StatelessWidget {
@@ -51,13 +52,13 @@ class ProductItemHorizontal extends StatelessWidget {
               children: [
                 if (hasOriginalPrice)
                   Text(
-                    '\$${productItem.originalPrice} ',
+                    '${formatPrice(productItem.originalPrice)} ',
                     style: TextStyle(
                       decoration: TextDecoration.lineThrough,
                     ),
                   ),
                 Text(
-                  '\$${productItem.price}',
+                  formatPrice(productItem.price),
                   style: TextStyle(
                     color: hasOriginalPrice ? AppColors.primary : Colors.black,
                     fontWeight: FontWeight.bold,

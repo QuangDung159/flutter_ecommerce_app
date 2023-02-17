@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 String formatPrice(String price) {
-  return '\$$price';
+  return '\$${double.parse(price)}';
 }
 
 void showSnackBar(

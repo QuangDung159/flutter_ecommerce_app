@@ -97,7 +97,11 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                         ),
                         Text(
-                          '12312',
+                          formatPrice(
+                            CartServices.calSubtotal(
+                              getxAppController.listCartItem,
+                            ).toString(),
+                          ),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
