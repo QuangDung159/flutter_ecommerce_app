@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class CartItem extends StatefulWidget {
@@ -153,7 +154,8 @@ class _CartItemState extends State<CartItem> {
                           if (widget.cartItem.product.originalPrice != '')
                             Text(
                               formatPrice(
-                                  widget.cartItem.product.originalPrice),
+                                widget.cartItem.product.originalPrice,
+                              ),
                               style: TextStyle(
                                 fontSize: 13,
                                 color: AppColors.greyMid,
@@ -171,9 +173,12 @@ class _CartItemState extends State<CartItem> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset(
-                            AssetHelper.iconDecreaseCart,
-                            width: 30,
+                          GestureDetector(
+                            onTap: () {},
+                            child: Image.asset(
+                              AssetHelper.iconDecreaseCart,
+                              width: 30,
+                            ),
                           ),
                           Text(
                             widget.cartItem.quantity.toString(),
@@ -182,9 +187,18 @@ class _CartItemState extends State<CartItem> {
                               color: AppColors.grey,
                             ),
                           ),
-                          Image.asset(
-                            AssetHelper.iconIncreaseCart,
-                            width: 30,
+                          GestureDetector(
+                            onTap: () {
+                              CartServices.addCart(
+                                product: widget.cartItem.product,
+                                quantity: 1,
+                                isShowSnackBar: false,
+                              );
+                            },
+                            child: Image.asset(
+                              AssetHelper.iconIncreaseCart,
+                              width: 30,
+                            ),
                           ),
                         ],
                       ),
