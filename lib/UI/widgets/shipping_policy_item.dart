@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 
 class ShippingPolicyItem extends StatelessWidget {
   const ShippingPolicyItem({
@@ -71,10 +72,23 @@ class ShippingPolicyItem extends StatelessWidget {
           SizedBox(
             width: 12,
           ),
-          Image.asset(
-            AssetHelper.iconChevronRight,
-            width: 6,
+          Text(
+            formatPrice(shippingPolicy.fee),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: AppColors.primary,
+            ),
           ),
+          SizedBox(
+            width: 12,
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 3),
+            child: Image.asset(
+              AssetHelper.iconChevronRight,
+              width: 6,
+            ),
+          )
         ],
       ),
     );
