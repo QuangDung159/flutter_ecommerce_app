@@ -1,3 +1,4 @@
+import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
@@ -386,4 +387,16 @@ List<FilterItemModel> listFilterDummy = [
   FilterItemModel(id: 25, name: 'Tanks', slug: 'tanks', parentId: 5),
   FilterItemModel(id: 26, name: 'Bags', slug: 'bags', parentId: 5),
   FilterItemModel(id: 27, name: 'Tanks', slug: 'tanks', parentId: 5),
+];
+
+List<CartItemModel> listCartItemDummy = [
+  CartItemModel(id: 1, product: listProductDummy[0], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(id: 2, product: listProductDummy[1], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(id: 3, product: listProductDummy[2], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(id: 4, product: listProductDummy[3], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(id: 5, product: listProductDummy[4], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(id: 6, product: listProductDummy[5], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(id: 7, product: listProductDummy[6], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(id: 8, product: listProductDummy[7], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(id: 9, product: listProductDummy[8], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
 ];
