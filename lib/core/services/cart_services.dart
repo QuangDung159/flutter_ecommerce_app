@@ -10,6 +10,7 @@ class CartServices {
   static addCart({
     required ProductModel product,
     required int quantity,
+    bool? isShowSnackBar,
   }) {
     GetxAppController getxAppController = Get.find<GetxAppController>();
     List listCart = getxAppController.listCartItem;
@@ -35,9 +36,11 @@ class CartServices {
       );
     }
 
-    showSnackBar(
-      title: 'Add to cart success',
-      content: product.name,
-    );
+    if (isShowSnackBar ?? true) {
+      showSnackBar(
+        title: 'Add to cart success',
+        content: product.name,
+      );
+    }
   }
 }
