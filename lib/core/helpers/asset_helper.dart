@@ -28,4 +28,5 @@ class AssetHelper {
   static const String iconShare = '$iconDir/icon_share.png';
   static const String iconIncreaseCart = '$iconDir/icon_increase_cart.png';
   static const String iconDecreaseCart = '$iconDir/icon_decrease_cart.png';
+  static const String iconTrash = '$iconDir/icon_trash.png';
 }

@@ -11,6 +11,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
 class CartScreen extends StatefulWidget {
@@ -65,6 +66,7 @@ class _CartScreenState extends State<CartScreen> {
                       CartItem(cartItem: listCartItemDummy[2]),
                       CartItem(cartItem: listCartItemDummy[3]),
                       CartItem(cartItem: listCartItemDummy[4]),
+                      
                     ],
                   ),
                 ),

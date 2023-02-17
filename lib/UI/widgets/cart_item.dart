@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class CartItem extends StatefulWidget {
   const CartItem({
@@ -22,9 +23,42 @@ class CartItem extends StatefulWidget {
 class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 12,
+        ),
+        Slidable(
+          // Specify a key if the Slidable is dismissible.
+          key: ValueKey(widget.cartItem.id),
+          endActionPane: ActionPane(
+            extentRatio: 64 / MediaQuery.of(context).size.width,
+            openThreshold: 0.1,
+            closeThreshold: 0.8,
+            // dismissible: DismissiblePane(onDismissed: () {}),
+            motion: BehindMotion(),
+            children: [
+              Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  color: AppColors.orangeSecondary,
+                  child: Image.asset(
+                    AssetHelper.iconTrash,
+                    width: 24,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          child: renderItemCartInfo(),
+        ),
+      ],
+    );
+  }
+
+  Widget renderItemCartInfo() {
     return Container(
       color: Colors.white,
-      margin: EdgeInsets.only(top: 12),
       padding: EdgeInsets.only(
         right: AppDimension.contentPadding,
         left: AppDimension.contentPadding / 2,
