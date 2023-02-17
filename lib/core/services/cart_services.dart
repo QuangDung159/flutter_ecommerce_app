@@ -90,16 +90,4 @@ class CartServices {
     }
     return subtotal;
   }
-
-  static void getLocalCart() {
-    if (localStorage.read('cart') == null) {
-      return;
-    }
-
-    getxAppController.setData(
-      listCartItem: jsonDecode(
-        localStorage.read('cart'),
-      ),
-    );
-  }
 }
