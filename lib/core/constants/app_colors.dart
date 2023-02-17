@@ -12,4 +12,6 @@ class AppColors {
   static Color scaffoldBackgroundColor = Color(0xffF5F5F5);
   static Color border = Color(0xffDCDCDC);
   static Color greyMid = Color(0xff9C9C9C);
+  static Color greyDisable = Color(0xffE9E9E9);
+  static Color grey = Color(0xff828282);
 }

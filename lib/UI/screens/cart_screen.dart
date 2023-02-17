@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/bottom_button.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
@@ -100,6 +101,98 @@ class _CartScreenState extends State<CartScreen> {
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
+                                ),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Container(
+                                  height: 24,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.greyDisable,
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Green, Size 7',
+                                        style: TextStyle(
+                                          color: AppColors.grey,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Image.asset(
+                                        AssetHelper.iconChevronDown,
+                                        width: 10,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Flexible(
+                                      flex: 55,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '\$99999.99',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.primary,
+                                            ),
+                                          ),
+                                          Text(
+                                            '\$99999.99',
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              color: AppColors.greyMid,
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                      flex: 45,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Image.asset(
+                                            AssetHelper.iconDecreaseCart,
+                                            width: 30,
+                                          ),
+                                          Text(
+                                            '1',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: AppColors.grey,
+                                            ),
+                                          ),
+                                          Image.asset(
+                                            AssetHelper.iconIncreaseCart,
+                                            width: 30,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 )
                               ],
                             ),
