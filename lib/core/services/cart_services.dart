@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
 
 class CartServices {
@@ -31,5 +34,10 @@ class CartServices {
         CartItemModel(id: product.id, product: product, quantity: quantity),
       );
     }
+
+    showSnackBar(
+      title: 'Add to cart success',
+      content: product.name,
+    );
   }
 }
