@@ -40,79 +40,148 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   Widget build(BuildContext context) {
     GetxAppController getxAppController = Get.find<GetxAppController>();
     return Scaffold(
-      body: SizedBox(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).padding.top,
-            ),
-            MyAppBar(
-              hasBackButton: true,
-              title: 'Delivery',
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      color: Colors.white,
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: AppDimension.contentPadding,
-                          ),
-                          Text(
-                              '${getxAppController.listCartItem.length} items'),
-                          SizedBox(
-                            height: 6,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Column(
-                      children: renderListCartItem(
-                        getxAppController.listCartItem.cast<CartItemModel>(),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.contentPadding,
-              ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).padding.top,
+          ),
+          MyAppBar(
+            hasBackButton: true,
+            title: 'Delivery',
+          ),
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('asd'),
-                      Text('asd'),
-                    ],
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppDimension.contentPadding,
+                    ),
+                    color: Colors.white,
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: AppDimension.contentPadding,
+                        ),
+                        Text(
+                          '${getxAppController.listCartItem.length} items',
+                        ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                      ],
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('asd'),
-                      Text('asd'),
-                    ],
+                  Column(
+                    children: renderListCartItem(
+                      getxAppController.listCartItem.cast<CartItemModel>(),
+                    ),
                   ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppDimension.contentPadding,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 18,
+                        ),
+                        Text(
+                          'Delivery information',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 18,
+                        ),
+                        // Column(
+                        //   children: [
+                        //     Container(
+                        //       height: 72,
+                        //       padding: EdgeInsets.all(12),
+                        //       decoration: BoxDecoration(
+                        //         borderRadius: BorderRadius.circular(6),
+                        //         border: Border.all(
+                        //           color: AppColors.blackPrimary,
+                        //           width: 1,
+                        //         ),
+                        //       ),
+                        //       child: Row(
+                        //         mainAxisAlignment:
+                        //             MainAxisAlignment.spaceBetween,
+                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                        //         children: [
+                        //           Row(
+                        //             crossAxisAlignment:
+                        //                 CrossAxisAlignment.start,
+                        //             children: [
+                        //               Image.asset(
+                        //                 AssetHelper.iconMap,
+                        //                 width: 24,
+                        //               ),
+                        //               Row(
+                        //                 children: [
+                        //                   Text(
+                        //                     'asd asd asd asd asd asd asd asd asd asd asd asd',
+                        //                   ),
+                        //                 ],
+                        //               ),
+                        //             ],
+                        //           ),
+                        //           Image.asset(
+                        //             AssetHelper.iconChevronRight,
+                        //             width: 6,
+                        //           )
+                        //         ],
+                        //       ),
+                        //     )
+                        //   ],
+                        // ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
-            BottomButton(
-              title: 'Payment',
-              onTap: () {},
+          ),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimension.contentPadding,
             ),
-          ],
-        ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('asd'),
+                    Text('asd'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('asd'),
+                    Text('asd'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          BottomButton(
+            title: 'Payment',
+            onTap: () {},
+          ),
+        ],
       ),
     );
   }
