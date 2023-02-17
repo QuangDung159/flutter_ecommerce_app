@@ -5,11 +5,14 @@ import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/bottom_button.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_item_delivery.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/shipping_policy_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
@@ -106,73 +109,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           height: 18,
                         ),
                         Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6),
-                                border: Border.all(
-                                  color: AppColors.blackPrimary,
-                                  width: 1,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    AssetHelper.iconMap,
-                                    width: 24,
-                                  ),
-                                  SizedBox(
-                                    width: 12,
-                                  ),
-                                  Flexible(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Flexible(
-                                              child: Text(
-                                                'data data data da',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                            Text(' | '),
-                                            Text('+123123'),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 6,
-                                        ),
-                                        Text(
-                                          'data',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: AppColors.greyMid,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 12,
-                                  ),
-                                  Image.asset(
-                                    AssetHelper.iconChevronRight,
-                                    width: 6,
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                          children: renderListShippingPolicy(),
                         ),
                       ],
                     ),
@@ -234,6 +171,19 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
       );
     }
 
+    return listRender;
+  }
+
+  List<Widget> renderListShippingPolicy() {
+    List<Widget> listRender = [];
+
+    for (var item in listShippingPolicyDummy) {
+      listRender.add(
+        ShippingPolicyItem(
+          shippingPolicy: item,
+        ),
+      );
+    }
     return listRender;
   }
 }

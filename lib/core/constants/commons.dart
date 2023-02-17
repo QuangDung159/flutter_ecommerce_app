@@ -2,6 +2,7 @@ import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 
 List<ProductModel> listProductDummy = [
@@ -390,13 +391,88 @@ List<FilterItemModel> listFilterDummy = [
 ];
 
 List<CartItemModel> listCartItemDummy = [
-  CartItemModel(id: 1, product: listProductDummy[0], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
-  CartItemModel(id: 2, product: listProductDummy[1], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
-  CartItemModel(id: 3, product: listProductDummy[2], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
-  CartItemModel(id: 4, product: listProductDummy[3], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
-  CartItemModel(id: 5, product: listProductDummy[4], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
-  CartItemModel(id: 6, product: listProductDummy[5], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
-  CartItemModel(id: 7, product: listProductDummy[6], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
-  CartItemModel(id: 8, product: listProductDummy[7], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
-  CartItemModel(id: 9, product: listProductDummy[8], quantity: 120, variant: '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(
+      id: 1,
+      product: listProductDummy[0],
+      quantity: 120,
+      variant:
+          '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(
+      id: 2,
+      product: listProductDummy[1],
+      quantity: 120,
+      variant:
+          '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(
+      id: 3,
+      product: listProductDummy[2],
+      quantity: 120,
+      variant:
+          '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(
+      id: 4,
+      product: listProductDummy[3],
+      quantity: 120,
+      variant:
+          '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(
+      id: 5,
+      product: listProductDummy[4],
+      quantity: 120,
+      variant:
+          '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(
+      id: 6,
+      product: listProductDummy[5],
+      quantity: 120,
+      variant:
+          '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(
+      id: 7,
+      product: listProductDummy[6],
+      quantity: 120,
+      variant:
+          '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(
+      id: 8,
+      product: listProductDummy[7],
+      quantity: 120,
+      variant:
+          '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+  CartItemModel(
+      id: 9,
+      product: listProductDummy[8],
+      quantity: 120,
+      variant:
+          '{"id": 5334,"price": "55.0","original_price": "69.0","quantity": 0,"variant_options": [{"title": "Title","value": "Default Title"}],"thumbnail": null}'),
+];
+
+List<ShippingPolicyModel> listShippingPolicyDummy = [
+  ShippingPolicyModel(
+    deliveryInfo: 'Normal (3 - 5 Working Days)',
+    displayFee: 'FREE',
+    fee: '0.0',
+    orderAmountFrom: '90.0',
+    orderAmountTo: '9999999999.0',
+    valid: true,
+    orderAmountInfo: 'Above \$90',
+  ),
+  ShippingPolicyModel(
+    deliveryInfo: 'Normal (3 - 5 Working Days)',
+    displayFee: '\$5.00',
+    fee: '5.0',
+    orderAmountFrom: '0.0',
+    orderAmountTo: '90.0',
+    valid: true,
+    orderAmountInfo: '\$90 & Below',
+  ),
+  ShippingPolicyModel(
+    deliveryInfo: 'Self-Pickup',
+    displayFee: 'FREE',
+    fee: '0.0',
+    orderAmountFrom: '0.0',
+    orderAmountTo: '9999999999.0',
+    valid: true,
+    orderAmountInfo: 'All',
+  ),
 ];
