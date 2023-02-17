@@ -119,7 +119,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Image.asset(
                                     AssetHelper.iconMap,
@@ -128,14 +128,37 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                   SizedBox(
                                     width: 12,
                                   ),
-                                  Expanded(
+                                  Flexible(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'data data data data data data data data data data data data',
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                'data data data da',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                            Text(' | '),
+                                            Text('+123123'),
+                                          ],
                                         ),
-                                        Text('data'),
+                                        SizedBox(
+                                          height: 6,
+                                        ),
+                                        Text(
+                                          'data',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: AppColors.greyMid,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
