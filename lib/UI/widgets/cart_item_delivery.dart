@@ -9,58 +9,76 @@ class CartItemDelivery extends StatelessWidget {
   const CartItemDelivery({
     Key? key,
     required this.cartItem,
+    this.isEndItem,
   }) : super(key: key);
 
   final CartItemModel cartItem;
+  final bool? isEndItem;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      padding: EdgeInsets.only(
-        left: AppDimension.contentPadding,
-        right: AppDimension.contentPadding,
-        bottom: 12,
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          bottom: BorderSide(
+            width: 1,
+            color: isEndItem ?? false ? Colors.white : AppColors.border,
+          ),
+        ),
+      ),
+      child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: Image.network(
-              cartItem.product.thumbnail,
-              width: 60,
-            ),
+          SizedBox(
+            height: 12,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Image.network(
+                  cartItem.product.thumbnail,
+                  width: 60,
+                ),
+              ),
+              SizedBox(
+                width: 12,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      cartItem.product.name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 7,
+                    ),
+                    Text(
+                      'Black, Size S',
+                      style: TextStyle(
+                        color: AppColors.grey,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 12,
+              ),
+              Text('x1'),
+            ],
           ),
           SizedBox(
-            width: 12,
+            height: 12,
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  cartItem.product.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 7,
-                ),
-                Text(
-                  'Black, Size S',
-                  style: TextStyle(
-                    color: AppColors.grey,
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 12,
-          ),
-          Text('x1'),
         ],
       ),
     );

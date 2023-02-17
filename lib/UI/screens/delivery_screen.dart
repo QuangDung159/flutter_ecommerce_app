@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/UI/widgets/cart_item_delivery.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:get/get.dart';
 
@@ -65,19 +66,18 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           SizedBox(
                             height: AppDimension.contentPadding,
                           ),
-                          Text('3 items'),
+                          Text(
+                              '${getxAppController.listCartItem.length} items'),
                           SizedBox(
-                            height: 18,
+                            height: 6,
                           ),
                         ],
                       ),
                     ),
                     Column(
-                      children: [
-                        CartItemDelivery(
-                          cartItem: getxAppController.listCartItem[0],
-                        ),
-                      ],
+                      children: renderListCartItem(
+                        getxAppController.listCartItem.cast<CartItemModel>(),
+                      ),
                     )
                   ],
                 ),
@@ -115,5 +115,28 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
         ),
       ),
     );
+  }
+
+  List<Widget> renderListCartItem(List<CartItemModel> listCartItem) {
+    List<Widget> listRender = [];
+
+    if (listCartItem.isEmpty) {
+      return [
+        Center(
+          child: Text('Cart empty'),
+        )
+      ];
+    }
+
+    for (var i = 0; i < listCartItem.length; i++) {
+      listRender.add(
+        CartItemDelivery(
+          cartItem: listCartItem[i],
+          isEndItem: i == listCartItem.length - 1,
+        ),
+      );
+    }
+
+    return listRender;
   }
 }
