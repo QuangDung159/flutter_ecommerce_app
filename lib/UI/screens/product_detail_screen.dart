@@ -8,6 +8,8 @@ import 'package:flutter_ecommerce_app/UI/widgets/list_product_horizontal.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
@@ -40,6 +42,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     ProductModel product = widget.product;
+    GetxAppController getxAppController = Get.find<GetxAppController>();
 
     bool isSale = product.originalPrice != '';
 
@@ -57,7 +60,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
           BottomButton(
             title: 'Add to cart',
-            onTap: () {},
+            onTap: () {
+              List listCartItem = getxAppController.listCartItem;
+              listCartItem.add(
+                CartItemModel(
+                  id: product.id,
+                  product: product,
+                  quantity: 1,
+                ),
+              );
+            },
           )
         ],
       ),

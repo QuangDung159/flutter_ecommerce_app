@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
@@ -38,6 +39,7 @@ class _CartIconState extends State<CartIcon> {
 
   @override
   Widget build(BuildContext context) {
+    GetxAppController getxAppController = Get.find<GetxAppController>();
     return GestureDetector(
       onTap: () {
         Get.to(() => CartScreen());
@@ -57,8 +59,11 @@ class _CartIconState extends State<CartIcon> {
             child: SizedBox(
               width: 18,
               height: 18,
-              child: Center(
-                child: renderNumberCartItem(cartItemCount),
+              child: Obx(
+                () => Center(
+                  child: renderNumberCartItem(
+                      getxAppController.listCartItem.length),
+                ),
               ),
             ),
           )
