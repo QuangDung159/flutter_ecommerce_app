@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
@@ -16,6 +16,7 @@ class ShippingPolicyItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isSelfPickup = shippingPolicy.deliveryInfo == 'Self-Pickup';
     return Container(
       padding: EdgeInsets.all(12),
       margin: EdgeInsets.only(bottom: 12),
@@ -46,21 +47,30 @@ class ShippingPolicyItem extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Text(
-                        shippingPolicy.deliveryInfo,
+                        isSelfPickup
+                            ? shippingPolicy.deliveryInfo
+                            : 'Samantha Lee',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    Text(' | '),
-                    Text('+123123'),
+                    if (!isSelfPickup)
+                      Row(
+                        children: [
+                          Text(' | '),
+                          Text('+123123'),
+                        ],
+                      )
                   ],
                 ),
                 SizedBox(
                   height: 6,
                 ),
                 Text(
-                  shippingPolicy.displayFee,
+                  isSelfPickup
+                      ? shippingPolicy.displayFee
+                      : '111 Chu Thien, Hiep Tan ward',
                   style: TextStyle(
                     fontSize: 12,
                     color: AppColors.greyMid,
