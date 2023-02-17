@@ -10,14 +10,14 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:get/get.dart';
 
-class SampleScreen extends StatefulWidget {
-  const SampleScreen({super.key});
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  State<SampleScreen> createState() => _SampleScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _SampleScreenState extends State<SampleScreen> {
+class _CartScreenState extends State<CartScreen> {
   GetxAppController getxAppController = Get.find<GetxAppController>();
   List<Widget> renderListFilterLevel1() {
     List<Widget> listFilterLevel1Render = [];

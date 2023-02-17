@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:get/get.dart';
 
 class CartIcon extends StatefulWidget {
   const CartIcon({
@@ -37,7 +39,9 @@ class _CartIconState extends State<CartIcon> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(() => CartScreen());
+      },
       child: Stack(
         children: [
           Image.asset(
