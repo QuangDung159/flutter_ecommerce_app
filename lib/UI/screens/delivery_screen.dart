@@ -108,7 +108,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         Column(
                           children: [
                             Container(
-                              height: 72,
                               padding: EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
@@ -118,23 +117,30 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    child: Row(
+                                  Image.asset(
+                                    AssetHelper.iconMap,
+                                    width: 24,
+                                  ),
+                                  SizedBox(
+                                    width: 12,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Image.asset(
-                                          AssetHelper.iconMap,
-                                          width: 24,
+                                        Text(
+                                          'data data data data data data data data data data data data',
                                         ),
-                                        Column(
-                                          children: [
-                                            Text('data data data data data data data data data data data data'),
-                                            Text('data'),
-                                          ],
-                                        ),
+                                        Text('data'),
                                       ],
                                     ),
+                                  ),
+                                  SizedBox(
+                                    width: 12,
                                   ),
                                   Image.asset(
                                     AssetHelper.iconChevronRight,
