@@ -7,14 +7,14 @@ import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
 
 class CartServices {
+  static GetxAppController getxAppController = Get.find<GetxAppController>();
+  static List listCart = getxAppController.listCartItem;
+
   static addCart({
     required ProductModel product,
     required int quantity,
     bool? isShowSnackBar,
   }) {
-    GetxAppController getxAppController = Get.find<GetxAppController>();
-    List listCart = getxAppController.listCartItem;
-
     int theSameItemId =
         listCart.indexWhere((element) => element.id == product.id);
 
@@ -50,9 +50,6 @@ class CartServices {
     bool? isShowSnackBar,
     bool? removeAll,
   }) {
-    GetxAppController getxAppController = Get.find<GetxAppController>();
-    List listCart = getxAppController.listCartItem;
-
     int theSameItemId =
         listCart.indexWhere((element) => element.id == product.id);
 
@@ -80,5 +77,13 @@ class CartServices {
         content: product.name,
       );
     }
+  }
+
+  static double calSubtotal(List list) {
+    double subtotal = 0;
+    for (var item in list.cast<CartItemModel>()) {
+      subtotal += double.parse(item.product.price) * item.quantity;
+    }
+    return subtotal;
   }
 }
