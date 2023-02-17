@@ -1,14 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class CartServices {
   static GetxAppController getxAppController = Get.find<GetxAppController>();
   static List listCart = getxAppController.listCartItem;
+  static GetStorage localStorage = GetStorage();
 
   static addCart({
     required ProductModel product,
@@ -85,5 +89,17 @@ class CartServices {
       subtotal += double.parse(item.product.price) * item.quantity;
     }
     return subtotal;
+  }
+
+  static void getLocalCart() {
+    if (localStorage.read('cart') == null) {
+      return;
+    }
+
+    getxAppController.setData(
+      listCartItem: jsonDecode(
+        localStorage.read('cart'),
+      ),
+    );
   }
 }

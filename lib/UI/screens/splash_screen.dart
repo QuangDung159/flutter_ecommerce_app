@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
+    CartServices.getLocalCart();
     Future.delayed(Duration(seconds: 2), () {
       Get.to(() => MainScreen());
     });
