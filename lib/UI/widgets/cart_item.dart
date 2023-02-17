@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 
 class CartItem extends StatefulWidget {
   const CartItem({
@@ -108,21 +109,23 @@ class _CartItemState extends State<CartItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '\$99999.99',
+                            formatPrice(widget.cartItem.product.price),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: AppColors.primary,
                             ),
                           ),
-                          Text(
-                            '\$99999.99',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: AppColors.greyMid,
-                              decoration: TextDecoration.lineThrough,
+                          if (widget.cartItem.product.originalPrice != '')
+                            Text(
+                              formatPrice(
+                                  widget.cartItem.product.originalPrice),
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: AppColors.greyMid,
+                                decoration: TextDecoration.lineThrough,
+                              ),
                             ),
-                          ),
                         ],
                       ),
                     ),
