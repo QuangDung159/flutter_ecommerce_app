@@ -3,9 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/shipping_policy_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -21,7 +24,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
       body: SizedBox(
         child: Column(
           children: [
@@ -31,81 +33,43 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             MyAppBar(
               hasBackButton: true,
-              title: 'My cart',
+              title: 'Checkout',
             ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
+                    renderPaymentSection(),
                   ],
                 ),
               ),
             ),
             Container(
               color: Colors.white,
-              padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.contentPadding,
+              padding: EdgeInsets.only(
+                left: AppDimension.contentPadding,
+                right: AppDimension.contentPadding,
+                top: AppDimension.contentPadding,
               ),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('asd'),
-                      Text('asd'),
-                    ],
+                  Text(
+                    'Total',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('asd'),
-                      Text('asd'),
-                    ],
+                  Text(
+                    formatPrice(
+                      '100.0',
+                    ),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.orangeSecondary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -136,5 +100,59 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
       ),
     );
+  }
+
+  Widget renderPaymentSection() {
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 18,
+          ),
+          Text(
+            'Payment methods',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(
+            height: 18,
+          ),
+          Obx(
+            () => Column(
+              children: renderListPaymentMethods(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> renderListPaymentMethods() {
+    List<Widget> listRender = [];
+    GetxAppController getxAppController = Get.find<GetxAppController>();
+
+    for (var item in listShippingPolicyDummy) {
+      listRender.add(
+        GestureDetector(
+          onTap: () => getxAppController.setData(
+            shippingPolicySelected: item,
+          ),
+          child: ShippingPolicyItem(
+            shippingPolicy: item,
+            isSelected: getxAppController
+                    .shippingPolicySelected.value.orderAmountInfo ==
+                item.orderAmountInfo,
+          ),
+        ),
+      );
+    }
+    return listRender;
   }
 }

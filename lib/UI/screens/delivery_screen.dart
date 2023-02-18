@@ -93,41 +93,45 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                   SizedBox(
                     height: 12,
                   ),
-                  Container(
-                    color: Colors.white,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppDimension.contentPadding,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 18,
-                        ),
-                        Text(
-                          'Delivery information',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 18,
-                        ),
-                        Obx(
-                          () => Column(
-                            children: renderListShippingPolicy(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                  renderDeliverySection(),
                 ],
               ),
             ),
           ),
           Obx(
             () => renderTotalSection(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget renderDeliverySection() {
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 18,
+          ),
+          Text(
+            'Delivery information',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(
+            height: 18,
+          ),
+          Obx(
+            () => Column(
+              children: renderListShippingPolicy(),
+            ),
           ),
         ],
       ),
