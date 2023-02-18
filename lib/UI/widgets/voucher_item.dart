@@ -18,6 +18,13 @@ class VoucherItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GetxAppController getxAppController = Get.find<GetxAppController>();
+    bool isUsed = false;
+
+    if (getxAppController.promotionSelected.value != null) {
+      isUsed = getxAppController.promotionSelected.value!.id ==
+          promotionUserModel.id;
+    }
+
     return Container(
       margin: EdgeInsets.only(bottom: 12),
       padding: EdgeInsets.symmetric(
@@ -86,7 +93,7 @@ class VoucherItem extends StatelessWidget {
                 },
                 child: Center(
                   child: Text(
-                    'Use',
+                    isUsed ? 'Used' : 'Use',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.orangeSecondary,
