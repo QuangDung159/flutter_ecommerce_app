@@ -2,12 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 
 class VoucherItem extends StatelessWidget {
   const VoucherItem({
     Key? key,
+    required this.promotionUserModel,
   }) : super(key: key);
+
+  final PromotionUserModel promotionUserModel;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,7 @@ class VoucherItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$5 off your next 2 booking!',
+                        '${promotionUserModel.promotion.code} - ${promotionUserModel.promotion.title}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

@@ -2,13 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/voucher_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
-import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
-import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
 class VoucherScreen extends StatefulWidget {
@@ -35,22 +33,6 @@ class _VoucherScreenState extends State<VoucherScreen> {
     // widget tree.
     textFieldController.dispose();
     super.dispose();
-  }
-
-  List<Widget> renderListFilterLevel1() {
-    List<Widget> listFilterLevel1Render = [];
-
-    List listFilterLevel1 = getxAppController.listFilterLevel1;
-
-    for (FilterItemModel item in listFilterLevel1) {
-      listFilterLevel1Render.add(
-        FilterItemLevel1(
-          filterItemLevel1: item,
-        ),
-      );
-    }
-
-    return listFilterLevel1Render;
   }
 
   @override
@@ -131,9 +113,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
                       height: AppDimension.contentPadding,
                     ),
                     Column(
-                      children: [
-                        VoucherItem(),
-                      ],
+                      children: renderListVoucherItem(),
                     ),
                   ],
                 ),
@@ -146,5 +126,19 @@ class _VoucherScreenState extends State<VoucherScreen> {
         ),
       ),
     );
+  }
+
+  List<Widget> renderListVoucherItem() {
+    List<Widget> listRender = [];
+
+    for (var i = 0; i < listPromotionUserDummy.length; i++) {
+      listRender.add(
+        VoucherItem(
+          promotionUserModel: listPromotionUserDummy[i],
+        ),
+      );
+    }
+
+    return listRender;
   }
 }

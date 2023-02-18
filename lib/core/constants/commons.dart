@@ -586,7 +586,7 @@ List<PromotionModel> listPromotionDummy = [
   ),
 ];
 
-List<PromotionUserModel> listPromotionUserModel = [
+List<PromotionUserModel> listPromotionUserDummy = [
   PromotionUserModel(
     id: 1,
     promotion: listPromotionDummy[0],
