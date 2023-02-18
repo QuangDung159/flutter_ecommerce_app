@@ -7,14 +7,14 @@ import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:get/get.dart';
 
-class SampleScreen extends StatefulWidget {
-  const SampleScreen({super.key});
+class CheckoutScreen extends StatefulWidget {
+  const CheckoutScreen({super.key});
 
   @override
-  State<SampleScreen> createState() => _SampleScreenState();
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
-class _SampleScreenState extends State<SampleScreen> {
+class _CheckoutScreenState extends State<CheckoutScreen> {
   GetxAppController getxAppController = Get.find<GetxAppController>();
 
   @override
