@@ -50,61 +50,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
               hasBackButton: true,
               title: 'My cart',
             ),
-            Container(
-              padding: EdgeInsets.all(16),
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 40,
-                      child: TextField(
-                        controller: textFieldController,
-                        onChanged: (value) {
-                          setState(() {
-                            promoCodeInput = value;
-                          });
-                        },
-                        cursorHeight: 16,
-                        textAlignVertical: TextAlignVertical.center,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(bottom: 11, left: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            borderSide: BorderSide(
-                              color: AppColors.border,
-                            ),
-                          ),
-                          hintText: 'Enter a promo code',
-                          hintStyle: TextStyle(
-                            color: AppColors.greyMid,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 24,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        promoCodeInput = '';
-                      });
-
-                      textFieldController.text = '';
-                    },
-                    child: Text(
-                      'Add',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            // renderInputPromoCode(),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -124,6 +70,64 @@ class _VoucherScreenState extends State<VoucherScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget renderInputPromoCode() {
+    return Container(
+      padding: EdgeInsets.all(16),
+      color: Colors.white,
+      child: Row(
+        children: [
+          Expanded(
+            child: SizedBox(
+              height: 40,
+              child: TextField(
+                controller: textFieldController,
+                onChanged: (value) {
+                  setState(() {
+                    promoCodeInput = value;
+                  });
+                },
+                cursorHeight: 16,
+                textAlignVertical: TextAlignVertical.center,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(bottom: 11, left: 16),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(100),
+                    borderSide: BorderSide(
+                      color: AppColors.border,
+                    ),
+                  ),
+                  hintText: 'Enter a promo code',
+                  hintStyle: TextStyle(
+                    color: AppColors.greyMid,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 24,
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                promoCodeInput = '';
+              });
+
+              textFieldController.text = '';
+            },
+            child: Text(
+              'Add',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
