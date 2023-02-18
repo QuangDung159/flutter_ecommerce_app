@@ -1,6 +1,7 @@
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class GetxAppController extends GetxController {
   final RxList listCartItem = [].obs;
   final Rx<ShippingPolicyModel> shippingPolicySelected =
       listShippingPolicyDummy[0].obs;
+  final Rx<PromotionUserModel?> promotionSelected = null.obs;
 
   void setData({
     String? sortSelectedValue,
@@ -23,6 +25,7 @@ class GetxAppController extends GetxController {
     List<int>? listFilterSelected,
     List<CartItemModel>? listCartItem,
     ShippingPolicyModel? shippingPolicySelected,
+    PromotionUserModel? promotionSelected,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -51,5 +54,9 @@ class GetxAppController extends GetxController {
     if (shippingPolicySelected != null) {
       this.shippingPolicySelected.value = shippingPolicySelected;
     }
+  }
+
+  void setPromotionSelected (PromotionUserModel? promotionSelected) {
+    this.promotionSelected.value = promotionSelected;
   }
 }

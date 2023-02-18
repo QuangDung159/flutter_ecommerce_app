@@ -40,7 +40,7 @@ class ProfileMenuItem extends StatelessWidget {
                 ),
                 Image.asset(
                   AssetHelper.iconChevronRight,
-                  width: 8,
+                  width: 6,
                 ),
               ],
             ),
