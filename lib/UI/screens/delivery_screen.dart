@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_info_row_text.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_item_delivery.dart';
@@ -151,11 +152,16 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '5OFF',
-                style: TextStyle(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () => Get.to(
+                  () => VoucherScreen(),
+                ),
+                child: Text(
+                  '5OFF',
+                  style: TextStyle(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Image.asset(
