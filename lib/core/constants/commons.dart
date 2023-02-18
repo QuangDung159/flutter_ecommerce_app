@@ -452,15 +452,6 @@ List<CartItemModel> listCartItemDummy = [
 List<ShippingPolicyModel> listShippingPolicyDummy = [
   ShippingPolicyModel(
     deliveryInfo: 'Normal (3 - 5 Working Days)',
-    displayFee: 'FREE',
-    fee: '0.0',
-    orderAmountFrom: '90.0',
-    orderAmountTo: '9999999999.0',
-    valid: true,
-    orderAmountInfo: 'Above \$90',
-  ),
-  ShippingPolicyModel(
-    deliveryInfo: 'Normal (3 - 5 Working Days)',
     displayFee: '\$5.00',
     fee: '5.0',
     orderAmountFrom: '0.0',

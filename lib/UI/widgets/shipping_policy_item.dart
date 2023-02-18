@@ -84,23 +84,25 @@ class ShippingPolicyItem extends StatelessWidget {
           SizedBox(
             width: 12,
           ),
-          Text(
-            formatPrice(shippingPolicy.fee),
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: AppColors.primary,
+          if (shippingPolicy.fee != '0.0')
+            Text(
+              formatPrice(shippingPolicy.fee),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary,
+              ),
             ),
-          ),
           SizedBox(
             width: 12,
           ),
-          Container(
-            margin: EdgeInsets.only(top: 3),
-            child: Image.asset(
-              AssetHelper.iconChevronRight,
-              width: 6,
-            ),
-          )
+          if (!isSelfPickup)
+            Container(
+              margin: EdgeInsets.only(top: 3),
+              child: Image.asset(
+                AssetHelper.iconChevronRight,
+                width: 6,
+              ),
+            )
         ],
       ),
     );
