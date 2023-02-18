@@ -2,6 +2,8 @@ import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 
@@ -474,5 +476,143 @@ List<ShippingPolicyModel> listShippingPolicyDummy = [
     orderAmountTo: '9999999999.0',
     valid: true,
     orderAmountInfo: 'All',
+  ),
+];
+
+List<PromotionModel> listPromotionDummy = [
+  PromotionModel(
+    id: 1,
+    qty: 100,
+    isClaimed: true,
+    isValid: true,
+    code: 'code1',
+    discountType: 'special_value',
+    endDate: '2023-09-15T21:39:00.000Z',
+    sourceType: 'products',
+    startDate: '2023-01-30T21:39:00.000Z',
+    title: 'Discount \$10 next order',
+    value: '10.0',
+  ),
+  PromotionModel(
+    id: 1,
+    qty: 100,
+    isClaimed: true,
+    isValid: true,
+    code: 'code1',
+    discountType: 'special_value',
+    endDate: '2023-09-15T21:39:00.000Z',
+    sourceType: 'products',
+    startDate: '2023-01-30T21:39:00.000Z',
+    title: 'Discount \$10 next order',
+    value: '10.0',
+  ),
+  PromotionModel(
+    id: 2,
+    qty: 100,
+    isClaimed: true,
+    isValid: true,
+    code: 'code2',
+    discountType: 'special_value',
+    endDate: '2023-09-15T21:39:00.000Z',
+    sourceType: 'products',
+    startDate: '2023-01-30T21:39:00.000Z',
+    title: 'Discount \$12 next order',
+    value: '12.0',
+  ),
+  PromotionModel(
+    id: 3,
+    qty: 100,
+    isClaimed: true,
+    isValid: true,
+    code: 'code3',
+    discountType: 'special_value',
+    endDate: '2023-09-15T21:39:00.000Z',
+    sourceType: 'products',
+    startDate: '2023-01-30T21:39:00.000Z',
+    title: 'Discount \$13 next order',
+    value: '13.0',
+  ),
+  PromotionModel(
+    id: 4,
+    qty: 100,
+    isClaimed: true,
+    isValid: true,
+    code: 'code4',
+    discountType: 'special_value',
+    endDate: '2023-09-15T21:39:00.000Z',
+    sourceType: 'products',
+    startDate: '2023-01-30T21:39:00.000Z',
+    title: 'Discount \$14 next order',
+    value: '14.0',
+  ),
+  PromotionModel(
+    id: 5,
+    qty: 100,
+    isClaimed: true,
+    isValid: true,
+    code: 'code5',
+    discountType: 'special_value',
+    endDate: '2023-09-15T21:39:00.000Z',
+    sourceType: 'products',
+    startDate: '2023-01-30T21:39:00.000Z',
+    title: 'Discount \$15 next order',
+    value: '15.0',
+  ),
+  PromotionModel(
+    id: 6,
+    qty: 100,
+    isClaimed: true,
+    isValid: true,
+    code: 'code6',
+    discountType: 'special_value',
+    endDate: '2023-09-15T21:39:00.000Z',
+    sourceType: 'products',
+    startDate: '2023-01-30T21:39:00.000Z',
+    title: 'Discount \$16 next order',
+    value: '16.0',
+  ),
+  PromotionModel(
+    id: 7,
+    qty: 100,
+    isClaimed: true,
+    isValid: true,
+    code: 'code7',
+    discountType: 'special_value',
+    endDate: '2023-09-15T21:39:00.000Z',
+    sourceType: 'products',
+    startDate: '2023-01-30T21:39:00.000Z',
+    title: 'Discount \$17 next order',
+    value: '17.0',
+  ),
+];
+
+List<PromotionUserModel> listPromotionUserModel = [
+  PromotionUserModel(
+    id: 1,
+    promotion: listPromotionDummy[0],
+  ),
+  PromotionUserModel(
+    id: 2,
+    promotion: listPromotionDummy[1],
+  ),
+  PromotionUserModel(
+    id: 3,
+    promotion: listPromotionDummy[2],
+  ),
+  PromotionUserModel(
+    id: 4,
+    promotion: listPromotionDummy[3],
+  ),
+  PromotionUserModel(
+    id: 5,
+    promotion: listPromotionDummy[4],
+  ),
+  PromotionUserModel(
+    id: 6,
+    promotion: listPromotionDummy[5],
+  ),
+  PromotionUserModel(
+    id: 7,
+    promotion: listPromotionDummy[6],
   ),
 ];
