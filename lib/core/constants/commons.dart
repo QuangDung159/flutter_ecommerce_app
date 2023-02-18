@@ -1,5 +1,6 @@
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
@@ -613,4 +614,9 @@ List<PromotionUserModel> listPromotionUserDummy = [
     promotion: listPromotionDummy[6],
     redeemAt: '2023-01-30'
   ),
+];
+
+List<PaymentMethodModel> listPaymentMethodDummy = [
+  PaymentMethodModel(id: 1, title: 'Cash on delivery', type: 'cash'),
+  PaymentMethodModel(id: 2, title: 'Flutter E-Wallet App', type: 'e_wallet'),
 ];

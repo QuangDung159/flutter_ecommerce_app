@@ -1,6 +1,7 @@
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
@@ -16,6 +17,8 @@ class GetxAppController extends GetxController {
   final Rx<ShippingPolicyModel> shippingPolicySelected =
       listShippingPolicyDummy[0].obs;
   final promotionSelected = Rxn<PromotionUserModel>();
+  final paymentMethodSelected =
+      Rx<PaymentMethodModel>(listPaymentMethodDummy[0]);
 
   void setData({
     String? sortSelectedValue,
@@ -26,6 +29,7 @@ class GetxAppController extends GetxController {
     List<CartItemModel>? listCartItem,
     ShippingPolicyModel? shippingPolicySelected,
     PromotionUserModel? promotionSelected,
+    PaymentMethodModel? paymentMethodSelected,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -54,8 +58,13 @@ class GetxAppController extends GetxController {
     if (shippingPolicySelected != null) {
       this.shippingPolicySelected.value = shippingPolicySelected;
     }
+
+    if (paymentMethodSelected != null) {
+      this.paymentMethodSelected.value = paymentMethodSelected;
+    }
   }
 
+// accept null
   void setPromotionSelected(PromotionUserModel? promotionSelected) {
     this.promotionSelected.value = promotionSelected;
   }

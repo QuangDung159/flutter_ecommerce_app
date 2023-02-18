@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/shipping_policy_item.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/payment_method_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
@@ -138,17 +138,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     List<Widget> listRender = [];
     GetxAppController getxAppController = Get.find<GetxAppController>();
 
-    for (var item in listShippingPolicyDummy) {
+    for (var item in listPaymentMethodDummy) {
       listRender.add(
         GestureDetector(
           onTap: () => getxAppController.setData(
-            shippingPolicySelected: item,
+            paymentMethodSelected: item,
           ),
-          child: ShippingPolicyItem(
-            shippingPolicy: item,
-            isSelected: getxAppController
-                    .shippingPolicySelected.value.orderAmountInfo ==
-                item.orderAmountInfo,
+          child: PaymentMethodItem(
+            paymentMethodItem: item,
+            isSelected:
+                getxAppController.paymentMethodSelected.value.id == item.id,
           ),
         ),
       );
