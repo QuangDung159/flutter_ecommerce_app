@@ -13,6 +13,7 @@ class AssetHelper {
   static const String gradientHome = '$imageDir/gradient_home.png';
   static const String panelHome2 = '$imageDir/panel_home_2.png';
   static const String panelHome3 = '$imageDir/panel_home_3.png';
+  static const String imageVoucherActive = '$imageDir/image_voucher_active.png';
 
   static const String iconFilter = '$iconDir/icon_filter.png';
   static const String iconBottomSheet = '$iconDir/icon_bottom_sheet.png';
