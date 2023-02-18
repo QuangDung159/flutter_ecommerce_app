@@ -149,8 +149,11 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
     bool hasSelectedPromotion = promotionSelected != null;
 
+    double discount = hasSelectedPromotion
+        ? double.parse(promotionSelected.promotion.value)
+        : 0.0;
     double subtotal = CartServices.calSubtotal(listCartItem);
-    double total = subtotal + double.parse(shippingSelected.fee) - 0;
+    double total = CartServices.calTotal();
 
     return Container(
       color: Colors.white,
@@ -218,7 +221,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 ),
               ),
               Text(
-                '- ${formatPrice('0.0')}',
+                '- ${formatPrice(discount.toString())}',
                 style: TextStyle(
                   fontSize: 16,
                   color: AppColors.orangeSecondary,

@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
+import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -89,5 +91,23 @@ class CartServices {
       subtotal += double.parse(item.product.price) * item.quantity;
     }
     return subtotal;
+  }
+
+  static double calTotal() {
+    ShippingPolicyModel shippingSelected =
+        getxAppController.shippingPolicySelected.value;
+
+    PromotionUserModel? promotionSelected =
+        getxAppController.promotionSelected.value;
+
+    bool hasSelectedPromotion = promotionSelected != null;
+
+    double discount = hasSelectedPromotion
+        ? double.parse(promotionSelected.promotion.value)
+        : 0.0;
+    double subtotal = CartServices.calSubtotal(listCart);
+    double total = subtotal + double.parse(shippingSelected.fee) - discount;
+
+    return total;
   }
 }

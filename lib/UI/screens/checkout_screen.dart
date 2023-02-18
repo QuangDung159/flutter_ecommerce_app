@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/payment_method_item.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -20,6 +22,7 @@ class CheckoutScreen extends StatefulWidget {
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
   GetxAppController getxAppController = Get.find<GetxAppController>();
+  double total = CartServices.calTotal();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
                   Text(
                     formatPrice(
-                      '100.0',
+                      total.toString(),
                     ),
                     style: TextStyle(
                       fontSize: 16,
@@ -83,14 +86,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               child: Column(
                 children: [
                   ButtonWidget(
-                    title: 'Payment',
-                    backgroundColor: getxAppController.listCartItem.isEmpty
-                        ? AppColors.greyMid
-                        : AppColors.primary,
+                    title: 'Checkout',
+                    backgroundColor: AppColors.primary,
                     opTap: () {
-                      if (getxAppController.listCartItem.isNotEmpty) {
-                        Get.to(() => CheckoutScreen());
-                      }
+                      Get.offAll(() => MainScreen());
+                      showSnackBar(
+                        title: 'Payment success',
+                        content:
+                            'Your order has been created, thanks for your shopping!',
+                      );
+                      getxAppController.setData(
+                        listCartItem: [],
+                      );
                     },
                   ),
                 ],
