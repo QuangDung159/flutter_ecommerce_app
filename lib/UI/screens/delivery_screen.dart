@@ -13,6 +13,7 @@ import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
@@ -122,7 +123,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               ),
             ),
           ),
-          renderTotalSection(),
+          Obx(
+            () => renderTotalSection(),
+          ),
         ],
       ),
     );
@@ -130,6 +133,12 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
   Widget renderTotalSection() {
     GetxAppController getxAppController = Get.find<GetxAppController>();
+    List listCartItem = getxAppController.listCartItem;
+    ShippingPolicyModel shippingSelected =
+        getxAppController.shippingPolicySelected.value;
+
+    double subtotal = CartServices.calSubtotal(listCartItem);
+    double total = subtotal + double.parse(shippingSelected.fee) - 0;
 
     return Container(
       color: Colors.white,
@@ -161,12 +170,15 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
           CartInfoRowText(
             title: 'Subtotal',
             value: formatPrice(
-              CartServices.calSubtotal(
-                getxAppController.listCartItem,
-              ).toString(),
+              subtotal.toString(),
             ),
           ),
-          CartInfoRowText(title: 'Delivery', value: 'Standard free'),
+          CartInfoRowText(
+            title: 'Delivery',
+            value: formatPrice(
+              shippingSelected.fee,
+            ).toString(),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -178,7 +190,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 ),
               ),
               Text(
-                '-59',
+                '- ${formatPrice('0.0')}',
                 style: TextStyle(
                   fontSize: 16,
                   color: AppColors.orangeSecondary,
@@ -211,7 +223,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 ),
               ),
               Text(
-                '1000',
+                formatPrice(
+                  total.toString(),
+                ),
                 style: TextStyle(
                   fontSize: 16,
                   color: AppColors.orangeSecondary,
