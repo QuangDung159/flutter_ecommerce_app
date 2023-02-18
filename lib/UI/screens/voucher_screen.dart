@@ -65,7 +65,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
                             promoCodeInput = value;
                           });
                         },
-                        // cursorHeight: 16,
+                        cursorHeight: 16,
                         textAlignVertical: TextAlignVertical.center,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(bottom: 11, left: 16),

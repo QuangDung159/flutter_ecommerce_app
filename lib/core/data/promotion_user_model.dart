@@ -18,6 +18,7 @@ class PromotionUserModel {
         promotion: PromotionModel.fromJson(
           json['promotion'],
         ),
+        redeemAt: json['redeem_at'],
       );
     }
   }

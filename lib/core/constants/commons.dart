@@ -590,29 +590,36 @@ List<PromotionUserModel> listPromotionUserDummy = [
   PromotionUserModel(
     id: 1,
     promotion: listPromotionDummy[0],
+    redeemAt: '2023-01-30'
   ),
   PromotionUserModel(
     id: 2,
     promotion: listPromotionDummy[1],
+    redeemAt: '2023-01-30'
   ),
   PromotionUserModel(
     id: 3,
     promotion: listPromotionDummy[2],
+    redeemAt: '2023-01-30'
   ),
   PromotionUserModel(
     id: 4,
     promotion: listPromotionDummy[3],
+    redeemAt: '2023-01-30'
   ),
   PromotionUserModel(
     id: 5,
     promotion: listPromotionDummy[4],
+    redeemAt: '2023-01-30'
   ),
   PromotionUserModel(
     id: 6,
     promotion: listPromotionDummy[5],
+    redeemAt: '2023-01-30'
   ),
   PromotionUserModel(
     id: 7,
     promotion: listPromotionDummy[6],
+    redeemAt: '2023-01-30'
   ),
 ];

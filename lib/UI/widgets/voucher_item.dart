@@ -45,14 +45,25 @@ class VoucherItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '${promotionUserModel.promotion.code} - ${promotionUserModel.promotion.title}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                      RichText(
+                        text: TextSpan(
+                          text: '${promotionUserModel.promotion.code} ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: '- ${promotionUserModel.promotion.title}',
+                              style: TextStyle(
+                                color: AppColors.blackPrimary,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Text(
-                        'Redeem by 24/02/2022',
+                        'Redeem by ${promotionUserModel.redeemAt}',
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.greyScale,
