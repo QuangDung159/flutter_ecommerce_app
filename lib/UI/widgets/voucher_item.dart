@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:get/get.dart';
 
 class VoucherItem extends StatelessWidget {
   const VoucherItem({
@@ -15,6 +17,7 @@ class VoucherItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetxAppController getxAppController = Get.find<GetxAppController>();
     return Container(
       margin: EdgeInsets.only(bottom: 12),
       padding: EdgeInsets.symmetric(
@@ -76,12 +79,18 @@ class VoucherItem extends StatelessWidget {
             ),
             Flexible(
               flex: 80,
-              child: Center(
-                child: Text(
-                  'Use',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.orangeSecondary,
+              child: GestureDetector(
+                onTap: () {
+                  getxAppController.setPromotionSelected(promotionUserModel);
+                  Get.back();
+                },
+                child: Center(
+                  child: Text(
+                    'Use',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.orangeSecondary,
+                    ),
                   ),
                 ),
               ),
