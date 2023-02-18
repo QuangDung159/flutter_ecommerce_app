@@ -10,9 +10,11 @@ class ShippingPolicyItem extends StatelessWidget {
   const ShippingPolicyItem({
     Key? key,
     required this.shippingPolicy,
+    this.isSelected,
   }) : super(key: key);
 
   final ShippingPolicyModel shippingPolicy;
+  final bool? isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class ShippingPolicyItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         border: Border.all(
-          color: AppColors.blackPrimary,
+          color: isSelected ?? false ? AppColors.blackPrimary : Colors.white,
           width: 1,
         ),
       ),

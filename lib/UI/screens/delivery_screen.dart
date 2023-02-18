@@ -13,6 +13,7 @@ import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
@@ -109,7 +110,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           height: 18,
                         ),
                         Column(
-                          children: renderListShippingPolicy(),
+                          children: renderListShippingPolicy(
+                            getxAppController.shippingPolicySelected.value,
+                          ),
                         ),
                       ],
                     ),
@@ -251,13 +254,16 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
     return listRender;
   }
 
-  List<Widget> renderListShippingPolicy() {
+  List<Widget> renderListShippingPolicy(
+    ShippingPolicyModel shippingPolicySelected,
+  ) {
     List<Widget> listRender = [];
 
     for (var item in listShippingPolicyDummy) {
       listRender.add(
         ShippingPolicyItem(
           shippingPolicy: item,
+          isSelected: shippingPolicySelected.orderAmountInfo == item.orderAmountInfo,
         ),
       );
     }
