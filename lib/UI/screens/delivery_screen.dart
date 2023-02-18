@@ -13,8 +13,9 @@ import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
-import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
 class DeliveryScreen extends StatefulWidget {
@@ -109,9 +110,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         SizedBox(
                           height: 18,
                         ),
-                        Column(
-                          children: renderListShippingPolicy(
-                            getxAppController.shippingPolicySelected.value,
+                        Obx(
+                          () => Column(
+                            children: renderListShippingPolicy(),
                           ),
                         ),
                       ],
@@ -157,7 +158,14 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
           SizedBox(
             height: 12,
           ),
-          CartInfoRowText(title: 'Subtitle', value: '123'),
+          CartInfoRowText(
+            title: 'Subtotal',
+            value: formatPrice(
+              CartServices.calSubtotal(
+                getxAppController.listCartItem,
+              ).toString(),
+            ),
+          ),
           CartInfoRowText(title: 'Delivery', value: 'Standard free'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -254,16 +262,22 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
     return listRender;
   }
 
-  List<Widget> renderListShippingPolicy(
-    ShippingPolicyModel shippingPolicySelected,
-  ) {
+  List<Widget> renderListShippingPolicy() {
     List<Widget> listRender = [];
+    GetxAppController getxAppController = Get.find<GetxAppController>();
 
     for (var item in listShippingPolicyDummy) {
       listRender.add(
-        ShippingPolicyItem(
-          shippingPolicy: item,
-          isSelected: shippingPolicySelected.orderAmountInfo == item.orderAmountInfo,
+        GestureDetector(
+          onTap: () => getxAppController.setData(
+            shippingPolicySelected: item,
+          ),
+          child: ShippingPolicyItem(
+            shippingPolicy: item,
+            isSelected: getxAppController
+                    .shippingPolicySelected.value.orderAmountInfo ==
+                item.orderAmountInfo,
+          ),
         ),
       );
     }
