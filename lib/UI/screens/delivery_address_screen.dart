@@ -52,9 +52,29 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               color: Colors.white,
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 12,
+                  ),
                   TextFieldWidget(
                     controller: addressLineInputController,
                     hintText: 'Enter your address',
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  TextFieldWidget(
+                    controller: addressLineInputController,
+                    hintText: 'Enter receiver name',
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  TextFieldWidget(
+                    controller: addressLineInputController,
+                    hintText: 'Enter receiver phone',
+                  ),
+                  SizedBox(
+                    height: 12,
                   ),
                 ],
               ),
@@ -63,42 +83,6 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Text('asd'),
-                    ),
                     Container(
                       color: Colors.white,
                       margin: EdgeInsets.only(bottom: 12),
