@@ -210,8 +210,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   Widget renderTopBar(double statusBarHeight) {
+    bool isAndroid = Theme.of(context).platform == TargetPlatform.android;
     return Positioned(
-      top: statusBarHeight,
+      top: statusBarHeight + (isAndroid ? AppDimension.contentPadding : 0),
       left: 0,
       right: 0,
       child: Container(
