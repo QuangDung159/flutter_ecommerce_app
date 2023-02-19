@@ -22,7 +22,7 @@ class MainBottomBarDealsWidget extends StatefulWidget {
 class _MainBottomBarDealsWidgetState extends State<MainBottomBarDealsWidget> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Container(
       child: Column(
         children: [
           Container(
@@ -32,98 +32,106 @@ class _MainBottomBarDealsWidgetState extends State<MainBottomBarDealsWidget> {
           AppBarStore(
             title: 'Deals',
           ),
-          Container(
-            color: AppColors.blackPrimary,
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 14,
-                ),
-                Text(
-                  'Summer Sale',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    color: AppColors.blackPrimary,
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 14,
+                        ),
+                        Text(
+                          'Summer Sale',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          'Up to 50% off with code: SS50',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 14,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(
+                      vertical: AppDimension.contentPadding,
+                    ),
+                    child: ListProductHorizontal(
+                      title: 'Fitness Products',
+                      listProduct: listProductDummy,
+                      isShowSeeAll: true,
+                      onTapSeeAll: () => Get.to(
+                        () => ListProductScreen(title: 'Fitness Products'),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(
+                      vertical: AppDimension.contentPadding,
+                    ),
+                    child: ListProductHorizontal(
+                      title: 'Fitness Classes',
+                      listProduct: listProductDummy,
+                      isShowSeeAll: true,
+                      onTapSeeAll: () => Get.to(
+                        () => ListProductScreen(title: 'Fitness Classes'),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(
+                      vertical: AppDimension.contentPadding,
+                    ),
+                    child: ListProductHorizontal(
+                      title: 'Virtual Runs',
+                      listProduct: listProductDummy,
+                      isShowSeeAll: true,
+                      onTapSeeAll: () => Get.to(
+                        () => ListProductScreen(title: 'Virtual Runs'),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(
+                      vertical: AppDimension.contentPadding,
+                    ),
+                    child: ListProductHorizontal(
+                      title: 'Recently Viewed',
+                      listProduct: listProductDummy,
+                      isShowSeeAll: true,
+                      onTapSeeAll: () => Get.to(
+                        () => ListProductScreen(title: 'Recently Viewed'),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 30,
                     color: Colors.white,
                   ),
-                ),
-                Text(
-                  'Up to 50% off with code: SS50',
-                  style: TextStyle(
-                    fontSize: 16,
+                  Container(
                     color: Colors.white,
+                    child: BenefitBanner(),
                   ),
-                ),
-                SizedBox(
-                  height: 14,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              vertical: AppDimension.contentPadding,
-            ),
-            child: ListProductHorizontal(
-              title: 'Fitness Products',
-              listProduct: listProductDummy,
-              isShowSeeAll: true,
-              onTapSeeAll: () => Get.to(
-                () => ListProductScreen(title: 'Fitness Products'),
+                ],
               ),
             ),
-          ),
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              vertical: AppDimension.contentPadding,
-            ),
-            child: ListProductHorizontal(
-              title: 'Fitness Classes',
-              listProduct: listProductDummy,
-              isShowSeeAll: true,
-              onTapSeeAll: () => Get.to(
-                () => ListProductScreen(title: 'Fitness Classes'),
-              ),
-            ),
-          ),
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              vertical: AppDimension.contentPadding,
-            ),
-            child: ListProductHorizontal(
-              title: 'Virtual Runs',
-              listProduct: listProductDummy,
-              isShowSeeAll: true,
-              onTapSeeAll: () => Get.to(
-                () => ListProductScreen(title: 'Virtual Runs'),
-              ),
-            ),
-          ),
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              vertical: AppDimension.contentPadding,
-            ),
-            child: ListProductHorizontal(
-              title: 'Recently Viewed',
-              listProduct: listProductDummy,
-              isShowSeeAll: true,
-              onTapSeeAll: () => Get.to(
-                () => ListProductScreen(title: 'Recently Viewed'),
-              ),
-            ),
-          ),
-          Container(
-            height: 30,
-            color: Colors.white,
-          ),
-          Container(
-            color: Colors.white,
-            child: BenefitBanner(),
           )
         ],
       ),
