@@ -41,51 +41,7 @@ class _MainBottomBarProfileWidgetState
                 child: Column(
                   children: [
                     renderAvatarSection(),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: Row(
-                        children: [
-                          renderAccountShoppingInfoItem(
-                            'Cart',
-                            '2',
-                            Image.asset(
-                              AssetHelper.iconCartBag,
-                              width: 20,
-                              height: 20,
-                              color: AppColors.primary,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          renderAccountShoppingInfoItem(
-                            'Orders',
-                            '2',
-                            Image.asset(
-                              AssetHelper.iconOrder,
-                              width: 20,
-                              height: 20,
-                              color: AppColors.primary,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          renderAccountShoppingInfoItem(
-                            'Vouchers',
-                            '2',
-                            Image.asset(
-                              AssetHelper.iconPromo,
-                              width: 20,
-                              height: 20,
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
+                    renderShoppingInfoSection()
                   ],
                 ),
               ),
@@ -96,13 +52,61 @@ class _MainBottomBarProfileWidgetState
     );
   }
 
+  Widget renderShoppingInfoSection() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
+      ),
+      child: Row(
+        children: [
+          renderAccountShoppingInfoItem(
+            'Cart',
+            '2',
+            Image.asset(
+              AssetHelper.iconCartBag,
+              width: 20,
+              height: 20,
+              color: AppColors.primary,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          renderAccountShoppingInfoItem(
+            'Orders',
+            '2',
+            Image.asset(
+              AssetHelper.iconOrder,
+              width: 20,
+              height: 20,
+              color: AppColors.primary,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          renderAccountShoppingInfoItem(
+            'Vouchers',
+            '2',
+            Image.asset(
+              AssetHelper.iconPromo,
+              width: 20,
+              height: 20,
+              color: AppColors.primary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget renderAccountShoppingInfoItem(
       String title, String value, Widget icon) {
     return Flexible(
       flex: 1,
       child: Container(
         alignment: Alignment.center,
-        height: 60,
+        height: 54,
         decoration: BoxDecoration(
           color: AppColors.yellowLight.withOpacity(0.4),
           borderRadius: BorderRadius.circular(6),
@@ -118,7 +122,6 @@ class _MainBottomBarProfileWidgetState
               title,
               style: TextStyle(
                 color: AppColors.primary,
-                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -128,18 +131,12 @@ class _MainBottomBarProfileWidgetState
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Image.asset(
-                //   AssetHelper.iconCartBag,
-                //   width: 20,
-                //   height: 20,
-                //   color: AppColors.primary,
-                // ),
                 icon,
                 Text(
                   ' $value',
                   style: TextStyle(
                     color: AppColors.primary,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               ],
