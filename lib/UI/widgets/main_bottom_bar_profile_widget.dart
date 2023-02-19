@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/more_screen.dart';
@@ -41,10 +41,109 @@ class _MainBottomBarProfileWidgetState
                 child: Column(
                   children: [
                     renderAvatarSection(),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimension.contentPadding,
+                      ),
+                      child: Row(
+                        children: [
+                          renderAccountShoppingInfoItem(
+                            'Cart',
+                            '2',
+                            Image.asset(
+                              AssetHelper.iconCartBag,
+                              width: 20,
+                              height: 20,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          renderAccountShoppingInfoItem(
+                            'Orders',
+                            '2',
+                            Image.asset(
+                              AssetHelper.iconOrder,
+                              width: 20,
+                              height: 20,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          renderAccountShoppingInfoItem(
+                            'Vouchers',
+                            '2',
+                            Image.asset(
+                              AssetHelper.iconPromo,
+                              width: 20,
+                              height: 20,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget renderAccountShoppingInfoItem(
+      String title, String value, Widget icon) {
+    return Flexible(
+      flex: 1,
+      child: Container(
+        alignment: Alignment.center,
+        height: 60,
+        decoration: BoxDecoration(
+          color: AppColors.yellowLight.withOpacity(0.4),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            color: AppColors.primary,
+            width: 1,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                color: AppColors.primary,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Image.asset(
+                //   AssetHelper.iconCartBag,
+                //   width: 20,
+                //   height: 20,
+                //   color: AppColors.primary,
+                // ),
+                icon,
+                Text(
+                  ' $value',
+                  style: TextStyle(
+                    color: AppColors.primary,
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
