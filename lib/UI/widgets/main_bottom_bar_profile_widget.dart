@@ -293,7 +293,13 @@ class _MainBottomBarProfileWidgetState
             AssetHelper.iconCopy,
             width: 24,
           ),
-          Text('asdasd'),
+          Text(
+            'asdasd',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           Image.asset(
             AssetHelper.iconShare,
             width: 24,
