@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_ecommerce_app/UI/screens/splash_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
@@ -36,10 +37,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   statusBarColor: Colors.white,
-    //   statusBarBrightness: Brightness.dark,
-    // ));
+    bool isAndroid = Theme.of(context).platform == TargetPlatform.android;
+    if (isAndroid) {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.black,
+        statusBarBrightness: Brightness.dark,
+      ));
+    }
+
     return GetMaterialApp(
       title: 'Flutter E-Commerce App',
       theme: ThemeData(
