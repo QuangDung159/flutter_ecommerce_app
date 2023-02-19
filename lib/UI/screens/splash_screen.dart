@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/version_text.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:get/get.dart';
 
@@ -37,13 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontSize: 26,
               ),
             ),
-            Text(
-              '1.0.0 (build 1)',
-              style: TextStyle(
-                fontSize: 8,
-                color: Colors.white,
-              ),
-            )
+            VersionText(),
           ],
         ),
       ),

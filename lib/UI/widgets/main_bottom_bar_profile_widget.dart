@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/more_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/version_text.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
@@ -45,71 +47,21 @@ class _MainBottomBarProfileWidgetState
                     SizedBox(
                       height: AppDimension.contentPadding,
                     ),
+                    renderReferCodeSection(),
+                    SizedBox(
+                      height: AppDimension.contentPadding,
+                    ),
                     Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: AppDimension.contentPadding,
                       ),
-                      child: Stack(
-                        children: [
-                          Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child:
-                                  Image.asset(AssetHelper.imageReferBackground),
-                            ),
-                          ),
-                          Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child:
-                                  Image.asset(AssetHelper.imageGradientProfile),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        height: AppDimension.contentPadding,
-                                      ),
-                                      Text(
-                                        'Refer a friend and get reward.',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 6,
-                                      ),
-                                      Text(
-                                        'Terms and conditions apply.',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 16,
-                            left: 16,
-                            right: 16,
-                            child: renderReferCode(),
-                          )
-                        ],
-                      ),
+                      child: ButtonWidget(title: 'Logout', opTap: () {}),
+                    ),
+                    SizedBox(
+                      height: AppDimension.contentPadding,
+                    ),
+                    VersionText(
+                      textColor: AppColors.greyDark,
                     )
                   ],
                 ),
@@ -117,6 +69,72 @@ class _MainBottomBarProfileWidgetState
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget renderReferCodeSection() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
+      ),
+      child: Stack(
+        children: [
+          Container(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(AssetHelper.imageReferBackground),
+            ),
+          ),
+          Container(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(AssetHelper.imageGradientProfile),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: AppDimension.contentPadding,
+                      ),
+                      Text(
+                        'Refer a friend and get reward.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Text(
+                        'Terms and conditions apply.',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 16,
+            left: 16,
+            right: 16,
+            child: renderReferCode(),
+          )
+        ],
       ),
     );
   }
