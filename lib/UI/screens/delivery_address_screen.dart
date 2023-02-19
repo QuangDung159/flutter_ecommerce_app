@@ -174,7 +174,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             ),
             child: Container(
               color: Colors.white,
-              height: 300,
+              height: 200,
               child: Column(
                 children: [
                   SizedBox(
@@ -242,11 +242,13 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       margin: EdgeInsets.only(bottom: 12),
-      color: isSelected ? Colors.amber : Colors.grey,
+      alignment: Alignment.center,
       child: Text(
         locationItem.name,
         style: TextStyle(
           fontWeight: FontWeight.bold,
+          fontSize: 16,
+          color: isSelected ? AppColors.primary : AppColors.greyDark,
         ),
       ),
     );
