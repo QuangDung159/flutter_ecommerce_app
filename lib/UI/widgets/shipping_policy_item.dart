@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:get/get.dart';
 
 class ShippingPolicyItem extends StatelessWidget {
   const ShippingPolicyItem({
@@ -96,11 +98,14 @@ class ShippingPolicyItem extends StatelessWidget {
             width: 12,
           ),
           if (!isSelfPickup)
-            Container(
-              margin: EdgeInsets.only(top: 3),
-              child: Image.asset(
-                AssetHelper.iconChevronRight,
-                width: 6,
+            GestureDetector(
+              onTap: () => Get.to(() => DeliveryAddressScreen()),
+              child: Container(
+                margin: EdgeInsets.only(top: 3),
+                child: Image.asset(
+                  AssetHelper.iconChevronRight,
+                  width: 6,
+                ),
               ),
             )
         ],
