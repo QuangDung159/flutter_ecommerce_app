@@ -260,6 +260,9 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     DistrictModel districtSelected = getx.districtSelected.value;
     WardModel wardSelected = getx.wardSelected.value;
 
+    List<DistrictModel> listDistrict = citySelected.listDistrict ?? [];
+    List<WardModel> listWard = districtSelected.listWard ?? [];
+
     switch (locationType) {
       case 'city':
         for (var cityItem in listCityDummy) {
@@ -268,6 +271,8 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               onTap: () {
                 getx.setData(
                   citySelected: cityItem,
+                  districtSelected: cityItem.listDistrict![0],
+                  wardSelected: cityItem.listDistrict![0].listWard![0],
                 );
               },
               child: renderLocationItem(
@@ -279,12 +284,13 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
         }
         break;
       case 'district':
-        for (var districtItem in listCityDummy[1].listDistrict!) {
+        for (var districtItem in listDistrict) {
           listRender.add(
             GestureDetector(
               onTap: () {
                 getx.setData(
                   districtSelected: districtItem,
+                  wardSelected: districtItem.listWard![0],
                 );
               },
               child: renderLocationItem(
@@ -296,7 +302,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
         }
         break;
       default:
-        for (var wardItem in listCityDummy[1].listDistrict![0].listWard!) {
+        for (var wardItem in listWard) {
           listRender.add(
             GestureDetector(
               onTap: () {
