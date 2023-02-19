@@ -11,6 +11,7 @@ import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class DeliveryAddressScreen extends StatefulWidget {
   const DeliveryAddressScreen({super.key});
@@ -146,34 +147,92 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
   }
 
   Widget renderDropdownButton(String title) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: AppColors.border,
-          width: 1,
-        ),
-      ),
-      margin: EdgeInsets.only(bottom: 12),
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 16,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 16,
+    return GestureDetector(
+      onTap: () {
+        showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
               ),
             ),
-            Image.asset(
-              AssetHelper.iconChevronDown,
-              width: 10,
+            child: Container(
+              color: Colors.white,
+              height: 300,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset(
+                    AssetHelper.iconBottomSheet,
+                    width: 40,
+                    height: 4,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        Container(
+                          height: 100,
+                          color: Colors.white,
+                          child: Text('asd'),
+                        ),
+                        Container(
+                          height: 100,
+                          color: Colors.white,
+                          child: Text('asd'),
+                        ),
+                        Container(
+                          height: 100,
+                          color: Colors.white,
+                          child: Text('asd'),
+                        ),
+                        SizedBox(
+                          height: 36,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
+        );
+      },
+      child: Container(
+        height: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: AppColors.border,
+            width: 1,
+          ),
+        ),
+        margin: EdgeInsets.only(bottom: 12),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              Image.asset(
+                AssetHelper.iconChevronDown,
+                width: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );
