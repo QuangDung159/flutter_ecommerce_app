@@ -1,3 +1,4 @@
+import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
@@ -622,20 +623,63 @@ List<CityModel> listCityDummy = [
     ]),
   ]),
   CityModel(id: 2, name: 'Ho Chi Minh City', listDistrict: [
-    DistrictModel(name: 'District 1', id: 4, listWard: [
-      WardModel(id: 10, name: 'Ben Nghe'),
-      WardModel(id: 11, name: 'Ben Thanh'),
-      WardModel(id: 12, name: 'Co Giang'),
-    ],),
-    DistrictModel(name: 'Binh Thanh District', id: 5, listWard: [
-      WardModel(id: 13, name: 'Ward 1'),
-      WardModel(id: 14, name: 'Ward 2'),
-      WardModel(id: 15, name: 'Ward 3'),
-    ],),
-    DistrictModel(name: 'Tan Phu District', id: 6, listWard: [
-      WardModel(id: 16, name: 'Hiep Tan'),
-      WardModel(id: 17, name: 'Tay Thanh'),
-      WardModel(id: 18, name: 'Phu Thanh'),
-    ],),
+    DistrictModel(
+      name: 'District 1',
+      id: 4,
+      listWard: [
+        WardModel(id: 10, name: 'Ben Nghe'),
+        WardModel(id: 11, name: 'Ben Thanh'),
+        WardModel(id: 12, name: 'Co Giang'),
+      ],
+    ),
+    DistrictModel(
+      name: 'Binh Thanh District',
+      id: 5,
+      listWard: [
+        WardModel(id: 13, name: 'Ward 1'),
+        WardModel(id: 14, name: 'Ward 2'),
+        WardModel(id: 15, name: 'Ward 3'),
+      ],
+    ),
+    DistrictModel(
+      name: 'Tan Phu District',
+      id: 6,
+      listWard: [
+        WardModel(id: 16, name: 'Hiep Tan'),
+        WardModel(id: 17, name: 'Tay Thanh'),
+        WardModel(id: 18, name: 'Phu Thanh'),
+      ],
+    ),
   ]),
+];
+
+List<AddressModel> listAddressDummy = [
+  AddressModel(
+    addressLine: '1 Nguyen Van Thu',
+    city: listCityDummy[1],
+    district: listCityDummy[1].listDistrict![0],
+    ward: listCityDummy[1].listDistrict![0].listWard![0],
+    id: 1,
+  ),
+  AddressModel(
+    addressLine: '111 Chu Thien',
+    city: listCityDummy[1],
+    district: listCityDummy[1].listDistrict![2],
+    ward: listCityDummy[1].listDistrict![2].listWard![0],
+    id: 2,
+  ),
+  AddressModel(
+    addressLine: '113 Chu Thien',
+    city: listCityDummy[1],
+    district: listCityDummy[1].listDistrict![2],
+    ward: listCityDummy[1].listDistrict![2].listWard![0],
+    id: 3,
+  ),
+  AddressModel(
+    addressLine: '115 Chu Thien',
+    city: listCityDummy[1],
+    district: listCityDummy[1].listDistrict![2],
+    ward: listCityDummy[1].listDistrict![2].listWard![0],
+    id: 4,
+  ),
 ];
