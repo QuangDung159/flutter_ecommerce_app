@@ -13,8 +13,9 @@ void showSnackBar(
     title,
     content,
     duration: Duration(seconds: 2),
-    backgroundColor: Colors.white,
     borderColor: isSuccess ?? true ? Colors.green : Colors.red,
     borderWidth: 1,
+    margin: EdgeInsets.all(12),
+    barBlur: 30,
   );
 }
