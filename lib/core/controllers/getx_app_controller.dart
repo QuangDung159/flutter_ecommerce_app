@@ -32,7 +32,7 @@ class GetxAppController extends GetxController {
   final paymentMethodSelected =
       Rx<PaymentMethodModel>(listPaymentMethodDummy[0]);
 
-  final addressSelected = Rxn<AddressModel>(listAddressDummy[0]);
+  final addressSelected = Rxn<AddressModel>();
 
   final citySelected = Rx<CityModel>(listCityDummy[0]);
 
@@ -41,6 +41,8 @@ class GetxAppController extends GetxController {
   final wardSelected = Rx<WardModel>(
     listCityDummy[0].listDistrict![0].listWard![0],
   );
+
+  final listAddress = RxList<AddressModel>([]);
 
   void setData({
     String? sortSelectedValue,
@@ -54,6 +56,7 @@ class GetxAppController extends GetxController {
     CityModel? citySelected,
     DistrictModel? districtSelected,
     WardModel? wardSelected,
+    List<AddressModel>? listAddress,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -97,6 +100,10 @@ class GetxAppController extends GetxController {
 
     if (wardSelected != null) {
       this.wardSelected.value = wardSelected;
+    }
+
+    if (listAddress != null) {
+      this.listAddress.value = listAddress;
     }
   }
 

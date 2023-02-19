@@ -9,10 +9,12 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -76,15 +78,18 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
 
   List<Widget> renderListAddress() {
     List<Widget> listRendered = [];
-    GetxAppController getxApp = Get.find<GetxAppController>();
+    List<AddressModel> listAddress = getxAppController.listAddress;
+    AddressModel? addressSelected = getxAppController.addressSelected.value;
 
-    for (var i = 0; i < listAddressDummy.length; i++) {
+    print(addressSelected?.addressLine);
+
+    for (var i = 0; i < listAddress.length; i++) {
       listRendered.add(
         AddressItem(
-          isSelected: getxApp.addressSelected.value == null
+          isSelected: addressSelected == null
               ? false
-              : getxApp.addressSelected.value!.id == listAddressDummy[i].id,
-          addressModel: listAddressDummy[i],
+              : addressSelected.id == listAddress[i].id,
+          addressModel: listAddress[i],
         ),
       );
     }
@@ -93,8 +98,6 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
   }
 
   Widget renderAddressInputSection() {
-    GetxAppController getx = Get.find<GetxAppController>();
-
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppDimension.contentPadding,
@@ -139,18 +142,51 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               height: 12,
             ),
             renderDropdownButton(
-              getx.citySelected.value.name,
+              getxAppController.citySelected.value.name,
               'city',
             ),
             renderDropdownButton(
-              getx.districtSelected.value.name,
+              getxAppController.districtSelected.value.name,
               'district',
             ),
             renderDropdownButton(
-              getx.wardSelected.value.name,
+              getxAppController.wardSelected.value.name,
               'ward',
             ),
-            ButtonWidget(title: 'Add', opTap: () {}),
+            ButtonWidget(
+                title: 'Add',
+                opTap: () {
+                  List<AddressModel> listAddress =
+                      getxAppController.listAddress;
+
+                  if (addressLineInputController.text == '' ||
+                      receiverNameInputController.text == '' ||
+                      phoneInputController.text == '') {
+                    showSnackBar(
+                      title: 'Warning!',
+                      content: 'Please fill all data',
+                      isSuccess: false,
+                    );
+                    return;
+                  }
+
+                  AddressModel address = AddressModel(
+                    addressLine: addressLineInputController.text,
+                    city: getxAppController.citySelected.value,
+                    district: getxAppController.districtSelected.value,
+                    ward: getxAppController.wardSelected.value,
+                    id: listAddress.length,
+                    receiverName: receiverNameInputController.text,
+                    phone: phoneInputController.text,
+                  );
+
+                  listAddress.add(address);
+                  getxAppController.setAddressSelected(address);
+
+                  addressLineInputController.text = '';
+                  receiverNameInputController.text = '';
+                  phoneInputController.text = '';
+                }),
             SizedBox(
               height: AppDimension.contentPadding,
             ),
