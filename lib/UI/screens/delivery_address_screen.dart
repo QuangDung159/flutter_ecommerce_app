@@ -132,10 +132,17 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           SizedBox(
             height: 12,
           ),
-          renderDropdownButton(listCityDummy[1].name),
-          renderDropdownButton(listCityDummy[1].listDistrict![0].name),
+          renderDropdownButton(
+            listCityDummy[1].name,
+            'city',
+          ),
+          renderDropdownButton(
+            listCityDummy[1].listDistrict![0].name,
+            'district',
+          ),
           renderDropdownButton(
             listCityDummy[1].listDistrict![0].listWard![0].name,
+            'ward',
           ),
           ButtonWidget(title: 'Add', opTap: () {}),
           SizedBox(
@@ -146,7 +153,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     );
   }
 
-  Widget renderDropdownButton(String title) {
+  Widget renderDropdownButton(String title, String locationType) {
     return GestureDetector(
       onTap: () {
         showMaterialModalBottomSheet(
@@ -176,26 +183,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   ),
                   Expanded(
                     child: ListView(
-                      children: [
-                        Container(
-                          height: 100,
-                          color: Colors.white,
-                          child: Text('asd'),
-                        ),
-                        Container(
-                          height: 100,
-                          color: Colors.white,
-                          child: Text('asd'),
-                        ),
-                        Container(
-                          height: 100,
-                          color: Colors.white,
-                          child: Text('asd'),
-                        ),
-                        SizedBox(
-                          height: 36,
-                        ),
-                      ],
+                      children: renderListLocation(
+                        getxAppController,
+                        locationType,
+                      ),
                     ),
                   ),
                 ],
@@ -236,5 +227,61 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
         ),
       ),
     );
+  }
+
+  Widget renderLocationItem(dynamic locationItem) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      margin: EdgeInsets.only(bottom: 12),
+      color: Colors.amber,
+      child: Text(
+        locationItem.name,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  List<Widget> renderListCity(GetxAppController getx) {
+    List<Widget> listRender = [];
+
+    for (var cityItem in listCityDummy) {
+      listRender.add(
+        renderLocationItem(cityItem),
+      );
+    }
+
+    return listRender;
+  }
+
+  List<Widget> renderListLocation(GetxAppController getx, String locationType) {
+    List<Widget> listRender = [];
+
+    switch (locationType) {
+      case 'city':
+        for (var cityItem in listCityDummy) {
+          listRender.add(
+            renderLocationItem(cityItem),
+          );
+        }
+        break;
+      case 'district':
+        for (var districtItem in listCityDummy[1].listDistrict!) {
+          listRender.add(
+            renderLocationItem(districtItem),
+          );
+        }
+        break;
+      default:
+        for (var wardItem in listCityDummy[1].listDistrict![0].listWard!) {
+          listRender.add(
+            renderLocationItem(wardItem),
+          );
+        }
+        break;
+    }
+
+    return listRender;
   }
 }
