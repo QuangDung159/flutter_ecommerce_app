@@ -5,7 +5,9 @@ import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
 class DeliveryAddressScreen extends StatefulWidget {
@@ -34,7 +36,6 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
       body: SizedBox(
         child: Column(
           children: [
@@ -64,29 +65,24 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     height: 12,
                   ),
                   TextFieldWidget(
-                    controller: addressLineInputController,
+                    controller: receiverNameInputController,
                     hintText: 'Enter receiver name',
                   ),
                   SizedBox(
                     height: 12,
                   ),
                   TextFieldWidget(
-                    controller: addressLineInputController,
+                    controller: phoneInputController,
                     hintText: 'Enter receiver phone',
                   ),
                   SizedBox(
                     height: 12,
                   ),
-                  Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: AppColors.border,
-                        width: 1,
-                      ),
-                    ),
-                  )
+                  renderDropdownButton(listCityDummy[1].name),
+                  renderDropdownButton(listCityDummy[1].listDistrict![0].name),
+                  renderDropdownButton(
+                    listCityDummy[1].listDistrict![0].listWard![0].name,
+                  ),
                 ],
               ),
             ),
@@ -106,6 +102,40 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   ],
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget renderDropdownButton(String title) {
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppColors.border,
+          width: 1,
+        ),
+      ),
+      margin: EdgeInsets.only(bottom: 12),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            Image.asset(
+              AssetHelper.iconChevronDown,
+              width: 10,
             ),
           ],
         ),
