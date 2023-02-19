@@ -81,8 +81,6 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     List<AddressModel> listAddress = getxAppController.listAddress;
     AddressModel? addressSelected = getxAppController.addressSelected.value;
 
-    print(addressSelected?.addressLine);
-
     for (var i = 0; i < listAddress.length; i++) {
       listRendered.add(
         AddressItem(
