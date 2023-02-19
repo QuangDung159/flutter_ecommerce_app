@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/profile_menu_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
@@ -48,13 +49,11 @@ class _MoreScreenState extends State<MoreScreen> {
                       height: 34,
                     ),
                     ProfileMenuItem(
-                      title: 'Edit profile',
-                    ),
-                    ProfileMenuItem(
                       title: 'My purchase',
                     ),
                     ProfileMenuItem(
-                      title: 'My transaction',
+                      title: 'Address book',
+                      onTap: () => Get.to(() => DeliveryAddressScreen()),
                     ),
                     ProfileMenuItem(
                       title: 'Payment methods',

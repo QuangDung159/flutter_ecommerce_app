@@ -8,6 +8,8 @@ class AddressModel {
   final CityModel city;
   final DistrictModel district;
   final WardModel ward;
+  final String receiverName;
+  final String phone;
 
   AddressModel({
     required this.addressLine,
@@ -15,6 +17,8 @@ class AddressModel {
     required this.district,
     required this.ward,
     required this.id,
+    required this.receiverName,
+    required this.phone,
   });
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +29,8 @@ class AddressModel {
         district: DistrictModel.fromJson(json['district']),
         ward: WardModel.fromJson(json['ward']),
         id: json['id'],
+        receiverName: json['receiver_name'],
+        phone: json['phone'],
       );
     }
   }

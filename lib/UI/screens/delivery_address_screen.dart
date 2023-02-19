@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
-import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:get/get.dart';
@@ -31,7 +29,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             ),
             MyAppBar(
               hasBackButton: true,
-              title: 'My cart',
+              title: 'Delivery address',
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -84,52 +82,6 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     ),
                   ],
                 ),
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.contentPadding,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('asd'),
-                      Text('asd'),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('asd'),
-                      Text('asd'),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.contentPadding,
-                vertical: AppDimension.contentPadding,
-              ),
-              child: Column(
-                children: [
-                  ButtonWidget(
-                    title: 'Payment',
-                    backgroundColor: getxAppController.listCartItem.isEmpty
-                        ? AppColors.greyMid
-                        : AppColors.primary,
-                    opTap: () {
-                      if (getxAppController.listCartItem.isNotEmpty) {
-                        Get.to(() => DeliveryAddressScreen());
-                      }
-                    },
-                  ),
-                ],
               ),
             ),
           ],
