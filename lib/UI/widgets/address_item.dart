@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
 class AddressItem extends StatelessWidget {
@@ -19,8 +20,6 @@ class AddressItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String fullAddress =
-        '${addressModel.addressLine}, ${addressModel.ward.name}, ${addressModel.district.name}, ${addressModel.city.name}';
     GetxAppController getx = Get.find<GetxAppController>();
 
     return GestureDetector(
@@ -70,7 +69,7 @@ class AddressItem extends StatelessWidget {
                     height: 6,
                   ),
                   Text(
-                    fullAddress,
+                    CartServices.getFullAddress(addressModel),
                     style: TextStyle(
                       fontSize: 12,
                       color: AppColors.greyMid,

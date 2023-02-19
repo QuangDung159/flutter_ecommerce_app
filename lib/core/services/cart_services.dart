@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:convert';
-
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
@@ -109,5 +108,16 @@ class CartServices {
     double total = subtotal + double.parse(shippingSelected.fee) - discount;
 
     return total;
+  }
+
+  static String getFullAddress(AddressModel? addressModel) {
+    if (addressModel == null) {
+      return 'N/a';
+    }
+
+    String fullAddress =
+        '${addressModel.addressLine}, ${addressModel.ward.name}, ${addressModel.district.name}, ${addressModel.city.name}';
+
+    return fullAddress;
   }
 }

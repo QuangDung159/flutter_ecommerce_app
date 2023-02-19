@@ -3,9 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
 class ShippingPolicyItem extends StatelessWidget {
@@ -21,6 +23,8 @@ class ShippingPolicyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isSelfPickup = shippingPolicy.deliveryInfo == 'Self-Pickup';
+    GetxAppController getx = Get.find<GetxAppController>();
+
     return Container(
       padding: EdgeInsets.all(12),
       margin: EdgeInsets.only(bottom: 12),
@@ -50,36 +54,22 @@ class ShippingPolicyItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Flexible(
-                      child: Text(
-                        isSelfPickup
-                            ? shippingPolicy.deliveryInfo
-                            : 'Samantha Lee',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: renderName(isSelfPickup, getx),
                     ),
-                    if (!isSelfPickup)
-                      Row(
-                        children: [
-                          Text(' | '),
-                          Text('+123123'),
-                        ],
-                      )
                   ],
                 ),
+                if (!isSelfPickup)
+                  Obx(
+                    () => Text(
+                      getx.addressSelected.value != null
+                          ? getx.addressSelected.value!.phone
+                          : '',
+                    ),
+                  ),
                 SizedBox(
                   height: 6,
                 ),
-                Text(
-                  isSelfPickup
-                      ? shippingPolicy.displayFee
-                      : '111 Chu Thien, Hiep Tan ward',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppColors.greyMid,
-                  ),
-                ),
+                renderAddress(isSelfPickup, getx),
               ],
             ),
           ),
@@ -109,6 +99,50 @@ class ShippingPolicyItem extends StatelessWidget {
               ),
             )
         ],
+      ),
+    );
+  }
+
+  Widget renderAddress(bool isSelfPickup, GetxAppController getx) {
+    if (isSelfPickup) {
+      return Text(
+        shippingPolicy.displayFee,
+        style: TextStyle(
+          fontSize: 12,
+          color: AppColors.greyMid,
+        ),
+      );
+    }
+
+    return Obx(
+      () => Text(
+        CartServices.getFullAddress(getx.addressSelected.value),
+        style: TextStyle(
+          fontSize: 12,
+          color: AppColors.greyMid,
+        ),
+      ),
+    );
+  }
+
+  Widget renderName(bool isSelfPickup, GetxAppController getx) {
+    if (isSelfPickup) {
+      return Text(
+        shippingPolicy.deliveryInfo,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    }
+
+    return Obx(
+      () => Text(
+        getx.addressSelected.value != null
+            ? getx.addressSelected.value!.receiverName
+            : 'Please choose delivery address',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
