@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/address_item.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -47,64 +49,103 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               hasBackButton: true,
               title: 'Delivery address',
             ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.contentPadding,
-              ),
-              color: Colors.white,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 12,
-                  ),
-                  TextFieldWidget(
-                    controller: addressLineInputController,
-                    hintText: 'Enter your address',
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  TextFieldWidget(
-                    controller: receiverNameInputController,
-                    hintText: 'Enter receiver name',
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  TextFieldWidget(
-                    controller: phoneInputController,
-                    hintText: 'Enter receiver phone',
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  renderDropdownButton(listCityDummy[1].name),
-                  renderDropdownButton(listCityDummy[1].listDistrict![0].name),
-                  renderDropdownButton(
-                    listCityDummy[1].listDistrict![0].listWard![0].name,
-                  ),
-                ],
-              ),
-            ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(bottom: 12),
-                      height: 120,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
+                child: Container(
+                  color: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  margin: EdgeInsets.only(bottom: 12),
+                  child: Column(
+                    children: [
+                      AddressItem(
+                        isSelected: true,
                       ),
-                      child: Text('asd'),
-                    ),
-                  ],
+                      AddressItem(
+                        isSelected: true,
+                      ),
+                      AddressItem(
+                        isSelected: true,
+                      ),
+                      AddressItem(
+                        isSelected: true,
+                      ),
+                      AddressItem(
+                        isSelected: true,
+                      ),
+                      AddressItem(
+                        isSelected: true,
+                      ),
+                      AddressItem(
+                        isSelected: true,
+                      ),
+                      AddressItem(
+                        isSelected: true,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
+            renderAddressInputSection(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget renderAddressInputSection() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
+      ),
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 18,
+          ),
+          Text(
+            'Add new address',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(
+            height: 18,
+          ),
+          TextFieldWidget(
+            controller: addressLineInputController,
+            hintText: 'Enter your address',
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          TextFieldWidget(
+            controller: receiverNameInputController,
+            hintText: 'Enter receiver name',
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          TextFieldWidget(
+            controller: phoneInputController,
+            hintText: 'Enter receiver phone',
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          renderDropdownButton(listCityDummy[1].name),
+          renderDropdownButton(listCityDummy[1].listDistrict![0].name),
+          renderDropdownButton(
+            listCityDummy[1].listDistrict![0].listWard![0].name,
+          ),
+          ButtonWidget(title: 'Add', opTap: () {}),
+          SizedBox(
+            height: AppDimension.contentPadding,
+          ),
+        ],
       ),
     );
   }
