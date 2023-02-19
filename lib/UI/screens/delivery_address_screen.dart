@@ -56,32 +56,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   margin: EdgeInsets.only(bottom: 12),
                   child: Column(
-                    children: [
-                      AddressItem(
-                        isSelected: true,
-                      ),
-                      AddressItem(
-                        isSelected: true,
-                      ),
-                      AddressItem(
-                        isSelected: true,
-                      ),
-                      AddressItem(
-                        isSelected: true,
-                      ),
-                      AddressItem(
-                        isSelected: true,
-                      ),
-                      AddressItem(
-                        isSelected: true,
-                      ),
-                      AddressItem(
-                        isSelected: true,
-                      ),
-                      AddressItem(
-                        isSelected: true,
-                      ),
-                    ],
+                    children: renderListAddress(),
                   ),
                 ),
               ),
@@ -91,6 +66,21 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
         ),
       ),
     );
+  }
+
+  List<Widget> renderListAddress() {
+    List<Widget> listRendered = [];
+
+    for (var i = 0; i < listAddressDummy.length; i++) {
+      listRendered.add(
+        AddressItem(
+          isSelected: true,
+          addressModel: listAddressDummy[i],
+        ),
+      );
+    }
+
+    return listRendered;
   }
 
   Widget renderAddressInputSection() {

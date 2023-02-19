@@ -606,20 +606,20 @@ List<PaymentMethodModel> listPaymentMethodDummy = [
 
 List<CityModel> listCityDummy = [
   CityModel(id: 1, name: 'Ha Noi City', listDistrict: [
-    DistrictModel(name: 'Dong Da', id: 1, listWard: [
-      WardModel(id: 1, name: 'Cat Linh'),
-      WardModel(id: 2, name: 'Hang Bot'),
-      WardModel(id: 3, name: 'Kham Thien'),
+    DistrictModel(name: 'Dong Da District', id: 1, listWard: [
+      WardModel(id: 1, name: 'Cat Linh Ward'),
+      WardModel(id: 2, name: 'Hang Bot Ward'),
+      WardModel(id: 3, name: 'Kham Thien Ward'),
     ]),
-    DistrictModel(name: 'Hoan Kiem', id: 2, listWard: [
-      WardModel(id: 4, name: 'Chuong Duong'),
-      WardModel(id: 5, name: 'Cua Dong'),
-      WardModel(id: 6, name: 'Cua Nam'),
+    DistrictModel(name: 'Hoan Kiem District', id: 2, listWard: [
+      WardModel(id: 4, name: 'Chuong Duong Ward'),
+      WardModel(id: 5, name: 'Cua Dong Ward'),
+      WardModel(id: 6, name: 'Cua Nam Ward'),
     ]),
-    DistrictModel(name: 'Ba Dinh', id: 3, listWard: [
-      WardModel(id: 7, name: 'Cau Giay'),
-      WardModel(id: 8, name: 'Doi Can'),
-      WardModel(id: 9, name: 'Dien Bien'),
+    DistrictModel(name: 'Ba Dinh District', id: 3, listWard: [
+      WardModel(id: 7, name: 'Cau Giay Ward'),
+      WardModel(id: 8, name: 'Doi Can Ward'),
+      WardModel(id: 9, name: 'Dien Bien Ward'),
     ]),
   ]),
   CityModel(id: 2, name: 'Ho Chi Minh City', listDistrict: [
@@ -627,9 +627,9 @@ List<CityModel> listCityDummy = [
       name: 'District 1',
       id: 4,
       listWard: [
-        WardModel(id: 10, name: 'Ben Nghe'),
-        WardModel(id: 11, name: 'Ben Thanh'),
-        WardModel(id: 12, name: 'Co Giang'),
+        WardModel(id: 10, name: 'Ben Nghe Ward'),
+        WardModel(id: 11, name: 'Ben Thanh Ward'),
+        WardModel(id: 12, name: 'Co Giang Ward'),
       ],
     ),
     DistrictModel(
@@ -645,9 +645,9 @@ List<CityModel> listCityDummy = [
       name: 'Tan Phu District',
       id: 6,
       listWard: [
-        WardModel(id: 16, name: 'Hiep Tan'),
-        WardModel(id: 17, name: 'Tay Thanh'),
-        WardModel(id: 18, name: 'Phu Thanh'),
+        WardModel(id: 16, name: 'Hiep Tan Ward'),
+        WardModel(id: 17, name: 'Tay Thanh Ward'),
+        WardModel(id: 18, name: 'Phu Thanh Ward'),
       ],
     ),
   ]),
