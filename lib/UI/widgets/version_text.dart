@@ -51,7 +51,6 @@ class _VersionTextState extends State<VersionText> {
 
   @override
   Widget build(BuildContext context) {
-    print(buildNumber);
     return Text(
       'Version $version (build $buildNumber)',
       style: TextStyle(
