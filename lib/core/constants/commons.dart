@@ -1,4 +1,6 @@
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/city_model.dart';
+import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 
 List<ProductModel> listProductDummy = [
   ProductModel(
@@ -580,43 +583,59 @@ List<PromotionModel> listPromotionDummy = [
 
 List<PromotionUserModel> listPromotionUserDummy = [
   PromotionUserModel(
-    id: 1,
-    promotion: listPromotionDummy[0],
-    redeemAt: '2023-01-30'
-  ),
+      id: 1, promotion: listPromotionDummy[0], redeemAt: '2023-01-30'),
   PromotionUserModel(
-    id: 2,
-    promotion: listPromotionDummy[1],
-    redeemAt: '2023-01-30'
-  ),
+      id: 2, promotion: listPromotionDummy[1], redeemAt: '2023-01-30'),
   PromotionUserModel(
-    id: 3,
-    promotion: listPromotionDummy[2],
-    redeemAt: '2023-01-30'
-  ),
+      id: 3, promotion: listPromotionDummy[2], redeemAt: '2023-01-30'),
   PromotionUserModel(
-    id: 4,
-    promotion: listPromotionDummy[3],
-    redeemAt: '2023-01-30'
-  ),
+      id: 4, promotion: listPromotionDummy[3], redeemAt: '2023-01-30'),
   PromotionUserModel(
-    id: 5,
-    promotion: listPromotionDummy[4],
-    redeemAt: '2023-01-30'
-  ),
+      id: 5, promotion: listPromotionDummy[4], redeemAt: '2023-01-30'),
   PromotionUserModel(
-    id: 6,
-    promotion: listPromotionDummy[5],
-    redeemAt: '2023-01-30'
-  ),
+      id: 6, promotion: listPromotionDummy[5], redeemAt: '2023-01-30'),
   PromotionUserModel(
-    id: 7,
-    promotion: listPromotionDummy[6],
-    redeemAt: '2023-01-30'
-  ),
+      id: 7, promotion: listPromotionDummy[6], redeemAt: '2023-01-30'),
 ];
 
 List<PaymentMethodModel> listPaymentMethodDummy = [
   PaymentMethodModel(id: 1, title: 'Cash on delivery', type: 'cash'),
   PaymentMethodModel(id: 2, title: 'Flutter E-Wallet App', type: 'e_wallet'),
+];
+
+List<CityModel> listCityDummy = [
+  CityModel(id: 1, name: 'Ha Noi City', listDistrict: [
+    DistrictModel(name: 'Dong Da', id: 1, listWard: [
+      WardModel(id: 1, name: 'Cat Linh'),
+      WardModel(id: 2, name: 'Hang Bot'),
+      WardModel(id: 3, name: 'Kham Thien'),
+    ]),
+    DistrictModel(name: 'Hoan Kiem', id: 2, listWard: [
+      WardModel(id: 4, name: 'Chuong Duong'),
+      WardModel(id: 5, name: 'Cua Dong'),
+      WardModel(id: 6, name: 'Cua Nam'),
+    ]),
+    DistrictModel(name: 'Ba Dinh', id: 3, listWard: [
+      WardModel(id: 7, name: 'Cau Giay'),
+      WardModel(id: 8, name: 'Doi Can'),
+      WardModel(id: 9, name: 'Dien Bien'),
+    ]),
+  ]),
+  CityModel(id: 2, name: 'Ho Chi Minh City', listDistrict: [
+    DistrictModel(name: 'District 1', id: 4, listWard: [
+      WardModel(id: 10, name: 'Ben Nghe'),
+      WardModel(id: 11, name: 'Ben Thanh'),
+      WardModel(id: 12, name: 'Co Giang'),
+    ],),
+    DistrictModel(name: 'Binh Thanh District', id: 5, listWard: [
+      WardModel(id: 13, name: 'Ward 1'),
+      WardModel(id: 14, name: 'Ward 2'),
+      WardModel(id: 15, name: 'Ward 3'),
+    ],),
+    DistrictModel(name: 'Tan Phu District', id: 6, listWard: [
+      WardModel(id: 16, name: 'Hiep Tan'),
+      WardModel(id: 17, name: 'Tay Thanh'),
+      WardModel(id: 18, name: 'Phu Thanh'),
+    ],),
+  ]),
 ];
