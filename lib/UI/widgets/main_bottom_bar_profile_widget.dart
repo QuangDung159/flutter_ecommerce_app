@@ -41,7 +41,76 @@ class _MainBottomBarProfileWidgetState
                 child: Column(
                   children: [
                     renderAvatarSection(),
-                    renderShoppingInfoSection()
+                    renderShoppingInfoSection(),
+                    SizedBox(
+                      height: AppDimension.contentPadding,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimension.contentPadding,
+                      ),
+                      child: Stack(
+                        children: [
+                          Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child:
+                                  Image.asset(AssetHelper.imageReferBackground),
+                            ),
+                          ),
+                          Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child:
+                                  Image.asset(AssetHelper.imageGradientProfile),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: AppDimension.contentPadding,
+                                      ),
+                                      Text(
+                                        'Refer a friend and get reward.',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 6,
+                                      ),
+                                      Text(
+                                        'Terms and conditions apply.',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 16,
+                            left: 16,
+                            right: 16,
+                            child: renderReferCode(),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
