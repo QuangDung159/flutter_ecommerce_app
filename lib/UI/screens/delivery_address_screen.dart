@@ -92,6 +92,14 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
       );
     }
 
+    if (listRendered.isEmpty) {
+      return [
+        Center(
+          child: Text('Address book empty'),
+        ),
+      ];
+    }
+
     return listRendered;
   }
 
@@ -135,6 +143,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             TextFieldWidget(
               controller: phoneInputController,
               hintText: 'Enter receiver phone',
+              keyboardType: TextInputType.number,
             ),
             SizedBox(
               height: 12,
