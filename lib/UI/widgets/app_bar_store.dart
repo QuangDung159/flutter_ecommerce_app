@@ -6,7 +6,10 @@ import 'package:flutter_ecommerce_app/UI/widgets/cart_icon.dart';
 class AppBarStore extends StatelessWidget {
   const AppBarStore({
     Key? key,
+    this.title,
   }) : super(key: key);
+
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +25,11 @@ class AppBarStore extends StatelessWidget {
             onTap: () {},
             child: Icon(
               Icons.search,
-              size: 20,
+              size: 24,
             ),
           ),
           Text(
-            'Store',
+            title ?? 'Store',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           CartIcon(),

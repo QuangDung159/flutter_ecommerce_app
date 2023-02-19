@@ -33,47 +33,49 @@ class _MainBottomBarHomeWidgetState extends State<MainBottomBarHomeWidget>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          AppBarStore(),
-          Container(
-            color: Colors.white,
-            child: TabBar(
-              unselectedLabelColor: AppColors.greyScale,
-              labelColor: AppColors.primary,
-              labelStyle: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
+    return Column(
+      children: [
+        Container(
+          color: Colors.white,
+          height: MediaQuery.of(context).padding.top,
+        ),
+        AppBarStore(),
+        Container(
+          color: Colors.white,
+          child: TabBar(
+            unselectedLabelColor: AppColors.greyScale,
+            labelColor: AppColors.primary,
+            labelStyle: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+            tabs: [
+              Tab(
+                text: 'Featured',
               ),
-              tabs: [
-                Tab(
-                  text: 'Featured',
-                ),
-                Tab(
-                  text: 'New Arrivals',
-                ),
-                Tab(
-                  text: 'Sale',
-                )
-              ],
-              controller: _tabController,
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicatorColor: AppColors.primary,
-            ),
+              Tab(
+                text: 'New Arrivals',
+              ),
+              Tab(
+                text: 'Sale',
+              )
+            ],
+            controller: _tabController,
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorColor: AppColors.primary,
           ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                TabFeaturedWidget(),
-                TabNewArrivalsWidget(),
-                TabSaleWidget(),
-              ],
-            ),
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              TabFeaturedWidget(),
+              TabNewArrivalsWidget(),
+              TabSaleWidget(),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
