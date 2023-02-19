@@ -9,6 +9,9 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/city_model.dart';
+import 'package:flutter_ecommerce_app/core/data/district_model.dart';
+import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -90,65 +93,69 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
   }
 
   Widget renderAddressInputSection() {
+    GetxAppController getx = Get.find<GetxAppController>();
+
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppDimension.contentPadding,
       ),
       color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 18,
-          ),
-          Text(
-            'Add new address',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 18,
             ),
-          ),
-          SizedBox(
-            height: 18,
-          ),
-          TextFieldWidget(
-            controller: addressLineInputController,
-            hintText: 'Enter your address',
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          TextFieldWidget(
-            controller: receiverNameInputController,
-            hintText: 'Enter receiver name',
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          TextFieldWidget(
-            controller: phoneInputController,
-            hintText: 'Enter receiver phone',
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          renderDropdownButton(
-            listCityDummy[1].name,
-            'city',
-          ),
-          renderDropdownButton(
-            listCityDummy[1].listDistrict![0].name,
-            'district',
-          ),
-          renderDropdownButton(
-            listCityDummy[1].listDistrict![0].listWard![0].name,
-            'ward',
-          ),
-          ButtonWidget(title: 'Add', opTap: () {}),
-          SizedBox(
-            height: AppDimension.contentPadding,
-          ),
-        ],
+            Text(
+              'Add new address',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 18,
+            ),
+            TextFieldWidget(
+              controller: addressLineInputController,
+              hintText: 'Enter your address',
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            TextFieldWidget(
+              controller: receiverNameInputController,
+              hintText: 'Enter receiver name',
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            TextFieldWidget(
+              controller: phoneInputController,
+              hintText: 'Enter receiver phone',
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            renderDropdownButton(
+              getx.citySelected.value.name,
+              'city',
+            ),
+            renderDropdownButton(
+              getx.districtSelected.value.name,
+              'district',
+            ),
+            renderDropdownButton(
+              getx.wardSelected.value.name,
+              'ward',
+            ),
+            ButtonWidget(title: 'Add', opTap: () {}),
+            SizedBox(
+              height: AppDimension.contentPadding,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -182,10 +189,12 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     height: 10,
                   ),
                   Expanded(
-                    child: ListView(
-                      children: renderListLocation(
-                        getxAppController,
-                        locationType,
+                    child: Obx(
+                      () => ListView(
+                        children: renderListLocation(
+                          getxAppController,
+                          locationType,
+                        ),
                       ),
                     ),
                   ),
@@ -229,11 +238,11 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     );
   }
 
-  Widget renderLocationItem(dynamic locationItem) {
+  Widget renderLocationItem(dynamic locationItem, bool isSelected) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       margin: EdgeInsets.only(bottom: 12),
-      color: Colors.amber,
+      color: isSelected ? Colors.amber : Colors.grey,
       child: Text(
         locationItem.name,
         style: TextStyle(
@@ -243,40 +252,61 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     );
   }
 
-  List<Widget> renderListCity(GetxAppController getx) {
-    List<Widget> listRender = [];
-
-    for (var cityItem in listCityDummy) {
-      listRender.add(
-        renderLocationItem(cityItem),
-      );
-    }
-
-    return listRender;
-  }
-
   List<Widget> renderListLocation(GetxAppController getx, String locationType) {
     List<Widget> listRender = [];
+    CityModel citySelected = getx.citySelected.value;
+    DistrictModel districtSelected = getx.districtSelected.value;
+    WardModel wardSelected = getx.wardSelected.value;
 
     switch (locationType) {
       case 'city':
         for (var cityItem in listCityDummy) {
           listRender.add(
-            renderLocationItem(cityItem),
+            GestureDetector(
+              onTap: () {
+                getx.setData(
+                  citySelected: cityItem,
+                );
+              },
+              child: renderLocationItem(
+                cityItem,
+                cityItem.id == citySelected.id,
+              ),
+            ),
           );
         }
         break;
       case 'district':
         for (var districtItem in listCityDummy[1].listDistrict!) {
           listRender.add(
-            renderLocationItem(districtItem),
+            GestureDetector(
+              onTap: () {
+                getx.setData(
+                  districtSelected: districtItem,
+                );
+              },
+              child: renderLocationItem(
+                districtItem,
+                districtItem.id == districtSelected.id,
+              ),
+            ),
           );
         }
         break;
       default:
         for (var wardItem in listCityDummy[1].listDistrict![0].listWard!) {
           listRender.add(
-            renderLocationItem(wardItem),
+            GestureDetector(
+              onTap: () {
+                getx.setData(
+                  wardSelected: wardItem,
+                );
+              },
+              child: renderLocationItem(
+                wardItem,
+                wardItem.id == wardSelected.id,
+              ),
+            ),
           );
         }
         break;
