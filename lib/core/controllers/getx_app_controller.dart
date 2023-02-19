@@ -1,4 +1,5 @@
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
@@ -19,6 +20,7 @@ class GetxAppController extends GetxController {
   final promotionSelected = Rxn<PromotionUserModel>();
   final paymentMethodSelected =
       Rx<PaymentMethodModel>(listPaymentMethodDummy[0]);
+  final addressSelected = Rxn<AddressModel>(listAddressDummy[0]);
 
   void setData({
     String? sortSelectedValue,
@@ -28,7 +30,6 @@ class GetxAppController extends GetxController {
     List<int>? listFilterSelected,
     List<CartItemModel>? listCartItem,
     ShippingPolicyModel? shippingPolicySelected,
-    PromotionUserModel? promotionSelected,
     PaymentMethodModel? paymentMethodSelected,
   }) {
     if (sortSelectedValue != null) {
@@ -67,5 +68,10 @@ class GetxAppController extends GetxController {
 // accept null
   void setPromotionSelected(PromotionUserModel? promotionSelected) {
     this.promotionSelected.value = promotionSelected;
+  }
+
+  // accept null
+  void setAddressSelected(AddressModel? addressSelected) {
+    this.addressSelected.value = addressSelected;
   }
 }

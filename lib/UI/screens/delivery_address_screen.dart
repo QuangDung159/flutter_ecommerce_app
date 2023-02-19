@@ -55,8 +55,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   color: Colors.white,
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   margin: EdgeInsets.only(bottom: 12),
-                  child: Column(
-                    children: renderListAddress(),
+                  child: Obx(
+                    () => Column(
+                      children: renderListAddress(),
+                    ),
                   ),
                 ),
               ),
@@ -70,11 +72,14 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
 
   List<Widget> renderListAddress() {
     List<Widget> listRendered = [];
+    GetxAppController getxApp = Get.find<GetxAppController>();
 
     for (var i = 0; i < listAddressDummy.length; i++) {
       listRendered.add(
         AddressItem(
-          isSelected: true,
+          isSelected: getxApp.addressSelected.value == null
+              ? false
+              : getxApp.addressSelected.value!.id == listAddressDummy[i].id,
           addressModel: listAddressDummy[i],
         ),
       );
