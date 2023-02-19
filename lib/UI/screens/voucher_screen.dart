@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/voucher_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
@@ -48,9 +49,9 @@ class _VoucherScreenState extends State<VoucherScreen> {
             ),
             MyAppBar(
               hasBackButton: true,
-              title: 'My cart',
+              title: 'My voucher',
             ),
-            // renderInputPromoCode(),
+            renderInputPromoCode(),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -81,31 +82,14 @@ class _VoucherScreenState extends State<VoucherScreen> {
       child: Row(
         children: [
           Expanded(
-            child: SizedBox(
-              height: 40,
-              child: TextField(
-                controller: textFieldController,
-                onChanged: (value) {
-                  setState(() {
-                    promoCodeInput = value;
-                  });
-                },
-                cursorHeight: 16,
-                textAlignVertical: TextAlignVertical.center,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(bottom: 11, left: 16),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    borderSide: BorderSide(
-                      color: AppColors.border,
-                    ),
-                  ),
-                  hintText: 'Enter a promo code',
-                  hintStyle: TextStyle(
-                    color: AppColors.greyMid,
-                  ),
-                ),
-              ),
+            child: TextFieldWidget(
+              controller: textFieldController,
+              hintText: 'Enter a promo code',
+              onChanged: (value) {
+                setState(() {
+                  promoCodeInput = value;
+                });
+              },
             ),
           ),
           SizedBox(
