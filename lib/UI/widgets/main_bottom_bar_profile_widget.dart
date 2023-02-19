@@ -40,58 +40,56 @@ class _MainBottomBarProfileWidgetState
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding * 2,
-                        vertical: AppDimension.contentPadding,
-                      ),
-                      child: Row(
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(85),
-                            child: Image.asset(
-                              AssetHelper.imageAvatar,
-                              width: 85,
-                              height: 85,
-                            ),
-                          ),
-                          SizedBox(
-                            width: AppDimension.contentPadding,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Lư Quảng Dũng',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  'quangdunglu159@gmail.com',
-                                  style: TextStyle(
-                                    color: AppColors.greyScale,
-                                    fontSize: 12
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    renderAvatarSection(),
                   ],
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget renderAvatarSection() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding * 2,
+        vertical: AppDimension.contentPadding,
+      ),
+      child: Row(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(85),
+            child: Image.asset(
+              AssetHelper.imageAvatar,
+              width: 85,
+              height: 85,
+            ),
+          ),
+          SizedBox(
+            width: AppDimension.contentPadding,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Lư Quảng Dũng',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  'quangdunglu159@gmail.com',
+                  style: TextStyle(color: AppColors.greyScale, fontSize: 12),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
