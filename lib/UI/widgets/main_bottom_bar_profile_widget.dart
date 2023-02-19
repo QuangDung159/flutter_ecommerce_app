@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/more_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
@@ -39,14 +40,51 @@ class _MainBottomBarProfileWidgetState
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 30,
-                    ),
                     Container(
                       padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
+                        horizontal: AppDimension.contentPadding * 2,
+                        vertical: AppDimension.contentPadding,
                       ),
-                      child: Container(),
+                      child: Row(
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(85),
+                            child: Image.asset(
+                              AssetHelper.imageAvatar,
+                              width: 85,
+                              height: 85,
+                            ),
+                          ),
+                          SizedBox(
+                            width: AppDimension.contentPadding,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Lư Quảng Dũng',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  'quangdunglu159@gmail.com',
+                                  style: TextStyle(
+                                    color: AppColors.greyScale,
+                                    fontSize: 12
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -54,6 +92,32 @@ class _MainBottomBarProfileWidgetState
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget renderReferCode() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      alignment: Alignment.center,
+      height: 48,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset(
+            AssetHelper.iconCopy,
+            width: 24,
+          ),
+          Text('asdasd'),
+          Image.asset(
+            AssetHelper.iconShare,
+            width: 24,
+          ),
+        ],
       ),
     );
   }
