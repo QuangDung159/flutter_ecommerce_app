@@ -10,7 +10,7 @@ class GoogleServices {
       ? '1012509086997-5595hcq0p2gnmi5m5bqoqjrictle7bef.apps.googleusercontent.com'
       : '';
 
-  static final googleInfo = Get.put(GetxGoogleInfoController());
+  static final googleInfo = Get.find<GetxGoogleInfoController>();
 
   // google signin
   static final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -73,6 +73,19 @@ class GoogleServices {
       }
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  static void getInitGoogleAccountSigned() {
+    var displayName = LocalStorageHelper.getValue('DISPLAY_NAME');
+
+    if (displayName != null && displayName != '') {
+      googleInfo.setData(
+        displayName: displayName,
+        photoUrl: LocalStorageHelper.getValue('PHOTO_URL'),
+        openid: LocalStorageHelper.getValue('OPEN_ID'),
+        email: LocalStorageHelper.getValue('EMAIL'),
+      );
     }
   }
 }

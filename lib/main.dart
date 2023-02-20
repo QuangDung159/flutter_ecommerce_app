@@ -6,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_ecommerce_app/UI/screens/splash_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/google_services.dart';
 import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -34,6 +36,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     Get.put(GetxAppController());
+    Get.put(GetxGoogleInfoController());
 
     SortFilterServices.initListFilter();
   }
@@ -45,6 +48,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    GoogleServices.getInitGoogleAccountSigned();
+
     bool isAndroid = Theme.of(context).platform == TargetPlatform.android;
     if (isAndroid) {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
