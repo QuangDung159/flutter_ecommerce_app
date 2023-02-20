@@ -86,7 +86,7 @@ class _ListOrderState extends State<ListOrder> {
                         width: 2,
                       ),
                       Text(
-                        '4242',
+                        orderModel.paymentTransaction.cardLast4,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ class _ListOrderState extends State<ListOrder> {
                       ),
                     ),
                     Text(
-                      formatPrice('200.0'),
+                      formatPrice(orderModel.totalAmount),
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

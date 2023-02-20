@@ -849,7 +849,7 @@ List<OrderModel> listOrderDummy = [
   OrderModel(
     id: 1,
     subTotalAmount: '99.0',
-    totalAmount: '89.0',
+    totalAmount: '586.0',
     createdAt: '2023-02-20',
     promotionAmount: '10.0',
     orderItems: [
@@ -892,7 +892,7 @@ List<OrderModel> listOrderDummy = [
   OrderModel(
     id: 2,
     subTotalAmount: '99.0',
-    totalAmount: '89.0',
+    totalAmount: '594.0',
     createdAt: '2023-02-20',
     promotionAmount: '10.0',
     orderItems: [
@@ -935,7 +935,7 @@ List<OrderModel> listOrderDummy = [
   OrderModel(
     id: 3,
     subTotalAmount: '99.0',
-    totalAmount: '89.0',
+    totalAmount: '594.0',
     createdAt: '2023-02-20',
     promotionAmount: '10.0',
     orderItems: [
@@ -977,7 +977,7 @@ List<OrderModel> listOrderDummy = [
   OrderModel(
     id: 4,
     subTotalAmount: '99.0',
-    totalAmount: '89.0',
+    totalAmount: '594.0',
     createdAt: '2023-02-20',
     promotionAmount: '10.0',
     orderItems: [
@@ -1022,7 +1022,7 @@ List<OrderModel> listOrderDeliveredDummy = [
   OrderModel(
     id: 1,
     subTotalAmount: '99.0',
-    totalAmount: '89.0',
+    totalAmount: '586.0',
     createdAt: '2023-02-20',
     promotionAmount: '10.0',
     orderItems: [
@@ -1065,7 +1065,7 @@ List<OrderModel> listOrderDeliveredDummy = [
   OrderModel(
     id: 2,
     subTotalAmount: '99.0',
-    totalAmount: '89.0',
+    totalAmount: '594.0',
     createdAt: '2023-02-20',
     promotionAmount: '10.0',
     orderItems: [
@@ -1111,7 +1111,7 @@ List<OrderModel> listOrderShippingDummy = [
   OrderModel(
     id: 3,
     subTotalAmount: '99.0',
-    totalAmount: '89.0',
+    totalAmount: '594.0',
     createdAt: '2023-02-20',
     promotionAmount: '10.0',
     orderItems: [
@@ -1153,7 +1153,7 @@ List<OrderModel> listOrderShippingDummy = [
   OrderModel(
     id: 4,
     subTotalAmount: '99.0',
-    totalAmount: '89.0',
+    totalAmount: '594.0',
     createdAt: '2023-02-20',
     promotionAmount: '10.0',
     orderItems: [
