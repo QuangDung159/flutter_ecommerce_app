@@ -90,6 +90,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     backgroundColor: AppColors.primary,
                     opTap: () {
                       Get.offAll(() => MainScreen());
+                      getxAppController.setData(listCartItem: []);
                       showSnackBar(
                         title: 'Payment success',
                         content:

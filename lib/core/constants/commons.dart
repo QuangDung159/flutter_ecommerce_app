@@ -600,7 +600,7 @@ List<PromotionUserModel> listPromotionUserDummy = [
 ];
 
 List<PaymentMethodModel> listPaymentMethodDummy = [
-  PaymentMethodModel(id: 1, title: 'Cash on delivery', type: 'cash'),
+  PaymentMethodModel(id: 1, title: 'Cash', type: 'cash'),
   PaymentMethodModel(id: 2, title: 'Flutter E-Wallet App', type: 'e_wallet'),
 ];
 
