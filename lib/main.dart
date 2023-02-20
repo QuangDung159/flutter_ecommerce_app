@@ -15,11 +15,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  await LocalStorageHelper.initLocalStorage();
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
 
-  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await LocalStorageHelper.initLocalStorage();
   await GetStorage.init();
   runApp(MyApp());
 }

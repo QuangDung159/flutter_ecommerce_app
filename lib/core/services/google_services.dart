@@ -14,7 +14,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class GoogleServices {
   static String clientId = Platform.isIOS
-      ? '1012509086997-5595hcq0p2gnmi5m5bqoqjrictle7bef.apps.googleusercontent.com'
+      ? '721966385478-sv49lrmg59rktbt7kejvcb81f2e1nab5.apps.googleusercontent.com'
       : '';
 
   static final googleInfo = Get.find<GetxGoogleInfoController>();
