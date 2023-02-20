@@ -17,6 +17,7 @@ class AssetHelper {
   static const String imageAvatar = '$imageDir/image_avatar.png';
   static const String imageGradientProfile = '$imageDir/image_gradient_profile.png';
   static const String imageReferBackground = '$imageDir/image_refer_background.png';
+  static const String imageSigninScreen = '$imageDir/image_signin_screen.png';
 
   static const String iconFilter = '$iconDir/icon_filter.png';
   static const String iconBottomSheet = '$iconDir/icon_bottom_sheet.png';
@@ -39,4 +40,6 @@ class AssetHelper {
   static const String iconCopy = '$iconDir/icon_copy.png';
   static const String iconPromo = '$iconDir/icon_promo.png';
   static const String iconOrder = '$iconDir/icon_order.png';
+  static const String iconFacebook = '$iconDir/icon_facebook.png';
+  static const String iconGoogle = '$iconDir/icon_google.png';
 }

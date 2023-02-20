@@ -26,6 +26,8 @@ class _MainBottomBarProfileWidgetState
     extends State<MainBottomBarProfileWidget> {
   GetxAppController getx = Get.find<GetxAppController>();
 
+  bool isSigned = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,48 +37,132 @@ class _MainBottomBarProfileWidgetState
           children: [
             MyAppBar(
               title: 'Profile',
-              action: GestureDetector(
-                onTap: () => {},
-                child: Text(
-                  'Log out',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppColors.orangeSecondary,
-                  ),
-                ),
+              action: isSigned
+                  ? GestureDetector(
+                      onTap: () => {},
+                      child: Text(
+                        'Log out',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppColors.orangeSecondary,
+                        ),
+                      ),
+                    )
+                  : null,
+            ),
+            renderMainContentBySignedStatus(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget renderMainContentBySignedStatus() {
+    if (isSigned) {
+      return Expanded(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              renderAvatarSection(),
+              Obx(
+                () => renderShoppingInfoSection(),
+              ),
+              SizedBox(
+                height: AppDimension.contentPadding,
+              ),
+              renderReferCodeSection(),
+              SizedBox(
+                height: AppDimension.contentPadding,
+              ),
+              ProfileMenuItem(
+                title: 'Address book',
+                onTap: () => Get.to(() => DeliveryAddressScreen()),
+              ),
+              ProfileMenuItem(
+                title: 'Payment methods',
+              ),
+              VersionText(
+                textColor: AppColors.greyDark,
+              )
+            ],
+          ),
+        ),
+      );
+    }
+    return Expanded(
+      child: Container(
+        // color: Colors.amber,
+        padding: EdgeInsets.symmetric(
+          horizontal: AppDimension.contentPadding,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 100,
+            ),
+            Text(
+              'Welcome!',
+              style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primary),
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            renderSigninMethod(
+              'Sign in with Google',
+              Image.asset(
+                AssetHelper.iconGoogle,
+                width: 30,
+                height: 30,
               ),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    renderAvatarSection(),
-                    Obx(
-                      () => renderShoppingInfoSection(),
-                    ),
-                    SizedBox(
-                      height: AppDimension.contentPadding,
-                    ),
-                    renderReferCodeSection(),
-                    SizedBox(
-                      height: AppDimension.contentPadding,
-                    ),
-                    ProfileMenuItem(
-                      title: 'Address book',
-                      onTap: () => Get.to(() => DeliveryAddressScreen()),
-                    ),
-                    ProfileMenuItem(
-                      title: 'Payment methods',
-                    ),
-                    VersionText(
-                      textColor: AppColors.greyDark,
-                    )
-                  ],
-                ),
+            SizedBox(
+              height: 12,
+            ),
+            renderSigninMethod(
+              'Sign in with Facebook',
+              Image.asset(
+                AssetHelper.iconFacebook,
+                width: 30,
+                height: 30,
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget renderSigninMethod(
+    String title,
+    Widget icon,
+  ) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.primary, width: 1),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          // Image.asset(
+          //   AssetHelper.iconGoogle,
+          //   width: 30,
+          //   height: 30,
+          // ),
+          icon,
+          SizedBox(
+            width: 16,
+          ),
+          Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }
