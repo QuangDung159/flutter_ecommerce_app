@@ -69,6 +69,21 @@ class _ListOrderScreenState extends State<ListOrderScreen> {
     return listRendered;
   }
 
+  List<Widget> renderListOrderItem(OrderModel orderModel) {
+    List<Widget> listRendered = [];
+
+    for (var i = 0; i < orderModel.orderItems.length; i++) {
+      listRendered.add(
+        OrderItem(
+          orderItemModel: orderModel.orderItems[i],
+          isEndItem: i == orderModel.orderItems.length - 1,
+        ),
+      );
+    }
+
+    return listRendered;
+  }
+
   Widget renderOrder({
     required OrderModel orderModel,
   }) {
@@ -77,53 +92,10 @@ class _ListOrderScreenState extends State<ListOrderScreen> {
       margin: EdgeInsets.only(bottom: 12),
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(
-              top: AppDimension.contentPadding,
-              left: AppDimension.contentPadding,
-              right: AppDimension.contentPadding,
-            ),
-            height: 32,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(
-                color: AppColors.border,
-                width: 1,
-              ),
-            ),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 8,
-                ),
-                Image.asset(
-                  AssetHelper.iconDelivery,
-                  width: 16,
-                  height: 16,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  '07/02 - Your package has been delivered',
-                  style: TextStyle(
-                    fontSize: 10,
-                  ),
-                )
-              ],
-            ),
-          ),
+          if (orderModel.deliveryAt != null && orderModel.deliveryAt != '')
+            renderDeliveredAt(orderModel),
           Column(
-            children: [
-              OrderItem(
-                orderItemModel: orderModel.orderItems[0],
-                isEndItem: false,
-              ),
-              OrderItem(
-                orderItemModel: orderModel.orderItems[1],
-                isEndItem: true,
-              ),
-            ],
+            children: renderListOrderItem(orderModel),
           ),
           Container(
             padding: EdgeInsets.only(
@@ -162,7 +134,7 @@ class _ListOrderScreenState extends State<ListOrderScreen> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'Total 2 items',
+                      'Total ${orderModel.orderItems.length} items',
                       style: TextStyle(
                         fontSize: 12,
                         color: AppColors.grey,
@@ -179,6 +151,45 @@ class _ListOrderScreenState extends State<ListOrderScreen> {
                   ],
                 )
               ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget renderDeliveredAt(OrderModel orderModel) {
+    return Container(
+      margin: EdgeInsets.only(
+        top: AppDimension.contentPadding,
+        left: AppDimension.contentPadding,
+        right: AppDimension.contentPadding,
+      ),
+      height: 32,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: AppColors.border,
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 8,
+          ),
+          Image.asset(
+            AssetHelper.iconDelivery,
+            width: 16,
+            height: 16,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            '${orderModel.deliveryAt} - Your package has been delivered',
+            style: TextStyle(
+              fontSize: 10,
             ),
           )
         ],
