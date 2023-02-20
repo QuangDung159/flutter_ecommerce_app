@@ -65,55 +65,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             onTap: () {
               if (getxGoogle.displayName.value == '') {
                 // user doesn't login
-                showMaterialModalBottomSheet(
-                  context: context,
-                  builder: (context) => Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12),
-                      ),
-                    ),
-                    child: Container(
-                      color: Colors.white,
-                      height: 220,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Image.asset(
-                            AssetHelper.iconBottomSheet,
-                            width: 40,
-                            height: 4,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'Please sign in before add to cart',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: AppDimension.contentPadding,
-                            ),
-                            child: ListSigninMethod(
-                              onSignInSuccess: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                );
+                CartServices.showSigninBottomSheet(context);
               } else {
                 CartServices.addCart(
                   product: product,
