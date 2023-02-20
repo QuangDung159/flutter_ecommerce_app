@@ -44,6 +44,13 @@ dependencies:
   flutter_slidable: ^2.0.0
   get_storage: ^2.0.3
   package_info_plus: ^3.0.3
+  google_sign_in: ^6.0.0
+  hive_flutter: ^1.1.0
+  firebase_messaging: ^14.2.1
+  firebase_core: ^2.4.1
+  firebase_dynamic_links: ^5.0.11
+  firebase_remote_config: ^3.0.10
+  firebase_analytics: ^10.1.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.11.0

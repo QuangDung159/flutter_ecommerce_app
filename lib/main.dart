@@ -1,15 +1,22 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_ecommerce_app/UI/screens/splash_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
+  await Hive.initFlutter();
+  await LocalStorageHelper.initLocalStorage();
+  await Firebase.initializeApp();
+
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   runApp(MyApp());
