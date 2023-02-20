@@ -1,12 +1,16 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/more_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/version_text.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +24,8 @@ class MainBottomBarProfileWidget extends StatefulWidget {
 
 class _MainBottomBarProfileWidgetState
     extends State<MainBottomBarProfileWidget> {
+  GetxAppController getx = Get.find<GetxAppController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +49,9 @@ class _MainBottomBarProfileWidgetState
                 child: Column(
                   children: [
                     renderAvatarSection(),
-                    renderShoppingInfoSection(),
+                    Obx(
+                      () => renderShoppingInfoSection(),
+                    ),
                     SizedBox(
                       height: AppDimension.contentPadding,
                     ),
@@ -148,13 +156,14 @@ class _MainBottomBarProfileWidgetState
         children: [
           renderAccountShoppingInfoItem(
             'Cart',
-            '2',
+            getx.listCartItem.length.toString(),
             Image.asset(
               AssetHelper.iconCartBag,
               width: 20,
               height: 20,
               color: AppColors.primary,
             ),
+            () => Get.to(() => CartScreen()),
           ),
           SizedBox(
             width: 10,
@@ -168,19 +177,21 @@ class _MainBottomBarProfileWidgetState
               height: 20,
               color: AppColors.primary,
             ),
+            () => Get.to(() => CartScreen()),
           ),
           SizedBox(
             width: 10,
           ),
           renderAccountShoppingInfoItem(
             'Vouchers',
-            '2',
+            listPromotionUserDummy.length.toString(),
             Image.asset(
               AssetHelper.iconPromo,
               width: 20,
               height: 20,
               color: AppColors.primary,
             ),
+            () => Get.to(() => VoucherScreen()),
           ),
         ],
       ),
@@ -188,47 +199,54 @@ class _MainBottomBarProfileWidgetState
   }
 
   Widget renderAccountShoppingInfoItem(
-      String title, String value, Widget icon) {
+    String title,
+    String value,
+    Widget icon,
+    Function() onTap,
+  ) {
     return Flexible(
       flex: 1,
-      child: Container(
-        alignment: Alignment.center,
-        height: 54,
-        decoration: BoxDecoration(
-          color: AppColors.yellowLight.withOpacity(0.4),
-          borderRadius: BorderRadius.circular(6),
-          border: Border.all(
-            color: AppColors.primary,
-            width: 1,
+      child: GestureDetector(
+        onTap: () => onTap(),
+        child: Container(
+          alignment: Alignment.center,
+          height: 54,
+          decoration: BoxDecoration(
+            color: AppColors.yellowLight.withOpacity(0.4),
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(
+              color: AppColors.primary,
+              width: 1,
+            ),
           ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: AppColors.primary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                icon,
-                Text(
-                  ' $value',
-                  style: TextStyle(
-                    color: AppColors.primary,
-                    fontSize: 16,
-                  ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            )
-          ],
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  icon,
+                  Text(
+                    ' $value',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
