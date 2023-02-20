@@ -312,7 +312,7 @@ class _MainBottomBarProfileWidgetState
             width: 24,
           ),
           Text(
-            'asdasd',
+            'sbg-rg023',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
