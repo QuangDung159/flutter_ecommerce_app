@@ -64,7 +64,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             onTap: () {
               if (getxGoogle.displayName.value == '') {
                 // user doesn't login
-                GoogleServices.showSigninBottomSheet(context);
+                GoogleServices.showSigninBottomSheet(context,
+                    onSignInSuccess: () {
+                  Navigator.pop(context);
+                  CartServices.addCart(
+                    product: product,
+                    quantity: 1,
+                  );
+                });
               } else {
                 CartServices.addCart(
                   product: product,

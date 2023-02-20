@@ -100,7 +100,10 @@ class GoogleServices {
     }
   }
 
-  static void showSigninBottomSheet(BuildContext context) {
+  static void showSigninBottomSheet(
+    BuildContext context, {
+    Function()? onSignInSuccess,
+  }) {
     showMaterialModalBottomSheet(
       context: context,
       builder: (context) => Container(
@@ -141,7 +144,9 @@ class GoogleServices {
                 ),
                 child: ListSigninMethod(
                   onSignInSuccess: () {
-                    Navigator.pop(context);
+                    if (onSignInSuccess != null) {
+                      onSignInSuccess();
+                    }
                   },
                 ),
               )

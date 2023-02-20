@@ -46,7 +46,13 @@ class _CartIconState extends State<CartIcon> {
     return GestureDetector(
       onTap: () {
         if (getxGoogle.displayName.value == '') {
-          GoogleServices.showSigninBottomSheet(context);
+          GoogleServices.showSigninBottomSheet(
+            context,
+            onSignInSuccess: () {
+              Navigator.pop(context);
+              Get.to(() => CartScreen());
+            },
+          );
         } else {
           Get.to(() => CartScreen());
         }
