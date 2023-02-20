@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/data/order_item_model.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({
@@ -66,14 +67,25 @@ class OrderItem extends StatelessWidget {
                       style: TextStyle(
                         color: AppColors.grey,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
               SizedBox(
                 width: 12,
               ),
-              Text('x1'),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text('x${orderItemModel.quantity}'),
+                  Text(
+                    formatPrice(orderItemModel.price),
+                    style: TextStyle(
+                      color: AppColors.blackPrimary,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
           SizedBox(
