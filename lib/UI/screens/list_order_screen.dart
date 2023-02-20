@@ -90,17 +90,17 @@ class _ListOrderScreenState extends State<ListOrderScreen>
     );
   }
 
-  SingleChildScrollView renderTabBarContent() {
+  Widget renderTabBarContent() {
     return SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                vertical: AppDimension.contentPadding / 2,
-              ),
-              child: Column(
-                children: renderListOrder(),
-              ),
-            ),
-          );
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: AppDimension.contentPadding / 2,
+        ),
+        child: Column(
+          children: renderListOrder(),
+        ),
+      ),
+    );
   }
 
   List<Widget> renderListOrder() {
