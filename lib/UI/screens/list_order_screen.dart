@@ -91,6 +91,27 @@ class _ListOrderScreenState extends State<ListOrderScreen> {
                 width: 1,
               ),
             ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 8,
+                ),
+                Image.asset(
+                  AssetHelper.iconDelivery,
+                  width: 16,
+                  height: 16,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  '07/02 - Your package has been delivered',
+                  style: TextStyle(
+                    fontSize: 10,
+                  ),
+                )
+              ],
+            ),
           ),
           Column(
             children: [
