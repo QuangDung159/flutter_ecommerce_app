@@ -307,8 +307,8 @@ class _MainBottomBarProfileWidgetState
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(85),
-            child: Image.asset(
-              AssetHelper.imageAvatar,
+            child: Image.network(
+              googleGetx.photoUrl.value,
               width: 85,
               height: 85,
             ),
@@ -321,14 +321,14 @@ class _MainBottomBarProfileWidgetState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Lư Quảng Dũng',
+                  googleGetx.displayName.value,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 SizedBox(
                   height: 4,
                 ),
                 Text(
-                  'quangdunglu159@gmail.com',
+                  googleGetx.email.value,
                   style: TextStyle(color: AppColors.greyScale, fontSize: 12),
                 ),
               ],
