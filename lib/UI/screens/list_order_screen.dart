@@ -82,6 +82,24 @@ class _ListOrderScreenState extends State<ListOrderScreen> {
                       ),
                       child: Text('asd'),
                     ),
+                    Container(
+                      color: Colors.white,
+                      margin: EdgeInsets.only(bottom: 12),
+                      height: 120,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimension.contentPadding,
+                      ),
+                      child: Text('asd'),
+                    ),
+                    Container(
+                      color: Colors.white,
+                      margin: EdgeInsets.only(bottom: 12),
+                      height: 120,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppDimension.contentPadding,
+                      ),
+                      child: Text('asd'),
+                    ),
                   ],
                 ),
               ),

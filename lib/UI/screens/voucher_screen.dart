@@ -40,37 +40,32 @@ class _VoucherScreenState extends State<VoucherScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.white,
-      body: SizedBox(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).padding.top,
-            ),
-            MyAppBar(
-              hasBackButton: true,
-              title: 'My voucher',
-            ),
-            renderInputPromoCode(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: AppDimension.contentPadding,
-                    ),
-                    Column(
-                      children: renderListVoucherItem(),
-                    ),
-                  ],
-                ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).padding.top,
+          ),
+          MyAppBar(
+            hasBackButton: true,
+            title: 'My voucher',
+          ),
+          renderInputPromoCode(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: AppDimension.contentPadding / 2,
+                  ),
+                  Column(
+                    children: renderListVoucherItem(),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: 12,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -123,6 +118,7 @@ class _VoucherScreenState extends State<VoucherScreen> {
       listRender.add(
         VoucherItem(
           promotionUserModel: listPromotionUserDummy[i],
+          isLastItem: i == listPromotionUserDummy.length - 1,
         ),
       );
     }

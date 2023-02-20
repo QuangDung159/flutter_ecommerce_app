@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
@@ -11,9 +12,11 @@ class VoucherItem extends StatelessWidget {
   const VoucherItem({
     Key? key,
     required this.promotionUserModel,
+    required this.isLastItem,
   }) : super(key: key);
 
   final PromotionUserModel promotionUserModel;
+  final bool isLastItem;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,10 @@ class VoucherItem extends StatelessWidget {
     }
 
     return Container(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: EdgeInsets.only(
+        top: 12,
+        bottom: isLastItem ? AppDimension.contentPadding : 0,
+      ),
       padding: EdgeInsets.symmetric(
         horizontal: 16,
       ),
