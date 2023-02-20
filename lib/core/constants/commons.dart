@@ -358,6 +358,196 @@ List<ProductModel> listProductDummy = [
       ),
     ],
   ),
+  ProductModel(
+    originalPrice: '119',
+    quantity: 100,
+    id: 10,
+    price: '99',
+    name: 'FreeRain24 2.0 Packable Backpack (Advanced Series)',
+    productInfo: '',
+    description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
+    shippingInfo: '',
+    thumbnail:
+        'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/image_upload/image/2831/MATFR242001BK_1.jpg',
+    productImages: [
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_1.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_2.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_3.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_5.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_6.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_7.jpg',
+      ),
+    ],
+  ),
+  ProductModel(
+    originalPrice: '119',
+    quantity: 100,
+    id: 11,
+    price: '99',
+    name: 'FreeRain24 2.0 Packable Backpack (Advanced Series) (Charcoal) 12f4',
+    productInfo: '',
+    description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
+    shippingInfo: '',
+    thumbnail:
+        'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/image_upload/image/2831/MATFR242001BK_1.jpg',
+    productImages: [
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_1.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_2.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_3.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_5.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_6.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_7.jpg',
+      ),
+    ],
+  ),
+  ProductModel(
+    originalPrice: '119',
+    quantity: 100,
+    id: 12,
+    price: '99',
+    name: 'FreeRain24 2.0 Packable Backpack (Advanced Series) (Charcoal) 43df23',
+    productInfo: '',
+    description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
+    shippingInfo: '',
+    thumbnail:
+        'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/image_upload/image/2831/MATFR242001BK_1.jpg',
+    productImages: [
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_1.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_2.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_3.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_5.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_6.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_7.jpg',
+      ),
+    ],
+  ),
+  ProductModel(
+    originalPrice: '119',
+    quantity: 100,
+    id: 13,
+    price: '99',
+    name: 'FreeRain24 2.0 Packable Backpack (Advanced Series) (Charcoal) 234',
+    productInfo: '',
+    description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
+    shippingInfo: '',
+    thumbnail:
+        'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/image_upload/image/2831/MATFR242001BK_1.jpg',
+    productImages: [
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_1.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_2.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_3.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_5.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_6.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_7.jpg',
+      ),
+    ],
+  ),
+  ProductModel(
+    originalPrice: '119',
+    quantity: 100,
+    id: 14,
+    price: '99',
+    name: 'FreeRain24 2.0 Packable Backpack (Advanced Series) (Charcoal) 123',
+    productInfo: '',
+    description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
+    shippingInfo: '',
+    thumbnail:
+        'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/image_upload/image/2831/MATFR242001BK_1.jpg',
+    productImages: [
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_1.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_2.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_3.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_5.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_6.jpg',
+      ),
+      ProductImageModel(
+        url:
+            'https://levelup-stag.s3.ap-southeast-1.amazonaws.com/uploads/product/product_images/1605/MATFR242001BK_7.jpg',
+      ),
+    ],
+  ),
 ];
 
 List<SortItemModel> listSortDummy = [

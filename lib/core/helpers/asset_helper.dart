@@ -42,4 +42,5 @@ class AssetHelper {
   static const String iconOrder = '$iconDir/icon_order.png';
   static const String iconFacebook = '$iconDir/icon_facebook.png';
   static const String iconGoogle = '$iconDir/icon_google.png';
+  static const String iconVisa = '$iconDir/icon_visa.png';
 }
