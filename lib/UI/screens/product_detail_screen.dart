@@ -5,9 +5,11 @@ import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/bottom_button.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_icon.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_product_horizontal.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
@@ -42,6 +44,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     ProductModel product = widget.product;
+    GetxGoogleInfoController getxGoogle = Get.find<GetxGoogleInfoController>();
 
     bool isSale = product.originalPrice != '';
 
@@ -60,44 +63,63 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           BottomButton(
             title: 'Add to cart',
             onTap: () {
-              // CartServices.addCart(
-              //   product: product,
-              //   quantity: 1,
-              // );
-
-              showMaterialModalBottomSheet(
-                context: context,
-                builder: (context) => Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      topRight: Radius.circular(12),
+              if (getxGoogle.displayName.value == '') {
+                // user doesn't login
+                showMaterialModalBottomSheet(
+                  context: context,
+                  builder: (context) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                      ),
+                    ),
+                    child: Container(
+                      color: Colors.white,
+                      height: 220,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Image.asset(
+                            AssetHelper.iconBottomSheet,
+                            width: 40,
+                            height: 4,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            'Please sign in before add to cart',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: AppDimension.contentPadding,
+                            ),
+                            child: ListSigninMethod(
+                              onSignInSuccess: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  child: Container(
-                    color: Colors.white,
-                    height: 200,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Image.asset(
-                          AssetHelper.iconBottomSheet,
-                          width: 40,
-                          height: 4,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Expanded(
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
+                );
+              } else {
+                CartServices.addCart(
+                  product: product,
+                  quantity: 1,
+                );
+              }
             },
           )
         ],

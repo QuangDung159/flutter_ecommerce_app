@@ -67,15 +67,14 @@ class _MainBottomBarProfileWidgetState
 
   Widget renderMainContentBySignedStatus() {
     bool isSigned = googleGetx.displayName.value != '';
+
     if (isSigned) {
       return Expanded(
         child: SingleChildScrollView(
           child: Column(
             children: [
               renderAvatarSection(),
-              Obx(
-                () => renderShoppingInfoSection(),
-              ),
+              renderShoppingInfoSection(),
               SizedBox(
                 height: AppDimension.contentPadding,
               ),

@@ -58,7 +58,7 @@ class GoogleServices {
     }
   }
 
-  static Future<void> handleGoogleSignIn() async {
+  static Future<void> handleGoogleSignIn(Function()? onSignInSuccess) async {
     try {
       final res = await GoogleServices.login();
       if (res != null) {
@@ -70,6 +70,10 @@ class GoogleServices {
         //   usingCustomSound: true,
         //   payload: HotelBookingScreen.routerName,
         // );
+
+        if (onSignInSuccess != null) {
+          onSignInSuccess();
+        }
       }
     } catch (e) {
       throw Exception(e);

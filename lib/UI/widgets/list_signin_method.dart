@@ -8,7 +8,10 @@ import 'package:flutter_ecommerce_app/core/services/google_services.dart';
 class ListSigninMethod extends StatelessWidget {
   const ListSigninMethod({
     Key? key,
+    this.onSignInSuccess,
   }) : super(key: key);
+
+  final Function()? onSignInSuccess;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class ListSigninMethod extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            GoogleServices.handleGoogleSignIn();
+            GoogleServices.handleGoogleSignIn(onSignInSuccess);
           },
           child: SignInMethodButton(
             title: 'Sign in with Google',
