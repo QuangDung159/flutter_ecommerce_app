@@ -5,8 +5,8 @@ import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/profile_menu_item.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/signin_method_button.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/version_text.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -119,30 +119,7 @@ class _MainBottomBarProfileWidgetState
             SizedBox(
               height: 100,
             ),
-            GestureDetector(
-              onTap: () {
-                GoogleServices.handleGoogleSignIn();
-              },
-              child: SignInMethodButton(
-                title: 'Sign in with Google',
-                icon: Image.asset(
-                  AssetHelper.iconGoogle,
-                  width: 30,
-                  height: 30,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            SignInMethodButton(
-              icon: Image.asset(
-                AssetHelper.iconFacebook,
-                width: 30,
-                height: 30,
-              ),
-              title: 'Sign in with Facebook',
-            ),
+            ListSigninMethod()
           ],
         ),
       ),
