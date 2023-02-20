@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar_store.dart';
@@ -7,8 +7,7 @@ class TabBarSample extends StatefulWidget {
   const TabBarSample({super.key});
 
   @override
-  State<TabBarSample> createState() =>
-      _TabBarSampleState();
+  State<TabBarSample> createState() => _TabBarSampleState();
 }
 
 class _TabBarSampleState extends State<TabBarSample>
@@ -50,8 +49,10 @@ class _TabBarSampleState extends State<TabBarSample>
           Expanded(
             child: TabBarView(
               children: [
-                Container(child: Center(child: Text('people'))),
-                Text('Person')
+                Center(
+                  child: Text('people'),
+                ),
+                Text('Person'),
               ],
               controller: _tabController,
             ),

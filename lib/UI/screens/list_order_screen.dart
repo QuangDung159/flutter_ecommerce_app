@@ -26,31 +26,29 @@ class _ListOrderScreenState extends State<ListOrderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.white,
-      body: SizedBox(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).padding.top,
-            ),
-            MyAppBar(
-              hasBackButton: true,
-              title: 'Your orders',
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: AppDimension.contentPadding / 2,
-                  ),
-                  child: Column(
-                    children: renderListOrder(),
-                  ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).padding.top,
+          ),
+          MyAppBar(
+            hasBackButton: true,
+            title: 'Your orders',
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: AppDimension.contentPadding / 2,
+                ),
+                child: Column(
+                  children: renderListOrder(),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
