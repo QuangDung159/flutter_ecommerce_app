@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/list_order_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
@@ -221,7 +222,7 @@ class _MainBottomBarProfileWidgetState
               height: 20,
               color: AppColors.primary,
             ),
-            () => Get.to(() => CartScreen()),
+            () => Get.to(() => ListOrderScreen()),
           ),
           SizedBox(
             width: 10,

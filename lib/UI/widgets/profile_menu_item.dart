@@ -36,6 +36,7 @@ class ProfileMenuItem extends StatelessWidget {
                   title,
                   style: TextStyle(
                     fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Image.asset(
