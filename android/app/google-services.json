@@ -30,7 +30,7 @@
           }
         },
         {
-          "client_id": "721966385478-74mm17pv9m21bd217522bnmqhh1lhmou.apps.googleusercontent.com",
+          "client_id": "721966385478-cqvs2b3qq28n3ab8nfq70bbnpjfandb1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -45,6 +45,13 @@
             {
               "client_id": "721966385478-74mm17pv9m21bd217522bnmqhh1lhmou.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "721966385478-sv49lrmg59rktbt7kejvcb81f2e1nab5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lqd.flutterEcommerceApp"
+              }
             }
           ]
         }
