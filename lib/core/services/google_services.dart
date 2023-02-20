@@ -1,9 +1,16 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
+import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class GoogleServices {
   static String clientId = Platform.isIOS
@@ -91,5 +98,57 @@ class GoogleServices {
         email: LocalStorageHelper.getValue('EMAIL'),
       );
     }
+  }
+
+  static void showSigninBottomSheet(BuildContext context) {
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+          ),
+        ),
+        child: Container(
+          color: Colors.white,
+          height: 220,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Image.asset(
+                AssetHelper.iconBottomSheet,
+                width: 40,
+                height: 4,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Please sign in',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppDimension.contentPadding,
+                ),
+                child: ListSigninMethod(
+                  onSignInSuccess: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
