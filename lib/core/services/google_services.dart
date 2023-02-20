@@ -57,4 +57,22 @@ class GoogleServices {
       throw Exception(e);
     }
   }
+
+  static Future<void> handleGoogleSignIn() async {
+    try {
+      final res = await GoogleServices.login();
+      if (res != null) {
+        // Navigator.of(context).pushNamed(MainScreen.routerName);
+
+        // NotificationServices.showNotification(
+        //   title: 'Hi ${res.displayName}',
+        //   body: 'Welcome back!',
+        //   usingCustomSound: true,
+        //   payload: HotelBookingScreen.routerName,
+        // );
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

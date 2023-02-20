@@ -11,7 +11,9 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/google_services.dart';
 import 'package:get/get.dart';
 
 class MainBottomBarProfileWidget extends StatefulWidget {
@@ -25,8 +27,7 @@ class MainBottomBarProfileWidget extends StatefulWidget {
 class _MainBottomBarProfileWidgetState
     extends State<MainBottomBarProfileWidget> {
   GetxAppController getx = Get.find<GetxAppController>();
-
-  bool isSigned = false;
+  GetxGoogleInfoController googleGetx = Get.find<GetxGoogleInfoController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,22 +36,28 @@ class _MainBottomBarProfileWidgetState
       body: SafeArea(
         child: Column(
           children: [
-            MyAppBar(
-              title: 'Profile',
-              action: isSigned
-                  ? GestureDetector(
-                      onTap: () => {},
-                      child: Text(
-                        'Log out',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: AppColors.orangeSecondary,
+            Obx(
+              () => MyAppBar(
+                title: 'Profile',
+                action: googleGetx.displayName.value != ''
+                    ? GestureDetector(
+                        onTap: () {
+                          GoogleServices.logout();
+                        },
+                        child: Text(
+                          'Log out',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: AppColors.orangeSecondary,
+                          ),
                         ),
-                      ),
-                    )
-                  : null,
+                      )
+                    : null,
+              ),
             ),
-            renderMainContentBySignedStatus(),
+            Obx(
+              () => renderMainContentBySignedStatus(),
+            ),
           ],
         ),
       ),
@@ -58,6 +65,7 @@ class _MainBottomBarProfileWidgetState
   }
 
   Widget renderMainContentBySignedStatus() {
+    bool isSigned = googleGetx.displayName.value != '';
     if (isSigned) {
       return Expanded(
         child: SingleChildScrollView(
@@ -110,12 +118,17 @@ class _MainBottomBarProfileWidgetState
             SizedBox(
               height: 100,
             ),
-            renderSigninMethod(
-              'Sign in with Google',
-              Image.asset(
-                AssetHelper.iconGoogle,
-                width: 30,
-                height: 30,
+            GestureDetector(
+              onTap: () {
+                GoogleServices.handleGoogleSignIn();
+              },
+              child: renderSigninMethod(
+                'Sign in with Google',
+                Image.asset(
+                  AssetHelper.iconGoogle,
+                  width: 30,
+                  height: 30,
+                ),
               ),
             ),
             SizedBox(
