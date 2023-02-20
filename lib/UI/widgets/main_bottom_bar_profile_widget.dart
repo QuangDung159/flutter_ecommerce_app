@@ -215,7 +215,7 @@ class _MainBottomBarProfileWidgetState
           ),
           renderAccountShoppingInfoItem(
             'Orders',
-            '2',
+            listOrderDummy.length.toString(),
             Image.asset(
               AssetHelper.iconOrder,
               width: 20,

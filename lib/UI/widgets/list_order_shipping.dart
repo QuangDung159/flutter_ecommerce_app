@@ -15,7 +15,7 @@ class _ListOrderShippingState extends State<ListOrderShipping>
   Widget build(BuildContext context) {
     super.build(context);
     return ListOrder(
-      listOrderModel: listOrderDummy,
+      listOrderModel: listOrderShippingDummy,
     );
   }
 
