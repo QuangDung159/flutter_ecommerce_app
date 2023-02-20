@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
-import 'package:flutter_ecommerce_app/UI/screens/more_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/profile_menu_item.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/version_text.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -36,11 +36,13 @@ class _MainBottomBarProfileWidgetState
             MyAppBar(
               title: 'Profile',
               action: GestureDetector(
-                onTap: () => Get.to(() => MoreScreen()),
-                child: Image.asset(
-                  AssetHelper.iconMore,
-                  width: 20,
-                  height: 20,
+                onTap: () => {},
+                child: Text(
+                  'Log out',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.orangeSecondary,
+                  ),
                 ),
               ),
             ),
@@ -59,14 +61,12 @@ class _MainBottomBarProfileWidgetState
                     SizedBox(
                       height: AppDimension.contentPadding,
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppDimension.contentPadding,
-                      ),
-                      child: ButtonWidget(title: 'Logout', opTap: () {}),
+                    ProfileMenuItem(
+                      title: 'Address book',
+                      onTap: () => Get.to(() => DeliveryAddressScreen()),
                     ),
-                    SizedBox(
-                      height: AppDimension.contentPadding,
+                    ProfileMenuItem(
+                      title: 'Payment methods',
                     ),
                     VersionText(
                       textColor: AppColors.greyDark,
