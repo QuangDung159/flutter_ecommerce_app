@@ -19,8 +19,22 @@ class ListOrderScreen extends StatefulWidget {
   State<ListOrderScreen> createState() => _ListOrderScreenState();
 }
 
-class _ListOrderScreenState extends State<ListOrderScreen> {
+class _ListOrderScreenState extends State<ListOrderScreen>
+    with SingleTickerProviderStateMixin {
   GetxAppController getxAppController = Get.find<GetxAppController>();
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 3, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +50,57 @@ class _ListOrderScreenState extends State<ListOrderScreen> {
             hasBackButton: true,
             title: 'Your orders',
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: AppDimension.contentPadding / 2,
-                ),
-                child: Column(
-                  children: renderListOrder(),
-                ),
+          Container(
+            color: Colors.white,
+            child: TabBar(
+              unselectedLabelColor: AppColors.greyScale,
+              labelColor: AppColors.primary,
+              labelStyle: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
+              tabs: [
+                Tab(
+                  text: 'All',
+                ),
+                Tab(
+                  text: 'Shipping',
+                ),
+                Tab(
+                  text: 'Delivered',
+                )
+              ],
+              controller: _tabController,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorColor: AppColors.primary,
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                renderTabBarContent(),
+                renderTabBarContent(),
+                renderTabBarContent(),
+              ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  SingleChildScrollView renderTabBarContent() {
+    return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                vertical: AppDimension.contentPadding / 2,
+              ),
+              child: Column(
+                children: renderListOrder(),
+              ),
+            ),
+          );
   }
 
   List<Widget> renderListOrder() {
