@@ -15,6 +15,7 @@ import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -59,9 +60,43 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           BottomButton(
             title: 'Add to cart',
             onTap: () {
-              CartServices.addCart(
-                product: product,
-                quantity: 1,
+              // CartServices.addCart(
+              //   product: product,
+              //   quantity: 1,
+              // );
+
+              showMaterialModalBottomSheet(
+                context: context,
+                builder: (context) => Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                    ),
+                  ),
+                  child: Container(
+                    color: Colors.white,
+                    height: 200,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset(
+                          AssetHelper.iconBottomSheet,
+                          width: 40,
+                          height: 4,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Expanded(
+                          child: Container(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               );
             },
           )

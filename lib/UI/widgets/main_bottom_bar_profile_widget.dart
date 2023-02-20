@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/profile_menu_item.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/signin_method_button.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/version_text.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -122,9 +123,9 @@ class _MainBottomBarProfileWidgetState
               onTap: () {
                 GoogleServices.handleGoogleSignIn();
               },
-              child: renderSigninMethod(
-                'Sign in with Google',
-                Image.asset(
+              child: SignInMethodButton(
+                title: 'Sign in with Google',
+                icon: Image.asset(
                   AssetHelper.iconGoogle,
                   width: 30,
                   height: 30,
@@ -134,48 +135,16 @@ class _MainBottomBarProfileWidgetState
             SizedBox(
               height: 12,
             ),
-            renderSigninMethod(
-              'Sign in with Facebook',
-              Image.asset(
+            SignInMethodButton(
+              icon: Image.asset(
                 AssetHelper.iconFacebook,
                 width: 30,
                 height: 30,
               ),
+              title: 'Sign in with Facebook',
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget renderSigninMethod(
-    String title,
-    Widget icon,
-  ) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.primary, width: 1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          // Image.asset(
-          //   AssetHelper.iconGoogle,
-          //   width: 30,
-          //   height: 30,
-          // ),
-          icon,
-          SizedBox(
-            width: 16,
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
     );
   }
