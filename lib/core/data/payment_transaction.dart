@@ -1,5 +1,5 @@
 class PaymentTransaction {
-  final String id;
+  final int id;
   final String amountRequest;
   final String amountCaptured;
   final String cardLast4;

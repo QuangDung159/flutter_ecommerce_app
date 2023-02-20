@@ -1,9 +1,11 @@
-import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/order_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/order_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_transaction.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
@@ -651,4 +653,177 @@ List<CityModel> listCityDummy = [
       ],
     ),
   ]),
+];
+
+List<OrderModel> listOrderDummy = [
+  OrderModel(
+    id: 1,
+    subTotalAmount: '99.0',
+    totalAmount: '89.0',
+    createdAt: '2023-02-20',
+    promotionAmount: '10.0',
+    orderItems: [
+      OrderItemModel(
+        id: 1,
+        quantity: 2,
+        price: listProductDummy[0].price,
+        product: listProductDummy[0],
+      ),
+      OrderItemModel(
+        id: 2,
+        quantity: 2,
+        price: listProductDummy[1].price,
+        product: listProductDummy[1],
+      ),
+      OrderItemModel(
+        id: 3,
+        quantity: 2,
+        price: listProductDummy[2].price,
+        product: listProductDummy[2],
+      ),
+    ],
+    paymentTransaction: PaymentTransaction(
+      id: 1,
+      amountRequest: '99.0',
+      amountCaptured: '99.0',
+      cardLast4: '4242',
+      cardBrand: 'visa',
+      description: '',
+      userId: 1,
+      createdAt: '2023-02-20',
+      updatedAt: '2023-02-20',
+      sourceableType: 'order',
+      sourceableId: 1,
+    ),
+    deliveryAt: '2023-02-20',
+    description: '',
+    promotionCode: 'code1',
+  ),
+  OrderModel(
+    id: 2,
+    subTotalAmount: '99.0',
+    totalAmount: '89.0',
+    createdAt: '2023-02-20',
+    promotionAmount: '10.0',
+    orderItems: [
+      OrderItemModel(
+        id: 4,
+        quantity: 2,
+        price: listProductDummy[4].price,
+        product: listProductDummy[4],
+      ),
+      OrderItemModel(
+        id: 5,
+        quantity: 2,
+        price: listProductDummy[5].price,
+        product: listProductDummy[5],
+      ),
+      OrderItemModel(
+        id: 6,
+        quantity: 2,
+        price: listProductDummy[6].price,
+        product: listProductDummy[6],
+      ),
+    ],
+    paymentTransaction: PaymentTransaction(
+      id: 2,
+      amountRequest: '99.0',
+      amountCaptured: '99.0',
+      cardLast4: '4242',
+      cardBrand: 'visa',
+      description: '',
+      userId: 1,
+      createdAt: '2023-02-20',
+      updatedAt: '2023-02-20',
+      sourceableType: 'order',
+      sourceableId: 1,
+    ),
+    deliveryAt: '2023-02-20',
+    description: '',
+    promotionCode: 'code1',
+  ),
+  OrderModel(
+    id: 3,
+    subTotalAmount: '99.0',
+    totalAmount: '89.0',
+    createdAt: '2023-02-20',
+    promotionAmount: '10.0',
+    orderItems: [
+      OrderItemModel(
+        id: 7,
+        quantity: 2,
+        price: listProductDummy[7].price,
+        product: listProductDummy[7],
+      ),
+      OrderItemModel(
+        id: 8,
+        quantity: 2,
+        price: listProductDummy[8].price,
+        product: listProductDummy[8],
+      ),
+      OrderItemModel(
+        id: 9,
+        quantity: 2,
+        price: listProductDummy[9].price,
+        product: listProductDummy[9],
+      ),
+    ],
+    paymentTransaction: PaymentTransaction(
+      id: 3,
+      amountRequest: '99.0',
+      amountCaptured: '99.0',
+      cardLast4: '4242',
+      cardBrand: 'visa',
+      description: '',
+      userId: 1,
+      createdAt: '2023-02-20',
+      updatedAt: '2023-02-20',
+      sourceableType: 'order',
+      sourceableId: 1,
+    ),
+    description: '',
+    promotionCode: 'code1',
+  ),
+  OrderModel(
+    id: 4,
+    subTotalAmount: '99.0',
+    totalAmount: '89.0',
+    createdAt: '2023-02-20',
+    promotionAmount: '10.0',
+    orderItems: [
+      OrderItemModel(
+        id: 10,
+        quantity: 2,
+        price: listProductDummy[10].price,
+        product: listProductDummy[10],
+      ),
+      OrderItemModel(
+        id: 11,
+        quantity: 2,
+        price: listProductDummy[11].price,
+        product: listProductDummy[11],
+      ),
+      OrderItemModel(
+        id: 12,
+        quantity: 2,
+        price: listProductDummy[12].price,
+        product: listProductDummy[12],
+      ),
+    ],
+    paymentTransaction: PaymentTransaction(
+      id: 4,
+      amountRequest: '99.0',
+      amountCaptured: '99.0',
+      cardLast4: '4242',
+      cardBrand: 'visa',
+      description: '',
+      userId: 1,
+      createdAt: '2023-02-20',
+      updatedAt: '2023-02-20',
+      sourceableType: 'order',
+      sourceableId: 1,
+    ),
+    description: '',
+    promotionCode: 'code1',
+  ),
 ];

@@ -42,6 +42,9 @@ class OrderModel {
         paymentTransaction: PaymentTransaction.fromJson(
           json['last_payment_transaction'],
         ),
+        description: json['description'],
+        promotionCode: json['promotion_code'],
+        deliveryAt: json['delivery_at'],
       );
     }
   }
