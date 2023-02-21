@@ -368,7 +368,7 @@ class _MainBottomBarProfileWidgetState
           GestureDetector(
             onTap: () async {
               String dynamicLink = await DynamicLinkServices.buildDynamicLink(
-                link: Uri.parse('$deepLinkDomain/refer/${googleGetx.openid}'),
+                link: Uri.parse('$deepLinkDomain/profile_screen/${googleGetx.openid}'),
               );
               share(
                 title: 'Click link to get promotion',

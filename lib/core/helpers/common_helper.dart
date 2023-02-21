@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
@@ -49,6 +50,18 @@ int getIdFromUrl(String? payloadUrl) {
   return -1;
 }
 
+String getReferCodeFromUrl(String? payloadUrl) {
+  if (payloadUrl != null) {
+    List<String> listSegment = payloadUrl.split('/');
+
+    if (listSegment.length >= 3) {
+      return listSegment[2];
+    }
+  }
+
+  return '';
+}
+
 String getScreenFromUrl(String? payloadUrl) {
   if (payloadUrl != null) {
     List<String> listSegment = payloadUrl.split('/');
@@ -61,8 +74,7 @@ String getScreenFromUrl(String? payloadUrl) {
 
 Widget? getScreen(
   String? screenName, {
-  int? id,
-  String? referCode,
+  String? payload,
 }) {
   switch (screenName) {
     case 'voucher_screen':
@@ -70,9 +82,7 @@ Widget? getScreen(
     case 'cart_screen':
       return CartScreen();
     case 'product_detail_screen':
-      if (id == null) {
-        return null;
-      }
+      int id = getIdFromUrl(payload);
 
       ProductModel? product = CartServices.getProductById(id);
       if (product == null) {
@@ -82,6 +92,11 @@ Widget? getScreen(
       return ProductDetailScreen(
         product: product,
       );
+    case 'profile_screen':
+      String referCode = getReferCodeFromUrl(payload);
+      if (referCode == '') {}
+      showSnackBar(content: referCode, title: 'Using refer code success');
+      return MainScreen();
     default:
       return null;
   }
@@ -89,8 +104,10 @@ Widget? getScreen(
 
 void navigationByUrl(String? payload) {
   String screenName = getScreenFromUrl(payload);
-  int id = getIdFromUrl(payload);
-  Widget? screen = getScreen(screenName, id: id);
+  Widget? screen = getScreen(
+    screenName,
+    payload: payload,
+  );
 
   if (screen == null) {
     showSnackBar(content: 'No screen has been navigator!');
