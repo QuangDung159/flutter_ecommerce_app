@@ -64,7 +64,6 @@ Widget? getScreen(
   int? id,
   String? referCode,
 }) {
-  printCustom(title: 'screenName >>', content: screenName);
   switch (screenName) {
     case 'voucher_screen':
       return VoucherScreen();
