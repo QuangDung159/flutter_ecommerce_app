@@ -13,6 +13,7 @@ class TextFieldWidget extends StatelessWidget {
     this.hintStyle,
     this.onChanged,
     this.keyboardType,
+    this.autofocus,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -22,12 +23,14 @@ class TextFieldWidget extends StatelessWidget {
   final TextStyle? hintStyle;
   final Function(String)? onChanged;
   final TextInputType? keyboardType;
+  final bool? autofocus;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height ?? 40,
       child: TextField(
+        autofocus: true,
         keyboardType: keyboardType ?? TextInputType.text,
         controller: controller,
         onChanged: (value) {

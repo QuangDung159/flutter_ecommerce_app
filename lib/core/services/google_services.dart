@@ -67,47 +67,13 @@ class GoogleServices {
   }
 
   static void showReferCodeInputBottomSheet(BuildContext context) {
-    showMaterialModalBottomSheet(
-      context: context,
-      builder: (context) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            topRight: Radius.circular(12),
-          ),
-        ),
-        child: Container(
-          color: Colors.white,
-          height: 200,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              Image.asset(
-                AssetHelper.iconBottomSheet,
-                width: 40,
-                height: 4,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Expanded(
-                child: Text('asd'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  static showReferCodeBottomSheet(BuildContext context) {
     final referCodeInputController = TextEditingController();
 
-    showMaterialModalBottomSheet(
+    showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) => Container(
+        padding: MediaQuery.of(context).viewInsets,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),
@@ -131,9 +97,15 @@ class GoogleServices {
                 height: 10,
               ),
               Expanded(
-                child: TextFieldWidget(
-                  controller: referCodeInputController,
-                  hintText: 'Enter refer code',
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 12,
+                  ),
+                  child: TextFieldWidget(
+                    controller: referCodeInputController,
+                    hintText: 'Enter refer code',
+                    autofocus: true,
+                  ),
                 ),
               ),
             ],
