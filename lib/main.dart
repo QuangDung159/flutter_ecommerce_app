@@ -14,6 +14,7 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controll
 import 'package:flutter_ecommerce_app/core/data/received_notification_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/google_services.dart';
 import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
@@ -151,7 +152,7 @@ class _MyAppState extends State<MyApp> {
     NotificationServices.setupInteractedFirebaseMessage();
 
     // DynamicLinkServices.onReceiveTerminateAppDynamicLink();
-    // DynamicLinkServices.onReceiveDynamicLink();
+    DynamicLinkServices.onReceiveDynamicLink();
   }
 
   Future<void> _isAndroidPermissionGranted() async {
