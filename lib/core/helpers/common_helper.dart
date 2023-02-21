@@ -100,7 +100,7 @@ Widget? getScreen(
       if (referCode == '') {}
       // showSnackBar(content: referCode, title: 'Using refer code success');
       getx.setReferCodeReceived(referCode);
-      return null;
+      return MainScreen();
     default:
       return null;
   }
