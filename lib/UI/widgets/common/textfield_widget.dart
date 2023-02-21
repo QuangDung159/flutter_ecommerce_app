@@ -30,7 +30,7 @@ class TextFieldWidget extends StatelessWidget {
     return SizedBox(
       height: height ?? 40,
       child: TextField(
-        autofocus: true,
+        autofocus: autofocus ?? false,
         keyboardType: keyboardType ?? TextInputType.text,
         controller: controller,
         onChanged: (value) {

@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -82,7 +83,7 @@ class GoogleServices {
         ),
         child: Container(
           color: Colors.white,
-          height: 200,
+          height: 176,
           child: Column(
             children: [
               SizedBox(
@@ -96,16 +97,25 @@ class GoogleServices {
               SizedBox(
                 height: 10,
               ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 12,
-                  ),
-                  child: TextFieldWidget(
-                    controller: referCodeInputController,
-                    hintText: 'Enter refer code',
-                    autofocus: true,
-                  ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 12,
+                ),
+                child: Column(
+                  children: [
+                    TextFieldWidget(
+                      controller: referCodeInputController,
+                      hintText: 'Enter refer code',
+                      // autofocus: true,
+                    ),
+                    SizedBox(
+                      height: AppDimension.contentPadding,
+                    ),
+                    ButtonWidget(
+                      title: 'Submit',
+                      opTap: () {},
+                    )
+                  ],
                 ),
               ),
             ],
