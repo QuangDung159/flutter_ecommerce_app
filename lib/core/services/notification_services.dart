@@ -11,6 +11,7 @@ import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:get/get.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -192,7 +193,7 @@ class NotificationServices {
     selectNotificationStream.stream.listen((String? payload) async {
       printCustom(title: 'payload :>>', content: payload);
 
-      // Get.to(() => navigationByRouterName(payload));
+      Get.to(() => navigationByRouterName(payload));
     });
   }
 
@@ -324,7 +325,7 @@ class NotificationServices {
             CupertinoDialogAction(
               isDefaultAction: true,
               onPressed: () async {
-                // print('object');
+                print('asd');
               },
               child: const Text('Ok'),
             )
@@ -354,6 +355,6 @@ class NotificationServices {
       return;
     }
 
-    // Get.to(() => navigationByRouterName(message.data['payload']));
+    Get.to(() => navigationByRouterName(message.data['payload']));
   }
 }
