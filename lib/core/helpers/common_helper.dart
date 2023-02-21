@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_share/flutter_share.dart';
@@ -78,6 +79,7 @@ Widget? getScreen(
   String? payload,
 }) {
   GetxAppController getx = Get.find<GetxAppController>();
+  GetxGoogleInfoController getxGoogle = Get.find<GetxGoogleInfoController>();
 
   switch (screenName) {
     case 'voucher_screen':
@@ -98,10 +100,18 @@ Widget? getScreen(
     case 'profile_screen':
       String referCode = getReferCodeFromUrl(payload);
       if (referCode == '') {}
+
+      String title = 'Please go to account screen and use your refer code';
+
+      if (getxGoogle.displayName.value == '') {
+        title = 'Please signin to use refer code';
+      }
+
       showSnackBar(
         content: 'Your received refer code: $referCode',
-        title: 'Please signin to use refer code',
+        title: title,
       );
+
       getx.setReferCodeReceived(referCode);
       return MainScreen();
     default:
