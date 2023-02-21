@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
+import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
 String formatPrice(String price) {
@@ -24,6 +27,7 @@ void showSnackBar({
     barBlur: 30,
   );
 }
+
 void printCustom({String? title, content}) {
   if (title != null && title != '') {
     print('$title $content');
@@ -32,11 +36,13 @@ void printCustom({String? title, content}) {
   }
 }
 
-int getIdFromUrl(String payloadUrl) {
-  List<String> listSegment = payloadUrl.split('/');
+int getIdFromUrl(String? payloadUrl) {
+  if (payloadUrl != null) {
+    List<String> listSegment = payloadUrl.split('/');
 
-  if (listSegment.length >= 3) {
-    return int.parse(listSegment[2]);
+    if (listSegment.length >= 3) {
+      return int.parse(listSegment[2]);
+    }
   }
 
   return -1;
@@ -47,20 +53,35 @@ String getScreenFromUrl(String? payloadUrl) {
     List<String> listSegment = payloadUrl.split('/');
     if (listSegment.length >= 2) {
       return listSegment[1];
-    } else {
-      return '';
     }
-  } else {
-    return '';
   }
+  return '';
 }
 
-Widget? getScreen(String? screenName) {
+Widget? getScreen(
+  String? screenName, {
+  int? id,
+  String? referCode,
+}) {
+  printCustom(title: 'screenName >>', content: screenName);
   switch (screenName) {
     case 'voucher_screen':
       return VoucherScreen();
     case 'cart_screen':
       return CartScreen();
+    case 'product_detail_screen':
+      if (id == null) {
+        return null;
+      }
+
+      ProductModel? product = CartServices.getProductById(id);
+      if (product == null) {
+        return null;
+      }
+
+      return ProductDetailScreen(
+        product: product,
+      );
     default:
       return null;
   }
@@ -68,7 +89,8 @@ Widget? getScreen(String? screenName) {
 
 void navigationByUrl(String? payload) {
   String screenName = getScreenFromUrl(payload);
-  Widget? screen = getScreen(screenName);
+  int id = getIdFromUrl(payload);
+  Widget? screen = getScreen(screenName, id: id);
 
   if (screen == null) {
     showSnackBar(content: 'No screen has been navigator!');
