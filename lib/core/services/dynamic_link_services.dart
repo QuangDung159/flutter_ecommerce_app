@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
@@ -46,5 +48,33 @@ class DynamicLinkServices {
       return null;
     }
     return listSegment[1];
+  }
+
+  static Future<String> buildDynamicLink() async {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'flutterecommerceapp.page.link',
+      link: Uri.parse('https://flutter-ecommerce-app.page.link/product_detail_screen/1'),
+      androidParameters: AndroidParameters(
+        //Ở đây là tên package đã config trên Firebase.
+        packageName: androidAppId,
+        minimumVersion: 0,
+      ),
+      iosParameters: IOSParameters(
+        //Ở đây là bundleId đã config trên Firebase.
+        bundleId: iosBundleId,
+        minimumVersion: '0',
+      ),
+      // socialMetaTagParameters: SocialMetaTagParameters(
+      //   description: '',
+      //   imageUrl:
+      //       Uri.parse('https://flutter.dev/images/flutter-logo-sharing.png'),
+      //   title: '',
+      // ),
+    );
+
+    final dynamicLink =
+        await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+
+    return dynamicLink.toString();
   }
 }

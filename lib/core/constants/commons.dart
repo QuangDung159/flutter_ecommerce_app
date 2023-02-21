@@ -1196,3 +1196,7 @@ List<OrderModel> listOrderShippingDummy = [
 ];
 
 String deepLinkDomain = 'flutter-ecommerce-app.page.link';
+
+String androidAppId = 'com.lqd.flutter_ecommerce_app';
+
+String iosBundleId = 'com.lqd.flutterEcommerceApp';

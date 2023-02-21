@@ -15,6 +15,8 @@ import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/google_services.dart';
 import 'package:get/get.dart';
 
@@ -363,9 +365,16 @@ class _MainBottomBarProfileWidgetState
               fontWeight: FontWeight.bold,
             ),
           ),
-          Image.asset(
-            AssetHelper.iconShare,
-            width: 24,
+          GestureDetector(
+            onTap: () async {
+              String dynamicLink = await DynamicLinkServices.buildDynamicLink();
+              printCustom(title: 'dynamicLink >>', content: dynamicLink);
+              showSnackBar(content: dynamicLink);
+            },
+            child: Image.asset(
+              AssetHelper.iconShare,
+              width: 24,
+            ),
           ),
         ],
       ),
