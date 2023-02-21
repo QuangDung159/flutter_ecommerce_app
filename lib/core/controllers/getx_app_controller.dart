@@ -44,6 +44,8 @@ class GetxAppController extends GetxController {
 
   final listAddress = RxList<AddressModel>([]);
 
+  final referCodeReceived = RxnString();
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -115,5 +117,9 @@ class GetxAppController extends GetxController {
   // accept null
   void setAddressSelected(AddressModel? addressSelected) {
     this.addressSelected.value = addressSelected;
+  }
+
+  void setReferCodeReceived(String? referCodeReceived) {
+    this.referCodeReceived.value = referCodeReceived;
   }
 }

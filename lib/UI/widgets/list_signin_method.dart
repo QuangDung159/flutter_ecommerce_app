@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/signin_method_button.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/google_services.dart';
+import 'package:get/get.dart';
 
 class ListSigninMethod extends StatelessWidget {
   const ListSigninMethod({
@@ -15,6 +17,8 @@ class ListSigninMethod extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetxAppController getx = Get.find<GetxAppController>();
+
     return Column(
       children: [
         GestureDetector(
@@ -22,7 +26,10 @@ class ListSigninMethod extends StatelessWidget {
             GoogleServices.handleGoogleSignIn(context, onSignInSuccess).then(
               (googleSigninAccount) {
                 if (googleSigninAccount != null) {
-                  GoogleServices.showReferCodeInputBottomSheet(context);
+                  // signin success
+                  if (getx.referCodeReceived.value != null) {
+                    GoogleServices.showReferCodeInputBottomSheet(context);
+                  }
                 }
               },
             );

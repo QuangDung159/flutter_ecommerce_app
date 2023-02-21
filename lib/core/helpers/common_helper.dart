@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_share/flutter_share.dart';
@@ -76,6 +77,8 @@ Widget? getScreen(
   String? screenName, {
   String? payload,
 }) {
+  GetxAppController getx = Get.find<GetxAppController>();
+
   switch (screenName) {
     case 'voucher_screen':
       return VoucherScreen();
@@ -96,7 +99,8 @@ Widget? getScreen(
       String referCode = getReferCodeFromUrl(payload);
       if (referCode == '') {}
       // showSnackBar(content: referCode, title: 'Using refer code success');
-      return MainScreen();
+      getx.setReferCodeReceived(referCode);
+      return null;
     default:
       return null;
   }
