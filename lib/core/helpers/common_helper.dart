@@ -98,7 +98,10 @@ Widget? getScreen(
     case 'profile_screen':
       String referCode = getReferCodeFromUrl(payload);
       if (referCode == '') {}
-      // showSnackBar(content: referCode, title: 'Using refer code success');
+      showSnackBar(
+        content: 'Your received refer code: $referCode',
+        title: 'Please signin to use refer code',
+      );
       getx.setReferCodeReceived(referCode);
       return MainScreen();
     default:
