@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 
 String formatPrice(String price) {
@@ -98,3 +99,26 @@ void navigationByUrl(String? payload) {
     Get.to(() => screen);
   }
 }
+
+Future<void> share({
+  required String text,
+  required String title,
+  required String linkUrl,
+}) async {
+  await FlutterShare.share(
+    title: title,
+    text: text,
+    linkUrl: linkUrl,
+  );
+}
+
+  // Future<void> shareFile() async {
+  //   List<dynamic> docs = await DocumentsPicker.pickDocuments;
+  //   if (docs == null || docs.isEmpty) return null;
+
+  //   await FlutterShare.shareFile(
+  //     title: 'Example share',
+  //     text: 'Example share text',
+  //     filePath: docs[0] as String,
+  //   );
+  // }

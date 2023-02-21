@@ -368,8 +368,11 @@ class _MainBottomBarProfileWidgetState
           GestureDetector(
             onTap: () async {
               String dynamicLink = await DynamicLinkServices.buildDynamicLink();
-              printCustom(title: 'dynamicLink >>', content: dynamicLink);
-              showSnackBar(content: dynamicLink);
+              share(
+                title: 'Click link to get promotion',
+                text: 'Flutter E-Commerce App - Referrer link',
+                linkUrl: dynamicLink,
+              );
             },
             child: Image.asset(
               AssetHelper.iconShare,
