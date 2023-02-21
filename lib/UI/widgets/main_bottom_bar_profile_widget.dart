@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables
 
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
@@ -354,9 +355,14 @@ class _MainBottomBarProfileWidgetState
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(
-            AssetHelper.iconCopy,
-            width: 24,
+          GestureDetector(
+            onTap: () => FlutterClipboard.copy(
+              googleGetx.openid.toString(),
+            ),
+            child: Image.asset(
+              AssetHelper.iconCopy,
+              width: 24,
+            ),
           ),
           Text(
             googleGetx.openid.toString(),
@@ -368,7 +374,8 @@ class _MainBottomBarProfileWidgetState
           GestureDetector(
             onTap: () async {
               String dynamicLink = await DynamicLinkServices.buildDynamicLink(
-                link: Uri.parse('$deepLinkDomain/profile_screen/${googleGetx.openid}'),
+                link: Uri.parse(
+                    '$deepLinkDomain/profile_screen/${googleGetx.openid}'),
               );
               share(
                 title: 'Click link to get promotion',
