@@ -3,7 +3,9 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:get/get.dart';
 
 class DynamicLinkServices {
   static Future<void> initDynamicLinks({
@@ -50,9 +52,9 @@ class DynamicLinkServices {
     return listSegment[1];
   }
 
-  static Future<String> buildDynamicLink() async {
+  static Future<String> buildDynamicLink({required Uri link}) async {
     final dynamicLinkParams = DynamicLinkParameters(
-      link: Uri.parse('$deepLinkDomain/product_detail_screen/3'),
+      link: link,
       uriPrefix: uriPrefix,
       androidParameters: AndroidParameters(
         packageName: androidAppId,

@@ -18,7 +18,6 @@ import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/google_services.dart';
-import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:get/get.dart';
 
 class MainBottomBarProfileWidget extends StatefulWidget {
@@ -36,8 +35,6 @@ class _MainBottomBarProfileWidgetState
 
   @override
   Widget build(BuildContext context) {
-    String referCode = ProfileService.generateReferCode();
-    printCustom(title: 'referCode >>', content: referCode);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -362,7 +359,7 @@ class _MainBottomBarProfileWidgetState
             width: 24,
           ),
           Text(
-            '115128300342560590888',
+            googleGetx.openid.toString(),
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
@@ -370,7 +367,9 @@ class _MainBottomBarProfileWidgetState
           ),
           GestureDetector(
             onTap: () async {
-              String dynamicLink = await DynamicLinkServices.buildDynamicLink();
+              String dynamicLink = await DynamicLinkServices.buildDynamicLink(
+                link: Uri.parse('$deepLinkDomain/refer/${googleGetx.openid}'),
+              );
               share(
                 title: 'Click link to get promotion',
                 text: 'Flutter E-Commerce App - Referrer link',
