@@ -202,7 +202,7 @@ class NotificationServices {
 
   static void onTapLocalNotification() {
     selectNotificationStream.stream.listen((String? payload) async {
-      navigationByRouterName(payload);
+      navigationByUrl(payload);
     });
   }
 
@@ -364,6 +364,6 @@ class NotificationServices {
     if (message.data['payload'] == null || message.data['payload'] == '') {
       return;
     }
-    navigationByRouterName(message.data['payload']);
+    navigationByUrl(message.data['payload']);
   }
 }

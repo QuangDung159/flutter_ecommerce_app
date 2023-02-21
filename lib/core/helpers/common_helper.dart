@@ -66,7 +66,7 @@ Widget? getScreen(String? screenName) {
   }
 }
 
-void navigationByRouterName(String? payload) {
+void navigationByUrl(String? payload) {
   String screenName = getScreenFromUrl(payload);
   Widget? screen = getScreen(screenName);
 
