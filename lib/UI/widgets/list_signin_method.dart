@@ -19,7 +19,13 @@ class ListSigninMethod extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            GoogleServices.handleGoogleSignIn(context, onSignInSuccess);
+            GoogleServices.handleGoogleSignIn(context, onSignInSuccess).then(
+              (googleSigninAccount) {
+                if (googleSigninAccount != null) {
+                  GoogleServices.showReferCodeInputBottomSheet(context);
+                }
+              },
+            );
           },
           child: SignInMethodButton(
             title: 'Sign in with Google',

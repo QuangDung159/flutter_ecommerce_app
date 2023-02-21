@@ -87,6 +87,11 @@ class _MainBottomBarProfileWidgetState
                 height: AppDimension.contentPadding,
               ),
               ProfileMenuItem(
+                title: 'Refer code',
+                onTap: () =>
+                    GoogleServices.showReferCodeInputBottomSheet(context),
+              ),
+              ProfileMenuItem(
                 title: 'Address book',
                 onTap: () => Get.to(() => DeliveryAddressScreen()),
               ),

@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
@@ -101,60 +102,62 @@ class GoogleServices {
     );
   }
 
-  static Future<void> handleGoogleSignIn(
+  static showReferCodeBottomSheet(BuildContext context) {
+    final referCodeInputController = TextEditingController();
+
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+          ),
+        ),
+        child: Container(
+          color: Colors.white,
+          height: 200,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Image.asset(
+                AssetHelper.iconBottomSheet,
+                width: 40,
+                height: 4,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: TextFieldWidget(
+                  controller: referCodeInputController,
+                  hintText: 'Enter refer code',
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Future<GoogleSignInAccount?> handleGoogleSignIn(
     BuildContext context,
     Function()? onSignInSuccess,
   ) async {
     try {
       final res = await GoogleServices.login();
+
       if (res != null) {
-        // Navigator.of(context).pushNamed(MainScreen.routerName);
-
-        // NotificationServices.showNotification(
-        //   title: 'Hi ${res.displayName}',
-        //   body: 'Welcome back!',
-        //   usingCustomSound: true,
-        //   payload: HotelBookingScreen.routerName,
-        // );
-
+        // success
         if (onSignInSuccess != null) {
           onSignInSuccess();
         }
-
-        showMaterialModalBottomSheet(
-          context: context,
-          builder: (context) => Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-              ),
-            ),
-            child: Container(
-              color: Colors.white,
-              height: 200,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Image.asset(
-                    AssetHelper.iconBottomSheet,
-                    width: 40,
-                    height: 4,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Expanded(
-                    child: Text('asd'),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
       }
+
+      return res;
     } catch (e) {
       throw Exception(e);
     }

@@ -3,9 +3,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
-import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
-import 'package:get/get.dart';
 
 class DynamicLinkServices {
   static Future<void> initDynamicLinks({
