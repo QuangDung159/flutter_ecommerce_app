@@ -188,9 +188,11 @@ class NotificationServices {
         'weekly scheduled notification body',
         _nextInstanceOfTenAM(),
         const NotificationDetails(
-          android: AndroidNotificationDetails('weekly notification channel id',
-              'weekly notification channel name',
-              channelDescription: 'weekly notificationdescription'),
+          android: AndroidNotificationDetails(
+            'weekly notification channel id',
+            'weekly notification channel name',
+            channelDescription: 'weekly notificationdescription',
+          ),
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
@@ -200,9 +202,7 @@ class NotificationServices {
 
   static void onTapLocalNotification() {
     selectNotificationStream.stream.listen((String? payload) async {
-      printCustom(title: 'payload :>>', content: payload);
-
-      Get.to(() => navigationByRouterName(payload));
+      navigationByRouterName(payload);
     });
   }
 
@@ -364,7 +364,6 @@ class NotificationServices {
     if (message.data['payload'] == null || message.data['payload'] == '') {
       return;
     }
-
-    Get.to(() => navigationByRouterName(message.data['payload']));
+    navigationByRouterName(message.data['payload']);
   }
 }

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
-import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +24,6 @@ void showSnackBar({
     barBlur: 30,
   );
 }
-
 void printCustom({String? title, content}) {
   if (title != null && title != '') {
     print('$title $content');
@@ -44,23 +42,37 @@ int getIdFromUrl(String payloadUrl) {
   return -1;
 }
 
-String getScreenFromUrl(String payloadUrl) {
-  List<String> listSegment = payloadUrl.split('/');
-
-  if (listSegment.length >= 2) {
-    return listSegment[1];
+String getScreenFromUrl(String? payloadUrl) {
+  if (payloadUrl != null) {
+    List<String> listSegment = payloadUrl.split('/');
+    if (listSegment.length >= 2) {
+      return listSegment[1];
+    } else {
+      return '';
+    }
+  } else {
+    return '';
   }
-
-  return '';
 }
 
-Widget navigationByRouterName(String? routerName) {
-  switch (routerName) {
+Widget? getScreen(String? screenName) {
+  switch (screenName) {
     case 'voucher_screen':
       return VoucherScreen();
     case 'cart_screen':
       return CartScreen();
     default:
-      return MainScreen();
+      return null;
+  }
+}
+
+void navigationByRouterName(String? payload) {
+  String screenName = getScreenFromUrl(payload);
+  Widget? screen = getScreen(screenName);
+
+  if (screen == null) {
+    showSnackBar(content: 'No screen has been navigator!');
+  } else {
+    Get.to(() => screen);
   }
 }
