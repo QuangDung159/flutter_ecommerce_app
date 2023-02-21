@@ -65,7 +65,46 @@ class GoogleServices {
     }
   }
 
-  static Future<void> handleGoogleSignIn(Function()? onSignInSuccess) async {
+  static void showReferCodeInputBottomSheet(BuildContext context) {
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+          ),
+        ),
+        child: Container(
+          color: Colors.white,
+          height: 200,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Image.asset(
+                AssetHelper.iconBottomSheet,
+                width: 40,
+                height: 4,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: Text('asd'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Future<void> handleGoogleSignIn(
+    BuildContext context,
+    Function()? onSignInSuccess,
+  ) async {
     try {
       final res = await GoogleServices.login();
       if (res != null) {
@@ -81,6 +120,40 @@ class GoogleServices {
         if (onSignInSuccess != null) {
           onSignInSuccess();
         }
+
+        showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+              ),
+            ),
+            child: Container(
+              color: Colors.white,
+              height: 200,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset(
+                    AssetHelper.iconBottomSheet,
+                    width: 40,
+                    height: 4,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    child: Text('asd'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
       }
     } catch (e) {
       throw Exception(e);
