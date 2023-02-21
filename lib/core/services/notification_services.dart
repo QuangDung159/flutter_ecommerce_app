@@ -324,7 +324,7 @@ class NotificationServices {
             CupertinoDialogAction(
               isDefaultAction: true,
               onPressed: () async {
-                print('object');
+                // print('object');
               },
               child: const Text('Ok'),
             )

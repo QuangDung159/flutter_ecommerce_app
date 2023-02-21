@@ -76,6 +76,7 @@ Future<void> main() async {
   await LocalStorageHelper.initLocalStorage();
   await GetStorage.init();
 
+  // start local notification
   InitializationSettings initializationSettings =
       await NotificationServices.initializeLocalNotificationSettings();
 
@@ -115,6 +116,7 @@ Future<void> main() async {
       );
     }
   });
+  // end firebase notification
 
   runApp(MyApp());
 }
