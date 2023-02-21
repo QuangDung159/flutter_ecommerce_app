@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_element
 
 import 'dart:io';
 
@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/core/data/received_notification_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/main.dart';
@@ -29,6 +30,14 @@ class NotificationServices {
   static tz.TZDateTime _nextInstanceOfTenAMLastYear() {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     return tz.TZDateTime(tz.local, now.year - 1, now.month, now.day, 10);
+  }
+
+  static tz.TZDateTime _nextInstanceOfMondayTenAM() {
+    tz.TZDateTime scheduledDate = _nextInstanceOfTenAM();
+    while (scheduledDate.weekday != DateTime.monday) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+    return scheduledDate;
   }
 
   static Future<void> configureLocalTimeZone() async {
@@ -208,7 +217,7 @@ class NotificationServices {
                 .getNotificationAppLaunchDetails();
 
     if (initialRoute == null || initialRoute == '') {
-      initialRoute = '/main_screen';
+      initialRoute = '/cart_screen';
     }
 
     if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
@@ -325,7 +334,8 @@ class NotificationServices {
             CupertinoDialogAction(
               isDefaultAction: true,
               onPressed: () async {
-                print('asd');
+                Navigator.of(context, rootNavigator: true).pop();
+                Get.to(() => CartScreen());
               },
               child: const Text('Ok'),
             )
