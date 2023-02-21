@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,4 +18,12 @@ void showSnackBar(
     margin: EdgeInsets.all(12),
     barBlur: 30,
   );
+}
+
+void printCustom({String? title, content}) {
+  if (title != null && title != '') {
+    print('$title $content');
+  } else {
+    print('$content');
+  }
 }
