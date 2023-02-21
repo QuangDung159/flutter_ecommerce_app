@@ -313,11 +313,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       style: {
         'body': Style(
           padding: EdgeInsets.zero,
-          margin: EdgeInsets.zero,
+          margin: Margins.zero,
         ),
         'p': Style(
           padding: EdgeInsets.zero,
-          margin: EdgeInsets.zero,
+          margin: Margins.zero,
         ),
       },
     );
