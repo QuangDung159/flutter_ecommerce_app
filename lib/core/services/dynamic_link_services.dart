@@ -1,7 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
-import 'package:get/get.dart';
 
 class DynamicLinkServices {
   static Future<void> initDynamicLinks({
@@ -35,31 +35,16 @@ class DynamicLinkServices {
   }
 
   static handleDynamicUrl(String url) async {
-    List<Map<String, String>> params = getParamsFromUrl(url);
+    String? payload = getPayloadUrlFromLink(url);
 
-    var screenName = '';
-    var id = '';
-
-    for (var element in params) {
-      if (element['key'] == 'screen') {
-        screenName = element['value'].toString();
-      }
-
-      if (element['key'] == 'id') {
-        id = element['value'].toString();
-      }
-    }
-
-    navigationByUrl('/$screenName');
+    navigationByUrl(payload);
   }
 
-  static getParamsFromUrl(String url) {
-    List<String> urlArr = url.split('?');
-    List<String> urlArr2 = urlArr[1].split('&');
-    var list = urlArr2.map(
-      (e) => <String, String>{'key': e.split('=')[0], 'value': e.split('=')[1]},
-    );
-
-    return list.toList();
+  static String? getPayloadUrlFromLink(String deepLink) {
+    List<String> listSegment = deepLink.split(deepLinkDomain);
+    if (listSegment.length <= 1) {
+      return null;
+    }
+    return listSegment[1];
   }
 }

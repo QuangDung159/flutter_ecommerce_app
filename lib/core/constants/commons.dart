@@ -439,7 +439,8 @@ List<ProductModel> listProductDummy = [
     quantity: 100,
     id: 12,
     price: '99',
-    name: 'FreeRain24 2.0 Packable Backpack (Advanced Series) (Charcoal) 43df23',
+    name:
+        'FreeRain24 2.0 Packable Backpack (Advanced Series) (Charcoal) 43df23',
     productInfo: '',
     description: '<p>INTRODUCING THE ADVANCED SERIES from Matador</p>',
     shippingInfo: '',
@@ -1193,3 +1194,5 @@ List<OrderModel> listOrderShippingDummy = [
     promotionCode: 'code1',
   ),
 ];
+
+String deepLinkDomain = 'flutter-ecommerce-app.page.link';
