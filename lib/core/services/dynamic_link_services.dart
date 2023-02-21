@@ -51,30 +51,19 @@ class DynamicLinkServices {
   }
 
   static Future<String> buildDynamicLink() async {
-    final DynamicLinkParameters parameters = DynamicLinkParameters(
-      uriPrefix: 'flutterecommerceapp.page.link',
-      link: Uri.parse('https://flutter-ecommerce-app.page.link/product_detail_screen/1'),
+    final dynamicLinkParams = DynamicLinkParameters(
+      link: Uri.parse('$deepLinkDomain/product_detail_screen/3'),
+      uriPrefix: uriPrefix,
       androidParameters: AndroidParameters(
-        //Ở đây là tên package đã config trên Firebase.
         packageName: androidAppId,
-        minimumVersion: 0,
       ),
       iosParameters: IOSParameters(
-        //Ở đây là bundleId đã config trên Firebase.
         bundleId: iosBundleId,
-        minimumVersion: '0',
       ),
-      // socialMetaTagParameters: SocialMetaTagParameters(
-      //   description: '',
-      //   imageUrl:
-      //       Uri.parse('https://flutter.dev/images/flutter-logo-sharing.png'),
-      //   title: '',
-      // ),
     );
-
     final dynamicLink =
-        await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+        await FirebaseDynamicLinks.instance.buildShortLink(dynamicLinkParams);
 
-    return dynamicLink.toString();
+    return dynamicLink.shortUrl.toString();
   }
 }
