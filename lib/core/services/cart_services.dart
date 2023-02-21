@@ -1,19 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
-import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
-import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CartServices {
   static GetxAppController getxAppController = Get.find<GetxAppController>();
@@ -124,5 +120,17 @@ class CartServices {
         '${addressModel.addressLine}, ${addressModel.ward.name}, ${addressModel.district.name}, ${addressModel.city.name}';
 
     return fullAddress;
+  }
+
+  static ProductModel? getProductById(int id) {
+    int index = listProductDummy.indexWhere(
+      (item) => item.id == id,
+    );
+
+    if (index == -1) {
+      return null;
+    }
+
+    return listProductDummy[index];
   }
 }

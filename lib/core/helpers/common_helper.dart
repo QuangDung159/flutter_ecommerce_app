@@ -10,10 +10,13 @@ String formatPrice(String price) {
   return '\$${double.parse(price)}';
 }
 
-void showSnackBar(
-    {required String title, required String content, bool? isSuccess}) {
+void showSnackBar({
+  String? title,
+  required String content,
+  bool? isSuccess,
+}) {
   Get.snackbar(
-    title,
+    title ?? 'Flutter E-Commerce App',
     content,
     duration: Duration(seconds: 2),
     borderColor: isSuccess ?? true ? Colors.green : Colors.red,
@@ -31,11 +34,31 @@ void printCustom({String? title, content}) {
   }
 }
 
+int getIdFromUrl(String payloadUrl) {
+  List<String> listSegment = payloadUrl.split('/');
+
+  if (listSegment.length >= 3) {
+    return int.parse(listSegment[2]);
+  }
+
+  return -1;
+}
+
+String getScreenFromUrl(String payloadUrl) {
+  List<String> listSegment = payloadUrl.split('/');
+
+  if (listSegment.length >= 2) {
+    return listSegment[1];
+  }
+
+  return '';
+}
+
 Widget navigationByRouterName(String? routerName) {
   switch (routerName) {
-    case '/voucher_scree':
+    case 'voucher_screen':
       return VoucherScreen();
-    case '/cart_screen':
+    case 'cart_screen':
       return CartScreen();
     default:
       return MainScreen();

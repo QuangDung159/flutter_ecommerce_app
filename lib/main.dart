@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -129,6 +130,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool _notificationsEnabled = false;
+
   @override
   void initState() {
     super.initState();
@@ -136,10 +139,69 @@ class _MyAppState extends State<MyApp> {
     Get.put(GetxGoogleInfoController());
 
     SortFilterServices.initListFilter();
+
+    _isAndroidPermissionGranted();
+    _requestPermissions();
+    // NotificationServices.configureDidReceiveLocalNotificationSubject(context);
+
+    // local notification onTap
+    NotificationServices.onTapLocalNotification();
+
+    // firebase notification onTap
+    NotificationServices.setupInteractedFirebaseMessage();
+
+    // DynamicLinkServices.onReceiveTerminateAppDynamicLink();
+    // DynamicLinkServices.onReceiveDynamicLink();
+  }
+
+  Future<void> _isAndroidPermissionGranted() async {
+    if (Platform.isAndroid) {
+      final bool granted = await flutterLocalNotificationsPlugin
+              .resolvePlatformSpecificImplementation<
+                  AndroidFlutterLocalNotificationsPlugin>()
+              ?.areNotificationsEnabled() ??
+          false;
+
+      setState(() {
+        _notificationsEnabled = granted;
+      });
+    }
+  }
+
+  Future<void> _requestPermissions() async {
+    if (Platform.isIOS || Platform.isMacOS) {
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              MacOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
+    } else if (Platform.isAndroid) {
+      final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+          flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>();
+
+      final bool? granted = await androidImplementation?.requestPermission();
+      setState(() {
+        _notificationsEnabled = granted ?? false;
+      });
+    }
   }
 
   @override
   void dispose() {
+    didReceiveLocalNotificationStream.close();
+    selectNotificationStream.close();
     super.dispose();
   }
 
