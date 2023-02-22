@@ -206,4 +206,16 @@ class CartServices {
 
     getxAppController.setData(listCartItemCheckout: []);
   }
+
+  static void selectAllCartItem({
+    required bool isDeselect,
+  }) {
+    getxAppController.setData(listCartItemCheckout: []);
+
+    if (!isDeselect) {
+      for (var i = 0; i < listCart.length; i++) {
+        listCartItemCheckout.add(listCart[i]);
+      }
+    }
+  }
 }

@@ -38,9 +38,17 @@ class _CartScreenState extends State<CartScreen> {
             MyAppBar(
               hasBackButton: true,
               title: 'My cart',
-              action: Icon(
-                Icons.checklist,
-                size: 24,
+              action: GestureDetector(
+                onTap: () {
+                  CartServices.selectAllCartItem(
+                    isDeselect:
+                        getxAppController.listCartItemCheckout.isNotEmpty,
+                  );
+                },
+                child: Icon(
+                  Icons.checklist,
+                  size: 24,
+                ),
               ),
             ),
             Expanded(
