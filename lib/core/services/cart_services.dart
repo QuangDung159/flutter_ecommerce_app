@@ -84,6 +84,14 @@ class CartServices {
     );
   }
 
+  static removeCartCheckout(CartItemModel cartItem) {
+    int index = findCartInList(listCartItemCheckout, cartItem);
+    if (index == -1) {
+      return;
+    }
+    listCartItemCheckout.removeAt(index);
+  }
+
   static updateCartCheckout({
     required CartItemModel cartItem,
   }) {
@@ -107,6 +115,7 @@ class CartServices {
 
     if (theSameItemId != -1) {
       if (removeAll ?? false) {
+        removeCartCheckout(listCart[theSameItemId]);
         listCart.removeAt(theSameItemId);
       } else {
         CartItemModel cartItemToUpdate = CartItemModel(
