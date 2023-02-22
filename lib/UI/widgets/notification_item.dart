@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/notification_icon.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 
 class NotificationItem extends StatelessWidget {
   const NotificationItem({
@@ -16,6 +18,10 @@ class NotificationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isRead = notificationModel.isRead;
+    DateTimeModel dateTimeModel = getDateTimeFromString(
+      notificationModel.sendAt,
+    );
+
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 12,
@@ -91,7 +97,7 @@ class NotificationItem extends StatelessWidget {
                 height: 7,
               ),
               Text(
-                '31 May',
+                '${dateTimeModel.day} ${dateTimeModel.monthShort}',
                 style: TextStyle(
                   color: isRead
                       ? AppColors.greyScale.withOpacity(0.6)

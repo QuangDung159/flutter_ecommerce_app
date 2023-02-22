@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_share/flutter_share.dart';
@@ -157,13 +158,68 @@ Future<void> share({
   );
 }
 
-  // Future<void> shareFile() async {
-  //   List<dynamic> docs = await DocumentsPicker.pickDocuments;
-  //   if (docs == null || docs.isEmpty) return null;
+// Future<void> shareFile() async {
+//   List<dynamic> docs = await DocumentsPicker.pickDocuments;
+//   if (docs == null || docs.isEmpty) return null;
 
-  //   await FlutterShare.shareFile(
-  //     title: 'Example share',
-  //     text: 'Example share text',
-  //     filePath: docs[0] as String,
-  //   );
-  // }
+//   await FlutterShare.shareFile(
+//     title: 'Example share',
+//     text: 'Example share text',
+//     filePath: docs[0] as String,
+//   );
+// }
+
+Map<String, String> getMonthString(String monthNumber) {
+  switch (monthNumber) {
+    case '01':
+      return {'long': 'January', 'short': 'Jan'};
+    case '02':
+      return {'long': 'February', 'short': 'Feb'};
+    case '03':
+      return {'long': 'March', 'short': 'Mar'};
+    case '04':
+      return {'long': 'April', 'short': 'Apr'};
+    case '05':
+      return {'long': 'May', 'short': 'May'};
+    case '06':
+      return {'long': 'June', 'short': 'Jun'};
+    case '07':
+      return {'long': 'July', 'short': 'Jul'};
+    case '08':
+      return {'long': 'August', 'short': 'Aug'};
+    case '09':
+      return {'long': 'September', 'short': 'Sep'};
+    case '10':
+      return {'long': 'October', 'short': 'Oct'};
+    case '11':
+      return {'long': 'November', 'short': 'Nov'};
+    default:
+      return {'long': 'December', 'short': 'Dec'};
+  }
+}
+
+DateTimeModel getDateTimeFromString(String dateTime) {
+  String date = dateTime.split(' ')[0];
+  String time = dateTime.split(' ')[1];
+
+  String year = date.split('-')[0];
+  String month = date.split('-')[1];
+  String day = date.split('-')[2];
+
+  String hour = time.split(':')[0];
+  String minute = time.split(':')[1];
+  String second = time.split(':')[2];
+
+  Map monthString = getMonthString(month);
+
+  return DateTimeModel(
+    year: year,
+    month: month,
+    day: day,
+    hour: hour,
+    minute: minute,
+    second: second,
+    monthLong: monthString['long'],
+    monthShort: monthString['short'],
+  );
+}
