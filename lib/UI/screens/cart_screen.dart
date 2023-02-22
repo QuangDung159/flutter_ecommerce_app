@@ -68,7 +68,7 @@ class _CartScreenState extends State<CartScreen> {
                       title: 'Subtotal',
                       value: formatPrice(
                         CartServices.calSubtotal(
-                          getxAppController.listCartItem,
+                          getxAppController.listCartItemCheckout,
                         ).toString(),
                       ),
                     ),
@@ -100,7 +100,7 @@ class _CartScreenState extends State<CartScreen> {
                         Text(
                           formatPrice(
                             CartServices.calSubtotal(
-                              getxAppController.listCartItem,
+                              getxAppController.listCartItemCheckout,
                             ).toString(),
                           ),
                           style: TextStyle(
@@ -116,11 +116,11 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     ButtonWidget(
                       title: 'Checkout',
-                      backgroundColor: getxAppController.listCartItem.isEmpty
+                      backgroundColor: getxAppController.listCartItemCheckout.isEmpty
                           ? AppColors.greyMid
                           : AppColors.primary,
                       opTap: () {
-                        if (getxAppController.listCartItem.isNotEmpty) {
+                        if (getxAppController.listCartItemCheckout.isNotEmpty) {
                           Get.to(() => DeliveryScreen());
                         }
                       },

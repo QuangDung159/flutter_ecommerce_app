@@ -69,7 +69,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                           height: AppDimension.contentPadding,
                         ),
                         Text(
-                          '${getxAppController.listCartItem.length} items',
+                          '${getxAppController.listCartItemCheckout.length} items',
                         ),
                         SizedBox(
                           height: 6,
@@ -79,7 +79,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                   ),
                   Column(
                     children: renderListCartItem(
-                      getxAppController.listCartItem.cast<CartItemModel>(),
+                      getxAppController.listCartItemCheckout,
                     ),
                   ),
                   SizedBox(
@@ -93,7 +93,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
           CartTotalSection(
             buttonTitle: 'Payment',
             onTapButton: () {
-              if (getxAppController.listCartItem.isNotEmpty) {
+              if (getxAppController.listCartItemCheckout.isNotEmpty) {
                 Get.to(() => CheckoutScreen());
               }
             },

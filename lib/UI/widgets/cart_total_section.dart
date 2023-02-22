@@ -36,7 +36,7 @@ class _CartTotalSectionState extends State<CartTotalSection> {
 
   Widget renderTotalSection() {
     GetxAppController getxAppController = Get.find<GetxAppController>();
-    List listCartItem = getxAppController.listCartItem;
+    List listCartItemCheckout = getxAppController.listCartItemCheckout;
     ShippingPolicyModel shippingSelected =
         getxAppController.shippingPolicySelected.value;
 
@@ -48,7 +48,7 @@ class _CartTotalSectionState extends State<CartTotalSection> {
     double discount = hasSelectedPromotion
         ? double.parse(promotionSelected.promotion.value)
         : 0.0;
-    double subtotal = CartServices.calSubtotal(listCartItem);
+    double subtotal = CartServices.calSubtotal(listCartItemCheckout);
     double total = CartServices.calTotal();
 
     return Container(
@@ -170,7 +170,7 @@ class _CartTotalSectionState extends State<CartTotalSection> {
           ),
           ButtonWidget(
             title: widget.buttonTitle,
-            backgroundColor: getxAppController.listCartItem.isEmpty
+            backgroundColor: getxAppController.listCartItemCheckout.isEmpty
                 ? AppColors.greyMid
                 : AppColors.primary,
             opTap: () {
