@@ -97,8 +97,7 @@ class _CartItemState extends State<CartItem> {
               ),
               GestureDetector(
                 onTap: () {
-                  if (isChecked) {
-                  } else {}
+                  CartServices.updateCartCheckout(cartItem: widget.cartItem);
                 },
                 child: Image.asset(
                   isChecked ? AssetHelper.iconCheck : AssetHelper.iconUncheck,
@@ -123,6 +122,7 @@ class _CartItemState extends State<CartItem> {
           ),
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   widget.cartItem.product.name,

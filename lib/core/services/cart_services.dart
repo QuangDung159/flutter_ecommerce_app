@@ -52,6 +52,25 @@ class CartServices {
     }
   }
 
+  static int findCartInList(
+      List<CartItemModel> listCart, CartItemModel cartItem) {
+    return listCart.indexWhere(
+      (element) => cartItem.id == element.id,
+    );
+  }
+
+  static updateCartCheckout({
+    required CartItemModel cartItem,
+  }) {
+    int index = findCartInList(listCartItemCheckout, cartItem);
+
+    if (index == -1) {
+      listCartItemCheckout.add(cartItem);
+    } else {
+      listCartItemCheckout.removeAt(index);
+    }
+  }
+
   static removeCart({
     required ProductModel product,
     required int quantity,
