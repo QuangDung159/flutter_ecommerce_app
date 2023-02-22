@@ -36,7 +36,9 @@ class NotificationItem extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: isRead ? AppColors.greyScale.withOpacity(0.6) : AppColors.primary,
+              color: isRead
+                  ? AppColors.greyScale.withOpacity(0.6)
+                  : AppColors.primary,
             ),
             child: NotificationIcon(
               notificationModel: notificationModel,
