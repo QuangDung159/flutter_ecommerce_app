@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/notification_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
@@ -41,8 +40,10 @@ class _MainBottomBarNotificationWidgetState
                     horizontal: AppDimension.contentPadding,
                   ),
                   margin: EdgeInsets.only(bottom: 12),
-                  child: Column(
-                    children: renderListNoti(listNotificationDummy),
+                  child: Obx(
+                    () => Column(
+                      children: renderListNoti(getx.listNoti),
+                    ),
                   ),
                 ),
               ),
@@ -66,10 +67,10 @@ class _MainBottomBarNotificationWidgetState
 
     List<Widget> listRender = [];
 
-    for (var i = 0; i < listNotificationDummy.length; i++) {
+    for (var i = 0; i < listNotification.length; i++) {
       listRender.add(
         NotificationItem(
-          notificationModel: listNotificationDummy[i],
+          notificationModel: listNotification[i],
         ),
       );
     }

@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
@@ -46,6 +47,8 @@ class GetxAppController extends GetxController {
 
   final referCodeReceived = RxnString();
 
+  final listNoti = RxList<NotificationModel>(listNotificationDummy);
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -59,6 +62,7 @@ class GetxAppController extends GetxController {
     DistrictModel? districtSelected,
     WardModel? wardSelected,
     List<AddressModel>? listAddress,
+    List<NotificationModel>? listNoti,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -106,6 +110,10 @@ class GetxAppController extends GetxController {
 
     if (listAddress != null) {
       this.listAddress.value = listAddress;
+    }
+
+    if (listNoti != null) {
+      this.listNoti.value = listNoti;
     }
   }
 
