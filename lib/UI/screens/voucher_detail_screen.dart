@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -15,10 +17,12 @@ import 'package:get/get.dart';
 class VoucherDetailScreen extends StatefulWidget {
   const VoucherDetailScreen({
     super.key,
-    required this.promotionModel,
+    required this.showUseButton,
+    required this.promotionUserModel,
   });
 
-  final PromotionModel promotionModel;
+  final bool showUseButton;
+  final PromotionUserModel promotionUserModel;
 
   @override
   State<VoucherDetailScreen> createState() => _VoucherDetailScreenState();
@@ -29,7 +33,7 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    PromotionModel promotionModel = widget.promotionModel;
+    PromotionModel promotionModel = widget.promotionUserModel.promotion;
     DateTimeModel dateTimeModel = getDateTimeFromString(
       promotionModel.endDate,
     );
@@ -86,7 +90,7 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                         height: 25,
                                       ),
                                       Text(
-                                        widget.promotionModel.code,
+                                        widget.promotionUserModel.promotion.code,
                                         style: TextStyle(
                                           fontSize: 12,
                                           color: AppColors.greyScale,
@@ -96,7 +100,7 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                         height: 6,
                                       ),
                                       Text(
-                                        widget.promotionModel.title,
+                                        widget.promotionUserModel.promotion.title,
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -132,8 +136,26 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                         height: AppDimension.contentPadding,
                                       ),
                                       renderHtml(
-                                        widget.promotionModel.desc,
+                                        widget.promotionUserModel.promotion.desc,
                                       ),
+                                      if (widget.showUseButton)
+                                        Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 16,
+                                            ),
+                                            ButtonWidget(
+                                              title: 'Use',
+                                              opTap: () {
+                                                getxAppController
+                                                    .setPromotionSelected(
+                                                  widget.promotionUserModel,
+                                                );
+                                                Get.close(2);
+                                              },
+                                            ),
+                                          ],
+                                        ),
                                       SizedBox(
                                         height: 16,
                                       ),
