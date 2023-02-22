@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 
 class CartItem extends StatefulWidget {
   const CartItem({
@@ -60,13 +62,23 @@ class _CartItemState extends State<CartItem> {
               ),
             ],
           ),
-          child: renderItemCartInfo(),
+          child: Obx(() => renderItemCartInfo()),
         ),
       ],
     );
   }
 
   Widget renderItemCartInfo() {
+    GetxAppController getxApp = Get.find<GetxAppController>();
+    List<CartItemModel> listCartItemCheckout = getxApp.listCartItemCheckout;
+
+    int index = findCartInListCart(listCartItemCheckout, widget.cartItem.id);
+    bool isChecked = false;
+
+    if (index != -1) {
+      isChecked = true;
+    }
+
     return Container(
       color: Colors.white,
       padding: EdgeInsets.only(
@@ -83,9 +95,18 @@ class _CartItemState extends State<CartItem> {
               SizedBox(
                 height: 24,
               ),
-              Image.asset(
-                AssetHelper.iconUncheck,
-                width: 18,
+              GestureDetector(
+                onTap: () {
+                  if (!isChecked) {
+                    CartServices.addCartCheckout(cartItem: widget.cartItem);
+                  } else {
+                    CartServices.removeCartCheckout(cartItem: widget.cartItem);
+                  }
+                },
+                child: Image.asset(
+                  isChecked ? AssetHelper.iconCheck : AssetHelper.iconUncheck,
+                  width: 18,
+                ),
               ),
             ],
           ),

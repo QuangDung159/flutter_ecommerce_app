@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
@@ -222,4 +223,8 @@ DateTimeModel getDateTimeFromString(String dateTime) {
     monthLong: monthString['long'],
     monthShort: monthString['short'],
   );
+}
+
+int findCartInListCart(List<CartItemModel> listCartItem, int cartId) {
+  return listCartItem.indexWhere((element) => element.id == cartId);
 }

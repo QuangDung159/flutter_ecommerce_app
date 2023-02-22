@@ -53,16 +53,11 @@ class CartServices {
   }
 
   static addCartCheckout({
-    required ProductModel product,
-    required int quantity,
+    required CartItemModel cartItem,
   }) {
     listCartItemCheckout.add(
-        CartItemModel(
-          id: product.id,
-          product: product,
-          quantity: quantity,
-        ),
-      );
+      cartItem,
+    );
   }
 
   static removeCart({
@@ -101,24 +96,13 @@ class CartServices {
   }
 
   static removeCartCheckout({
-    required ProductModel product,
-    required int quantity,
+    required CartItemModel cartItem,
   }) {
     int theSameItemId =
-        listCartItemCheckout.indexWhere((element) => element.id == product.id);
+        listCartItemCheckout.indexWhere((element) => element.id == cartItem.id);
 
     if (theSameItemId != -1) {
-      listCartItemCheckout.replaceRange(
-        theSameItemId,
-        theSameItemId + 1,
-        [
-          CartItemModel(
-            id: product.id,
-            product: product,
-            quantity: listCartItemCheckout[theSameItemId].quantity - 1,
-          ),
-        ],
-      );
+      listCartItemCheckout.removeAt(theSameItemId);
     }
   }
 
