@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/voucher_item.dart';
@@ -8,6 +9,9 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
 class SearchProductScreen extends StatefulWidget {
@@ -43,6 +47,9 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ProductModel product = listProductDummy[2];
+    bool hasOriginalPrice = product.originalPrice != '';
+
     return Scaffold(
       // backgroundColor: Colors.white,
       body: Column(
@@ -53,7 +60,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
           ),
           MyAppBar(
             hasBackButton: true,
-            title: 'My voucher',
+            title: 'Search',
           ),
           renderInputPromoCode(),
           Expanded(
@@ -64,7 +71,88 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
                     height: AppDimension.contentPadding / 2,
                   ),
                   Column(
-                    children: renderListVoucherItem(),
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        color: Colors.white,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: Image.network(
+                                product.thumbnail,
+                                width: 60,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(
+                                    () => ProductDetailScreen(
+                                      product: product,
+                                    ),
+                                  );
+                                },
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      product.name,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 7,
+                                    ),
+                                    Row(
+                                      children: [
+                                        if (hasOriginalPrice)
+                                          Text(
+                                            '${formatPrice(product.originalPrice)} ',
+                                            style: TextStyle(
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                            ),
+                                          ),
+                                        Text(
+                                          formatPrice(product.price),
+                                          style: TextStyle(
+                                            color: hasOriginalPrice
+                                                ? AppColors.primary
+                                                : Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                CartServices.addCart(
+                                  product: product,
+                                  quantity: 1,
+                                );
+                              },
+                              child: Icon(
+                                Icons.add_shopping_cart_outlined,
+                                color: AppColors.primary,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),
@@ -84,7 +172,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
           Expanded(
             child: TextFieldWidget(
               controller: textFieldController,
-              hintText: 'Enter a promo code',
+              hintText: 'Enter product name',
               onChanged: (value) {
                 setState(() {
                   promoCodeInput = value;
@@ -96,15 +184,9 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
             width: 24,
           ),
           GestureDetector(
-            onTap: () {
-              setState(() {
-                promoCodeInput = '';
-              });
-
-              textFieldController.text = '';
-            },
+            onTap: () {},
             child: Text(
-              'Add',
+              'Search',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: AppColors.primary,
