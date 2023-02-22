@@ -31,6 +31,7 @@ class _MainBottomBarNotificationWidgetState
           children: [
             MyAppBar(
               title: 'Notifications',
+              action: Icon(Icons.checklist),
             ),
             Expanded(
               child: SingleChildScrollView(
