@@ -50,7 +50,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               buttonTitle: 'Checkout',
               onTapButton: () {
                 Get.offAll(() => MainScreen());
-                CartServices.removeItemCheckout();
+                CartServices.checkout();
                 Future.delayed(
                   Duration(seconds: 1),
                   () => showSnackBar(

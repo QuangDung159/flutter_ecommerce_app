@@ -194,7 +194,7 @@ class CartServices {
     return listProductDummy[index];
   }
 
-  static void removeItemCheckout() {
+  static void checkout() {
     for (var i = 0; i < listCartItemCheckout.length; i++) {
       CartServices.removeCart(
         product: listCartItemCheckout[i].product,
