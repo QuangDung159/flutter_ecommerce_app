@@ -50,8 +50,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               buttonTitle: 'Checkout',
               onTapButton: () {
                 Get.offAll(() => MainScreen());
-                getxAppController.setData(listCartItemCheckout: []);
-                // getxAppController.setData(listCartItem: []);
+                CartServices.removeItemCheckout();
                 Future.delayed(
                   Duration(seconds: 1),
                   () => showSnackBar(

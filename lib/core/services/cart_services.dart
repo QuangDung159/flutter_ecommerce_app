@@ -154,4 +154,17 @@ class CartServices {
 
     return listProductDummy[index];
   }
+
+  static void removeItemCheckout() {
+    for (var i = 0; i < listCartItemCheckout.length; i++) {
+      CartServices.removeCart(
+        product: listCartItemCheckout[i].product,
+        quantity: listCartItemCheckout[i].quantity,
+        removeAll: true,
+        isShowSnackBar: false,
+      );
+    }
+
+    getxAppController.setData(listCartItemCheckout: []);
+  }
 }
