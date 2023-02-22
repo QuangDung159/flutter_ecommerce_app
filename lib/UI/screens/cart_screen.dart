@@ -38,6 +38,10 @@ class _CartScreenState extends State<CartScreen> {
             MyAppBar(
               hasBackButton: true,
               title: 'My cart',
+              action: Icon(
+                Icons.checklist,
+                size: 24,
+              ),
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -116,9 +120,10 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     ButtonWidget(
                       title: 'Checkout',
-                      backgroundColor: getxAppController.listCartItemCheckout.isEmpty
-                          ? AppColors.greyMid
-                          : AppColors.primary,
+                      backgroundColor:
+                          getxAppController.listCartItemCheckout.isEmpty
+                              ? AppColors.greyMid
+                              : AppColors.primary,
                       opTap: () {
                         if (getxAppController.listCartItemCheckout.isNotEmpty) {
                           Get.to(() => DeliveryScreen());
