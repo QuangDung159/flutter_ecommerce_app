@@ -50,7 +50,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               buttonTitle: 'Checkout',
               onTapButton: () {
                 Get.offAll(() => MainScreen());
-                getxAppController.setData(listCartItem: []);
+                getxAppController.setData(listCartItemCheckout: []);
+                // getxAppController.setData(listCartItem: []);
                 Future.delayed(
                   Duration(seconds: 1),
                   () => showSnackBar(
@@ -58,9 +59,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     content:
                         'Your order has been created, thanks for your shopping!',
                   ),
-                );
-                getxAppController.setData(
-                  listCartItem: [],
                 );
               },
             ),

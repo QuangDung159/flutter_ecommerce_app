@@ -24,7 +24,7 @@ class CartServices {
     bool? isShowSnackBar,
   }) {
     int theSameItemId =
-        listCart.indexWhere((element) => element.id == product.id);
+        listCart.indexWhere((element) => element.product.id == product.id);
 
     if (theSameItemId != -1) {
       listCart.replaceRange(
@@ -67,7 +67,7 @@ class CartServices {
     bool? removeAll,
   }) {
     int theSameItemId =
-        listCart.indexWhere((element) => element.id == product.id);
+        listCart.indexWhere((element) => element.product.id == product.id);
 
     if (theSameItemId != -1) {
       if (removeAll ?? false) {
