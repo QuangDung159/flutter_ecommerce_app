@@ -15,6 +15,7 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isRead = notificationModel.isRead;
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 12,
@@ -35,7 +36,7 @@ class NotificationItem extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: AppColors.primary,
+              color: isRead ? AppColors.greyScale.withOpacity(0.6) : AppColors.primary,
             ),
             child: NotificationIcon(
               notificationModel: notificationModel,
@@ -51,8 +52,11 @@ class NotificationItem extends StatelessWidget {
                 Text(
                   notificationModel.type,
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: isRead ? FontWeight.normal : FontWeight.bold,
                     fontSize: 16,
+                    color: isRead
+                        ? AppColors.blackPrimary.withOpacity(0.6)
+                        : AppColors.blackPrimary,
                   ),
                 ),
                 SizedBox(
@@ -61,7 +65,9 @@ class NotificationItem extends StatelessWidget {
                 Text(
                   notificationModel.subTitle,
                   style: TextStyle(
-                    color: AppColors.greyScale,
+                    color: isRead
+                        ? AppColors.greyScale.withOpacity(0.6)
+                        : AppColors.greyScale,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -76,7 +82,7 @@ class NotificationItem extends StatelessWidget {
                 height: 10,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: AppColors.primary,
+                  color: isRead ? Colors.white : AppColors.primary,
                 ),
               ),
               SizedBox(
@@ -85,7 +91,9 @@ class NotificationItem extends StatelessWidget {
               Text(
                 '31 May',
                 style: TextStyle(
-                  color: AppColors.greyScale,
+                  color: isRead
+                      ? AppColors.greyScale.withOpacity(0.6)
+                      : AppColors.greyScale,
                 ),
               )
             ],
