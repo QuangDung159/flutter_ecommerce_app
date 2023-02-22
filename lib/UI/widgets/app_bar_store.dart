@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_icon.dart';
-import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 
 class AppBarStore extends StatelessWidget {
   const AppBarStore({
@@ -27,7 +26,6 @@ class AppBarStore extends StatelessWidget {
             child: Icon(
               Icons.search,
               size: 24,
-              color: AppColors.primary,
             ),
           ),
           Text(

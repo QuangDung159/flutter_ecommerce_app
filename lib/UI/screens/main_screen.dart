@@ -9,9 +9,13 @@ import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  const MainScreen({
+    super.key,
+    this.initialIndex,
+  });
 
   static String routeName = '/main_screen';
+  final int? initialIndex;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -23,6 +27,12 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
+
+    if (widget.initialIndex != null) {
+      setState(() {
+        _currentIndex = widget.initialIndex!;
+      });
+    }
 
     Future.delayed(Duration(seconds: 2), () {
       DynamicLinkServices.onReceiveTerminateAppDynamicLink();

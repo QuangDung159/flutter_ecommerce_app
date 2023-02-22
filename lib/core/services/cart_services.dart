@@ -113,7 +113,7 @@ class CartServices {
 
   static String getFullAddress(AddressModel? addressModel) {
     if (addressModel == null) {
-      return 'N/a';
+      return '';
     }
 
     String fullAddress =

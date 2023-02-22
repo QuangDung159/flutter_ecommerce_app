@@ -263,6 +263,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     borderRadius: BorderRadius.circular(18),
                     color: AppColors.greyDark.withOpacity(0.6),
                   ),
+                  child: Image.asset(
+                    AssetHelper.iconSearch,
+                    width: 14,
+                  ),
+                ),
+                SizedBox(
+                  width: 6,
+                ),
+                Container(
+                  width: 34,
+                  height: 34,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: AppColors.greyDark.withOpacity(0.6),
+                  ),
                   child: CartIcon(
                     color: Colors.white,
                   ),

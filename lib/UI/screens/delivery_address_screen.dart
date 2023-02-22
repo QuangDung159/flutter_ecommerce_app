@@ -206,6 +206,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
   Widget renderDropdownButton(String title, String locationType) {
     return GestureDetector(
       onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
         showMaterialModalBottomSheet(
           context: context,
           builder: (context) => Container(
@@ -317,6 +318,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   districtSelected: cityItem.listDistrict![0],
                   wardSelected: cityItem.listDistrict![0].listWard![0],
                 );
+                Navigator.of(context).pop();
               },
               child: renderLocationItem(
                 cityItem,
@@ -335,6 +337,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   districtSelected: districtItem,
                   wardSelected: districtItem.listWard![0],
                 );
+                Navigator.of(context).pop();
               },
               child: renderLocationItem(
                 districtItem,
@@ -352,6 +355,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                 getx.setData(
                   wardSelected: wardItem,
                 );
+                Navigator.of(context).pop();
               },
               child: renderLocationItem(
                 wardItem,

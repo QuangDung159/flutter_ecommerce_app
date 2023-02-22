@@ -91,10 +91,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     opTap: () {
                       Get.offAll(() => MainScreen());
                       getxAppController.setData(listCartItem: []);
-                      showSnackBar(
-                        title: 'Payment success',
-                        content:
-                            'Your order has been created, thanks for your shopping!',
+                      Future.delayed(
+                        Duration(seconds: 1),
+                        () => showSnackBar(
+                          title: 'Payment success',
+                          content:
+                              'Your order has been created, thanks for your shopping!',
+                        ),
                       );
                       getxAppController.setData(
                         listCartItem: [],
