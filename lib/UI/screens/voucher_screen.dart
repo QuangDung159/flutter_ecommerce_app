@@ -11,7 +11,12 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:get/get.dart';
 
 class VoucherScreen extends StatefulWidget {
-  const VoucherScreen({super.key});
+  const VoucherScreen({
+    super.key,
+    this.navigationFrom,
+  });
+
+  final String? navigationFrom;
 
   @override
   State<VoucherScreen> createState() => _VoucherScreenState();
@@ -114,11 +119,16 @@ class _VoucherScreenState extends State<VoucherScreen> {
   List<Widget> renderListVoucherItem() {
     List<Widget> listRender = [];
 
+    String? navigationFrom = widget.navigationFrom;
+    bool showUseButton =
+        navigationFrom == null ? false : navigationFrom == 'delivery_screen';
+
     for (var i = 0; i < listPromotionUserDummy.length; i++) {
       listRender.add(
         VoucherItem(
           promotionUserModel: listPromotionUserDummy[i],
           isLastItem: i == listPromotionUserDummy.length - 1,
+          showUseButton: showUseButton,
         ),
       );
     }

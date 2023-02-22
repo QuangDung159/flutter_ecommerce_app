@@ -181,7 +181,11 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               GestureDetector(
                 onTap: () {
                   if (!hasSelectedPromotion) {
-                    Get.to(() => VoucherScreen());
+                    Get.to(
+                      () => VoucherScreen(
+                        navigationFrom: 'delivery_screen',
+                      ),
+                    );
                   } else {
                     getxAppController.setPromotionSelected(null);
                   }

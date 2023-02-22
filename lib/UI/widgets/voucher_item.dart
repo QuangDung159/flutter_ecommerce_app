@@ -13,10 +13,12 @@ class VoucherItem extends StatelessWidget {
     Key? key,
     required this.promotionUserModel,
     required this.isLastItem,
+    required this.showUseButton,
   }) : super(key: key);
 
   final PromotionUserModel promotionUserModel;
   final bool isLastItem;
+  final bool showUseButton;
 
   @override
   Widget build(BuildContext context) {
@@ -94,12 +96,18 @@ class VoucherItem extends StatelessWidget {
               flex: 80,
               child: GestureDetector(
                 onTap: () {
-                  getxAppController.setPromotionSelected(promotionUserModel);
-                  Get.back();
+                  if (showUseButton) {
+                    getxAppController.setPromotionSelected(promotionUserModel);
+                    Get.back();
+                  }
                 },
                 child: Center(
                   child: Text(
-                    isUsed ? 'Used' : 'Use',
+                    showUseButton
+                        ? isUsed
+                            ? 'Used'
+                            : 'Use'
+                        : 'Detail',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.orangeSecondary,
