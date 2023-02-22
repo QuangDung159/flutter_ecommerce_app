@@ -2,12 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/notification_icon.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
-import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -16,14 +15,13 @@ import 'package:get/get.dart';
 class VoucherDetailScreen extends StatefulWidget {
   const VoucherDetailScreen({
     super.key,
-    required this.notificationModel,
+    required this.promotionModel,
   });
 
-  final NotificationModel notificationModel;
+  final PromotionModel promotionModel;
 
   @override
-  State<VoucherDetailScreen> createState() =>
-      _VoucherDetailScreenState();
+  State<VoucherDetailScreen> createState() => _VoucherDetailScreenState();
 }
 
 class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
@@ -31,8 +29,9 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    PromotionModel promotionModel = widget.promotionModel;
     DateTimeModel dateTimeModel = getDateTimeFromString(
-      widget.notificationModel.sendAt,
+      promotionModel.endDate,
     );
 
     return Scaffold(
@@ -46,7 +45,7 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
             ),
             MyAppBar(
               hasBackButton: true,
-              title: 'Notification',
+              title: 'My voucher',
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -87,7 +86,7 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                         height: 25,
                                       ),
                                       Text(
-                                        widget.notificationModel.type,
+                                        widget.promotionModel.code,
                                         style: TextStyle(
                                           fontSize: 12,
                                           color: AppColors.greyScale,
@@ -97,7 +96,7 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                         height: 6,
                                       ),
                                       Text(
-                                        widget.notificationModel.title,
+                                        widget.promotionModel.title,
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -125,24 +124,6 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                                   color: AppColors.greyScale,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 12,
-                                              ),
-                                              Image.asset(
-                                                AssetHelper.iconTime,
-                                                width: 15,
-                                                height: 15,
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                '${dateTimeModel.hour}:${dateTimeModel.minute}',
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: AppColors.greyScale,
-                                                ),
-                                              ),
                                             ],
                                           ),
                                         ],
@@ -151,10 +132,10 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                         height: AppDimension.contentPadding,
                                       ),
                                       renderHtml(
-                                        widget.notificationModel.content,
+                                        widget.promotionModel.desc,
                                       ),
                                       SizedBox(
-                                        height: AppDimension.contentPadding,
+                                        height: 16,
                                       ),
                                     ],
                                   ),
@@ -179,7 +160,11 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
     );
   }
 
-  Widget renderHtml(String content) {
+  Widget renderHtml(String? content) {
+    if (content == null || content == '') {
+      return Text('No information');
+    }
+
     Widget html = Html(
       data: content,
       style: {
@@ -205,10 +190,11 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
       ),
-      child: NotificationIcon(
-        notificationModel: widget.notificationModel,
+      child: Image.asset(
+        AssetHelper.iconPromo,
+        width: 30,
+        height: 30,
         color: AppColors.primary,
-        size: 30,
       ),
     );
   }

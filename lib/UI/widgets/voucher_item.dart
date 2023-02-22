@@ -59,7 +59,7 @@ class VoucherItem extends StatelessWidget {
                 onTap: () {
                   Get.to(
                     () => VoucherDetailScreen(
-                      notificationModel: listNotificationDummy[0],
+                      promotionModel: promotionUserModel.promotion,
                     ),
                   );
                 },
@@ -113,7 +113,7 @@ class VoucherItem extends StatelessWidget {
                   } else {
                     Get.to(
                       () => VoucherDetailScreen(
-                        notificationModel: listNotificationDummy[0],
+                        promotionModel: promotionUserModel.promotion,
                       ),
                     );
                   }

@@ -154,7 +154,7 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
                                         widget.notificationModel.content,
                                       ),
                                       SizedBox(
-                                        height: AppDimension.contentPadding,
+                                        height: 16,
                                       ),
                                     ],
                                   ),
