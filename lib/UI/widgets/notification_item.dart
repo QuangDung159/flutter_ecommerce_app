@@ -25,11 +25,13 @@ class NotificationItem extends StatelessWidget {
     );
 
     return GestureDetector(
-      onTap: () => Get.to(
-        () => NotificationDetailScreen(
-          notificationModel: notificationModel,
-        ),
-      ),
+      onTap: () {
+        Get.to(
+          () => NotificationDetailScreen(
+            notificationModel: notificationModel,
+          ),
+        );
+      },
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: 12,
