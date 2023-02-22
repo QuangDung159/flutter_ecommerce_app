@@ -45,4 +45,6 @@ class AssetHelper {
   static const String iconVisa = '$iconDir/icon_visa.png';
   static const String iconUpdate = '$iconDir/icon_update.png';
   static const String iconFeedback = '$iconDir/icon_feedback.png';
+  static const String iconCalendar = '$iconDir/icon_calendar.png';
+  static const String iconTime = '$iconDir/icon_time.png';
 }
