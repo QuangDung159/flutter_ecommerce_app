@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/search_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/bottom_button.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_icon.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_product_horizontal.dart';
@@ -263,9 +264,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     borderRadius: BorderRadius.circular(18),
                     color: AppColors.greyDark.withOpacity(0.6),
                   ),
-                  child: Image.asset(
-                    AssetHelper.iconSearch,
-                    width: 14,
+                  child: GestureDetector(
+                    onTap: () => Get.to(() => SearchProductScreen()),
+                    child: Image.asset(
+                      AssetHelper.iconSearch,
+                      width: 14,
+                    ),
                   ),
                 ),
                 SizedBox(
