@@ -32,7 +32,7 @@ class _MainBottomBarNotificationWidgetState
             MyAppBar(
               title: 'Notifications',
               action: Icon(
-                Icons.checklist,
+                Icons.checklist_rtl,
                 size: 24,
               ),
             ),
