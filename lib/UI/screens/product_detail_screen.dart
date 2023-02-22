@@ -15,6 +15,7 @@ import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/google_services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
@@ -162,10 +163,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ],
                     ),
                   ),
-                  Image.asset(
-                    AssetHelper.iconShare,
-                    width: 24,
-                    height: 24,
+                  GestureDetector(
+                    onTap: () async {
+                      String dynamicLink =
+                          await DynamicLinkServices.buildDynamicLink(
+                        link: Uri.parse(
+                            '$deepLinkDomain/product_detail_screen/${product.id}'),
+                      );
+                      share(
+                        title: 'Product detail',
+                        text: product.name,
+                        linkUrl: dynamicLink,
+                      );
+                    },
+                    child: Image.asset(
+                      AssetHelper.iconShare,
+                      width: 24,
+                      height: 24,
+                    ),
                   ),
                 ],
               ),
