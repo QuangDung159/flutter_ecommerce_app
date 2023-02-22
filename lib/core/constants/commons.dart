@@ -1206,6 +1206,7 @@ String uriPrefix = 'https://flutterecommerceapp.page.link';
 
 List<NotificationModel> listNotificationDummy = [
   NotificationModel(
+    isRead: false,
     type: 'Order',
     title: 'Your order\'s status changed',
     subTitle: 'Your order\'s status changed',
@@ -1214,6 +1215,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 1,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Update',
     title: 'So happy, new update has been installed',
     subTitle: 'New update has been installed',
@@ -1223,6 +1225,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 2,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Promotion',
     title: 'We send you a promo code',
     subTitle: 'We send you a promo code',
@@ -1231,6 +1234,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 3,
   ),
   NotificationModel(
+    isRead: false,
     type: 'Notification',
     title: 'Common notification',
     subTitle: 'Common notification',
@@ -1239,6 +1243,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 4,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Order',
     title: 'Your order\'s status changed',
     subTitle: 'Your order\'s status changed',
@@ -1247,6 +1252,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 5,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Update',
     title: 'So happy, new update has been installed',
     subTitle: 'New update has been installed',
@@ -1256,6 +1262,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 6,
   ),
   NotificationModel(
+    isRead: false,
     type: 'Promotion',
     title: 'We send you a promo code',
     subTitle: 'We send you a promo code',
@@ -1264,6 +1271,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 7,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Notification',
     title: 'Common notification',
     subTitle: 'Common notification',
@@ -1272,6 +1280,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 8,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Order',
     title: 'Your order\'s status changed',
     subTitle: 'Your order\'s status changed',
@@ -1280,6 +1289,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 9,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Update',
     title: 'So happy, new update has been installed',
     subTitle: 'New update has been installed',
@@ -1289,6 +1299,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 10,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Promotion',
     title: 'We send you a promo code',
     subTitle: 'We send you a promo code',
@@ -1297,6 +1308,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 11,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Notification',
     title: 'Common notification',
     subTitle: 'Common notification',
@@ -1305,6 +1317,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 12,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Order',
     title: 'Your order\'s status changed',
     subTitle: 'Your order\'s status changed',
@@ -1313,6 +1326,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 13,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Update',
     title: 'So happy, new update has been installed',
     subTitle: 'New update has been installed',
@@ -1322,6 +1336,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 14,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Promotion',
     title: 'We send you a promo code',
     subTitle: 'We send you a promo code',
@@ -1330,6 +1345,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 15,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Notification',
     title: 'Common notification',
     subTitle: 'Common notification',
@@ -1338,6 +1354,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 16,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Order',
     title: 'Your order\'s status changed',
     subTitle: 'Your order\'s status changed',
@@ -1346,6 +1363,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 17,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Update',
     title: 'So happy, new update has been installed',
     subTitle: 'New update has been installed',
@@ -1355,6 +1373,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 18,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Promotion',
     title: 'We send you a promo code',
     subTitle: 'We send you a promo code',
@@ -1363,6 +1382,7 @@ List<NotificationModel> listNotificationDummy = [
     id: 19,
   ),
   NotificationModel(
+    isRead: true,
     type: 'Notification',
     title: 'Common notification',
     subTitle: 'Common notification',

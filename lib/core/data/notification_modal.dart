@@ -5,6 +5,7 @@ class NotificationModel {
   final String content;
   final String sendAt;
   final int id;
+  final bool isRead;
 
   NotificationModel({
     required this.type,
@@ -13,6 +14,7 @@ class NotificationModel {
     required this.content,
     required this.sendAt,
     required this.id,
+    required this.isRead
   });
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,7 @@ class NotificationModel {
         content: json['content'],
         sendAt: json['send_at'],
         id: json['id'],
+        isRead: json['is_read'],
       );
     }
   }

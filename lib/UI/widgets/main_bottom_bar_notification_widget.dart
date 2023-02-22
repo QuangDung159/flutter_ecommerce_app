@@ -8,8 +8,6 @@ import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
-import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
-import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
 class MainBottomBarNotificationWidget extends StatefulWidget {
