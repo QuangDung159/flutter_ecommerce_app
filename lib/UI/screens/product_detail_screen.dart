@@ -234,7 +234,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         padding: EdgeInsets.symmetric(
           horizontal: AppDimension.contentPadding,
         ),
-        // color: Colors.amber,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -256,22 +255,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
             Row(
               children: [
-                Container(
-                  width: 34,
-                  height: 34,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    color: AppColors.greyDark.withOpacity(0.6),
-                  ),
-                  child: Image.asset(
-                    AssetHelper.iconSearch,
-                    width: 14,
-                  ),
-                ),
-                SizedBox(
-                  width: 6,
-                ),
                 Container(
                   width: 34,
                   height: 34,
