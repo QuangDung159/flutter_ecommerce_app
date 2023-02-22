@@ -27,16 +27,21 @@ class CartServices {
         listCart.indexWhere((element) => element.product.id == product.id);
 
     if (theSameItemId != -1) {
+      CartItemModel cartItemToUpdate = CartItemModel(
+        id: product.id,
+        product: product,
+        quantity: listCart[theSameItemId].quantity + quantity,
+      );
+
       listCart.replaceRange(
         theSameItemId,
         theSameItemId + 1,
-        [
-          CartItemModel(
-            id: product.id,
-            product: product,
-            quantity: listCart[theSameItemId].quantity + quantity,
-          ),
-        ],
+        [cartItemToUpdate],
+      );
+
+      updateQuantityCartCheckout(
+        cartItemToUpdate,
+        cartItemToUpdate.quantity,
       );
     } else {
       listCart.add(
@@ -56,6 +61,26 @@ class CartServices {
       List<CartItemModel> listCart, CartItemModel cartItem) {
     return listCart.indexWhere(
       (element) => cartItem.id == element.id,
+    );
+  }
+
+  static updateQuantityCartCheckout(CartItemModel cartItem, int quantity) {
+    int index = findCartInList(listCartItemCheckout, cartItem);
+
+    if (index == -1) {
+      return;
+    }
+
+    listCartItemCheckout.replaceRange(
+      index,
+      index + 1,
+      [
+        CartItemModel(
+          id: cartItem.product.id,
+          product: cartItem.product,
+          quantity: quantity,
+        ),
+      ],
     );
   }
 
@@ -84,16 +109,21 @@ class CartServices {
       if (removeAll ?? false) {
         listCart.removeAt(theSameItemId);
       } else {
+        CartItemModel cartItemToUpdate = CartItemModel(
+          id: product.id,
+          product: product,
+          quantity: listCart[theSameItemId].quantity - 1,
+        );
+
         listCart.replaceRange(
           theSameItemId,
           theSameItemId + 1,
-          [
-            CartItemModel(
-              id: product.id,
-              product: product,
-              quantity: listCart[theSameItemId].quantity - 1,
-            ),
-          ],
+          [cartItemToUpdate],
+        );
+
+        updateQuantityCartCheckout(
+          cartItemToUpdate,
+          cartItemToUpdate.quantity,
         );
       }
     }
