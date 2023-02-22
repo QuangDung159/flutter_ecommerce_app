@@ -52,14 +52,6 @@ class CartServices {
     }
   }
 
-  static addCartCheckout({
-    required CartItemModel cartItem,
-  }) {
-    listCartItemCheckout.add(
-      cartItem,
-    );
-  }
-
   static removeCart({
     required ProductModel product,
     required int quantity,
@@ -92,17 +84,6 @@ class CartServices {
         title: 'Remove product success',
         content: product.name,
       );
-    }
-  }
-
-  static removeCartCheckout({
-    required CartItemModel cartItem,
-  }) {
-    int theSameItemId =
-        listCartItemCheckout.indexWhere((element) => element.id == cartItem.id);
-
-    if (theSameItemId != -1) {
-      listCartItemCheckout.removeAt(theSameItemId);
     }
   }
 

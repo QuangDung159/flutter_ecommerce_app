@@ -98,10 +98,7 @@ class _CartItemState extends State<CartItem> {
               GestureDetector(
                 onTap: () {
                   if (isChecked) {
-                    CartServices.removeCartCheckout(cartItem: widget.cartItem);
-                  } else {
-                    CartServices.addCartCheckout(cartItem: widget.cartItem);
-                  }
+                  } else {}
                 },
                 child: Image.asset(
                   isChecked ? AssetHelper.iconCheck : AssetHelper.iconUncheck,
