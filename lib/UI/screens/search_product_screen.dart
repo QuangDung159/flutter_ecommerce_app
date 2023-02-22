@@ -8,6 +8,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:get/get.dart';
 
 class SearchProductScreen extends StatefulWidget {
@@ -27,6 +28,8 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
   String promoCodeInput = '';
 
   final textFieldController = TextEditingController();
+
+  List<ProductModel> listSearch = [];
 
   @override
   void initState() {
@@ -96,7 +99,11 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
             width: 24,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                listSearch = listProductDummy;
+              });
+            },
             child: Text(
               'Search',
               style: TextStyle(
@@ -113,14 +120,24 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
   List<Widget> renderListProductItem() {
     List<Widget> listRender = [];
 
-    for (var i = 0; i < listProductDummy.length; i++) {
+    if (listSearch.isEmpty) {
+      return [
+        Container(
+            margin: EdgeInsets.only(
+              top: 12,
+            ),
+            child: Text('List product empty'))
+      ];
+    }
+
+    for (var i = 0; i < listSearch.length; i++) {
       listRender.add(
         Container(
           margin: EdgeInsets.only(
-            bottom: i == listProductDummy.length - 1 ? 12 : 0,
+            bottom: i == listSearch.length - 1 ? 12 : 0,
           ),
           child: ProductItemVertical(
-            product: listProductDummy[i],
+            product: listSearch[i],
           ),
         ),
       );
