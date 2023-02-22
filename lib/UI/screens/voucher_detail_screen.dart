@@ -90,7 +90,7 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                         height: 25,
                                       ),
                                       Text(
-                                        widget.promotionUserModel.promotion.code,
+                                        'Voucher',
                                         style: TextStyle(
                                           fontSize: 12,
                                           color: AppColors.greyScale,
@@ -100,7 +100,8 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                         height: 6,
                                       ),
                                       Text(
-                                        widget.promotionUserModel.promotion.title,
+                                        widget
+                                            .promotionUserModel.promotion.title,
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -133,10 +134,28 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: AppDimension.contentPadding,
+                                        height: 12,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            promotionModel.code,
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: AppColors.primary,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 12,
                                       ),
                                       renderHtml(
-                                        widget.promotionUserModel.promotion.desc,
+                                        widget
+                                            .promotionUserModel.promotion.desc,
                                       ),
                                       if (widget.showUseButton)
                                         Column(
