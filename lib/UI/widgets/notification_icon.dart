@@ -6,9 +6,13 @@ class NotificationIcon extends StatelessWidget {
   const NotificationIcon({
     Key? key,
     required this.notificationModel,
+    this.color,
+    this.size,
   }) : super(key: key);
 
   final NotificationModel notificationModel;
+  final Color? color;
+  final double? size;
 
   String getImageByType(String type) {
     switch (type) {
@@ -27,9 +31,9 @@ class NotificationIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       getImageByType(notificationModel.type),
-      width: 20,
-      height: 20,
-      color: Colors.white,
+      width: size ?? 20,
+      height: size ?? 20,
+      color: color ?? Colors.white,
     );
   }
 }

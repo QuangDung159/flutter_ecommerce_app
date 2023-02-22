@@ -2,11 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/notification_icon.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
@@ -28,6 +31,10 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    DateTimeModel dateTimeModel = getDateTimeFromString(
+      widget.notificationModel.sendAt,
+    );
+
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SizedBox(
@@ -112,7 +119,7 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
                                                 width: 5,
                                               ),
                                               Text(
-                                                'asd',
+                                                '${dateTimeModel.year}/${dateTimeModel.month}/${dateTimeModel.day}',
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   color: AppColors.greyScale,
@@ -130,7 +137,7 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
                                                 width: 5,
                                               ),
                                               Text(
-                                                'asd',
+                                                '${dateTimeModel.hour}:${dateTimeModel.minute}',
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   color: AppColors.greyScale,
@@ -198,10 +205,10 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
       ),
-      child: Image.asset(
-        AssetHelper.iconUpdate,
-        width: 30,
-        height: 30,
+      child: NotificationIcon(
+        notificationModel: widget.notificationModel,
+        color: AppColors.primary,
+        size: 30,
       ),
     );
   }
