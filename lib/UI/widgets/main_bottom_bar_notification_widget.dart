@@ -67,9 +67,11 @@ class _MainBottomBarNotificationWidgetState
     List<Widget> listRender = [];
 
     for (var i = 0; i < listNotificationDummy.length; i++) {
-      listRender.add(NotificationItem(
-        notificationModel: listNotificationDummy[i],
-      ));
+      listRender.add(
+        NotificationItem(
+          notificationModel: listNotificationDummy[i],
+        ),
+      );
     }
 
     return listRender;

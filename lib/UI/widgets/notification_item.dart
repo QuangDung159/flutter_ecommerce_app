@@ -68,29 +68,27 @@ class NotificationItem extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.primary,
-                  ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                width: 10,
+                height: 10,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: AppColors.primary,
                 ),
-                SizedBox(
-                  height: 7,
+              ),
+              SizedBox(
+                height: 7,
+              ),
+              Text(
+                '31 May',
+                style: TextStyle(
+                  color: AppColors.greyScale,
                 ),
-                Text(
-                  '31 May',
-                  style: TextStyle(
-                    color: AppColors.greyScale,
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ],
       ),
