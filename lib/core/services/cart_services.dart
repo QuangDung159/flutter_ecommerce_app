@@ -14,6 +14,8 @@ import 'package:get_storage/get_storage.dart';
 class CartServices {
   static GetxAppController getxAppController = Get.find<GetxAppController>();
   static List listCart = getxAppController.listCartItem;
+  static List<CartItemModel> listCartItemCheckout =
+      getxAppController.listCartItemCheckout;
   static GetStorage localStorage = GetStorage();
 
   static addCart({
@@ -50,6 +52,36 @@ class CartServices {
     }
   }
 
+  static addCartCheckout({
+    required ProductModel product,
+    required int quantity,
+  }) {
+    int theSameItemId =
+        listCartItemCheckout.indexWhere((element) => element.id == product.id);
+
+    if (theSameItemId != -1) {
+      listCartItemCheckout.replaceRange(
+        theSameItemId,
+        theSameItemId + 1,
+        [
+          CartItemModel(
+            id: product.id,
+            product: product,
+            quantity: listCart[theSameItemId].quantity + quantity,
+          ),
+        ],
+      );
+    } else {
+      listCart.add(
+        CartItemModel(
+          id: product.id,
+          product: product,
+          quantity: quantity,
+        ),
+      );
+    }
+  }
+
   static removeCart({
     required ProductModel product,
     required int quantity,
@@ -81,6 +113,28 @@ class CartServices {
       showSnackBar(
         title: 'Remove product success',
         content: product.name,
+      );
+    }
+  }
+
+  static removeCartCheckout({
+    required ProductModel product,
+    required int quantity,
+  }) {
+    int theSameItemId =
+        listCartItemCheckout.indexWhere((element) => element.id == product.id);
+
+    if (theSameItemId != -1) {
+      listCartItemCheckout.replaceRange(
+        theSameItemId,
+        theSameItemId + 1,
+        [
+          CartItemModel(
+            id: product.id,
+            product: product,
+            quantity: listCartItemCheckout[theSameItemId].quantity - 1,
+          ),
+        ],
       );
     }
   }

@@ -49,6 +49,8 @@ class GetxAppController extends GetxController {
 
   final listNoti = RxList<NotificationModel>(listNotificationDummy);
 
+  final listCartItemCheckout = RxList<CartItemModel>([]);
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -63,6 +65,7 @@ class GetxAppController extends GetxController {
     WardModel? wardSelected,
     List<AddressModel>? listAddress,
     List<NotificationModel>? listNoti,
+    List<CartItemModel>? listCartItemCheckout,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -114,6 +117,10 @@ class GetxAppController extends GetxController {
 
     if (listNoti != null) {
       this.listNoti.value = listNoti;
+    }
+
+    if (listCartItemCheckout != null) {
+      this.listCartItemCheckout.value = listCartItemCheckout;
     }
   }
 
