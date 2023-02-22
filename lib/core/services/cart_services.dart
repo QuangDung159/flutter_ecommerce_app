@@ -56,30 +56,13 @@ class CartServices {
     required ProductModel product,
     required int quantity,
   }) {
-    int theSameItemId =
-        listCartItemCheckout.indexWhere((element) => element.id == product.id);
-
-    if (theSameItemId != -1) {
-      listCartItemCheckout.replaceRange(
-        theSameItemId,
-        theSameItemId + 1,
-        [
-          CartItemModel(
-            id: product.id,
-            product: product,
-            quantity: listCart[theSameItemId].quantity + quantity,
-          ),
-        ],
-      );
-    } else {
-      listCart.add(
+    listCartItemCheckout.add(
         CartItemModel(
           id: product.id,
           product: product,
           quantity: quantity,
         ),
       );
-    }
   }
 
   static removeCart({
@@ -159,7 +142,7 @@ class CartServices {
     double discount = hasSelectedPromotion
         ? double.parse(promotionSelected.promotion.value)
         : 0.0;
-    double subtotal = CartServices.calSubtotal(listCart);
+    double subtotal = CartServices.calSubtotal(listCartItemCheckout);
     double total = subtotal + double.parse(shippingSelected.fee) - discount;
 
     return total;
