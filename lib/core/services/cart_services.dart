@@ -71,16 +71,16 @@ class CartServices {
       return;
     }
 
+    CartItemModel cartItemToUpdate = CartItemModel(
+      id: cartItem.product.id,
+      product: cartItem.product,
+      quantity: quantity,
+    );
+
     listCartItemCheckout.replaceRange(
       index,
       index + 1,
-      [
-        CartItemModel(
-          id: cartItem.product.id,
-          product: cartItem.product,
-          quantity: quantity,
-        ),
-      ],
+      [cartItemToUpdate],
     );
   }
 
