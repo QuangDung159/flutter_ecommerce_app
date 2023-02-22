@@ -20,11 +20,12 @@ void showSnackBar({
   String? title,
   required String content,
   bool? isSuccess,
+  Duration? duration,
 }) {
   Get.snackbar(
     title ?? 'Flutter E-Commerce App',
     content,
-    duration: Duration(seconds: 2),
+    duration: duration ?? Duration(seconds: 2),
     borderColor: isSuccess ?? true ? Colors.green : Colors.red,
     borderWidth: 1,
     margin: EdgeInsets.all(12),
@@ -107,9 +108,15 @@ Widget? getScreen(
         title = 'Please signin to use refer code';
       }
 
-      showSnackBar(
-        content: 'Your received refer code: $referCode',
-        title: title,
+      Future.delayed(
+        Duration(seconds: 1),
+        () => showSnackBar(
+          content: 'Your received refer code: $referCode',
+          title: title,
+          duration: Duration(
+            seconds: 4,
+          ),
+        ),
       );
 
       getx.setReferCodeReceived(referCode);
@@ -127,7 +134,12 @@ void navigationByUrl(String? payload) {
   );
 
   if (screen == null) {
-    showSnackBar(content: 'No screen has been navigator!');
+    showSnackBar(
+      content: 'No screen has been navigator!',
+      duration: Duration(
+        seconds: 3,
+      ),
+    );
   } else {
     Get.to(() => screen);
   }

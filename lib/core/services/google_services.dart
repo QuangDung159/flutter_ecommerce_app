@@ -124,7 +124,12 @@ class GoogleServices {
                       title: 'Submit',
                       opTap: () {
                         getx.setReferCodeReceived(null);
-                        showSnackBar(content: 'Using refer code success. Thank you.');
+                        showSnackBar(
+                          content: 'Using refer code success. Thank you.',
+                          duration: Duration(
+                            seconds: 3,
+                          ),
+                        );
                         Navigator.of(context).pop();
                       },
                     )
