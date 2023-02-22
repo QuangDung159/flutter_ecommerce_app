@@ -87,16 +87,13 @@ class _MainBottomBarProfileWidgetState
                 height: AppDimension.contentPadding,
               ),
               ProfileMenuItem(
-                title: 'Refer code',
+                title: 'Enter refer code',
                 onTap: () =>
                     GoogleServices.showReferCodeInputBottomSheet(context),
               ),
               ProfileMenuItem(
                 title: 'Address book',
                 onTap: () => Get.to(() => DeliveryAddressScreen()),
-              ),
-              ProfileMenuItem(
-                title: 'Payment methods',
               ),
               VersionText(
                 textColor: AppColors.greyDark,
