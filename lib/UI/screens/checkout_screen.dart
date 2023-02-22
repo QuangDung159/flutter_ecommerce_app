@@ -3,9 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/cart_total_section.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/payment_method_item.dart';
-import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
@@ -47,65 +46,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ),
               ),
             ),
-            Container(
-              color: Colors.white,
-              padding: EdgeInsets.only(
-                left: AppDimension.contentPadding,
-                right: AppDimension.contentPadding,
-                top: AppDimension.contentPadding,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Total',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+            CartTotalSection(
+              buttonTitle: 'Checkout',
+              onTapButton: () {
+                Get.offAll(() => MainScreen());
+                getxAppController.setData(listCartItem: []);
+                Future.delayed(
+                  Duration(seconds: 1),
+                  () => showSnackBar(
+                    title: 'Payment success',
+                    content:
+                        'Your order has been created, thanks for your shopping!',
                   ),
-                  Text(
-                    formatPrice(
-                      total.toString(),
-                    ),
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.orangeSecondary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.contentPadding,
-                vertical: AppDimension.contentPadding,
-              ),
-              child: Column(
-                children: [
-                  ButtonWidget(
-                    title: 'Checkout',
-                    backgroundColor: AppColors.primary,
-                    opTap: () {
-                      Get.offAll(() => MainScreen());
-                      getxAppController.setData(listCartItem: []);
-                      Future.delayed(
-                        Duration(seconds: 1),
-                        () => showSnackBar(
-                          title: 'Payment success',
-                          content:
-                              'Your order has been created, thanks for your shopping!',
-                        ),
-                      );
-                      getxAppController.setData(
-                        listCartItem: [],
-                      );
-                    },
-                  ),
-                ],
-              ),
+                );
+                getxAppController.setData(
+                  listCartItem: [],
+                );
+              },
             ),
           ],
         ),

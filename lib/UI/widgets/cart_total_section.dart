@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_info_row_text.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
@@ -16,7 +15,14 @@ import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
 class CartTotalSection extends StatefulWidget {
-  const CartTotalSection({super.key});
+  const CartTotalSection({
+    super.key,
+    required this.buttonTitle,
+    required this.onTapButton,
+  });
+
+  final String buttonTitle;
+  final Function() onTapButton;
 
   @override
   State<CartTotalSection> createState() => _CartTotalSectionState();
@@ -163,24 +169,12 @@ class _CartTotalSectionState extends State<CartTotalSection> {
             height: AppDimension.contentPadding,
           ),
           ButtonWidget(
-            title: 'Payment',
+            title: widget.buttonTitle,
             backgroundColor: getxAppController.listCartItem.isEmpty
                 ? AppColors.greyMid
                 : AppColors.primary,
             opTap: () {
-              Get.offAll(() => MainScreen());
-              getxAppController.setData(listCartItem: []);
-              Future.delayed(
-                Duration(seconds: 1),
-                () => showSnackBar(
-                  title: 'Payment success',
-                  content:
-                      'Your order has been created, thanks for your shopping!',
-                ),
-              );
-              getxAppController.setData(
-                listCartItem: [],
-              );
+              widget.onTapButton();
             },
           ),
         ],
