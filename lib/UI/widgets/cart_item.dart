@@ -130,35 +130,35 @@ class _CartItemState extends State<CartItem> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
-                  height: 12,
-                ),
-                Container(
-                  height: 24,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.greyDisable,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Green, Size 7',
-                        style: TextStyle(
-                          color: AppColors.grey,
-                          fontSize: 12,
-                        ),
-                      ),
-                      Image.asset(
-                        AssetHelper.iconChevronDown,
-                        width: 10,
-                      ),
-                    ],
-                  ),
-                ),
+                // SizedBox(
+                //   height: 12,
+                // ),
+                // Container(
+                //   height: 24,
+                //   padding: EdgeInsets.symmetric(
+                //     horizontal: 10,
+                //   ),
+                //   decoration: BoxDecoration(
+                //     color: AppColors.greyDisable,
+                //     borderRadius: BorderRadius.circular(4),
+                //   ),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         'Green, Size 7',
+                //         style: TextStyle(
+                //           color: AppColors.grey,
+                //           fontSize: 12,
+                //         ),
+                //       ),
+                //       Image.asset(
+                //         AssetHelper.iconChevronDown,
+                //         width: 10,
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 SizedBox(
                   height: 12,
                 ),
