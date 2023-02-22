@@ -2,6 +2,7 @@ import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/order_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/order_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
@@ -1202,3 +1203,171 @@ String androidAppId = 'com.lqd.flutter_ecommerce_app';
 String iosBundleId = 'com.lqd.flutterEcommerceApp';
 
 String uriPrefix = 'https://flutterecommerceapp.page.link';
+
+List<NotificationModel> listNotificationDummy = [
+  NotificationModel(
+    type: 'Order',
+    title: 'Your order\'s status changed',
+    subTitle: 'Your order\'s status changed',
+    content: '<p>Your order\'s status changed</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 1,
+  ),
+  NotificationModel(
+    type: 'Update',
+    title: 'So happy, new update has been installed',
+    subTitle: 'New update has been installed',
+    content:
+        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+    sendAt: '2023-02-21 12:32:40',
+    id: 2,
+  ),
+  NotificationModel(
+    type: 'Promotion',
+    title: 'We send you a promo code',
+    subTitle: 'We send you a promo code',
+    content: '<p>We send you a promo code</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 3,
+  ),
+  NotificationModel(
+    type: 'Notification',
+    title: 'Common notification',
+    subTitle: 'Common notification',
+    content: 'Lu CTO used your refer code',
+    sendAt: '2023-02-20 12:32:16',
+    id: 4,
+  ),
+  NotificationModel(
+    type: 'Order',
+    title: 'Your order\'s status changed',
+    subTitle: 'Your order\'s status changed',
+    content: '<p>Your order\'s status changed</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 5,
+  ),
+  NotificationModel(
+    type: 'Update',
+    title: 'So happy, new update has been installed',
+    subTitle: 'New update has been installed',
+    content:
+        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+    sendAt: '2023-02-21 12:32:40',
+    id: 6,
+  ),
+  NotificationModel(
+    type: 'Promotion',
+    title: 'We send you a promo code',
+    subTitle: 'We send you a promo code',
+    content: '<p>We send you a promo code</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 7,
+  ),
+  NotificationModel(
+    type: 'Notification',
+    title: 'Common notification',
+    subTitle: 'Common notification',
+    content: 'Lu CTO used your refer code',
+    sendAt: '2023-02-20 12:32:16',
+    id: 8,
+  ),
+  NotificationModel(
+    type: 'Order',
+    title: 'Your order\'s status changed',
+    subTitle: 'Your order\'s status changed',
+    content: '<p>Your order\'s status changed</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 9,
+  ),
+  NotificationModel(
+    type: 'Update',
+    title: 'So happy, new update has been installed',
+    subTitle: 'New update has been installed',
+    content:
+        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+    sendAt: '2023-02-21 12:32:40',
+    id: 10,
+  ),
+  NotificationModel(
+    type: 'Promotion',
+    title: 'We send you a promo code',
+    subTitle: 'We send you a promo code',
+    content: '<p>We send you a promo code</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 11,
+  ),
+  NotificationModel(
+    type: 'Notification',
+    title: 'Common notification',
+    subTitle: 'Common notification',
+    content: 'Lu CTO used your refer code',
+    sendAt: '2023-02-20 12:32:16',
+    id: 12,
+  ),
+  NotificationModel(
+    type: 'Order',
+    title: 'Your order\'s status changed',
+    subTitle: 'Your order\'s status changed',
+    content: '<p>Your order\'s status changed</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 13,
+  ),
+  NotificationModel(
+    type: 'Update',
+    title: 'So happy, new update has been installed',
+    subTitle: 'New update has been installed',
+    content:
+        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+    sendAt: '2023-02-21 12:32:40',
+    id: 14,
+  ),
+  NotificationModel(
+    type: 'Promotion',
+    title: 'We send you a promo code',
+    subTitle: 'We send you a promo code',
+    content: '<p>We send you a promo code</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 15,
+  ),
+  NotificationModel(
+    type: 'Notification',
+    title: 'Common notification',
+    subTitle: 'Common notification',
+    content: 'Lu CTO used your refer code',
+    sendAt: '2023-02-20 12:32:16',
+    id: 16,
+  ),
+  NotificationModel(
+    type: 'Order',
+    title: 'Your order\'s status changed',
+    subTitle: 'Your order\'s status changed',
+    content: '<p>Your order\'s status changed</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 17,
+  ),
+  NotificationModel(
+    type: 'Update',
+    title: 'So happy, new update has been installed',
+    subTitle: 'New update has been installed',
+    content:
+        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+    sendAt: '2023-02-21 12:32:40',
+    id: 18,
+  ),
+  NotificationModel(
+    type: 'Promotion',
+    title: 'We send you a promo code',
+    subTitle: 'We send you a promo code',
+    content: '<p>We send you a promo code</p>',
+    sendAt: '2023-02-20 12:32:16',
+    id: 19,
+  ),
+  NotificationModel(
+    type: 'Notification',
+    title: 'Common notification',
+    subTitle: 'Common notification',
+    content: 'Lu CTO used your refer code',
+    sendAt: '2023-02-20 12:32:16',
+    id: 20,
+  ),
+];
