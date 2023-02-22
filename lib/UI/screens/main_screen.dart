@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/main_bottom_bar_deals_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/main_bottom_bar_home_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/main_bottom_bar_notification_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/main_bottom_bar_profile_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
@@ -48,6 +49,7 @@ class _MainScreenState extends State<MainScreen> {
           MainBottomBarDealsWidget(),
           MainBottomBarHomeWidget(),
           MainBottomBarProfileWidget(),
+          MainBottomBarNotificationWidget(),
         ],
       ),
       bottomNavigationBar: renderBottomTab(),
@@ -100,6 +102,28 @@ class _MainScreenState extends State<MainScreen> {
                 size: 20,
               ),
               title: Text('Profile'),
+            ),
+            SalomonBottomBarItem(
+              icon: Stack(
+                children: [
+                  Icon(
+                    Icons.notifications,
+                    size: 20,
+                  ),
+                  Positioned(
+                    right: 0,
+                    child: Container(
+                      width: 6,
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(7),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              title: Text('Notification'),
             ),
           ],
         ),
