@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/voucher_detail_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
@@ -53,41 +55,50 @@ class VoucherItem extends StatelessWidget {
           children: [
             Flexible(
               flex: 263,
-              child: Container(
-                padding: EdgeInsets.only(
-                  left: 22,
-                ),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(
+                    () => VoucherDetailScreen(
+                      notificationModel: listNotificationDummy[0],
+                    ),
+                  );
+                },
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          text: '${promotionUserModel.promotion.code} ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: '- ${promotionUserModel.promotion.title}',
-                              style: TextStyle(
-                                color: AppColors.blackPrimary,
-                              ),
+                  padding: EdgeInsets.only(
+                    left: 22,
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            text: '${promotionUserModel.promotion.code} ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primary,
                             ),
-                          ],
+                            children: [
+                              TextSpan(
+                                text: '- ${promotionUserModel.promotion.title}',
+                                style: TextStyle(
+                                  color: AppColors.blackPrimary,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Redeem by ${promotionUserModel.redeemAt}',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.greyScale,
+                        Text(
+                          'Redeem by ${promotionUserModel.redeemAt}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.greyScale,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -99,6 +110,12 @@ class VoucherItem extends StatelessWidget {
                   if (showUseButton) {
                     getxAppController.setPromotionSelected(promotionUserModel);
                     Get.back();
+                  } else {
+                    Get.to(
+                      () => VoucherDetailScreen(
+                        notificationModel: listNotificationDummy[0],
+                      ),
+                    );
                   }
                 },
                 child: Center(

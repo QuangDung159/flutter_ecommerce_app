@@ -671,6 +671,7 @@ List<ShippingPolicyModel> listShippingPolicyDummy = [
 
 List<PromotionModel> listPromotionDummy = [
   PromotionModel(
+    desc: '<p>This is promotion\'s description</p>',
     id: 1,
     qty: 100,
     isClaimed: true,
@@ -684,6 +685,7 @@ List<PromotionModel> listPromotionDummy = [
     value: '10.0',
   ),
   PromotionModel(
+    desc: '<p>This is promotion\'s description</p>',
     id: 1,
     qty: 100,
     isClaimed: true,
@@ -697,6 +699,7 @@ List<PromotionModel> listPromotionDummy = [
     value: '10.0',
   ),
   PromotionModel(
+    desc: '<p>This is promotion\'s description</p>',
     id: 2,
     qty: 100,
     isClaimed: true,
@@ -710,6 +713,7 @@ List<PromotionModel> listPromotionDummy = [
     value: '12.0',
   ),
   PromotionModel(
+    desc: '<p>This is promotion\'s description</p>',
     id: 3,
     qty: 100,
     isClaimed: true,
@@ -723,6 +727,7 @@ List<PromotionModel> listPromotionDummy = [
     value: '13.0',
   ),
   PromotionModel(
+    desc: '<p>This is promotion\'s description</p>',
     id: 4,
     qty: 100,
     isClaimed: true,
@@ -736,6 +741,7 @@ List<PromotionModel> listPromotionDummy = [
     value: '14.0',
   ),
   PromotionModel(
+    desc: '<p>This is promotion\'s description</p>',
     id: 5,
     qty: 100,
     isClaimed: true,
@@ -749,6 +755,7 @@ List<PromotionModel> listPromotionDummy = [
     value: '15.0',
   ),
   PromotionModel(
+    desc: '<p>This is promotion\'s description</p>',
     id: 6,
     qty: 100,
     isClaimed: true,
@@ -762,6 +769,7 @@ List<PromotionModel> listPromotionDummy = [
     value: '16.0',
   ),
   PromotionModel(
+    desc: '<p>This is promotion\'s description</p>',
     id: 7,
     qty: 100,
     isClaimed: true,

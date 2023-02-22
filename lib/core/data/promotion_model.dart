@@ -4,6 +4,7 @@ class PromotionModel {
   final bool isClaimed, isValid;
   final String code, discountType, endDate, sourceType, startDate, title, value;
   final String? maxDiscount;
+  final String? desc;
 
   PromotionModel({
     required this.id,
@@ -19,6 +20,7 @@ class PromotionModel {
     required this.title,
     required this.value,
     this.maxDiscount,
+    this.desc,
   });
 
   factory PromotionModel.fromJson(Map<String, dynamic> json) {
@@ -37,6 +39,7 @@ class PromotionModel {
         value: json['value'],
         qtyPerUser: json['qty_per_user'],
         maxDiscount: json['max_discount'],
+        desc: json['desc'],
       );
     }
   }
