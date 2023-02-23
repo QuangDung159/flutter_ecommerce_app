@@ -101,6 +101,29 @@ class ProfileService {
     );
   }
 
+  static storeUserLogged({
+    required String photoUrl,
+    required String email,
+    required String displayName,
+    required String id,
+  }) {
+    LocalStorageHelper.setValue('PHOTO_URL', photoUrl);
+    LocalStorageHelper.setValue('EMAIL', email);
+    LocalStorageHelper.setValue('DISPLAY_NAME', displayName);
+    LocalStorageHelper.setValue('OPEN_ID', id);
+
+    getxApp.setUserLogged(
+      UserModel(
+        email: email,
+        displayName: displayName,
+        photoUrl: photoUrl,
+        id: id,
+      ),
+    );
+
+    showSnackBar(content: 'Welcome $displayName');
+  }
+
   static facebookLogin() async {
     final result = await FacebookAuth.i.login(
       permissions: [
@@ -122,21 +145,12 @@ class ProfileService {
       String displayName = userData['name'];
       String id = userData['id'];
 
-      LocalStorageHelper.setValue('PHOTO_URL', photoUrl);
-      LocalStorageHelper.setValue('EMAIL', email);
-      LocalStorageHelper.setValue('DISPLAY_NAME', displayName);
-      LocalStorageHelper.setValue('OPEN_ID', id);
-
-      getxApp.setUserLogged(
-        UserModel(
-          email: email,
-          displayName: displayName,
-          photoUrl: photoUrl,
-          id: id,
-        ),
+      storeUserLogged(
+        photoUrl: photoUrl,
+        email: email,
+        displayName: displayName,
+        id: id,
       );
-
-      showSnackBar(content: 'Welcome $displayName');
     } else {
       print(result.status);
       print(result.message);
@@ -151,21 +165,12 @@ class ProfileService {
     try {
       var res = await _googleSignIn.signIn();
       if (res != null) {
-        LocalStorageHelper.setValue('PHOTO_URL', res.photoUrl);
-        LocalStorageHelper.setValue('EMAIL', res.email);
-        LocalStorageHelper.setValue('DISPLAY_NAME', res.displayName);
-        LocalStorageHelper.setValue('OPEN_ID', res.id);
-
-        getxApp.setUserLogged(
-          UserModel(
-            email: res.email,
-            displayName: res.displayName ?? 'No name',
-            photoUrl: res.photoUrl ?? '',
-            id: res.id,
-          ),
+        storeUserLogged(
+          photoUrl: res.photoUrl ?? '',
+          email: res.email,
+          displayName: res.displayName ?? '',
+          id: res.id,
         );
-
-        showSnackBar(content: 'Welcome ${res.displayName}');
       }
       return res;
     } catch (e) {
