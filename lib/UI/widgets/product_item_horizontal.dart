@@ -26,6 +26,7 @@ class ProductItemHorizontal extends StatelessWidget {
         () => ProductDetailScreen(
           product: productItem,
         ),
+        preventDuplicates: false,
       ),
       child: SizedBox(
         width: width,

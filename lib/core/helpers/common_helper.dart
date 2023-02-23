@@ -143,7 +143,10 @@ void navigationByUrl(String? payload) {
       ),
     );
   } else {
-    Get.to(() => screen);
+    Get.to(
+      () => screen,
+      preventDuplicates: screenName != 'product_detail_screen',
+    );
   }
 }
 

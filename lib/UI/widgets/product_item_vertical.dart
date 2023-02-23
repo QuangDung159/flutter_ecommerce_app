@@ -46,6 +46,7 @@ class ProductItemVertical extends StatelessWidget {
                   () => ProductDetailScreen(
                     product: product,
                   ),
+                  preventDuplicates: false,
                 );
               },
               child: Column(

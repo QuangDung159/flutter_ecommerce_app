@@ -25,6 +25,7 @@ class OrderItem extends StatelessWidget {
         () => ProductDetailScreen(
           product: orderItemModel.product,
         ),
+        preventDuplicates: false,
       ),
       child: Container(
         padding: EdgeInsets.symmetric(
