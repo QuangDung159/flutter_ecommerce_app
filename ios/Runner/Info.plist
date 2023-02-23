@@ -57,8 +57,30 @@
 				<!-- TODO Replace this value: -->
 				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
 				<string>com.googleusercontent.apps.721966385478-sv49lrmg59rktbt7kejvcb81f2e1nab5</string>
+				<string>fb1385442912215284</string>
 			</array>
 		</dict>
+	</array>
+
+	<!-- <key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+		<key>CFBundleURLSchemes</key>
+		<array>
+		<string>fb1385442912215284</string>
+		</array>
+	</dict>
+	</array> -->
+	<key>FacebookAppID</key>
+	<string>1385442912215284</string>
+	<key>FacebookClientToken</key>
+	<string>34be631eab6e4ae46e595aac5e6d0879</string>
+	<key>FacebookDisplayName</key>
+	<string>Flutter E-Commerce App</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	<string>fbapi</string>
+	<string>fb-messenger-share-api</string>
 	</array>
 </dict>
 </plist>
