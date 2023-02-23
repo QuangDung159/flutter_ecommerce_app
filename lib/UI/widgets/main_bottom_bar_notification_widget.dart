@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/notification_item.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/sign_in_section.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
@@ -36,23 +37,34 @@ class _MainBottomBarNotificationWidgetState
                 size: 24,
               ),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppDimension.contentPadding,
-                  ),
-                  margin: EdgeInsets.only(bottom: 12),
-                  child: Obx(
-                    () => Column(
-                      children: renderListNoti(getx.listNoti),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            Obx(() => renderMainContentBySignedStatus())
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget renderMainContentBySignedStatus() {
+    bool isSigned = googleGetx.displayName.value != '';
+
+    if (isSigned) {
+      return renderMainContent();
+    }
+    return SignInSection();
+  }
+
+  Widget renderMainContent() {
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(
+            horizontal: AppDimension.contentPadding,
+          ),
+          margin: EdgeInsets.only(bottom: 12),
+          child: Column(
+            children: renderListNoti(getx.listNoti),
+          ),
         ),
       ),
     );

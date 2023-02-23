@@ -7,8 +7,8 @@ import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/list_order_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/profile_menu_item.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/sign_in_section.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/version_text.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -73,58 +73,37 @@ class _MainBottomBarProfileWidgetState
     bool isSigned = googleGetx.displayName.value != '';
 
     if (isSigned) {
-      return Expanded(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              renderAvatarSection(),
-              renderShoppingInfoSection(),
-              SizedBox(
-                height: AppDimension.contentPadding,
-              ),
-              renderReferCodeSection(),
-              SizedBox(
-                height: AppDimension.contentPadding,
-              ),
-              ProfileMenuItem(
-                title: 'Enter refer code',
-                onTap: () =>
-                    GoogleServices.showReferCodeInputBottomSheet(context),
-              ),
-              ProfileMenuItem(
-                title: 'Address book',
-                onTap: () => Get.to(() => DeliveryAddressScreen()),
-              ),
-              VersionText(
-                textColor: AppColors.greyDark,
-              )
-            ],
-          ),
-        ),
-      );
+      return renderMainContent();
     }
+    return SignInSection();
+  }
+
+  Widget renderMainContent() {
     return Expanded(
-      child: Container(
-        // color: Colors.amber,
-        padding: EdgeInsets.symmetric(
-          horizontal: AppDimension.contentPadding,
-        ),
+      child: SingleChildScrollView(
         child: Column(
           children: [
+            renderAvatarSection(),
+            renderShoppingInfoSection(),
             SizedBox(
-              height: 100,
+              height: AppDimension.contentPadding,
             ),
-            Text(
-              'Welcome!',
-              style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary),
-            ),
+            renderReferCodeSection(),
             SizedBox(
-              height: 100,
+              height: AppDimension.contentPadding,
             ),
-            ListSigninMethod()
+            ProfileMenuItem(
+              title: 'Enter refer code',
+              onTap: () =>
+                  GoogleServices.showReferCodeInputBottomSheet(context),
+            ),
+            ProfileMenuItem(
+              title: 'Address book',
+              onTap: () => Get.to(() => DeliveryAddressScreen()),
+            ),
+            VersionText(
+              textColor: AppColors.greyDark,
+            )
           ],
         ),
       ),
