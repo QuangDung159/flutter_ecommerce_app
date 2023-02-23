@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/signin_method_button.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/facebook_services.dart';
 import 'package:flutter_ecommerce_app/core/services/google_services.dart';
 import 'package:get/get.dart';
 
@@ -46,13 +47,18 @@ class ListSigninMethod extends StatelessWidget {
         SizedBox(
           height: 12,
         ),
-        SignInMethodButton(
-          icon: Image.asset(
-            AssetHelper.iconFacebook,
-            width: 30,
-            height: 30,
+        GestureDetector(
+          onTap: () {
+            FacebookServices.login();
+          },
+          child: SignInMethodButton(
+            icon: Image.asset(
+              AssetHelper.iconFacebook,
+              width: 30,
+              height: 30,
+            ),
+            title: 'Sign in with Facebook',
           ),
-          title: 'Sign in with Facebook',
         ),
       ],
     );
