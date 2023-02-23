@@ -16,7 +16,7 @@ import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
-import 'package:flutter_ecommerce_app/core/services/google_services.dart';
+import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -66,7 +66,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             onTap: () {
               if (getxApp.userLogged.value == null) {
                 // user doesn't login
-                GoogleServices.showSigninBottomSheet(context,
+                ProfileService.showSigninBottomSheet(context,
                     onSignInSuccess: () {
                   Navigator.pop(context);
                   CartServices.addCart(

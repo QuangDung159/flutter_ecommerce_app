@@ -208,7 +208,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // GoogleServices.getInitGoogleAccountSigned();
     ProfileService.getInitAccountLogged();
 
     bool isAndroid = Theme.of(context).platform == TargetPlatform.android;

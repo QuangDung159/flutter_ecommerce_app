@@ -5,7 +5,7 @@ import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
-import 'package:flutter_ecommerce_app/core/services/google_services.dart';
+import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:get/get.dart';
 
 class CartIcon extends StatefulWidget {
@@ -45,7 +45,7 @@ class _CartIconState extends State<CartIcon> {
     return GestureDetector(
       onTap: () {
         if (getxAppController.userLogged.value == null) {
-          GoogleServices.showSigninBottomSheet(
+          ProfileService.showSigninBottomSheet(
             context,
             onSignInSuccess: () {
               Navigator.pop(context);
