@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_ecommerce_app/UI/screens/splash_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
-import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/received_notification_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
@@ -137,7 +136,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     Get.put(GetxAppController());
-    Get.put(GetxGoogleInfoController());
 
     SortFilterServices.initListFilter();
 
