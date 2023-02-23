@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Flutter E-Commerce App</string>
     <string name="facebook_app_id">1385442912215284</string>
     <string name="facebook_client_token">34be631eab6e4ae46e595aac5e6d0879</string>
     <string name="fb_login_protocol_scheme">fb1385442912215284</string>
