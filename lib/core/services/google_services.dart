@@ -44,6 +44,8 @@ class GoogleServices {
         LocalStorageHelper.setValue('DISPLAY_NAME', res.displayName);
         LocalStorageHelper.setValue('OPEN_ID', res.id);
       }
+
+      showSnackBar(content: 'Welcome ${res!.displayName}');
       return res;
     } catch (e) {
       showSnackBar(
