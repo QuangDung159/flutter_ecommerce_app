@@ -46,6 +46,10 @@ class GoogleServices {
       }
       return res;
     } catch (e) {
+      showSnackBar(
+        content: e.toString(),
+        isSuccess: false,
+      );
       throw Exception(e);
     }
   }
