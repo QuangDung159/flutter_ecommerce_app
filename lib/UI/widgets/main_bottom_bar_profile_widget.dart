@@ -17,7 +17,6 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
-import 'package:flutter_ecommerce_app/core/services/google_services.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:get/get.dart';
 
@@ -46,7 +45,7 @@ class _MainBottomBarProfileWidgetState
                 action: getx.userLogged.value != null
                     ? GestureDetector(
                         onTap: () {
-                          GoogleServices.logout();
+                          ProfileService.googleLogout();
                           ProfileService.facebookLogout();
                         },
                         child: Text(
@@ -95,7 +94,7 @@ class _MainBottomBarProfileWidgetState
             ProfileMenuItem(
               title: 'Enter refer code',
               onTap: () =>
-                  GoogleServices.showReferCodeInputBottomSheet(context),
+                  ProfileService.showReferCodeInputBottomSheet(context),
             ),
             ProfileMenuItem(
               title: 'Address book',
