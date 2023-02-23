@@ -17,8 +17,8 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
-import 'package:flutter_ecommerce_app/core/services/facebook_services.dart';
 import 'package:flutter_ecommerce_app/core/services/google_services.dart';
+import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:get/get.dart';
 
 class MainBottomBarProfileWidget extends StatefulWidget {
@@ -47,7 +47,7 @@ class _MainBottomBarProfileWidgetState
                     ? GestureDetector(
                         onTap: () {
                           GoogleServices.logout();
-                          FacebookServices.logout();
+                          ProfileService.facebookLogout();
                         },
                         child: Text(
                           'Log out',
