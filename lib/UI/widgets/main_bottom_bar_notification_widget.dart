@@ -6,7 +6,6 @@ import 'package:flutter_ecommerce_app/UI/widgets/notification_item.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/sign_in_section.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
-import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +20,6 @@ class MainBottomBarNotificationWidget extends StatefulWidget {
 class _MainBottomBarNotificationWidgetState
     extends State<MainBottomBarNotificationWidget> {
   GetxAppController getx = Get.find<GetxAppController>();
-  GetxGoogleInfoController googleGetx = Get.find<GetxGoogleInfoController>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +43,7 @@ class _MainBottomBarNotificationWidgetState
   }
 
   Widget renderMainContentBySignedStatus() {
-    bool isSigned = googleGetx.displayName.value != '';
+    bool isSigned = getx.userLogged.value != null;
 
     if (isSigned) {
       return renderMainContent();

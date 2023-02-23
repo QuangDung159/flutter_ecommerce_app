@@ -14,7 +14,6 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
-import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
@@ -32,7 +31,6 @@ class MainBottomBarProfileWidget extends StatefulWidget {
 class _MainBottomBarProfileWidgetState
     extends State<MainBottomBarProfileWidget> {
   GetxAppController getx = Get.find<GetxAppController>();
-  GetxGoogleInfoController googleGetx = Get.find<GetxGoogleInfoController>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class _MainBottomBarProfileWidgetState
             Obx(
               () => MyAppBar(
                 title: 'Profile',
-                action: googleGetx.displayName.value != ''
+                action: getx.userLogged.value != null
                     ? GestureDetector(
                         onTap: () {
                           GoogleServices.logout();
@@ -70,7 +68,7 @@ class _MainBottomBarProfileWidgetState
   }
 
   Widget renderMainContentBySignedStatus() {
-    bool isSigned = googleGetx.displayName.value != '';
+    bool isSigned = getx.userLogged.value != null;
 
     if (isSigned) {
       return renderMainContent();
@@ -293,7 +291,7 @@ class _MainBottomBarProfileWidgetState
           ClipRRect(
             borderRadius: BorderRadius.circular(85),
             child: Image.network(
-              googleGetx.photoUrl.value,
+              getx.userLogged.value!.photoUrl,
               width: 85,
               height: 85,
             ),
@@ -306,14 +304,14 @@ class _MainBottomBarProfileWidgetState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  googleGetx.displayName.value,
+                  getx.userLogged.value!.displayName,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 SizedBox(
                   height: 4,
                 ),
                 Text(
-                  googleGetx.email.value,
+                  getx.userLogged.value!.email,
                   style: TextStyle(color: AppColors.greyScale, fontSize: 12),
                 ),
               ],
@@ -338,7 +336,7 @@ class _MainBottomBarProfileWidgetState
         children: [
           GestureDetector(
             onTap: () => FlutterClipboard.copy(
-              googleGetx.openid.toString(),
+              getx.userLogged.value!.id,
             ),
             child: Image.asset(
               AssetHelper.iconCopy,
@@ -346,7 +344,7 @@ class _MainBottomBarProfileWidgetState
             ),
           ),
           Text(
-            googleGetx.openid.toString(),
+            getx.userLogged.value!.id,
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
@@ -356,7 +354,7 @@ class _MainBottomBarProfileWidgetState
             onTap: () async {
               String dynamicLink = await DynamicLinkServices.buildDynamicLink(
                 link: Uri.parse(
-                    '$deepLinkDomain/profile_screen/${googleGetx.openid}'),
+                    '$deepLinkDomain/profile_screen/${getx.userLogged.value!.id}'),
               );
               share(
                 title: 'Click link to get promotion',

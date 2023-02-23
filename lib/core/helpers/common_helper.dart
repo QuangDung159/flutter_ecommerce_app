@@ -6,7 +6,6 @@ import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
-import 'package:flutter_ecommerce_app/core/controllers/getx_google_info_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
@@ -82,7 +81,6 @@ Widget? getScreen(
   String? payload,
 }) {
   GetxAppController getx = Get.find<GetxAppController>();
-  GetxGoogleInfoController getxGoogle = Get.find<GetxGoogleInfoController>();
 
   switch (screenName) {
     case 'voucher_screen':
@@ -106,7 +104,7 @@ Widget? getScreen(
 
       String title = 'Please go to account screen and use your refer code';
 
-      if (getxGoogle.displayName.value == '') {
+      if (getx.userLogged.value == null) {
         title = 'Please signin to use refer code';
       }
 

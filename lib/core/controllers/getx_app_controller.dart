@@ -9,6 +9,7 @@ import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 import 'package:get/get.dart';
 
@@ -50,6 +51,8 @@ class GetxAppController extends GetxController {
   final listNoti = RxList<NotificationModel>(listNotificationDummy);
 
   final listCartItemCheckout = RxList<CartItemModel>([]);
+
+  final userLogged = Rxn<UserModel>(null);
 
   void setData({
     String? sortSelectedValue,
@@ -136,5 +139,9 @@ class GetxAppController extends GetxController {
 
   void setReferCodeReceived(String? referCodeReceived) {
     this.referCodeReceived.value = referCodeReceived;
+  }
+
+  void setUserLogged(UserModel? userLogged) {
+    this.userLogged.value = userLogged;
   }
 }

@@ -1,10 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:get/get.dart';
 
 class FacebookServices {
+  static GetxAppController getxApp = Get.find<GetxAppController>();
+
   static login() async {
     final result = await FacebookAuth.i.login(
       permissions: [
@@ -32,6 +37,15 @@ class FacebookServices {
       LocalStorageHelper.setValue('EMAIL', email);
       LocalStorageHelper.setValue('DISPLAY_NAME', displayName);
       LocalStorageHelper.setValue('OPEN_ID', id);
+
+      getxApp.setUserLogged(
+        UserModel(
+          email: email,
+          displayName: displayName,
+          photoUrl: photoUrl,
+          id: id,
+        ),
+      );
 
       showSnackBar(content: 'Welcome $displayName');
     } else {
