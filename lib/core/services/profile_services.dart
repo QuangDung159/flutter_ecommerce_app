@@ -124,7 +124,7 @@ class ProfileService {
     showSnackBar(content: 'Welcome $displayName');
   }
 
-  static facebookLogin() async {
+  static Future<LoginResult> facebookLogin() async {
     final result = await FacebookAuth.i.login(
       permissions: [
         'email',
@@ -152,13 +152,12 @@ class ProfileService {
         id: id,
       );
     } else {
-      print(result.status);
-      print(result.message);
       showSnackBar(
         content: result.message ?? 'Something went wrong.',
         isSuccess: false,
       );
     }
+    return result;
   }
 
   static Future<GoogleSignInAccount?> googleLogin() async {
@@ -272,7 +271,29 @@ class ProfileService {
     );
   }
 
-  static Future<GoogleSignInAccount?> handleGoogleSignIn(
+  static Future<LoginResult?> handleFacebookLogin(
+    BuildContext context,
+    Function()? onSignInSuccess,
+  ) async {
+    try {
+      final res = await facebookLogin();
+
+      if (res.status == LoginStatus.success) {
+        // success
+        if (onSignInSuccess != null) {
+          onSignInSuccess();
+        }
+      } else {
+        return null;
+      }
+
+      return res;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<GoogleSignInAccount?> handleGoogleLogin(
     BuildContext context,
     Function()? onSignInSuccess,
   ) async {

@@ -23,7 +23,7 @@ class ListSigninMethod extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            ProfileService.handleGoogleSignIn(context, onSignInSuccess).then(
+            ProfileService.handleGoogleLogin(context, onSignInSuccess).then(
               (googleSigninAccount) {
                 if (googleSigninAccount != null) {
                   // signin success
@@ -48,7 +48,16 @@ class ListSigninMethod extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            ProfileService.facebookLogin();
+            ProfileService.handleFacebookLogin(context, onSignInSuccess).then(
+              (loginResult) {
+                if (loginResult != null) {
+                  // signin success
+                  if (getx.referCodeReceived.value != null) {
+                    ProfileService.showReferCodeInputBottomSheet(context);
+                  }
+                }
+              },
+            );
           },
           child: SignInMethodButton(
             icon: Image.asset(
