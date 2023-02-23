@@ -147,10 +147,6 @@ class ProfileService {
     }
   }
 
-  static facebookLogout() async {
-    await FacebookAuth.instance.logOut();
-  }
-
   static Future<GoogleSignInAccount?> googleLogin() async {
     try {
       var res = await _googleSignIn.signIn();
@@ -181,7 +177,7 @@ class ProfileService {
     }
   }
 
-  static Future googleLogout() async {
+  static Future logout() async {
     try {
       getxApp.setUserLogged(null);
 
@@ -189,7 +185,9 @@ class ProfileService {
       LocalStorageHelper.setValue('EMAIL', '');
       LocalStorageHelper.setValue('DISPLAY_NAME', '');
       LocalStorageHelper.setValue('OPEN_ID', '');
+
       _googleSignIn.disconnect();
+      await FacebookAuth.instance.logOut();
     } catch (e) {
       throw Exception(e);
     }

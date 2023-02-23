@@ -45,8 +45,7 @@ class _MainBottomBarProfileWidgetState
                 action: getx.userLogged.value != null
                     ? GestureDetector(
                         onTap: () {
-                          ProfileService.googleLogout();
-                          ProfileService.facebookLogout();
+                          ProfileService.logout();
                         },
                         child: Text(
                           'Log out',
