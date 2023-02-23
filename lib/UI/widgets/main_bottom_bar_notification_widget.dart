@@ -28,17 +28,26 @@ class _MainBottomBarNotificationWidgetState
       body: SafeArea(
         child: Column(
           children: [
-            MyAppBar(
-              title: 'Notifications',
-              action: Icon(
-                Icons.checklist_rtl,
-                size: 24,
-              ),
+            Obx(
+              () => renderAppBar(),
             ),
             Obx(() => renderMainContentBySignedStatus())
           ],
         ),
       ),
+    );
+  }
+
+  MyAppBar renderAppBar() {
+    bool isSigned = getx.userLogged.value != null;
+    return MyAppBar(
+      title: 'Notifications',
+      action: isSigned
+          ? Icon(
+              Icons.checklist_rtl,
+              size: 24,
+            )
+          : null,
     );
   }
 
