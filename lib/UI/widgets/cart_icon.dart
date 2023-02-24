@@ -75,7 +75,8 @@ class _CartIconState extends State<CartIcon> {
               child: Obx(
                 () => Center(
                   child: renderNumberCartItem(
-                      getxAppController.listCartItem.length),
+                    getxAppController.listCartItem.length,
+                  ),
                 ),
               ),
             ),
