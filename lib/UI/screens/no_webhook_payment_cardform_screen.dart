@@ -28,13 +28,15 @@ class NoWebhookPaymentCardFormScreen extends StatefulWidget {
 
 class _NoWebhookPaymentCardFormScreenState
     extends State<NoWebhookPaymentCardFormScreen> {
+  String cardNumber = '';
+  String expiryDate = '';
   String cardHolderName = '';
+  String cvvCode = '';
   bool isCvvFocused = false;
   bool useGlassMorphism = false;
   bool useBackgroundImage = false;
   OutlineInputBorder? border;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  CardDetails cardDetail = CardDetails();
   final GetxAppController getxApp = Get.find<GetxAppController>();
 
   @override
@@ -79,10 +81,10 @@ class _NoWebhookPaymentCardFormScreenState
                 padding: 0,
                 frontCardBorder: Border.all(color: AppColors.border),
                 backCardBorder: Border.all(color: AppColors.border),
-                cardNumber: cardDetail.number ?? '',
-                expiryDate: cardDetail.expirationYear.toString(),
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
                 cardHolderName: cardHolderName,
-                cvvCode: cardDetail.cvc ?? '',
+                cvvCode: cvvCode,
                 bankName: ' ',
                 showBackView: isCvvFocused,
                 obscureCardNumber: true,
@@ -110,8 +112,11 @@ class _NoWebhookPaymentCardFormScreenState
                 horizontal: AppDimension.contentPadding,
               ),
               child: LoadingButtonWidget(
-                onTap: () => handlePayPress(),
-                label: 'Payment',
+                label: 'Add card',
+                onTap: () {
+                  // _onValidate();
+                  _handlePayPress();
+                },
               ),
             ),
             SizedBox(
@@ -132,14 +137,13 @@ class _NoWebhookPaymentCardFormScreenState
         formKey: formKey,
         obscureCvv: true,
         obscureNumber: true,
-        cardNumber: cardDetail.number ?? '',
-        cvvCode: cardDetail.cvc ?? '',
+        cardNumber: cardNumber,
+        cvvCode: '',
         isHolderNameVisible: true,
         isCardNumberVisible: true,
         isExpiryDateVisible: true,
         cardHolderName: cardHolderName,
-        expiryDate:
-            '${cardDetail.expirationMonth.toString()}/${cardDetail.expirationYear.toString()}',
+        expiryDate: expiryDate,
         themeColor: AppColors.primary,
         textColor: AppColors.blackPrimary,
         cardNumberDecoration: InputDecoration(
@@ -193,22 +197,23 @@ class _NoWebhookPaymentCardFormScreenState
   }
 
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
-    // check card valid
-
     setState(() {
-      cardDetail = cardDetail.copyWith(
-        cvc: creditCardModel!.cvvCode,
-        number: creditCardModel.cardNumber,
-        expirationMonth: 12,
-        expirationYear: 24,
-      );
+      cardNumber = creditCardModel!.cardNumber;
+      expiryDate = creditCardModel.expiryDate;
+      cardHolderName = creditCardModel.cardHolderName;
+      isCvvFocused = creditCardModel.isCvvFocused;
     });
   }
 
-  Future<void> handlePayPress() async {
+  Future<void> _handlePayPress() async {
     try {
+      CardDetails cardDetail = CardDetails(
+        number: cardNumber,
+        cvc: cvvCode,
+        expirationMonth: 12,
+        expirationYear: 24,
+      );
       await Stripe.instance.dangerouslyUpdateCardDetails(cardDetail);
-
       // 1. Gather customer billing information (ex. email)
 
       final billingDetails = BillingDetails(
@@ -231,8 +236,6 @@ class _NoWebhookPaymentCardFormScreenState
         currency: 'usd', // mocked data
         items: ['id-1'],
       );
-
-      print(paymentIntentResult);
 
       if (paymentIntentResult['error'] != null) {
         // Error during creating or confirming Intent
