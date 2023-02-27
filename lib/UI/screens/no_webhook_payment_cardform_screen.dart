@@ -113,10 +113,7 @@ class _NoWebhookPaymentCardFormScreenState
               ),
               child: LoadingButtonWidget(
                 label: 'Add card',
-                onTap: () {
-                  // _onValidate();
-                  _handlePayPress();
-                },
+                onTap: _handlePayPress,
               ),
             ),
             SizedBox(
