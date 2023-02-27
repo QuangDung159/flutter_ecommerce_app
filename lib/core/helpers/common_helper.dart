@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
@@ -31,7 +32,8 @@ void showSnackBar({
     duration: duration ?? Duration(seconds: 2),
     borderColor: isSuccess ?? true ? Colors.green : Colors.red,
     borderWidth: 1,
-    margin: EdgeInsets.all(12),
+    margin:
+        EdgeInsets.only(left: 12, right: 12, top: Platform.isAndroid ? 12 : 0),
     barBlur: 30,
   );
 }

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/screens/card_form_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/no_webhook_payment_cardform_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
@@ -58,7 +58,7 @@ class PaymentMethodItem extends StatelessWidget {
           GestureDetector(
             onTap: () {
               if (paymentMethodItem.title == 'Payment Card') {
-                Get.to(() => CardFormScreen());
+                Get.to(() => NoWebhookPaymentCardFormScreen());
               }
             },
             child: Container(

@@ -1,10 +1,17 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/example_scaffold.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/response_card.dart';
+import 'package:flutter_credit_card/credit_card_brand.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/card_form.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/config.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
@@ -19,99 +26,198 @@ class NoWebhookPaymentCardFormScreen extends StatefulWidget {
 
 class _NoWebhookPaymentCardFormScreenState
     extends State<NoWebhookPaymentCardFormScreen> {
-  final controller = CardFormEditController();
+  String cardNumber = '';
+  String expiryDate = '';
+  String cardHolderName = '';
+  String cvvCode = '';
+  bool isCvvFocused = false;
+  bool useGlassMorphism = false;
+  bool useBackgroundImage = false;
+  OutlineInputBorder? border;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    controller.addListener(update);
+    border = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.grey.withOpacity(0.7),
+        width: 1.0,
+      ),
+    );
+
     super.initState();
   }
 
-  void update() => setState(() {});
   @override
   void dispose() {
-    controller.removeListener(update);
-    controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ExampleScaffold(
-      title: 'NoWebhookPaymentCardFormScreen',
-      tags: ['No Webhook'],
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      children: [
-        CardFormField(
-          controller: controller,
-          countryCode: 'US',
-          style: CardFormStyle(
-            borderColor: Colors.blueGrey,
-            textColor: Colors.black,
-            fontSize: 24,
-            placeholderColor: Colors.blue,
-          ),
-        ),
-        LoadingButtonWidget(
-          onPressed:
-              controller.details.complete == true ? _handlePayPress : null,
-          text: 'Pay',
-        ),
-        Divider(),
-        Padding(
-          padding: EdgeInsets.all(8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              OutlinedButton(
-                onPressed: () => controller.focus(),
-                child: Text('Focus'),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).padding.top,
+            ),
+            MyAppBar(
+              title: 'Add card',
+              hasBackButton: true,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: AppDimension.contentPadding,
+                right: AppDimension.contentPadding,
+                top: AppDimension.contentPadding,
               ),
-              SizedBox(width: 12),
-              OutlinedButton(
-                onPressed: () => controller.blur(),
-                child: Text('Blur'),
+              child: CreditCardWidget(
+                padding: 0,
+                frontCardBorder: Border.all(color: AppColors.border),
+                backCardBorder: Border.all(color: AppColors.border),
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                cardHolderName: cardHolderName,
+                cvvCode: cvvCode,
+                bankName: ' ',
+                showBackView: isCvvFocused,
+                obscureCardNumber: true,
+                obscureCardCvv: true,
+                isHolderNameVisible: true,
+                // cardBgColor: AppColors.bgPrimary,
+                backgroundImage: AssetHelper.imageCardBackground,
+                isSwipeGestureEnabled: true,
+                onCreditCardWidgetChange: (
+                  CreditCardBrand creditCardBrand,
+                ) {},
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    renderCardForm(),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppDimension.contentPadding,
+              ),
+              child: ButtonWidget(
+                title: 'Add card',
+                opTap: () {
+                  // _onValidate();
+                  _handlePayPress();
+                },
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).padding.bottom + 12,
+            ),
+          ],
         ),
-        Divider(),
-        SizedBox(height: 20),
-        ResponseCard(
-          response: toPrettyString(controller.details.toJson()),
-        )
-      ],
+      ),
     );
   }
 
-  Future<void> _handlePayPress() async {
-    if (!controller.details.complete) {
-      return;
-    }
+  Widget renderCardForm() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 9,
+      ),
+      child: CardForm(
+        formKey: formKey,
+        obscureCvv: true,
+        obscureNumber: true,
+        cardNumber: cardNumber,
+        cvvCode: '',
+        isHolderNameVisible: true,
+        isCardNumberVisible: true,
+        isExpiryDateVisible: true,
+        cardHolderName: cardHolderName,
+        expiryDate: expiryDate,
+        themeColor: AppColors.primary,
+        textColor: AppColors.blackPrimary,
+        cardNumberDecoration: InputDecoration(
+          labelText: 'Number',
+          hintText: 'XXXX XXXX XXXX XXXX',
+          hintStyle: TextStyle(color: AppColors.greyScale),
+          labelStyle: TextStyle(
+            color: AppColors.blackPrimary,
+          ),
+          focusedBorder: border,
+          enabledBorder: border,
+        ),
+        expiryDateDecoration: InputDecoration(
+          hintStyle: TextStyle(
+            color: AppColors.blackPrimary,
+          ),
+          labelStyle: TextStyle(
+            color: AppColors.blackPrimary,
+          ),
+          focusedBorder: border,
+          enabledBorder: border,
+          labelText: 'Expired Date',
+          hintText: 'XX/XX',
+        ),
+        cvvCodeDecoration: InputDecoration(
+          hintStyle: TextStyle(
+            color: AppColors.blackPrimary,
+          ),
+          labelStyle: TextStyle(
+            color: AppColors.blackPrimary,
+          ),
+          focusedBorder: border,
+          enabledBorder: border,
+          labelText: 'CVV',
+          hintText: 'XXX',
+        ),
+        cardHolderDecoration: InputDecoration(
+          hintStyle: TextStyle(
+            color: AppColors.blackPrimary,
+          ),
+          labelStyle: TextStyle(
+            color: AppColors.blackPrimary,
+          ),
+          focusedBorder: border,
+          enabledBorder: border,
+          labelText: 'Card Holder',
+        ),
+        onCreditCardModelChange: onCreditCardModelChange,
+      ),
+    );
+  }
 
+  void onCreditCardModelChange(CreditCardModel? creditCardModel) {
+    setState(() {
+      cardNumber = creditCardModel!.cardNumber;
+      expiryDate = creditCardModel.expiryDate;
+      cardHolderName = creditCardModel.cardHolderName;
+      isCvvFocused = creditCardModel.isCvvFocused;
+    });
+  }
+
+  Future<void> _handlePayPress() async {
     try {
       // 1. Gather customer billing information (ex. email)
 
       final billingDetails = BillingDetails(
-        email: 'lu.cto@stripe.com',
-        phone: '+48888000888',
-        address: Address(
-          city: 'Houston',
-          country: 'US',
-          line1: '1459  Circle Drive',
-          line2: '',
-          state: 'Texas',
-          postalCode: '77063',
-        ),
+        email: 'lu.cto123@stripe.com',
       ); // mocked data for tests
 
       // 2. Create payment method
       final paymentMethod = await Stripe.instance.createPaymentMethod(
-          params: PaymentMethodParams.card(
-        paymentMethodData: PaymentMethodData(
-          billingDetails: billingDetails,
+        params: PaymentMethodParams.card(
+          paymentMethodData: PaymentMethodData(
+            billingDetails: billingDetails,
+          ),
         ),
-      ));
+      );
 
       // 3. call API to create PaymentIntent
       final paymentIntentResult = await callNoWebhookPayEndpointMethodId(
@@ -123,18 +229,20 @@ class _NoWebhookPaymentCardFormScreenState
 
       if (paymentIntentResult['error'] != null) {
         // Error during creating or confirming Intent
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Error: ${paymentIntentResult['error']}')));
+        showSnackBar(
+          content: 'Error: ${paymentIntentResult['error']}',
+          isSuccess: false,
+        );
         return;
       }
 
       if (paymentIntentResult['clientSecret'] != null &&
           paymentIntentResult['requiresAction'] == null) {
-        // Payment succedeed
+        // Payment succeed
 
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content:
-                Text('Success!: The payment was confirmed successfully!')));
+        showSnackBar(
+          content: 'Success!: The payment was confirmed successfully!',
+        );
         return;
       }
 
@@ -156,14 +264,18 @@ class _NoWebhookPaymentCardFormScreenState
           // 5. Call API to confirm intent
           await confirmIntent(paymentIntent.id);
         } else {
-          // Payment succedeed
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Error: ${paymentIntentResult['error']}')));
+          // Payment succeed
+          showSnackBar(
+            content: 'Error: ${paymentIntentResult['error']}',
+            isSuccess: false,
+          );
         }
       }
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Error: $e')));
+      showSnackBar(
+        content: 'Error: $e',
+        isSuccess: false,
+      );
       rethrow;
     }
   }
@@ -172,11 +284,15 @@ class _NoWebhookPaymentCardFormScreenState
     final result = await callNoWebhookPayEndpointIntentId(
         paymentIntentId: paymentIntentId);
     if (result['error'] != null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Error: ${result['error']}')));
+      showSnackBar(
+        content: 'Error: ${result['error']}',
+        isSuccess: false,
+      );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Success!: The payment was confirmed successfully!')));
+      showSnackBar(
+        content: 'Success!: The payment was confirmed successfully!',
+        isSuccess: false,
+      );
     }
   }
 
