@@ -240,6 +240,7 @@ app.post(
       useStripeSdk,
       cvcToken,
       email,
+      total,
     }: {
       paymentMethodId?: string;
       paymentIntentId?: string;
@@ -248,9 +249,10 @@ app.post(
       currency: string;
       useStripeSdk: boolean;
       email?: string;
+      total?: number,
     } = req.body;
 
-    const orderAmount: number = calculateOrderAmount(items);
+    const orderAmount: number = total || calculateOrderAmount(items);
     const { secret_key } = getKeys();
 
     const stripe = new Stripe(secret_key as string, {

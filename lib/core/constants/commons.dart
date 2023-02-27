@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
@@ -1400,4 +1402,7 @@ List<NotificationModel> listNotificationDummy = [
   ),
 ];
 
-String stripePublishableKey = 'pk_test_51JmJfZAuFtBplfKrgE6iUmueVzqWbiTosG1kDBZ4SwX3XRaGpqGPDHXtOsVz1LH3y1OgArtVlYzhg6PE6JJGf6xj00HzAHLgRp';
+String stripePublishableKey =
+    'pk_test_51JmJfZAuFtBplfKrgE6iUmueVzqWbiTosG1kDBZ4SwX3XRaGpqGPDHXtOsVz1LH3y1OgArtVlYzhg6PE6JJGf6xj00HzAHLgRp';
+
+bool isAndroid = Platform.isAndroid;

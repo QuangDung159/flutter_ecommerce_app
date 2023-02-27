@@ -326,7 +326,8 @@ class _NoWebhookPaymentCardFormScreenState
         'useStripeSdk': useStripeSdk,
         'paymentMethodId': paymentMethodId,
         'currency': currency,
-        'items': items
+        'items': items,
+        'total': 3000,
       }),
     );
     return json.decode(response.body);
