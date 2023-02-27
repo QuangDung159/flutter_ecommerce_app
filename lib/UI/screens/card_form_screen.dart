@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/card_form.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -116,12 +117,12 @@ class CardFormScreenState extends State<CardFormScreen> {
       padding: EdgeInsets.symmetric(
         horizontal: 9,
       ),
-      child: CreditCardForm(
+      child: CardForm(
         formKey: formKey,
         obscureCvv: true,
         obscureNumber: true,
         cardNumber: cardNumber,
-        cvvCode: cvvCode,
+        cvvCode: '',
         isHolderNameVisible: true,
         isCardNumberVisible: true,
         isExpiryDateVisible: true,
@@ -162,6 +163,7 @@ class CardFormScreenState extends State<CardFormScreen> {
           enabledBorder: border,
           labelText: 'CVV',
           hintText: 'XXX',
+          
         ),
         cardHolderDecoration: InputDecoration(
           hintStyle: TextStyle(
@@ -192,7 +194,6 @@ class CardFormScreenState extends State<CardFormScreen> {
       cardNumber = creditCardModel!.cardNumber;
       expiryDate = creditCardModel.expiryDate;
       cardHolderName = creditCardModel.cardHolderName;
-      cvvCode = creditCardModel.cvvCode;
       isCvvFocused = creditCardModel.isCvvFocused;
     });
   }

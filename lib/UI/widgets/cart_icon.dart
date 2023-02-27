@@ -54,7 +54,7 @@ class _CartIconState extends State<CartIcon> {
             },
           );
         } else {
-          Get.to(() => CardFormScreen());
+          Get.to(() => CartScreen());
         }
       },
       child: Stack(
