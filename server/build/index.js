@@ -231,12 +231,12 @@ app.post('/create-payment-intent-with-payment-method', function (req, res) { ret
     });
 }); });
 app.post('/pay-without-webhooks', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, paymentMethodId, paymentIntentId, items, currency, useStripeSdk, cvcToken, email, orderAmount, secret_key, stripe, customers, paymentMethods, params, intent, params, intent, intent, e_1;
+    var _a, paymentMethodId, paymentIntentId, items, currency, useStripeSdk, cvcToken, email, total, orderAmount, secret_key, stripe, customers, paymentMethods, params, intent, params, intent, intent, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _a = req.body, paymentMethodId = _a.paymentMethodId, paymentIntentId = _a.paymentIntentId, items = _a.items, currency = _a.currency, useStripeSdk = _a.useStripeSdk, cvcToken = _a.cvcToken, email = _a.email;
-                orderAmount = calculateOrderAmount(items);
+                _a = req.body, paymentMethodId = _a.paymentMethodId, paymentIntentId = _a.paymentIntentId, items = _a.items, currency = _a.currency, useStripeSdk = _a.useStripeSdk, cvcToken = _a.cvcToken, email = _a.email, total = _a.total;
+                orderAmount = total || calculateOrderAmount(items);
                 secret_key = getKeys().secret_key;
                 stripe = new stripe_1.default(secret_key, {
                     apiVersion: '2022-08-01',
