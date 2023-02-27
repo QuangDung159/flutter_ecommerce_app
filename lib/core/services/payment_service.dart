@@ -9,6 +9,7 @@ class PaymentService {
   static final GetxAppController getxApp = Get.find<GetxAppController>();
 
   static void getListCardPaymentFromLocalStore() {
+    // updateListCardLocal([]);
     List<String> listPaymentCardJson =
         LocalStorageHelper.getValue('LIST_CARD_PAYMENT') ?? '[]';
 
