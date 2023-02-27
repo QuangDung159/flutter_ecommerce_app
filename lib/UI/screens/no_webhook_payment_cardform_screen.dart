@@ -14,6 +14,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -234,6 +235,7 @@ class _NoWebhookPaymentCardFormScreenState
         paymentMethodId: paymentMethod.id,
         currency: 'usd', // mocked data
         items: ['id-1'],
+        total: (CartServices.calTotal() * 100).round(),
       );
 
       if (paymentIntentResult['error'] != null) {
@@ -324,6 +326,7 @@ class _NoWebhookPaymentCardFormScreenState
     required String paymentMethodId,
     required String currency,
     List<String>? items,
+    required int total,
   }) async {
     final url = Uri.parse('$kApiUrl/pay-without-webhooks');
     final response = await http.post(
@@ -336,7 +339,7 @@ class _NoWebhookPaymentCardFormScreenState
         'paymentMethodId': paymentMethodId,
         'currency': currency,
         'items': items,
-        'total': 3000,
+        'total': total,
       }),
     );
     return json.decode(response.body);
