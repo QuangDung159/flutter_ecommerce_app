@@ -10,7 +10,7 @@ class PaymentMethodModel {
     this.stripeClientKey,
   });
 
-  Map toJson() => {
+  Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
         'type': type,

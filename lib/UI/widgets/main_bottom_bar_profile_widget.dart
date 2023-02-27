@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/list_order_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/payment_method_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/profile_menu_item.dart';
@@ -98,6 +99,10 @@ class _MainBottomBarProfileWidgetState
             ProfileMenuItem(
               title: 'Address book',
               onTap: () => Get.to(() => DeliveryAddressScreen()),
+            ),
+            ProfileMenuItem(
+              title: 'Payment method',
+              onTap: () => Get.to(() => PaymentMethodScreen()),
             ),
             VersionText(
               textColor: AppColors.greyDark,

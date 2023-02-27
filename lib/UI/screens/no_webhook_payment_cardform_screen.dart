@@ -13,11 +13,10 @@ import 'package:flutter_ecommerce_app/config.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
-import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
-import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/payment_service.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -258,7 +257,7 @@ class _NoWebhookPaymentCardFormScreenState
           content: 'Success!: The payment was confirmed successfully!',
         );
 
-        handleStoreCardToLocal(
+        PaymentService.handleStoreCardToLocal(
           last4: '4242',
           cardType: 'Visa',
           clientSecret: paymentIntentResult['clientSecret'],
@@ -353,35 +352,5 @@ class _NoWebhookPaymentCardFormScreenState
       }),
     );
     return json.decode(response.body);
-  }
-
-  void handleStoreCardToLocal({
-    required String last4,
-    required String cardType,
-    required String clientSecret,
-  }) {
-    List<PaymentMethodModel> listCardPayment = getxApp.listCardPayment;
-
-    PaymentMethodModel cardPayment = PaymentMethodModel(
-      id: listCardPayment.length,
-      title: last4,
-      type: cardType,
-      stripeClientKey: clientSecret,
-    );
-
-    Map<String, dynamic> json = {
-      'id': cardPayment.id,
-      'title': cardPayment.title,
-      'type': cardPayment.type,
-      'stripeClientKey': cardPayment.stripeClientKey,
-    };
-
-    listCardPayment.add(cardPayment);
-    getxApp.setData(paymentMethodSelected: cardPayment);
-
-    LocalStorageHelper.setValue(
-      'LIST_CARD_PAYMENT',
-      jsonEncode([json]),
-    );
   }
 }

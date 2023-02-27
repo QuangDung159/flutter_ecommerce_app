@@ -130,7 +130,7 @@ class GetxAppController extends GetxController {
     }
 
     if (listCardPayment != null) {
-      this.listCardPayment.value = this.listCardPayment;
+      this.listCardPayment.value = listCardPayment;
     }
   }
 
