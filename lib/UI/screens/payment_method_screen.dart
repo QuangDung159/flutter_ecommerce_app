@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_total_section.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/payment_method_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
@@ -102,7 +103,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     List<Widget> listRender = [];
     GetxAppController getxAppController = Get.find<GetxAppController>();
 
-    for (var item in getxAppController.listCardPayment) {
+    for (var item in listPaymentMethodDummy) {
       listRender.add(
         GestureDetector(
           onTap: () => getxAppController.setData(

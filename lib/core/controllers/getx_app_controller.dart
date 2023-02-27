@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
@@ -54,7 +55,7 @@ class GetxAppController extends GetxController {
 
   final userLogged = Rxn<UserModel>(null);
 
-  final listCardPayment = RxList<PaymentMethodModel>([]);
+  final listPaymentCard = RxList<PaymentCardModel>([]);
 
   void setData({
     String? sortSelectedValue,
@@ -71,7 +72,7 @@ class GetxAppController extends GetxController {
     List<AddressModel>? listAddress,
     List<NotificationModel>? listNoti,
     List<CartItemModel>? listCartItemCheckout,
-    List<PaymentMethodModel>? listCardPayment,
+    List<PaymentCardModel>? listPaymentCard,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -129,8 +130,8 @@ class GetxAppController extends GetxController {
       this.listCartItemCheckout.value = listCartItemCheckout;
     }
 
-    if (listCardPayment != null) {
-      this.listCardPayment.value = listCardPayment;
+    if (listPaymentCard != null) {
+      this.listPaymentCard.value = listPaymentCard;
     }
   }
 

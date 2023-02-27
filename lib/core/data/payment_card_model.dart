@@ -1,17 +1,17 @@
-class PaymentCard {
+class PaymentCardModel {
   final int id;
   final String cardType, cardNumber, clientSecret;
 
-  PaymentCard({
+  PaymentCardModel({
     required this.id,
     required this.cardType,
     required this.cardNumber,
     required this.clientSecret,
   });
 
-  factory PaymentCard.fromJson(Map<String, dynamic> json) {
+  factory PaymentCardModel.fromJson(Map<String, dynamic> json) {
     {
-      return PaymentCard(
+      return PaymentCardModel(
         id: json['id'],
         cardType: json['card_type'],
         cardNumber: json['card_number'],
