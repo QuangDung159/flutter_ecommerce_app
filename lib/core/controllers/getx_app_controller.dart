@@ -54,6 +54,8 @@ class GetxAppController extends GetxController {
 
   final userLogged = Rxn<UserModel>(null);
 
+  final listCardPayment = RxList<PaymentMethodModel>([]);
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -69,6 +71,7 @@ class GetxAppController extends GetxController {
     List<AddressModel>? listAddress,
     List<NotificationModel>? listNoti,
     List<CartItemModel>? listCartItemCheckout,
+    List<PaymentMethodModel>? listCardPayment,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -124,6 +127,10 @@ class GetxAppController extends GetxController {
 
     if (listCartItemCheckout != null) {
       this.listCartItemCheckout.value = listCartItemCheckout;
+    }
+
+    if (listCardPayment != null) {
+      this.listCardPayment.value = this.listCardPayment;
     }
   }
 

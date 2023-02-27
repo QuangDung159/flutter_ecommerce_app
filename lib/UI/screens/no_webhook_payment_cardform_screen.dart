@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
@@ -12,8 +13,10 @@ import 'package:flutter_ecommerce_app/config.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
@@ -254,6 +257,13 @@ class _NoWebhookPaymentCardFormScreenState
         showSnackBar(
           content: 'Success!: The payment was confirmed successfully!',
         );
+
+        handleStoreCardToLocal(
+          last4: '4242',
+          cardType: 'Visa',
+          clientSecret: paymentIntentResult['clientSecret'],
+        );
+
         return;
       }
 
@@ -286,6 +296,7 @@ class _NoWebhookPaymentCardFormScreenState
         content: 'Error: $e',
         isSuccess: false,
       );
+      log('Error: $e');
       return;
     }
   }
@@ -342,5 +353,35 @@ class _NoWebhookPaymentCardFormScreenState
       }),
     );
     return json.decode(response.body);
+  }
+
+  void handleStoreCardToLocal({
+    required String last4,
+    required String cardType,
+    required String clientSecret,
+  }) {
+    List<PaymentMethodModel> listCardPayment = getxApp.listCardPayment;
+
+    PaymentMethodModel cardPayment = PaymentMethodModel(
+      id: listCardPayment.length,
+      title: last4,
+      type: cardType,
+      stripeClientKey: clientSecret,
+    );
+
+    Map<String, dynamic> json = {
+      'id': cardPayment.id,
+      'title': cardPayment.title,
+      'type': cardPayment.type,
+      'stripeClientKey': cardPayment.stripeClientKey,
+    };
+
+    listCardPayment.add(cardPayment);
+    getxApp.setData(paymentMethodSelected: cardPayment);
+
+    LocalStorageHelper.setValue(
+      'LIST_CARD_PAYMENT',
+      jsonEncode([json]),
+    );
   }
 }

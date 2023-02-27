@@ -9,4 +9,22 @@ class PaymentMethodModel {
     required this.type,
     this.stripeClientKey,
   });
+
+  Map toJson() => {
+        'id': id,
+        'title': title,
+        'type': type,
+        'stripeClientKey': stripeClientKey,
+      };
+
+  factory PaymentMethodModel.fromJson(Map<String, dynamic> json) {
+    {
+      return PaymentMethodModel(
+        id: json['id'],
+        title: json['title'],
+        type: json['type'],
+        stripeClientKey: json['stripeClientKey'],
+      );
+    }
+  }
 }

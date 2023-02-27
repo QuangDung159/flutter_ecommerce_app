@@ -16,6 +16,7 @@ import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
+import 'package:flutter_ecommerce_app/core/services/payment_service.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -214,6 +215,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     ProfileService.getInitAccountLogged();
+    PaymentService.getListCardPaymentFromLocalStore();
 
     bool isAndroid = Theme.of(context).platform == TargetPlatform.android;
     if (isAndroid) {
