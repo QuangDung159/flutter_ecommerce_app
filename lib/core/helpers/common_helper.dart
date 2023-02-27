@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
@@ -228,4 +230,9 @@ DateTimeModel getDateTimeFromString(String dateTime) {
 
 int findCartInListCart(List<CartItemModel> listCartItem, int cartId) {
   return listCartItem.indexWhere((element) => element.id == cartId);
+}
+
+String toPrettyString(Map<String, dynamic> json) {
+  var encoder = JsonEncoder.withIndent("     ");
+  return encoder.convert(json);
 }

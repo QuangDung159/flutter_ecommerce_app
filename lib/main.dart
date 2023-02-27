@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_ecommerce_app/UI/screens/splash_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/received_notification_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -118,6 +120,11 @@ Future<void> main() async {
     }
   });
   // end firebase notification
+
+  Stripe.publishableKey = stripePublishableKey;
+  Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
+  Stripe.urlScheme = 'flutterstripe';
+  await Stripe.instance.applySettings();
 
   runApp(MyApp());
 }

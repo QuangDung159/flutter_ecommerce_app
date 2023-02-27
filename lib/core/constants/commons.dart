@@ -1399,3 +1399,5 @@ List<NotificationModel> listNotificationDummy = [
     id: 20,
   ),
 ];
+
+String stripePublishableKey = 'pk_test_51JmJfZAuFtBplfKrgE6iUmueVzqWbiTosG1kDBZ4SwX3XRaGpqGPDHXtOsVz1LH3y1OgArtVlYzhg6PE6JJGf6xj00HzAHLgRp';
