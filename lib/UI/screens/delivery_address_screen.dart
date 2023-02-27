@@ -161,8 +161,8 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               'ward',
             ),
             ButtonWidget(
-                title: 'Add',
-                opTap: () {
+                label: 'Add',
+                onTap: () {
                   List<AddressModel> listAddress =
                       getxAppController.listAddress;
 

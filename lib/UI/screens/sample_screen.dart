@@ -119,11 +119,11 @@ class _SampleScreenState extends State<SampleScreen> {
               child: Column(
                 children: [
                   ButtonWidget(
-                    title: 'Payment',
+                    label: 'Payment',
                     backgroundColor: getxAppController.listCartItem.isEmpty
                         ? AppColors.greyMid
                         : AppColors.primary,
-                    opTap: () {
+                    onTap: () {
                       if (getxAppController.listCartItem.isNotEmpty) {
                         Get.to(() => SampleScreen());
                       }

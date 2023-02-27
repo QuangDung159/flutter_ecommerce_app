@@ -100,8 +100,8 @@ class CardFormScreenState extends State<CardFormScreen> {
                 horizontal: AppDimension.contentPadding,
               ),
               child: ButtonWidget(
-                title: 'Add card',
-                opTap: () {
+                label: 'Add card',
+                onTap: () {
                   // _onValidate();
                   _handlePayPress();
                 },

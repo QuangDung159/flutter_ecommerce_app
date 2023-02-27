@@ -29,8 +29,8 @@ class _BottomButtonState extends State<BottomButton> {
         top: 15,
       ),
       child: ButtonWidget(
-        title: widget.title,
-        opTap: () {
+        label: widget.title,
+        onTap: () {
           if (widget.onTap != null) {
             widget.onTap!();
           }

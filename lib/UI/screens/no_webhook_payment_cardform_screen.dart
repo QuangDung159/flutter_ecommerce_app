@@ -110,9 +110,9 @@ class _NoWebhookPaymentCardFormScreenState
               padding: EdgeInsets.symmetric(
                 horizontal: AppDimension.contentPadding,
               ),
-              child: ButtonWidget(
+              child: LoadingButtonWidget(
+                onTap: () => handlePayPress(),
                 title: 'Payment',
-                opTap: () {},
               ),
             ),
             SizedBox(

@@ -127,12 +127,12 @@ class _CartScreenState extends State<CartScreen> {
                       height: AppDimension.contentPadding,
                     ),
                     ButtonWidget(
-                      title: 'Checkout',
+                      label: 'Checkout',
                       backgroundColor:
                           getxAppController.listCartItemCheckout.isEmpty
                               ? AppColors.greyMid
                               : AppColors.primary,
-                      opTap: () {
+                      onTap: () {
                         if (getxAppController.listCartItemCheckout.isNotEmpty) {
                           Get.to(() => DeliveryScreen());
                         }

@@ -169,11 +169,11 @@ class _CartTotalSectionState extends State<CartTotalSection> {
             height: AppDimension.contentPadding,
           ),
           ButtonWidget(
-            title: widget.buttonTitle,
+            label: widget.buttonTitle,
             backgroundColor: getxAppController.listCartItemCheckout.isEmpty
                 ? AppColors.greyMid
                 : AppColors.primary,
-            opTap: () {
+            onTap: () {
               widget.onTapButton();
             },
           ),

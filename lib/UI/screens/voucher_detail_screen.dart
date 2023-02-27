@@ -164,8 +164,8 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                               height: 16,
                                             ),
                                             ButtonWidget(
-                                              title: 'Use',
-                                              opTap: () {
+                                              label: 'Use',
+                                              onTap: () {
                                                 getxAppController
                                                     .setPromotionSelected(
                                                   widget.promotionUserModel,

@@ -249,8 +249,8 @@ class ProfileService {
                       height: AppDimension.contentPadding,
                     ),
                     ButtonWidget(
-                      title: 'Submit',
-                      opTap: () {
+                      label: 'Submit',
+                      onTap: () {
                         getx.setReferCodeReceived(null);
                         showSnackBar(
                           content: 'Using refer code success. Thank you.',

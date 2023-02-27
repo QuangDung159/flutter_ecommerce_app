@@ -7,12 +7,18 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 
 class LoadingButtonWidget extends StatefulWidget {
-  final Future Function()? onPressed;
-  final String text;
+  final String title;
+  final TextStyle? titleStyle;
+  final Function() onTap;
+  final Color? backgroundColor;
 
-  const LoadingButtonWidget(
-      {Key? key, required this.onPressed, required this.text})
-      : super(key: key);
+  const LoadingButtonWidget({
+    Key? key,
+    required this.title,
+    this.titleStyle,
+    required this.onTap,
+    this.backgroundColor,
+  }) : super(key: key);
 
   @override
   State<LoadingButtonWidget> createState() => _LoadingButtonWidgetState();
@@ -33,10 +39,8 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
                 vertical: 12,
               ),
               backgroundColor: AppColors.primary,
-              
             ),
-            onPressed:
-                (_isLoading || widget.onPressed == null) ? null : _loadFuture,
+            onPressed: _isLoading ? null : _loadFuture,
             child: _isLoading
                 ? SizedBox(
                     height: 22,
@@ -46,7 +50,7 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
                     ),
                   )
                 : Text(
-                    widget.text,
+                    widget.title,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -64,7 +68,7 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
     });
 
     try {
-      await widget.onPressed!();
+      await widget.onTap();
     } catch (e, s) {
       log(e.toString(), error: e, stackTrace: s);
       showSnackBar(

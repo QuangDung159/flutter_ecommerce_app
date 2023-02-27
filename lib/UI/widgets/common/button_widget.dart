@@ -1,20 +1,23 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 
 class ButtonWidget extends StatefulWidget {
   const ButtonWidget({
     Key? key,
-    required this.title,
-    this.titleStyle,
-    required this.opTap,
+    required this.label,
+    this.labelStyle,
+    required this.onTap,
     this.backgroundColor,
   }) : super(key: key);
 
-  final String title;
-  final TextStyle? titleStyle;
-  final Function() opTap;
+  final String label;
+  final TextStyle? labelStyle;
+  final Function() onTap;
   final Color? backgroundColor;
 
   @override
@@ -22,10 +25,12 @@ class ButtonWidget extends StatefulWidget {
 }
 
 class _ButtonWidgetState extends State<ButtonWidget> {
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => widget.opTap(),
+      onTap: _isLoading ? null : _loadFuture,
       child: Container(
         height: 48,
         decoration: BoxDecoration(
@@ -33,17 +38,46 @@ class _ButtonWidgetState extends State<ButtonWidget> {
           color: widget.backgroundColor ?? AppColors.primary,
         ),
         child: Center(
-          child: Text(
-            widget.title,
-            style: widget.titleStyle ??
-                TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+          child: _isLoading
+              ? SizedBox(
+                  height: 22,
+                  width: 22,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                )
+              : Text(
+                  widget.label,
+                  style: widget.labelStyle ??
+                      TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                 ),
-          ),
         ),
       ),
     );
+  }
+
+  Future<void> _loadFuture() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await widget.onTap();
+    } catch (e, s) {
+      log(e.toString(), error: e, stackTrace: s);
+      showSnackBar(
+        content: 'Error $e',
+        isSuccess: false,
+      );
+      return;
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 }
