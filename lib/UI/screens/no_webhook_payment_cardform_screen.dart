@@ -275,7 +275,6 @@ class _NoWebhookPaymentCardFormScreenState
           // 5. Call API to confirm intent
           await confirmIntent(paymentIntent.id);
         } else {
-          // Payment succeed
           showSnackBar(
             content: 'Error: ${paymentIntentResult['error']}',
             isSuccess: false,
