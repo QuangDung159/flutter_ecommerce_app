@@ -255,7 +255,7 @@ class _NoWebhookPaymentCardFormScreenState
         // Payment succeed
 
         showSnackBar(
-          content: 'Success!: The payment was confirmed successfully!',
+          content: 'Success! The payment was confirmed successfully!',
         );
 
         List<PaymentMethodModel> listCardPayment = getxApp.listCardPayment;
