@@ -7,15 +7,15 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 
 class LoadingButtonWidget extends StatefulWidget {
-  final String title;
-  final TextStyle? titleStyle;
+  final String label;
+  final TextStyle? labelStyle;
   final Function() onTap;
   final Color? backgroundColor;
 
   const LoadingButtonWidget({
     Key? key,
-    required this.title,
-    this.titleStyle,
+    required this.label,
+    this.labelStyle,
     required this.onTap,
     this.backgroundColor,
   }) : super(key: key);
@@ -33,29 +33,34 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Expanded(
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(
-                vertical: 12,
+          child: GestureDetector(
+            onTap: _isLoading ? null : _loadFuture,
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: _isLoading
+                    ? AppColors.greyMid
+                    : widget.backgroundColor ?? AppColors.primary,
               ),
-              backgroundColor: AppColors.primary,
+              height: 48,
+              child: _isLoading
+                  ? SizedBox(
+                      height: 22,
+                      width: 22,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                      ),
+                    )
+                  : Text(
+                      widget.label,
+                      style: widget.labelStyle ?? TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
             ),
-            onPressed: _isLoading ? null : _loadFuture,
-            child: _isLoading
-                ? SizedBox(
-                    height: 22,
-                    width: 22,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                    ),
-                  )
-                : Text(
-                    widget.title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
           ),
         ),
       ],
