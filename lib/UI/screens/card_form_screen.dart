@@ -5,7 +5,7 @@ import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/card_form.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
@@ -99,7 +99,7 @@ class CardFormScreenState extends State<CardFormScreen> {
               padding: EdgeInsets.symmetric(
                 horizontal: AppDimension.contentPadding,
               ),
-              child: ButtonWidget(
+              child: LoadingButtonWidget(
                 label: 'Add card',
                 onTap: () {
                   // _onValidate();

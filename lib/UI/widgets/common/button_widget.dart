@@ -21,10 +21,10 @@ class ButtonWidget extends StatefulWidget {
   final Color? backgroundColor;
 
   @override
-  State<ButtonWidget> createState() => _ButtonWidgetState();
+  State<ButtonWidget> createState() => gButtonWidgetState();
 }
 
-class _ButtonWidgetState extends State<ButtonWidget> {
+class gButtonWidgetState extends State<ButtonWidget> {
   bool _isLoading = false;
 
   @override

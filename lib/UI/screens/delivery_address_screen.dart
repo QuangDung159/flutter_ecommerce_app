@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/address_item.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -160,7 +160,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               getxAppController.wardSelected.value.name,
               'ward',
             ),
-            ButtonWidget(
+            LoadingButtonWidget(
                 label: 'Add',
                 onTap: () {
                   List<AddressModel> listAddress =
