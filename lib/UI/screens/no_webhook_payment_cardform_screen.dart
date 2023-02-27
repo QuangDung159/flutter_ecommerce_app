@@ -8,12 +8,15 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/card_form.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/config.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class NoWebhookPaymentCardFormScreen extends StatefulWidget {
@@ -33,6 +36,7 @@ class _NoWebhookPaymentCardFormScreenState
   OutlineInputBorder? border;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   CardDetails cardDetail = CardDetails();
+  final GetxAppController getxApp = Get.find<GetxAppController>();
 
   @override
   void initState() {
@@ -106,12 +110,9 @@ class _NoWebhookPaymentCardFormScreenState
               padding: EdgeInsets.symmetric(
                 horizontal: AppDimension.contentPadding,
               ),
-              child: ButtonWidget(
-                title: 'Add card',
-                opTap: () {
-                  // _onValidate();
-                  _handlePayPress();
-                },
+              child: LoadingButtonWidget(
+                text: 'Payment',
+                onPressed: () => handlePayPress(),
               ),
             ),
             SizedBox(
@@ -205,14 +206,14 @@ class _NoWebhookPaymentCardFormScreenState
     });
   }
 
-  Future<void> _handlePayPress() async {
+  Future<void> handlePayPress() async {
     try {
       await Stripe.instance.dangerouslyUpdateCardDetails(cardDetail);
 
       // 1. Gather customer billing information (ex. email)
 
       final billingDetails = BillingDetails(
-        email: 'lu.cto123@stripe.com',
+        email: getxApp.userLogged.value!.email,
       ); // mocked data for tests
 
       // 2. Create payment method
@@ -283,7 +284,7 @@ class _NoWebhookPaymentCardFormScreenState
         content: 'Error: $e',
         isSuccess: false,
       );
-      rethrow;
+      return;
     }
   }
 

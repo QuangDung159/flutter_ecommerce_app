@@ -3,6 +3,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 
 class LoadingButtonWidget extends StatefulWidget {
   final Future Function()? onPressed;
@@ -27,7 +29,12 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
         Expanded(
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 12)),
+              padding: EdgeInsets.symmetric(
+                vertical: 12,
+              ),
+              backgroundColor: AppColors.primary,
+              
+            ),
             onPressed:
                 (_isLoading || widget.onPressed == null) ? null : _loadFuture,
             child: _isLoading
@@ -36,8 +43,15 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
                     width: 22,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                    ))
-                : Text(widget.text),
+                    ),
+                  )
+                : Text(
+                    widget.text,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
           ),
         ),
       ],
@@ -53,9 +67,11 @@ class _LoadingButtonWidgetState extends State<LoadingButtonWidget> {
       await widget.onPressed!();
     } catch (e, s) {
       log(e.toString(), error: e, stackTrace: s);
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Error $e')));
-      rethrow;
+      showSnackBar(
+        content: 'Error $e',
+        isSuccess: false,
+      );
+      return;
     } finally {
       setState(() {
         _isLoading = false;
