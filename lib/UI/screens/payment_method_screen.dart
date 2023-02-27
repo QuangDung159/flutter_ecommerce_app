@@ -77,17 +77,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 18,
-          ),
-          Text(
-            'Payment methods',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(
-            height: 18,
+            height: 12,
           ),
           Obx(
             () => Column(
