@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
@@ -9,6 +12,12 @@ import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:http/http.dart' as http;
+
+final kApiUrl = defaultTargetPlatform == TargetPlatform.android
+    ? 'http://10.0.2.2:4242'
+    : 'http://localhost:4242';
 
 void main() => runApp(CardFormScreen());
 
@@ -31,6 +40,8 @@ class CardFormScreenState extends State<CardFormScreen> {
   bool useBackgroundImage = false;
   OutlineInputBorder? border;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  CardDetails _card = CardDetails();
+  bool? _saveCard = false;
 
   @override
   void initState() {
@@ -99,7 +110,8 @@ class CardFormScreenState extends State<CardFormScreen> {
               child: ButtonWidget(
                 title: 'Add card',
                 opTap: () {
-                  _onValidate();
+                  // _onValidate();
+                  _handlePayPress();
                 },
               ),
             ),
@@ -163,7 +175,6 @@ class CardFormScreenState extends State<CardFormScreen> {
           enabledBorder: border,
           labelText: 'CVV',
           hintText: 'XXX',
-          
         ),
         cardHolderDecoration: InputDecoration(
           hintStyle: TextStyle(
@@ -196,5 +207,196 @@ class CardFormScreenState extends State<CardFormScreen> {
       cardHolderName = creditCardModel.cardHolderName;
       isCvvFocused = creditCardModel.isCvvFocused;
     });
+  }
+
+  Future<void> _handlePayPress() async {
+    await Stripe.instance.dangerouslyUpdateCardDetails(_card);
+
+    final billingDetails = BillingDetails(
+        email: 'email@stripe.com',
+        phone: '+48888000888',
+        address: Address(
+          city: 'Houston',
+          country: 'US',
+          line1: '1459  Circle Drive',
+          line2: '',
+          state: 'Texas',
+          postalCode: '77063',
+        ),
+      ); // mocked data for tests
+
+      // 2. Create payment method
+      final paymentMethod = await Stripe.instance.createPaymentMethod(
+          params: PaymentMethodParams.card(
+        paymentMethodData: PaymentMethodData(
+          billingDetails: billingDetails,
+        ),
+      ));
+
+      // 3. call API to create PaymentIntent
+      final paymentIntentResult = await callNoWebhookPayEndpointMethodId(
+        useStripeSdk: true,
+        paymentMethodId: paymentMethod.id,
+        currency: 'usd', // mocked data
+        items: [
+          'id-1',
+        ],
+      );
+
+      if (paymentIntentResult['error'] != null) {
+        // Error during creating or confirming Intent
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${paymentIntentResult['error']}')));
+        return;
+      }
+
+      if (paymentIntentResult['clientSecret'] != null &&
+          paymentIntentResult['requiresAction'] == null) {
+        // Payment succedeed
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content:
+                Text('Success!: The payment was confirmed successfully!')));
+        return;
+      }
+
+      if (paymentIntentResult['clientSecret'] != null &&
+          paymentIntentResult['requiresAction'] == true) {
+        // 4. if payment requires action calling handleNextAction
+        final paymentIntent = await Stripe.instance
+            .handleNextAction(paymentIntentResult['clientSecret']);
+
+        if (paymentIntent.status == PaymentIntentsStatus.RequiresConfirmation) {
+          // 5. Call API to confirm intent
+          await confirmIntent(paymentIntent.id);
+        } else {
+          // Payment succedeed
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Error: ${paymentIntentResult['error']}')));
+        }
+      }
+
+    // try {
+    //   // 1. Gather customer billing information (ex. email)
+
+    //   final billingDetails = BillingDetails(
+    //     email: 'email@stripe.com',
+    //     phone: '+48888000888',
+    //     address: Address(
+    //       city: 'Houston',
+    //       country: 'US',
+    //       line1: '1459  Circle Drive',
+    //       line2: '',
+    //       state: 'Texas',
+    //       postalCode: '77063',
+    //     ),
+    //   ); // mocked data for tests
+
+    //   // 2. Create payment method
+    //   final paymentMethod = await Stripe.instance.createPaymentMethod(
+    //       params: PaymentMethodParams.card(
+    //     paymentMethodData: PaymentMethodData(
+    //       billingDetails: billingDetails,
+    //     ),
+    //   ));
+
+    //   // 3. call API to create PaymentIntent
+    //   final paymentIntentResult = await callNoWebhookPayEndpointMethodId(
+    //     useStripeSdk: true,
+    //     paymentMethodId: paymentMethod.id,
+    //     currency: 'usd', // mocked data
+    //     items: [
+    //       'id-1',
+    //     ],
+    //   );
+
+    //   if (paymentIntentResult['error'] != null) {
+    //     // Error during creating or confirming Intent
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //         SnackBar(content: Text('Error: ${paymentIntentResult['error']}')));
+    //     return;
+    //   }
+
+    //   if (paymentIntentResult['clientSecret'] != null &&
+    //       paymentIntentResult['requiresAction'] == null) {
+    //     // Payment succedeed
+
+    //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //         content:
+    //             Text('Success!: The payment was confirmed successfully!')));
+    //     return;
+    //   }
+
+    //   if (paymentIntentResult['clientSecret'] != null &&
+    //       paymentIntentResult['requiresAction'] == true) {
+    //     // 4. if payment requires action calling handleNextAction
+    //     final paymentIntent = await Stripe.instance
+    //         .handleNextAction(paymentIntentResult['clientSecret']);
+
+    //     if (paymentIntent.status == PaymentIntentsStatus.RequiresConfirmation) {
+    //       // 5. Call API to confirm intent
+    //       await confirmIntent(paymentIntent.id);
+    //     } else {
+    //       // Payment succedeed
+    //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //           content: Text('Error: ${paymentIntentResult['error']}')));
+    //     }
+    //   }
+    // } catch (e) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(
+    //       content: Text('Error: $e'),
+    //     ),
+    //   );
+    //   rethrow;
+    // }
+  }
+
+  Future<Map<String, dynamic>> callNoWebhookPayEndpointMethodId({
+    required bool useStripeSdk,
+    required String paymentMethodId,
+    required String currency,
+    List<String>? items,
+  }) async {
+    final url = Uri.parse('$kApiUrl/pay-without-webhooks');
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'useStripeSdk': useStripeSdk,
+        'paymentMethodId': paymentMethodId,
+        'currency': currency,
+        'items': items
+      }),
+    );
+    return json.decode(response.body);
+  }
+
+  Future<void> confirmIntent(String paymentIntentId) async {
+    final result = await callNoWebhookPayEndpointIntentId(
+        paymentIntentId: paymentIntentId);
+    if (result['error'] != null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Error: ${result['error']}')));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Success!: The payment was confirmed successfully!')));
+    }
+  }
+
+  Future<Map<String, dynamic>> callNoWebhookPayEndpointIntentId({
+    required String paymentIntentId,
+  }) async {
+    final url = Uri.parse('$kApiUrl/charge-card-off-session');
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({'paymentIntentId': paymentIntentId}),
+    );
+    return json.decode(response.body);
   }
 }
