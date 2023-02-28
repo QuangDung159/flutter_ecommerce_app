@@ -81,6 +81,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           cardNumber: paymentCardDefault.cardNumber,
           cvvCode: paymentCardDefault.cvvCode,
           onPaymentSuccess: () {},
+          expiryDate: paymentCardDefault.expiryDate,
         );
       }
 

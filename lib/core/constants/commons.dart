@@ -1410,6 +1410,7 @@ bool isAndroid = Platform.isAndroid;
 
 List<PaymentCardModel> listPaymentCardDummy = [
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 1,
     cardType: 'Visa',
@@ -1417,6 +1418,7 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 2,
     cardType: 'Mastercard',
@@ -1424,6 +1426,7 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 3,
     cardType: 'Visa',
@@ -1431,6 +1434,7 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 4,
     cardType: 'Visa',
@@ -1438,6 +1442,7 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 5,
     cardType: 'Visa',
@@ -1445,6 +1450,7 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 6,
     cardType: 'JBC',
@@ -1452,6 +1458,7 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 7,
     cardType: 'Visa',
@@ -1459,6 +1466,7 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 8,
     cardType: 'Visa',
@@ -1466,6 +1474,7 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 9,
     cardType: 'Visa',
@@ -1473,6 +1482,7 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
   PaymentCardModel(
+    expiryDate: '04/24',
     cvvCode: '444',
     id: 10,
     cardType: 'JBC',

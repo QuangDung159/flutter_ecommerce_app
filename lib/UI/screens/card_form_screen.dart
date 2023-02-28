@@ -107,10 +107,11 @@ class _CardFormScreenState extends State<CardFormScreen> {
               child: LoadingButtonWidget(
                 label: 'Add card',
                 onTap: () async {
-                  Get.back();
+                  // Get.back();
                   return PaymentService.addCard(
                     cardNumber: cardNumber,
                     cvvCode: cvvCode,
+                    expiryDate: expiryDate,
                   );
                 },
               ),

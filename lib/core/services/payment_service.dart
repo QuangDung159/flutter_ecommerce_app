@@ -53,14 +53,17 @@ class PaymentService {
   static void addCard({
     required String cardNumber,
     required String cvvCode,
+    required String expiryDate,
   }) {
     List<PaymentCardModel> listCardPayment = getxApp.listPaymentCard;
     PaymentCardModel cardPayment = PaymentCardModel(
-        id: listCardPayment.length,
-        cardNumber: cardNumber.replaceAll(' ', ''),
-        cardType: getCardType(cardNumber),
-        clientSecret: 'clientSecret',
-        cvvCode: '');
+      id: listCardPayment.length,
+      cardNumber: cardNumber.replaceAll(' ', ''),
+      cardType: getCardType(cardNumber),
+      clientSecret: 'clientSecret',
+      cvvCode: cvvCode,
+      expiryDate: expiryDate,
+    );
 
     listCardPayment.add(cardPayment);
     PaymentService.updateListCardLocal(listCardPayment);
@@ -84,6 +87,7 @@ class PaymentService {
     required String cardNumber,
     required String cvvCode,
     required Function() onPaymentSuccess,
+    required String expiryDate,
   }) async {
     try {
       CardDetails cardDetail = CardDetails(
