@@ -53,9 +53,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             CartTotalSection(
               buttonTitle: 'Checkout',
-              onTapButton: () {
-                onCheckout();
-              },
+              onTapButton: onCheckout,
             ),
           ],
         ),
@@ -63,7 +61,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  void onCheckout() {
+  Future<void> onCheckout() async {
     try {
       PaymentMethodModel paymentMethodSelected =
           getxAppController.paymentMethodSelected.value;
@@ -79,7 +77,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           return;
         }
 
-        PaymentService.handlePayment(
+        await PaymentService.handlePayment(
           cardNumber: paymentCardDefault.cardNumber,
           cvvCode: paymentCardDefault.cvvCode,
           onPaymentSuccess: () {},
