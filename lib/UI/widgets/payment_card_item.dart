@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/payment_service.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
@@ -25,9 +26,12 @@ class PaymentCardItem extends StatefulWidget {
 }
 
 class _PaymentCardItemState extends State<PaymentCardItem> {
+  final GetxAppController getxApp = Get.find<GetxAppController>();
+
   @override
   Widget build(BuildContext context) {
     PaymentCardModel paymentCardModel = widget.paymentCardModel;
+
     return Container(
       margin: EdgeInsets.only(
         top: 12,
@@ -41,12 +45,18 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
           extentRatio: 64 / MediaQuery.of(context).size.width,
           openThreshold: 0.1,
           closeThreshold: 0.8,
-          // dismissible: DismissiblePane(onDismissed: () {}),
+          dismissible: DismissiblePane(
+            onDismissed: () {
+              onRemovePaymentCard(paymentCardModel);
+            },
+          ),
           motion: BehindMotion(),
           children: [
             Expanded(
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  onRemovePaymentCard(paymentCardModel);
+                },
                 child: Container(
                   alignment: Alignment.center,
                   color: AppColors.orangeSecondary,
@@ -66,9 +76,13 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
     );
   }
 
-  Widget renderCardInfo(PaymentCardModel paymentCardModel) {
-    final GetxAppController getxApp = Get.find<GetxAppController>();
+  void onRemovePaymentCard(PaymentCardModel paymentCardModel) {
+    List<PaymentCardModel> listPaymentCard = getxApp.listPaymentCard;
+    listPaymentCard.remove(paymentCardModel);
+    PaymentService.updateListCardLocal(listPaymentCard);
+  }
 
+  Widget renderCardInfo(PaymentCardModel paymentCardModel) {
     PaymentCardModel? paymentCardDefault = getxApp.paymentCardDefault.value;
 
     bool isDefaultCard = paymentCardDefault == null
