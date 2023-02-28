@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 import 'dart:developer';
 
@@ -45,6 +47,36 @@ class PaymentService {
       'LIST_PAYMENT_CARD',
       list,
     );
+  }
+
+  static void addCard({
+    required String cardNumber,
+    required String cvvCode,
+  }) {
+    List<PaymentCardModel> listCardPayment = getxApp.listPaymentCard;
+    PaymentCardModel cardPayment = PaymentCardModel(
+        id: listCardPayment.length,
+        cardNumber: cardNumber,
+        cardType: getCardType(cardNumber),
+        clientSecret: 'clientSecret',
+        cvvCode: '');
+
+    listCardPayment.add(cardPayment);
+    PaymentService.updateListCardLocal(listCardPayment);
+    getxApp.setPaymentCardDefault(cardPayment);
+
+    showSnackBar(
+      content: 'Add payment card success',
+      duration: Duration(
+        milliseconds: 1200,
+      ),
+    );
+  }
+
+  static void removeCard(PaymentCardModel paymentCardModel) {
+    List<PaymentCardModel> listPaymentCard = getxApp.listPaymentCard;
+    listPaymentCard.remove(paymentCardModel);
+    PaymentService.updateListCardLocal(listPaymentCard);
   }
 
   static Future<void> handlePayPress({
@@ -99,18 +131,6 @@ class PaymentService {
         showSnackBar(
           content: 'Success! The payment was confirmed successfully!',
         );
-
-        List<PaymentCardModel> listCardPayment = getxApp.listPaymentCard;
-        PaymentCardModel cardPayment = PaymentCardModel(
-          id: listCardPayment.length,
-          cardNumber: cardNumber,
-          cardType: getCardType(cardNumber),
-          clientSecret: paymentIntentResult['clientSecret'],
-        );
-
-        listCardPayment.add(cardPayment);
-        PaymentService.updateListCardLocal(listCardPayment);
-
         return;
       }
 

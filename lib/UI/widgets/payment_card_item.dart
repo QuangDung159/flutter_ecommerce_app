@@ -47,7 +47,7 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
           closeThreshold: 0.8,
           dismissible: DismissiblePane(
             onDismissed: () {
-              onRemovePaymentCard(paymentCardModel);
+              PaymentService.removeCard(paymentCardModel);
             },
           ),
           motion: BehindMotion(),
@@ -55,7 +55,7 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  onRemovePaymentCard(paymentCardModel);
+                  PaymentService.removeCard(paymentCardModel);
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -74,12 +74,6 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
         ),
       ),
     );
-  }
-
-  void onRemovePaymentCard(PaymentCardModel paymentCardModel) {
-    List<PaymentCardModel> listPaymentCard = getxApp.listPaymentCard;
-    listPaymentCard.remove(paymentCardModel);
-    PaymentService.updateListCardLocal(listPaymentCard);
   }
 
   Widget renderCardInfo(PaymentCardModel paymentCardModel) {
