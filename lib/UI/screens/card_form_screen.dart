@@ -107,7 +107,7 @@ class _CardFormScreenState extends State<CardFormScreen> {
               child: LoadingButtonWidget(
                 label: 'Add card',
                 onTap: () async {
-                  // Get.back();
+                  Get.back();
                   return PaymentService.addCard(
                     cardNumber: cardNumber,
                     cvvCode: cvvCode,
@@ -199,6 +199,7 @@ class _CardFormScreenState extends State<CardFormScreen> {
       expiryDate = creditCardModel.expiryDate;
       cardHolderName = creditCardModel.cardHolderName;
       isCvvFocused = creditCardModel.isCvvFocused;
+      cvvCode = creditCardModel.cvvCode;
     });
   }
 }

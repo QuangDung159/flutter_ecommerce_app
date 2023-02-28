@@ -90,11 +90,14 @@ class PaymentService {
     required String expiryDate,
   }) async {
     try {
+      int expiryMonth = int.parse(expiryDate.split('/')[0]);
+      int expiryYear = int.parse(expiryDate.split('/')[1]);
+
       CardDetails cardDetail = CardDetails(
         number: cardNumber,
         cvc: cvvCode,
-        expirationMonth: 12,
-        expirationYear: 24,
+        expirationMonth: expiryMonth,
+        expirationYear: expiryYear,
       );
 
       await Stripe.instance.dangerouslyUpdateCardDetails(cardDetail);

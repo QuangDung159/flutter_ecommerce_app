@@ -96,7 +96,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     Get.offAll(() => MainScreen());
     CartServices.checkout();
     Future.delayed(
-      Duration(seconds: 1),
+      Duration(milliseconds: 400),
       () => showSnackBar(
         title: 'Create order success',
         content: 'Your order has been created, thanks for your shopping!',
