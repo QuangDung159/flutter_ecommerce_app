@@ -18,6 +18,7 @@ class PaymentService {
 
   static void getListCardPaymentFromLocalStore() {
     // updateListCardLocal([]);
+    // return;
     List<String> listPaymentCardJson =
         LocalStorageHelper.getValue('LIST_PAYMENT_CARD') ?? [];
 
@@ -56,7 +57,7 @@ class PaymentService {
     List<PaymentCardModel> listCardPayment = getxApp.listPaymentCard;
     PaymentCardModel cardPayment = PaymentCardModel(
         id: listCardPayment.length,
-        cardNumber: cardNumber,
+        cardNumber: cardNumber.replaceAll(' ', ''),
         cardType: getCardType(cardNumber),
         clientSecret: 'clientSecret',
         cvvCode: '');
@@ -91,6 +92,7 @@ class PaymentService {
         expirationMonth: 12,
         expirationYear: 24,
       );
+
       await Stripe.instance.dangerouslyUpdateCardDetails(cardDetail);
       // 1. Gather customer billing information (ex. email)
 

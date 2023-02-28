@@ -63,7 +63,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  void onCheckout() async {
+  void onCheckout() {
     try {
       PaymentMethodModel paymentMethodSelected =
           getxAppController.paymentMethodSelected.value;

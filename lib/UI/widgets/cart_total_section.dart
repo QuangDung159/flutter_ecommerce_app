@@ -175,7 +175,7 @@ class _CartTotalSectionState extends State<CartTotalSection> {
                 ? AppColors.greyMid
                 : AppColors.primary,
             onTap: () {
-              widget.onTapButton();
+              return widget.onTapButton();
             },
           ),
           SizedBox(
