@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/screens/card_form_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/payment_card_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
@@ -36,7 +36,9 @@ class PaymentMethodItem extends StatelessWidget {
           width: 1,
         ),
       ),
-      child: renderPaymentMethod(isPaymentCard),
+      child: Obx(
+        () => renderPaymentMethod(isPaymentCard),
+      ),
     );
   }
 
@@ -47,7 +49,8 @@ class PaymentMethodItem extends StatelessWidget {
         : paymentMethodItem.title;
 
     String iconName = getCardLogo(
-        paymentCardDefault != null ? paymentCardDefault.cardNumber : 'unknown');
+      paymentCardDefault != null ? paymentCardDefault.cardNumber : 'unknown',
+    );
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +81,7 @@ class PaymentMethodItem extends StatelessWidget {
         if (isPaymentCard)
           GestureDetector(
             onTap: () {
-              Get.to(() => CardFormScreen());
+              Get.to(() => PaymentCardScreen());
             },
             child: Container(
               margin: EdgeInsets.only(top: 3),
