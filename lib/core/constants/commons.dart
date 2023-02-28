@@ -806,7 +806,7 @@ List<PromotionUserModel> listPromotionUserDummy = [
 
 List<PaymentMethodModel> listPaymentMethodDummy = [
   PaymentMethodModel(id: 1, title: 'Cash', type: 'cash'),
-  PaymentMethodModel(id: 2, title: 'Payment Card', type: 'e_wallet'),
+  PaymentMethodModel(id: 2, title: 'Payment Card', type: 'payment_card'),
 ];
 
 List<CityModel> listCityDummy = [

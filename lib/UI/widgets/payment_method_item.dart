@@ -24,7 +24,7 @@ class PaymentMethodItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isPaymentCard = paymentMethodItem.title == 'Payment Card';
+    bool isPaymentCard = paymentMethodItem.type == 'payment_card';
 
     return Container(
       padding: EdgeInsets.all(12),
