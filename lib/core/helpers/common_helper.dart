@@ -247,7 +247,22 @@ String getLast4(String cardNumber) {
 }
 
 String getCardType(String cardNumber) {
-  return detectCCType(cardNumber).toString();
+  switch (detectCCType(cardNumber)) {
+    case CreditCardType.visa:
+      return 'Visa';
+    case CreditCardType.mastercard:
+      return 'Mastercard';
+    case CreditCardType.dinersclub:
+      return 'Dinersclub';
+    case CreditCardType.amex:
+      return 'Amex';
+    case CreditCardType.discover:
+      return 'Discover';
+    case CreditCardType.jcb:
+      return 'jcb';
+    default:
+      return 'Unknown card';
+  }
 }
 
 String getCardLogo(String cardNumber) {
