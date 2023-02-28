@@ -91,6 +91,17 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
     List<Widget> listRender = [];
     List<PaymentCardModel> listPaymentCard = getxApp.listPaymentCard;
 
+    if (listPaymentCard.isEmpty) {
+      return [
+        SizedBox(
+          height: 12,
+        ),
+        Center(
+          child: Text('Payment card empty'),
+        ),
+      ];
+    }
+
     for (var i = 0; i < listPaymentCard.length; i++) {
       listRender.add(
         PaymentCardItem(
