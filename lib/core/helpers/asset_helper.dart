@@ -51,4 +51,6 @@ class AssetHelper {
   static const String iconFeedback = '$iconDir/icon_feedback.png';
   static const String iconCalendar = '$iconDir/icon_calendar.png';
   static const String iconTime = '$iconDir/icon_time.png';
+  static const String iconMastercard = '$iconDir/icon_mastercard.png';
+  static const String iconCardDefault = '$iconDir/icon_card.png';
 }

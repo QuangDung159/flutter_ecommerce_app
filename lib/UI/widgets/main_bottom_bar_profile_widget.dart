@@ -101,7 +101,7 @@ class _MainBottomBarProfileWidgetState
               onTap: () => Get.to(() => DeliveryAddressScreen()),
             ),
             ProfileMenuItem(
-              title: 'Payment method',
+              title: 'Payment card',
               onTap: () => Get.to(() => PaymentCardScreen()),
             ),
             VersionText(
