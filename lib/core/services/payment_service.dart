@@ -79,9 +79,10 @@ class PaymentService {
     PaymentService.updateListCardLocal(listPaymentCard);
   }
 
-  static Future<void> handlePayPress({
+  static Future<void> handlePayment({
     required String cardNumber,
     required String cvvCode,
+    required Function() onPaymentSuccess,
   }) async {
     try {
       CardDetails cardDetail = CardDetails(
@@ -128,9 +129,11 @@ class PaymentService {
           paymentIntentResult['requiresAction'] == null) {
         // Payment succeed
 
-        showSnackBar(
-          content: 'Success! The payment was confirmed successfully!',
-        );
+        // showSnackBar(
+        //   content: 'Success! The payment was confirmed successfully!',
+        // );
+
+        onPaymentSuccess();
         return;
       }
 
@@ -151,6 +154,7 @@ class PaymentService {
         if (paymentIntent.status == PaymentIntentsStatus.RequiresConfirmation) {
           // 5. Call API to confirm intent
           await confirmIntent(paymentIntent.id);
+          onPaymentSuccess();
         } else {
           showSnackBar(
             content: 'Error: ${paymentIntentResult['error']}',
