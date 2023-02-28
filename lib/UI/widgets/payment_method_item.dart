@@ -19,6 +19,8 @@ class PaymentMethodItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isPaymentCard = paymentMethodItem.title == 'Payment Card';
+
     return Container(
       padding: EdgeInsets.all(12),
       margin: EdgeInsets.only(bottom: 12),
@@ -55,20 +57,19 @@ class PaymentMethodItem extends StatelessWidget {
               ),
             ],
           ),
-          GestureDetector(
-            onTap: () {
-              if (paymentMethodItem.title == 'Payment Card') {
+          if (isPaymentCard)
+            GestureDetector(
+              onTap: () {
                 Get.to(() => CardFormScreen());
-              }
-            },
-            child: Container(
-              margin: EdgeInsets.only(top: 3),
-              child: Image.asset(
-                AssetHelper.iconChevronRight,
-                width: 6,
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: 3),
+                child: Image.asset(
+                  AssetHelper.iconChevronRight,
+                  width: 6,
+                ),
               ),
-            ),
-          )
+            )
         ],
       ),
     );
