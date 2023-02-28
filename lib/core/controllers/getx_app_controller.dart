@@ -135,7 +135,6 @@ class GetxAppController extends GetxController {
 
     if (listPaymentCard != null) {
       this.listPaymentCard.value = listPaymentCard;
-      PaymentService.updateListCardLocal(listPaymentCard);
     }
   }
 

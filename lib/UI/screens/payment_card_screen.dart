@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/card_form_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/payment_card_item.dart';
@@ -57,7 +58,9 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
                   ),
                   LoadingButtonWidget(
                     label: 'Add payment card',
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => CardFormScreen());
+                    },
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).padding.bottom + 12,
@@ -75,8 +78,10 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          children: renderListPaymentCard(),
+        Obx(
+          () => Column(
+            children: renderListPaymentCard(),
+          ),
         ),
       ],
     );

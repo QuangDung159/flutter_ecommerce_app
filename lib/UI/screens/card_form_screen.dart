@@ -267,8 +267,7 @@ class _CardFormScreenState
         );
 
         listCardPayment.add(cardPayment);
-
-        // PaymentService.updateListCardLocal(listCardPayment);
+        PaymentService.updateListCardLocal(listCardPayment);
 
         return;
       }
