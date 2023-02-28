@@ -3,12 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/card_form_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
 
 class PaymentMethodItem extends StatelessWidget {
-  const PaymentMethodItem({
+  PaymentMethodItem({
     Key? key,
     this.isSelected,
     required this.paymentMethodItem,
@@ -16,6 +19,8 @@ class PaymentMethodItem extends StatelessWidget {
 
   final bool? isSelected;
   final PaymentMethodModel paymentMethodItem;
+
+  final GetxAppController getxApp = Get.find<GetxAppController>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,47 +36,59 @@ class PaymentMethodItem extends StatelessWidget {
           width: 1,
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                AssetHelper.iconMap,
-                width: 24,
+      child: renderPaymentMethod(isPaymentCard),
+    );
+  }
+
+  Widget renderPaymentMethod(bool isPaymentCard) {
+    PaymentCardModel? paymentCardDefault = getxApp.paymentCardDefault.value;
+    String title = paymentCardDefault != null
+        ? '${paymentCardDefault.cardType} | **** ${getLast4(paymentCardDefault.cardNumber)}'
+        : paymentMethodItem.title;
+
+    String iconName = getCardLogo(
+        paymentCardDefault != null ? paymentCardDefault.cardNumber : 'unknown');
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Image.asset(
+              isPaymentCard ? iconName : AssetHelper.iconMap,
+              width: 24,
+            ),
+            SizedBox(
+              width: 12,
+            ),
+            Text(
+              isPaymentCard ? title : paymentMethodItem.title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                width: 12,
+            ),
+            SizedBox(
+              width: 12,
+            ),
+            SizedBox(
+              width: 12,
+            ),
+          ],
+        ),
+        if (isPaymentCard)
+          GestureDetector(
+            onTap: () {
+              Get.to(() => CardFormScreen());
+            },
+            child: Container(
+              margin: EdgeInsets.only(top: 3),
+              child: Image.asset(
+                AssetHelper.iconChevronRight,
+                width: 6,
               ),
-              Text(
-                paymentMethodItem.title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                width: 12,
-              ),
-              SizedBox(
-                width: 12,
-              ),
-            ],
-          ),
-          if (isPaymentCard)
-            GestureDetector(
-              onTap: () {
-                Get.to(() => CardFormScreen());
-              },
-              child: Container(
-                margin: EdgeInsets.only(top: 3),
-                child: Image.asset(
-                  AssetHelper.iconChevronRight,
-                  width: 6,
-                ),
-              ),
-            )
-        ],
-      ),
+            ),
+          )
+      ],
     );
   }
 }
