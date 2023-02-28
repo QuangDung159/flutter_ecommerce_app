@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/order_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/order_model.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_transaction.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
@@ -1406,3 +1407,66 @@ String stripePublishableKey =
     'pk_test_51JmJfZAuFtBplfKrgE6iUmueVzqWbiTosG1kDBZ4SwX3XRaGpqGPDHXtOsVz1LH3y1OgArtVlYzhg6PE6JJGf6xj00HzAHLgRp';
 
 bool isAndroid = Platform.isAndroid;
+
+List<PaymentCardModel> listPaymentCardDummy = [
+  PaymentCardModel(
+    id: 1,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    id: 2,
+    cardType: 'Mastercard',
+    cardNumber: '5463070230000335',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    id: 3,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    id: 4,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    id: 5,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    id: 6,
+    cardType: 'JBC',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+    PaymentCardModel(
+    id: 7,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    id: 8,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    id: 9,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    id: 10,
+    cardType: 'JBC',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+];

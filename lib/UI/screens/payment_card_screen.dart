@@ -5,7 +5,9 @@ import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/payment_card_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
@@ -75,11 +77,29 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
-          children: [
-            PaymentCardItem(),
-          ],
+          children: renderListPaymentCard(),
         ),
       ],
     );
+  }
+
+  List<Widget> renderListPaymentCard() {
+    List<Widget> listRender = [];
+    List<PaymentCardModel> listPaymentCard = getxApp.listPaymentCard;
+
+    for (var i = 0; i < listPaymentCardDummy.length; i++) {
+      listRender.add(
+        PaymentCardItem(
+          paymentCardModel: listPaymentCardDummy[i],
+          isDefault: true,
+          isLastItem: i == listPaymentCardDummy.length - 1,
+          key: Key(
+            listPaymentCardDummy[i].id.toString(),
+          ),
+        ),
+      );
+    }
+
+    return listRender;
   }
 }

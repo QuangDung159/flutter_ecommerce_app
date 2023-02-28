@@ -3,13 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class PaymentCardItem extends StatefulWidget {
   const PaymentCardItem({
     Key? key,
+    required this.paymentCardModel,
+    required this.isDefault,
+    required this.isLastItem,
   }) : super(key: key);
+
+  final PaymentCardModel paymentCardModel;
+  final bool isDefault;
+  final bool isLastItem;
 
   @override
   State<PaymentCardItem> createState() => _PaymentCardItemState();
@@ -18,12 +27,16 @@ class PaymentCardItem extends StatefulWidget {
 class _PaymentCardItemState extends State<PaymentCardItem> {
   @override
   Widget build(BuildContext context) {
+    PaymentCardModel paymentCardModel = widget.paymentCardModel;
     return Container(
-      margin: EdgeInsets.only(top: 12),
+      margin: EdgeInsets.only(
+        top: 12,
+        bottom: widget.isLastItem ? 12 : 0,
+      ),
       color: Colors.white,
       child: Slidable(
         // Specify a key if the Slidable is dismissible.
-        // key: ValueKey(widget.cartItem.id),
+        key: ValueKey(paymentCardModel.id),
         endActionPane: ActionPane(
           extentRatio: 64 / MediaQuery.of(context).size.width,
           openThreshold: 0.1,
@@ -57,7 +70,7 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
               Row(
                 children: [
                   Image.asset(
-                    AssetHelper.iconVisa,
+                    getCardLogo(paymentCardModel.cardNumber),
                     width: 48,
                     height: 48,
                   ),
@@ -68,14 +81,14 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '**** **** **** 4242',
+                        '**** **** **** ${getLast4(paymentCardModel.cardNumber)}',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        'Visa',
+                        paymentCardModel.cardType,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
