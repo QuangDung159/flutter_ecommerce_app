@@ -3,21 +3,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 
 class PaymentCardItem extends StatefulWidget {
   const PaymentCardItem({
     Key? key,
     required this.paymentCardModel,
-    required this.isDefault,
     required this.isLastItem,
   }) : super(key: key);
 
   final PaymentCardModel paymentCardModel;
-  final bool isDefault;
   final bool isLastItem;
 
   @override
@@ -59,54 +59,74 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
             ),
           ],
         ),
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppDimension.contentPadding,
-            vertical: 12,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Image.asset(
-                    getCardLogo(paymentCardModel.cardNumber),
-                    width: 48,
-                    height: 48,
-                  ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '**** **** **** ${getLast4(paymentCardModel.cardNumber)}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        paymentCardModel.cardType,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              Text(
-                'Default',
-                style: TextStyle(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+        child: Obx(
+          () => renderCardInfo(paymentCardModel),
         ),
+      ),
+    );
+  }
+
+  Widget renderCardInfo(PaymentCardModel paymentCardModel) {
+    final GetxAppController getxApp = Get.find<GetxAppController>();
+
+    PaymentCardModel? paymentCardDefault = getxApp.paymentCardDefault.value;
+
+    bool isDefaultCard = paymentCardDefault == null
+        ? false
+        : paymentCardDefault.id == paymentCardModel.id;
+
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimension.contentPadding,
+        vertical: 12,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          GestureDetector(
+            onTap: () {
+              getxApp.setPaymentCardDefault(paymentCardModel);
+            },
+            child: Row(
+              children: [
+                Image.asset(
+                  getCardLogo(paymentCardModel.cardNumber),
+                  width: 48,
+                  height: 48,
+                ),
+                SizedBox(
+                  width: 12,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '**** **** **** ${getLast4(paymentCardModel.cardNumber)}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      paymentCardModel.cardType,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          if (isDefaultCard)
+            Text(
+              'Default',
+              style: TextStyle(
+                color: AppColors.primary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+        ],
       ),
     );
   }

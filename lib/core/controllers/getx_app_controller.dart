@@ -57,6 +57,8 @@ class GetxAppController extends GetxController {
 
   final listPaymentCard = RxList<PaymentCardModel>([]);
 
+  final paymentCardDefault = Rxn<PaymentCardModel>(null);
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -151,5 +153,9 @@ class GetxAppController extends GetxController {
 
   void setUserLogged(UserModel? userLogged) {
     this.userLogged.value = userLogged;
+  }
+
+  void setPaymentCardDefault(PaymentCardModel paymentCardDefault) {
+    this.paymentCardDefault.value = paymentCardDefault;
   }
 }
