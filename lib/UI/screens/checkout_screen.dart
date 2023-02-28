@@ -80,12 +80,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         await PaymentService.handlePayment(
           cardNumber: paymentCardDefault.cardNumber,
           cvvCode: paymentCardDefault.cvvCode,
-          onPaymentSuccess: () {},
+          onPaymentSuccess: () {
+            onCheckoutSuccess();
+          },
           expiryDate: paymentCardDefault.expiryDate,
         );
+      } else {
+        onCheckoutSuccess();
       }
-
-      onCheckoutSuccess();
     } catch (e) {
       log(e.toString());
       return;

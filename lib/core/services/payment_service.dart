@@ -185,9 +185,12 @@ class PaymentService {
         }
       }
     } catch (e) {
+      var error = jsonDecode(jsonEncode(e));
+
       showSnackBar(
-        content: 'Error: $e',
+        content: 'Error: ${error['error']['message']}',
         isSuccess: false,
+        duration: Duration(seconds: 3),
       );
       log('Error: $e');
       return;
