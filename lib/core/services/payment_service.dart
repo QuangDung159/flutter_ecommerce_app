@@ -50,12 +50,25 @@ class PaymentService {
     );
   }
 
+  static bool isCardValid({
+    required String cardNumber,
+    required cvvCode,
+    required expiryDate,
+  }) {
+    if (cardNumber == '' || cvvCode == '' || expiryDate == '') {
+      return false;
+    }
+
+    return true;
+  }
+
   static void addCard({
     required String cardNumber,
     required String cvvCode,
     required String expiryDate,
   }) {
     List<PaymentCardModel> listCardPayment = getxApp.listPaymentCard;
+
     PaymentCardModel cardPayment = PaymentCardModel(
       id: listCardPayment.length,
       cardNumber: cardNumber.replaceAll(' ', ''),

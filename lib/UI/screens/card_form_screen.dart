@@ -10,6 +10,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/payment_service.dart';
 import 'package:get/get.dart';
 
@@ -107,7 +108,19 @@ class _CardFormScreenState extends State<CardFormScreen> {
               child: LoadingButtonWidget(
                 label: 'Add card',
                 onTap: () async {
+                  if (!PaymentService.isCardValid(
+                      cardNumber: cardNumber,
+                      cvvCode: cvvCode,
+                      expiryDate: expiryDate)) {
+                    showSnackBar(
+                      content: 'Please fill all input',
+                      isSuccess: false,
+                    );
+                    return;
+                  }
+
                   Get.back();
+
                   return PaymentService.addCard(
                     cardNumber: cardNumber,
                     cvvCode: cvvCode,
