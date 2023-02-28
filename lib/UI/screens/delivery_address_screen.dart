@@ -195,7 +195,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   phoneInputController.text = '';
                 }),
             SizedBox(
-              height: AppDimension.contentPadding,
+              height: MediaQuery.of(context).padding.bottom + 12,
             ),
           ],
         ),

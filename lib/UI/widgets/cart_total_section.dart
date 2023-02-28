@@ -53,9 +53,10 @@ class _CartTotalSectionState extends State<CartTotalSection> {
 
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimension.contentPadding,
-        vertical: AppDimension.contentPadding,
+      padding: EdgeInsets.only(
+        left: AppDimension.contentPadding,
+        right: AppDimension.contentPadding,
+        top: AppDimension.contentPadding,
       ),
       child: Column(
         children: [
@@ -176,6 +177,9 @@ class _CartTotalSectionState extends State<CartTotalSection> {
             onTap: () {
               widget.onTapButton();
             },
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).padding.bottom + 12,
           ),
         ],
       ),

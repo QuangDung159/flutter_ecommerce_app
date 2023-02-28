@@ -69,9 +69,10 @@ class _CartScreenState extends State<CartScreen> {
             ),
             Container(
               color: Colors.white,
-              padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.contentPadding,
-                vertical: AppDimension.contentPadding,
+              padding: EdgeInsets.only(
+                left: AppDimension.contentPadding,
+                right: AppDimension.contentPadding,
+                top: AppDimension.contentPadding,
               ),
               child: Obx(
                 () => Column(
@@ -137,6 +138,9 @@ class _CartScreenState extends State<CartScreen> {
                           Get.to(() => DeliveryScreen());
                         }
                       },
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.bottom + 12,
                     ),
                   ],
                 ),

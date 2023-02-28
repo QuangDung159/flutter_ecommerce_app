@@ -20,12 +20,13 @@ class _BottomButtonState extends State<BottomButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 93,
+      height: 93 + 15,
+      alignment: Alignment.bottomCenter,
       color: Colors.white,
       padding: EdgeInsets.only(
         left: AppDimension.contentPadding,
         right: AppDimension.contentPadding,
-        bottom: 30,
+        bottom: MediaQuery.of(context).padding.bottom + 12,
         top: 15,
       ),
       child: LoadingButtonWidget(

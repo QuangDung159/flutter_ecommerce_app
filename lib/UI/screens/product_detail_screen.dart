@@ -53,7 +53,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height - 93,
+            height: MediaQuery.of(context).size.height - (93 + 15),
             child: Stack(
               children: [
                 renderMainContent(context, product, isSale),
