@@ -151,12 +151,12 @@ class CartServices {
     }
   }
 
-  static removeCart({
+  static void removeCart({
     required ProductModel product,
     required int quantity,
     bool? isShowSnackBar,
     bool? removeAll,
-  }) {
+  }) async {
     int theSameItemIndex =
         listCart.indexWhere((element) => element.product.id == product.id);
 
@@ -165,24 +165,27 @@ class CartServices {
         removeCartCheckout(listCart[theSameItemIndex]);
         listCart.removeAt(theSameItemIndex);
       } else {
-        CartItemModel cartItemToUpdate = CartItemModel(
-          id: product.id,
-          product: product,
-          quantity: listCart[theSameItemIndex].quantity - 1,
+        Map<String, dynamic> reqBody = {
+          'quantity': listCart[theSameItemIndex].quantity - quantity,
+        };
+
+        final res = await httpPut(
+          uri:
+              '$baseUrl/cartItem/${getxAppController.userLogged.value!.id}/${listCart[theSameItemIndex].id}',
+          reqBody: reqBody,
         );
 
-        listCart.replaceRange(
-          theSameItemIndex,
-          theSameItemIndex + 1,
-          [cartItemToUpdate],
-        );
-
-        updateQuantityCartCheckout(
-          cartItemToUpdate,
-          cartItemToUpdate.quantity,
-        );
+        if (!isRequestSuccess(res)) {
+          showSnackBar(
+            content: 'Something went wrong!',
+            isSuccess: false,
+          );
+          return;
+        }
       }
     }
+
+    getListCart();
 
     if (isShowSnackBar ?? true) {
       showSnackBar(
