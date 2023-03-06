@@ -151,14 +151,17 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             renderDropdownButton(
               getxAppController.citySelected.value.name,
               'city',
+              getxAppController.citySelected.value.id,
             ),
             renderDropdownButton(
               getxAppController.districtSelected.value.name,
               'district',
+              getxAppController.districtSelected.value.id
             ),
             renderDropdownButton(
               getxAppController.wardSelected.value.name,
               'ward',
+              getxAppController.wardSelected.value.id
             ),
             LoadingButtonWidget(
                 label: 'Add',
@@ -203,9 +206,14 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     );
   }
 
-  Widget renderDropdownButton(String title, String locationType) {
+  Widget renderDropdownButton(
+      String title, String locationType, String itemId) {
     return GestureDetector(
       onTap: () {
+        if (itemId == '1') {
+          return;
+        }
+        
         FocusManager.instance.primaryFocus?.unfocus();
         showMaterialModalBottomSheet(
           context: context,
@@ -313,7 +321,8 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           listRender.add(
             GestureDetector(
               onTap: () {
-                DistrictModel district = AddressService.getDistrictDefault(cityItem);
+                DistrictModel district =
+                    AddressService.getDistrictDefault(cityItem);
                 WardModel ward = AddressService.getWardDefault(district);
 
                 getx.setData(
@@ -340,7 +349,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
 
                 getx.setData(
                   districtSelected: districtItem,
-                  wardSelected:ward,
+                  wardSelected: ward,
                 );
                 Navigator.of(context).pop();
               },
