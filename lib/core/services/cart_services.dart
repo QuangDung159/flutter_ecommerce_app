@@ -94,6 +94,7 @@ class CartServices {
       }
 
       if (isShowSnackBar ?? true) {
+        getListCart();
         showSnackBar(
           title: 'Add to cart success',
           content: product.name,
