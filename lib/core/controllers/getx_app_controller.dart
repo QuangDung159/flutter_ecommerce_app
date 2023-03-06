@@ -7,12 +7,12 @@ import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
+import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
-import 'package:flutter_ecommerce_app/core/services/payment_service.dart';
 import 'package:get/get.dart';
 
 class GetxAppController extends GetxController {
@@ -60,6 +60,12 @@ class GetxAppController extends GetxController {
 
   final paymentCardDefault = Rxn<PaymentCardModel>(null);
 
+  final listArrivals = RxList<ProductModel>([]);
+
+  final listSaleItems = RxList<ProductModel>([]);
+
+  final listRecentlyViewed = RxList<ProductModel>([]);
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -76,6 +82,9 @@ class GetxAppController extends GetxController {
     List<NotificationModel>? listNoti,
     List<CartItemModel>? listCartItemCheckout,
     List<PaymentCardModel>? listPaymentCard,
+    List<ProductModel>? listArrivals,
+    List<ProductModel>? listSaleItems,
+    List<ProductModel>? listRecentlyViewed,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -135,6 +144,18 @@ class GetxAppController extends GetxController {
 
     if (listPaymentCard != null) {
       this.listPaymentCard.value = listPaymentCard;
+    }
+
+    if (listArrivals != null) {
+      this.listArrivals.value = listArrivals;
+    }
+
+    if (listSaleItems != null) {
+      this.listSaleItems.value = listSaleItems;
+    }
+
+    if (listRecentlyViewed != null) {
+      this.listRecentlyViewed.value = listRecentlyViewed;
     }
   }
 
