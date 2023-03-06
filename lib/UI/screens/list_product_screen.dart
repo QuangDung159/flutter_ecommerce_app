@@ -24,6 +24,7 @@ class ListProductScreen extends StatefulWidget {
 
 class _ListProductScreenState extends State<ListProductScreen> {
   List<ProductModel> listProduct = [];
+  int page = 1;
 
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -32,24 +33,35 @@ class _ListProductScreenState extends State<ListProductScreen> {
   void initState() {
     super.initState();
 
-    fetchListListProduct(widget.category ?? '');
+    fetchListListProduct(widget.category ?? '', 1);
   }
 
-  Future<void> fetchListListProduct(String category) async {
-    List<ProductModel> list =
-        await ProductService.fetchListProductHome(category: category);
+  Future<void> fetchListListProduct(String category, int page) async {
+    List<ProductModel> list = await ProductService.fetchListProductHome(
+      category: category,
+      page: page,
+    );
     setState(() {
-      listProduct = list;
+      listProduct = [...listProduct, ...list];
     });
   }
 
   void _onRefresh() async {
-    await fetchListListProduct(widget.category ?? '');
+    setState(() {
+      listProduct = [];
+      page = 1;
+    });
+
+    await fetchListListProduct(widget.category ?? '', 1);
     _refreshController.refreshCompleted();
   }
 
   void _onLoading() async {
-    await fetchListListProduct(widget.category ?? '');
+    await fetchListListProduct(widget.category ?? '', page + 1);
+
+    setState(() {
+      page = page + 1;
+    });
     _refreshController.loadComplete();
   }
 
