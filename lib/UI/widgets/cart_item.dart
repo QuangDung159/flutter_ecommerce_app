@@ -39,7 +39,13 @@ class _CartItemState extends State<CartItem> {
             extentRatio: 64 / MediaQuery.of(context).size.width,
             openThreshold: 0.1,
             closeThreshold: 0.8,
-            // dismissible: DismissiblePane(onDismissed: () {}),
+            dismissible: DismissiblePane(onDismissed: () {
+              CartServices.removeCart(
+                product: widget.cartItem.product,
+                quantity: 1,
+                removeAll: true,
+              );
+            }),
             motion: BehindMotion(),
             children: [
               Expanded(
