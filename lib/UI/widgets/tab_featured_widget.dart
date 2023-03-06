@@ -24,21 +24,31 @@ class TabFeaturedWidget extends StatefulWidget {
 
 class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
     with AutomaticKeepAliveClientMixin {
-  List<ProductModel> listProductFetched = [];
+  List<ProductModel> listArrivalsFetched = [];
+  List<ProductModel> listSaleItemsFetched = [];
 
   @override
   void initState() {
     super.initState();
 
-    // listProductFetched = ProductService.fetchListProductHome();
-    fetch();
+    // listArrivalsFetched = ProductService.fetchListProductHome();
+    fetchListArrivals('Sale');
+    fetchListArrivals('New Arrivals');
   }
 
-  void fetch() async {
-    List<ProductModel> list = await ProductService.fetchListProductHome(category: 'New Arrivals');
-    setState(() {
-      listProductFetched = list;
-    });
+  void fetchListArrivals(String category) async {
+    List<ProductModel> list =
+        await ProductService.fetchListProductHome(category: category);
+
+    if (category == 'Sale') {
+      setState(() {
+        listSaleItemsFetched = list;
+      });
+    } else {
+      setState(() {
+        listArrivalsFetched = list;
+      });
+    }
   }
 
   @override
@@ -108,7 +118,7 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
               height: 30,
             ),
             // FutureBuilder(
-            //   future: listProductFetched,
+            //   future: listArrivalsFetched,
             //   builder: (context, snapshot) {
             //     if (snapshot.hasData) {
             //       final data = snapshot.data;
@@ -140,7 +150,7 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
             // ),
             ListProductHorizontal(
               title: 'New Arrivals',
-              listProduct: listProductFetched,
+              listProduct: listArrivalsFetched,
               isShowSeeAll: true,
               onTapSeeAll: () => Get.to(
                 () => ListProductScreen(title: 'New Arrivals'),
@@ -151,7 +161,7 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
             ),
             ListProductHorizontal(
               title: 'Sale Items',
-              listProduct: listProductDummy,
+              listProduct: listSaleItemsFetched,
               isShowSeeAll: true,
               onTapSeeAll: () => Get.to(
                 () => ListProductScreen(title: 'Sale Items'),
