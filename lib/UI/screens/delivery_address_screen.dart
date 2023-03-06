@@ -153,16 +153,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               'city',
               getxAppController.citySelected.value.id,
             ),
-            renderDropdownButton(
-              getxAppController.districtSelected.value.name,
-              'district',
-              getxAppController.districtSelected.value.id
-            ),
-            renderDropdownButton(
-              getxAppController.wardSelected.value.name,
-              'ward',
-              getxAppController.wardSelected.value.id
-            ),
+            renderDropdownButton(getxAppController.districtSelected.value.name,
+                'district', getxAppController.districtSelected.value.id),
+            renderDropdownButton(getxAppController.wardSelected.value.name,
+                'ward', getxAppController.wardSelected.value.id),
             LoadingButtonWidget(
                 label: 'Add',
                 onTap: () {
@@ -207,13 +201,16 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
   }
 
   Widget renderDropdownButton(
-      String title, String locationType, String itemId) {
+    String title,
+    String locationType,
+    String itemId,
+  ) {
     return GestureDetector(
       onTap: () {
         if (itemId == '1') {
           return;
         }
-        
+
         FocusManager.instance.primaryFocus?.unfocus();
         showMaterialModalBottomSheet(
           context: context,
@@ -325,6 +322,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     AddressService.getDistrictDefault(cityItem);
                 WardModel ward = AddressService.getWardDefault(district);
 
+                if (cityItem.id == citySelected.id) {
+                  return;
+                }
+
                 getx.setData(
                   citySelected: cityItem,
                   districtSelected: district,
@@ -347,6 +348,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               onTap: () {
                 WardModel ward = AddressService.getWardDefault(districtItem);
 
+                if (districtItem.id == districtSelected.id) {
+                  return;
+                }
+
                 getx.setData(
                   districtSelected: districtItem,
                   wardSelected: ward,
@@ -366,6 +371,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           listRender.add(
             GestureDetector(
               onTap: () {
+                if (wardItem.id == wardSelected.id) {
+                  return;
+                }
+
                 getx.setData(
                   wardSelected: wardItem,
                 );
