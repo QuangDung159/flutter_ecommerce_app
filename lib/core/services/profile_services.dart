@@ -38,7 +38,8 @@ class ProfileService {
           email: LocalStorageHelper.getValue('EMAIL'),
           displayName: displayName ?? 'No name',
           photoUrl: LocalStorageHelper.getValue('PHOTO_URL'),
-          id: LocalStorageHelper.getValue('OPEN_ID'),
+          // id: LocalStorageHelper.getValue('OPEN_ID'),
+          id: '640437434936ae9c96c8d610',
         ),
       );
     }
@@ -117,7 +118,7 @@ class ProfileService {
         email: email,
         displayName: displayName,
         photoUrl: photoUrl,
-        id: id,
+        id: '640437434936ae9c96c8d610',
       ),
     );
 

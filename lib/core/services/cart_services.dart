@@ -91,7 +91,7 @@ class CartServices {
 
         Map<String, dynamic> reqBody = {
           'product_id': product.id,
-          'user_id': '640437434936ae9c96c8d610',
+          'user_id': getxAppController.userLogged.value!.id,
           'quantity': quantity,
         };
 
