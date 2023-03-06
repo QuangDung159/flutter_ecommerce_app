@@ -66,6 +66,8 @@ class GetxAppController extends GetxController {
 
   final listRecentlyViewed = RxList<ProductModel>([]);
 
+  final listCity = RxList<CityModel>([]);
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -85,6 +87,7 @@ class GetxAppController extends GetxController {
     List<ProductModel>? listArrivals,
     List<ProductModel>? listSaleItems,
     List<ProductModel>? listRecentlyViewed,
+    List<CityModel>? listCity,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -156,6 +159,10 @@ class GetxAppController extends GetxController {
 
     if (listRecentlyViewed != null) {
       this.listRecentlyViewed.value = listRecentlyViewed;
+    }
+
+    if (listCity != null) {
+      this.listCity.value = listCity;
     }
   }
 

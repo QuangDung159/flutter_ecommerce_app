@@ -309,7 +309,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
 
     switch (locationType) {
       case 'city':
-        for (var cityItem in listCityDummy) {
+        for (var cityItem in getx.listCity) {
           listRender.add(
             GestureDetector(
               onTap: () {
