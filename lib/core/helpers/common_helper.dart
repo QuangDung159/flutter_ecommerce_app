@@ -232,7 +232,7 @@ DateTimeModel getDateTimeFromString(String dateTime) {
   );
 }
 
-int findCartInListCart(List<CartItemModel> listCartItem, int cartId) {
+int findCartInListCart(List<CartItemModel> listCartItem, String cartId) {
   return listCartItem.indexWhere((element) => element.id == cartId);
 }
 
@@ -274,4 +274,12 @@ String getCardLogo(String cardNumber) {
     default:
       return AssetHelper.iconCardDefault;
   }
+}
+
+Uri parseUri(String url) {
+  return Uri.parse(url);
+}
+
+bool isRequestSuccess(res) {
+  return res.statusCode == 200 || res.statusCode == 201;
 }

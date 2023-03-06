@@ -1,7 +1,7 @@
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 
 class CartItemModel {
-  final int id;
+  final String id;
   final ProductModel product;
   final int quantity;
   final dynamic variant;
@@ -16,7 +16,7 @@ class CartItemModel {
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     {
       return CartItemModel(
-        id: json['id'],
+        id: json['_id'],
         product: json['product'],
         quantity: json['quantity'],
         variant: json['variant'],
