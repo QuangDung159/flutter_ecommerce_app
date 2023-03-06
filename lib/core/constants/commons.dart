@@ -1490,3 +1490,6 @@ List<PaymentCardModel> listPaymentCardDummy = [
     clientSecret: 'clientSecret',
   ),
 ];
+
+const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
+// const String baseUrl = 'http://localhost:5001/api/v1';
