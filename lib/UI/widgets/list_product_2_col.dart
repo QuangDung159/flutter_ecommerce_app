@@ -10,9 +10,11 @@ class ListProduct2Col extends StatefulWidget {
   const ListProduct2Col({
     super.key,
     required this.listProduct,
+    this.paddingBottom,
   });
 
   final List<ProductModel> listProduct;
+  final double? paddingBottom;
 
   @override
   State<ListProduct2Col> createState() => _ListProduct2ColState();
@@ -109,8 +111,10 @@ class _ListProduct2ColState extends State<ListProduct2Col> {
   Widget build(BuildContext context) {
     generateList();
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimension.contentPadding,
+      padding: EdgeInsets.only(
+        left: AppDimension.contentPadding,
+        right: AppDimension.contentPadding,
+        bottom: widget.paddingBottom ?? 0,
       ),
       color: Colors.white,
       child: Column(

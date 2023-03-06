@@ -42,26 +42,29 @@ class _ListProductScreenState extends State<ListProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            MyAppBar(
-              hasBackButton: true,
-              title: widget.title,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ListProduct2Col(
-                      listProduct: listProduct,
-                    ),
-                  ],
-                ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).padding.top,
+          ),
+          MyAppBar(
+            hasBackButton: true,
+            title: widget.title,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListProduct2Col(
+                    listProduct: listProduct,
+                    paddingBottom: MediaQuery.of(context).padding.bottom
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
