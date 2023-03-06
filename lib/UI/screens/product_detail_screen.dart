@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/search_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/bottom_button.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_icon.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_product_horizontal.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -53,7 +54,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       body: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height - (93 + 15),
+            height: MediaQuery.of(context).size.height - (93 + 13),
             child: Stack(
               children: [
                 renderMainContent(context, product, isSale),
@@ -61,26 +62,36 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ],
             ),
           ),
-          BottomButton(
-            title: 'Add to cart',
-            onTap: () {
-              if (getxApp.userLogged.value == null) {
-                // user doesn't login
-                ProfileService.showSigninBottomSheet(context,
-                    onSignInSuccess: () {
-                  Navigator.pop(context);
-                  CartServices.addCart(
+          Expanded(child: Container()),
+          Container(
+            padding: EdgeInsets.only(
+              left: AppDimension.contentPadding,
+              right: AppDimension.contentPadding,
+              bottom: MediaQuery.of(context).padding.bottom + 12,
+              top: 12,
+            ),
+            color: Colors.white,
+            child: LoadingButtonWidget(
+              label: 'Add to cart',
+              onTap: () async {
+                if (getxApp.userLogged.value == null) {
+                  // user doesn't login
+                  return ProfileService.showSigninBottomSheet(context,
+                      onSignInSuccess: () {
+                    Navigator.pop(context);
+                    CartServices.addToCart(
+                      product: product,
+                      quantity: 1,
+                    );
+                  });
+                } else {
+                  return CartServices.addToCart(
                     product: product,
                     quantity: 1,
                   );
-                });
-              } else {
-                CartServices.addToCart(
-                  product: product,
-                  quantity: 1,
-                );
-              }
-            },
+                }
+              },
+            ),
           )
         ],
       ),
