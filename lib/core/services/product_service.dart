@@ -9,11 +9,9 @@ class ProductService {
   static Future<List<ProductModel>> fetchListProductHome() async {
     try {
       final res = await http.get(parseUri('$baseUrl/product/100/1'));
-      printCustom(title: 'res :>>', content: res);
 
       if (isRequestSuccess(res)) {
         Iterable list = json.decode(res.body)['data']['listProduct'];
-        printCustom(title: 'list :>>', content: list);
 
         List<ProductModel> listPhoto = List<ProductModel>.from(
           list.map(
