@@ -7,7 +7,6 @@ import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.da
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
@@ -15,6 +14,7 @@ import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/address_service.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -304,8 +304,8 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     DistrictModel districtSelected = getx.districtSelected.value;
     WardModel wardSelected = getx.wardSelected.value;
 
-    List<DistrictModel> listDistrict = citySelected.listDistrict ?? [];
-    List<WardModel> listWard = districtSelected.listWard ?? [];
+    List<DistrictModel> listDistrict = citySelected.listDistrict;
+    List<WardModel> listWard = districtSelected.listWard;
 
     switch (locationType) {
       case 'city':
@@ -313,10 +313,13 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           listRender.add(
             GestureDetector(
               onTap: () {
+                DistrictModel district = AddressService.getDistrictDefault(cityItem);
+                WardModel ward = AddressService.getWardDefault(district);
+
                 getx.setData(
                   citySelected: cityItem,
-                  districtSelected: cityItem.listDistrict![0],
-                  wardSelected: cityItem.listDistrict![0].listWard![0],
+                  districtSelected: district,
+                  wardSelected: ward,
                 );
                 Navigator.of(context).pop();
               },
@@ -333,9 +336,11 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           listRender.add(
             GestureDetector(
               onTap: () {
+                WardModel ward = AddressService.getWardDefault(districtItem);
+
                 getx.setData(
                   districtSelected: districtItem,
-                  wardSelected: districtItem.listWard![0],
+                  wardSelected:ward,
                 );
                 Navigator.of(context).pop();
               },

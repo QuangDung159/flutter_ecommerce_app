@@ -3,12 +3,12 @@ import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 class DistrictModel {
   final String name;
   final String id;
-  final List<WardModel>? listWard;
+  final List<WardModel> listWard;
 
   DistrictModel({
     required this.name,
     required this.id,
-    this.listWard,
+    required this.listWard,
   });
 
   factory DistrictModel.fromJson(Map<String, dynamic> json) {

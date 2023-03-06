@@ -266,51 +266,10 @@ List<PaymentMethodModel> listPaymentMethodDummy = [
 ];
 
 List<CityModel> listCityDummy = [
-  CityModel(id: '1', name: 'Ha Noi City', listDistrict: [
-    DistrictModel(name: 'Dong Da District', id: '1', listWard: [
-      WardModel(id: '1', name: 'Cat Linh Ward'),
-      WardModel(id: '2', name: 'Hang Bot Ward'),
-      WardModel(id: '3', name: 'Kham Thien Ward'),
+  CityModel(id: '1', name: 'No city available', listDistrict: [
+    DistrictModel(name: 'No district available', id: '1', listWard: [
+      WardModel(id: '1', name: 'No ward available'),
     ]),
-    DistrictModel(name: 'Hoan Kiem District', id: '2', listWard: [
-      WardModel(id: '4', name: 'Chuong Duong Ward'),
-      WardModel(id: '5', name: 'Cua Dong Ward'),
-      WardModel(id: '6', name: 'Cua Nam Ward'),
-    ]),
-    DistrictModel(name: 'Ba Dinh District', id: '3', listWard: [
-      WardModel(id: '7', name: 'Cau Giay Ward'),
-      WardModel(id: '8', name: 'Doi Can Ward'),
-      WardModel(id: '9', name: 'Dien Bien Ward'),
-    ]),
-  ]),
-  CityModel(id: '2', name: 'Ho Chi Minh City', listDistrict: [
-    DistrictModel(
-      name: 'District 1',
-      id: '4',
-      listWard: [
-        WardModel(id: '10', name: 'Ben Nghe Ward'),
-        WardModel(id: '11', name: 'Ben Thanh Ward'),
-        WardModel(id: '12', name: 'Co Giang Ward'),
-      ],
-    ),
-    DistrictModel(
-      name: 'Binh Thanh District',
-      id: '5',
-      listWard: [
-        WardModel(id: '13', name: 'Ward 1'),
-        WardModel(id: '14', name: 'Ward 2'),
-        WardModel(id: '15', name: 'Ward 3'),
-      ],
-    ),
-    DistrictModel(
-      name: 'Tan Phu District',
-      id: '6',
-      listWard: [
-        WardModel(id: '16', name: 'Hiep Tan Ward'),
-        WardModel(id: '17', name: 'Tay Thanh Ward'),
-        WardModel(id: '18', name: 'Phu Thanh Ward'),
-      ],
-    ),
   ]),
 ];
 
