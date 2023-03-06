@@ -121,6 +121,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
       padding: EdgeInsets.symmetric(
         horizontal: AppDimension.contentPadding,
       ),
+      margin: EdgeInsets.only(bottom: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
