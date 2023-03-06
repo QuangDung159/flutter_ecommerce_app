@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/benefit_banner.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/product_service.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TabFeaturedWidget extends StatefulWidget {
   const TabFeaturedWidget({super.key});
@@ -27,16 +29,25 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
   List<ProductModel> listArrivalsFetched = [];
   List<ProductModel> listSaleItemsFetched = [];
 
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
   @override
   void initState() {
     super.initState();
 
     // listArrivalsFetched = ProductService.fetchListProductHome();
-    fetchListListProduct('Sale');
-    fetchListListProduct('New Arrivals');
+    onFetch();
   }
 
-  void fetchListListProduct(String category) async {
+  onFetch() async {
+    await Future.wait([
+      fetchListListProduct('Sale'),
+      fetchListListProduct('New Arrivals'),
+    ]);
+  }
+
+  Future<void> fetchListListProduct(String category) async {
     List<ProductModel> list = await ProductService.fetchListProductHome(
       category: category,
       limit: 5,
@@ -54,166 +65,213 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
     }
   }
 
+  void _onRefresh() async {
+    // monitor network fetch
+    await onFetch();
+    // if failed, use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  Future<void> _onLoading() async {
+    // monitor network fetch
+    await onFetch();
+    // if failed, use loadFailed(),if no data return,use LoadNoData()
+    // items.add((items.length + 1).toString());
+    if (mounted) setState(() {});
+    _refreshController.loadComplete();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            Container(
-              height: 44,
-              color: AppColors.blackPrimary,
-              child: Center(
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppDimension.contentPadding,
-                  ),
-                  child: Text(
-                    'End of Season Sale: Up to 50% off + Low in Stock',
-                    style: TextStyle(
-                      color: Colors.white,
+    return SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: true,
+      header: WaterDropHeader(),
+      controller: _refreshController,
+      onRefresh: _onRefresh,
+      onLoading: _onLoading,
+      footer: CustomFooter(
+        loadStyle: LoadStyle.ShowWhenLoading,
+        builder: (context, mode) {
+          Widget body = Text('No more Data');
+          if (mode == LoadStatus.idle) {
+            body = CupertinoActivityIndicator();
+          }
+          if (mode == LoadStatus.loading) {
+            body = CupertinoActivityIndicator();
+          }
+          if (mode == LoadStatus.failed) {
+            body = Text('Load Failed!Click retry!');
+          }
+          if (mode == LoadStatus.canLoading) {
+            body = Text('Release to load more');
+          }
+
+          return SizedBox(
+            height: 55.0,
+            child: Center(child: body),
+          );
+        },
+      ),
+      child: SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
+                height: 44,
+                color: AppColors.blackPrimary,
+                child: Center(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppDimension.contentPadding,
+                    ),
+                    child: Text(
+                      'End of Season Sale: Up to 50% off + Low in Stock',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            renderTopPanel(
-              'Under Amour',
-              AssetHelper.panelHome1,
-              onTapShopNow: () => Get.to(
-                () => ListProductScreen(
-                  title: 'Under Amour',
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Text(
-              'Summer Sale',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'Up to 50% off with code: SS50',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Text(
-              'Selected marked products excluded from promo',
-              style: TextStyle(
-                fontSize: 12,
-              ),
-            ),
-            SizedBox(
-              height: 18,
-            ),
-            ListCategory(),
-            SizedBox(
-              height: 30,
-            ),
-            // FutureBuilder(
-            //   future: listArrivalsFetched,
-            //   builder: (context, snapshot) {
-            //     if (snapshot.hasData) {
-            //       final data = snapshot.data;
-            //       return ListProductHorizontal(
-            //         title: 'New Arrivals',
-            //         listProduct: data!,
-            //         isShowSeeAll: true,
-            //         onTapSeeAll: () => Get.to(
-            //           () => ListProductScreen(title: 'New Arrivals'),
-            //         ),
-            //       );
-            //     } else {
-            //       if (snapshot.hasData) {
-            //         return const Center(
-            //           child: Text(
-            //             'Fail',
-            //           ),
-            //         );
-            //       }
-            //       return const Center(
-            //         child: SizedBox(
-            //           width: 30,
-            //           height: 30,
-            //           child: CircularProgressIndicator(),
-            //         ),
-            //       );
-            //     }
-            //   },
-            // ),
-            ListProductHorizontal(
-              title: 'New Arrivals',
-              listProduct: listArrivalsFetched,
-              isShowSeeAll: true,
-              onTapSeeAll: () => Get.to(
-                () => ListProductScreen(
-                  title: 'New Arrivals',
-                  category: 'New Arrivals',
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            ListProductHorizontal(
-              title: 'Sale Items',
-              listProduct: listSaleItemsFetched,
-              isShowSeeAll: true,
-              onTapSeeAll: () => Get.to(
-                () => ListProductScreen(
-                  title: 'Sale Items',
-                  category: 'Sale',
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppDimension.contentPadding,
-              ),
-              child: renderTopPanel(
-                'New Arrivals',
-                AssetHelper.panelHome2,
-                hasBorderRadius: true,
-                titlePadding: 16,
+              renderTopPanel(
+                'Under Amour',
+                AssetHelper.panelHome1,
                 onTapShopNow: () => Get.to(
                   () => ListProductScreen(
-                    title: 'New Arrivals',
+                    title: 'Under Amour',
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            ListProductHorizontal(
-              title: 'Recently Viewed',
-              listProduct: listProductDummy,
-              isShowSeeAll: true,
-              onTapSeeAll: () => Get.to(
-                () => ListProductScreen(
-                  title: 'Recently Viewed',
-                  category: 'Recently',
+              SizedBox(
+                height: 24,
+              ),
+              Text(
+                'Summer Sale',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            BenefitBanner(),
-          ],
+              Text(
+                'Up to 50% off with code: SS50',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              Text(
+                'Selected marked products excluded from promo',
+                style: TextStyle(
+                  fontSize: 12,
+                ),
+              ),
+              SizedBox(
+                height: 18,
+              ),
+              ListCategory(),
+              SizedBox(
+                height: 30,
+              ),
+              // FutureBuilder(
+              //   future: listArrivalsFetched,
+              //   builder: (context, snapshot) {
+              //     if (snapshot.hasData) {
+              //       final data = snapshot.data;
+              //       return ListProductHorizontal(
+              //         title: 'New Arrivals',
+              //         listProduct: data!,
+              //         isShowSeeAll: true,
+              //         onTapSeeAll: () => Get.to(
+              //           () => ListProductScreen(title: 'New Arrivals'),
+              //         ),
+              //       );
+              //     } else {
+              //       if (snapshot.hasData) {
+              //         return const Center(
+              //           child: Text(
+              //             'Fail',
+              //           ),
+              //         );
+              //       }
+              //       return const Center(
+              //         child: SizedBox(
+              //           width: 30,
+              //           height: 30,
+              //           child: CircularProgressIndicator(),
+              //         ),
+              //       );
+              //     }
+              //   },
+              // ),
+              ListProductHorizontal(
+                title: 'New Arrivals',
+                listProduct: listArrivalsFetched,
+                isShowSeeAll: true,
+                onTapSeeAll: () => Get.to(
+                  () => ListProductScreen(
+                    title: 'New Arrivals',
+                    category: 'New Arrivals',
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              ListProductHorizontal(
+                title: 'Sale Items',
+                listProduct: listSaleItemsFetched,
+                isShowSeeAll: true,
+                onTapSeeAll: () => Get.to(
+                  () => ListProductScreen(
+                    title: 'Sale Items',
+                    category: 'Sale',
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppDimension.contentPadding,
+                ),
+                child: renderTopPanel(
+                  'New Arrivals',
+                  AssetHelper.panelHome2,
+                  hasBorderRadius: true,
+                  titlePadding: 16,
+                  onTapShopNow: () => Get.to(
+                    () => ListProductScreen(
+                      title: 'New Arrivals',
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              ListProductHorizontal(
+                title: 'Recently Viewed',
+                listProduct: listProductDummy,
+                isShowSeeAll: true,
+                onTapSeeAll: () => Get.to(
+                  () => ListProductScreen(
+                    title: 'Recently Viewed',
+                    category: 'Recently',
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              BenefitBanner(),
+            ],
+          ),
         ),
       ),
     );
