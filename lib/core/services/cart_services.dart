@@ -8,6 +8,7 @@ import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -54,6 +55,64 @@ class CartServices {
         title: 'Add to cart success',
         content: product.name,
       );
+    }
+  }
+
+  static void addToCart({
+    required ProductModel product,
+    required int quantity,
+    bool? isShowSnackBar,
+  }) async {
+    try {
+      int theSameItemId =
+          listCart.indexWhere((element) => element.product.id == product.id);
+
+      if (theSameItemId != -1) {
+        CartItemModel cartItemToUpdate = CartItemModel(
+          id: product.id,
+          product: product,
+          quantity: listCart[theSameItemId].quantity + quantity,
+        );
+
+        listCart.replaceRange(
+          theSameItemId,
+          theSameItemId + 1,
+          [cartItemToUpdate],
+        );
+
+        updateQuantityCartCheckout(
+          cartItemToUpdate,
+          cartItemToUpdate.quantity,
+        );
+      } else {
+        // listCart.add(
+        //   CartItemModel(id: product.id, product: product, quantity: quantity),
+        // );
+
+        Map<String, dynamic> reqBody = {
+          'product_id': product.id,
+          'user_id': '640437434936ae9c96c8d610',
+          'quantity': quantity,
+        };
+
+        final res = await httpPost(uri: '$baseUrl/cartItem', reqBody: reqBody);
+
+        if (!isRequestSuccess(res)) {
+          showSnackBar(
+            content: 'Something went wrong!',
+            isSuccess: false,
+          );
+        }
+      }
+
+      if (isShowSnackBar ?? true) {
+        showSnackBar(
+          title: 'Add to cart success',
+          content: product.name,
+        );
+      }
+    } catch (e) {
+      throw Exception(e);
     }
   }
 

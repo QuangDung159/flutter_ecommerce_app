@@ -75,7 +75,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   );
                 });
               } else {
-                CartServices.addCart(
+                CartServices.addToCart(
                   product: product,
                   quantity: 1,
                 );
