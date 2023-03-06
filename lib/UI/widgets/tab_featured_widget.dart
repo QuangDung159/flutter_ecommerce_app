@@ -32,11 +32,11 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
     super.initState();
 
     // listArrivalsFetched = ProductService.fetchListProductHome();
-    fetchListArrivals('Sale');
-    fetchListArrivals('New Arrivals');
+    fetchListListProduct('Sale');
+    fetchListListProduct('New Arrivals');
   }
 
-  void fetchListArrivals(String category) async {
+  void fetchListListProduct(String category) async {
     List<ProductModel> list =
         await ProductService.fetchListProductHome(category: category);
 
@@ -153,7 +153,10 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
               listProduct: listArrivalsFetched,
               isShowSeeAll: true,
               onTapSeeAll: () => Get.to(
-                () => ListProductScreen(title: 'New Arrivals'),
+                () => ListProductScreen(
+                  title: 'New Arrivals',
+                  category: 'New Arrivals',
+                ),
               ),
             ),
             SizedBox(
@@ -164,7 +167,10 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
               listProduct: listSaleItemsFetched,
               isShowSeeAll: true,
               onTapSeeAll: () => Get.to(
-                () => ListProductScreen(title: 'Sale Items'),
+                () => ListProductScreen(
+                  title: 'Sale Items',
+                  category: 'Sale',
+                ),
               ),
             ),
             SizedBox(
@@ -194,7 +200,10 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
               listProduct: listProductDummy,
               isShowSeeAll: true,
               onTapSeeAll: () => Get.to(
-                () => ListProductScreen(title: 'Recently Viewed'),
+                () => ListProductScreen(
+                  title: 'Recently Viewed',
+                  category: 'Recently',
+                ),
               ),
             ),
             SizedBox(

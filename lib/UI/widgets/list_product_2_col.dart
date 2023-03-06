@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/product_item_horizontal.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/sort_filter_section_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 
 class ListProduct2Col extends StatefulWidget {
@@ -26,18 +25,17 @@ class _ListProduct2ColState extends State<ListProduct2Col> {
   @override
   void initState() {
     super.initState();
-    generateList();
   }
 
   void generateList() {
     List<ProductModel> left = [];
     List<ProductModel> right = [];
 
-    for (var i = 0; i < listProductDummy.length; i++) {
+    for (var i = 0; i < widget.listProduct.length; i++) {
       if (i % 2 != 0) {
-        right.add(listProductDummy[i]);
+        right.add(widget.listProduct[i]);
       } else {
-        left.add(listProductDummy[i]);
+        left.add(widget.listProduct[i]);
       }
     }
 
@@ -109,6 +107,7 @@ class _ListProduct2ColState extends State<ListProduct2Col> {
 
   @override
   Widget build(BuildContext context) {
+    generateList();
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: AppDimension.contentPadding,
