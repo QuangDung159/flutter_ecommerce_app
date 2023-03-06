@@ -19,6 +19,21 @@ Future<Response> httpPost({
   return res;
 }
 
+Future<Response> httpPut({
+  required String uri,
+  required Map<String, dynamic> reqBody,
+}) async {
+  final res = await http.put(
+    parseUri(uri),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(reqBody),
+  );
+
+  return res;
+}
+
 Future<Response> httpGet({required String uri}) async {
   final res = await http.get(
     parseUri(uri),

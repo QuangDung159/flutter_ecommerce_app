@@ -52,19 +52,39 @@ class CartServices {
     bool? isShowSnackBar,
   }) async {
     try {
-      int theSameItemId =
+      int theSameItemIndex =
           listCart.indexWhere((element) => element.product.id == product.id);
 
-      if (theSameItemId != -1) {
+      print(theSameItemIndex);
+
+      if (theSameItemIndex != -1) {
         CartItemModel cartItemToUpdate = CartItemModel(
           id: product.id,
           product: product,
-          quantity: listCart[theSameItemId].quantity + quantity,
+          quantity: listCart[theSameItemIndex].quantity + quantity,
         );
 
+        Map<String, dynamic> reqBody = {
+          'quantity': quantity,
+        };
+
+        final res = await httpPut(
+          uri:
+              '$baseUrl/cartItem/${getxAppController.userLogged.value!.id}/${listCart[theSameItemIndex].id}',
+          reqBody: reqBody,
+        );
+
+        if (!isRequestSuccess(res)) {
+          showSnackBar(
+            content: 'Something went wrong!',
+            isSuccess: false,
+          );
+          return;
+        }
+
         listCart.replaceRange(
-          theSameItemId,
-          theSameItemId + 1,
+          theSameItemIndex,
+          theSameItemIndex + 1,
           [cartItemToUpdate],
         );
 
@@ -90,6 +110,7 @@ class CartServices {
             content: 'Something went wrong!',
             isSuccess: false,
           );
+          return;
         }
       }
 
@@ -159,23 +180,23 @@ class CartServices {
     bool? isShowSnackBar,
     bool? removeAll,
   }) {
-    int theSameItemId =
+    int theSameItemIndex =
         listCart.indexWhere((element) => element.product.id == product.id);
 
-    if (theSameItemId != -1) {
+    if (theSameItemIndex != -1) {
       if (removeAll ?? false) {
-        removeCartCheckout(listCart[theSameItemId]);
-        listCart.removeAt(theSameItemId);
+        removeCartCheckout(listCart[theSameItemIndex]);
+        listCart.removeAt(theSameItemIndex);
       } else {
         CartItemModel cartItemToUpdate = CartItemModel(
           id: product.id,
           product: product,
-          quantity: listCart[theSameItemId].quantity - 1,
+          quantity: listCart[theSameItemIndex].quantity - 1,
         );
 
         listCart.replaceRange(
-          theSameItemId,
-          theSameItemId + 1,
+          theSameItemIndex,
+          theSameItemIndex + 1,
           [cartItemToUpdate],
         );
 
