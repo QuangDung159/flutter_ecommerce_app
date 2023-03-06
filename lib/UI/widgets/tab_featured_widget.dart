@@ -2,10 +2,10 @@
 
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/benefit_banner.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/smart_refresher_custom.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_category.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_product_horizontal.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
@@ -84,36 +84,10 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SmartRefresher(
+    return SmartRefresherCustom(
       enablePullDown: true,
-      enablePullUp: true,
-      header: WaterDropHeader(),
-      controller: _refreshController,
+      refreshController: _refreshController,
       onRefresh: _onRefresh,
-      onLoading: _onLoading,
-      footer: CustomFooter(
-        loadStyle: LoadStyle.ShowWhenLoading,
-        builder: (context, mode) {
-          Widget body = Text('No more Data');
-          if (mode == LoadStatus.idle) {
-            body = CupertinoActivityIndicator();
-          }
-          if (mode == LoadStatus.loading) {
-            body = CupertinoActivityIndicator();
-          }
-          if (mode == LoadStatus.failed) {
-            body = Text('Load Failed!Click retry!');
-          }
-          if (mode == LoadStatus.canLoading) {
-            body = Text('Release to load more');
-          }
-
-          return SizedBox(
-            height: 55.0,
-            child: Center(child: body),
-          );
-        },
-      ),
       child: SingleChildScrollView(
         child: Container(
           color: Colors.white,
