@@ -57,7 +57,7 @@ class CartServices {
 
       if (theSameItemIndex != -1) {
         Map<String, dynamic> reqBody = {
-          'quantity': quantity,
+          'quantity': listCart[theSameItemIndex].quantity + quantity,
         };
 
         final res = await httpPut(
