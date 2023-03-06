@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -248,9 +248,9 @@ class ProfileService {
                     SizedBox(
                       height: AppDimension.contentPadding,
                     ),
-                    ButtonWidget(
-                      title: 'Submit',
-                      opTap: () {
+                    LoadingButtonWidget(
+                      label: 'Submit',
+                      onTap: () {
                         getx.setReferCodeReceived(null);
                         showSnackBar(
                           content: 'Using refer code success. Thank you.',

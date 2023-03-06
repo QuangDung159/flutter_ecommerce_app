@@ -1,5 +1,9 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:credit_card_type_detector/credit_card_type_detector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
@@ -9,6 +13,7 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
@@ -29,7 +34,8 @@ void showSnackBar({
     duration: duration ?? Duration(seconds: 2),
     borderColor: isSuccess ?? true ? Colors.green : Colors.red,
     borderWidth: 1,
-    margin: EdgeInsets.all(12),
+    margin:
+        EdgeInsets.only(left: 12, right: 12, top: Platform.isAndroid ? 12 : 0),
     barBlur: 30,
   );
 }
@@ -228,4 +234,44 @@ DateTimeModel getDateTimeFromString(String dateTime) {
 
 int findCartInListCart(List<CartItemModel> listCartItem, int cartId) {
   return listCartItem.indexWhere((element) => element.id == cartId);
+}
+
+String toPrettyString(Map<String, dynamic> json) {
+  var encoder = JsonEncoder.withIndent("     ");
+  return encoder.convert(json);
+}
+
+String getLast4(String cardNumber) {
+  String newString = cardNumber.substring(cardNumber.length - 5);
+  return newString;
+}
+
+String getCardType(String cardNumber) {
+  switch (detectCCType(cardNumber)) {
+    case CreditCardType.visa:
+      return 'Visa';
+    case CreditCardType.mastercard:
+      return 'Mastercard';
+    case CreditCardType.dinersclub:
+      return 'Dinersclub';
+    case CreditCardType.amex:
+      return 'Amex';
+    case CreditCardType.discover:
+      return 'Discover';
+    case CreditCardType.jcb:
+      return 'jcb';
+    default:
+      return 'Unknown card';
+  }
+}
+
+String getCardLogo(String cardNumber) {
+  switch (detectCCType(cardNumber)) {
+    case CreditCardType.visa:
+      return AssetHelper.iconVisa;
+    case CreditCardType.mastercard:
+      return AssetHelper.iconMastercard;
+    default:
+      return AssetHelper.iconCardDefault;
+  }
 }

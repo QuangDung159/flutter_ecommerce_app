@@ -5,12 +5,14 @@ import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
+import 'package:flutter_ecommerce_app/core/services/payment_service.dart';
 import 'package:get/get.dart';
 
 class GetxAppController extends GetxController {
@@ -54,6 +56,10 @@ class GetxAppController extends GetxController {
 
   final userLogged = Rxn<UserModel>(null);
 
+  final listPaymentCard = RxList<PaymentCardModel>([]);
+
+  final paymentCardDefault = Rxn<PaymentCardModel>(null);
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -69,6 +75,7 @@ class GetxAppController extends GetxController {
     List<AddressModel>? listAddress,
     List<NotificationModel>? listNoti,
     List<CartItemModel>? listCartItemCheckout,
+    List<PaymentCardModel>? listPaymentCard,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -125,6 +132,10 @@ class GetxAppController extends GetxController {
     if (listCartItemCheckout != null) {
       this.listCartItemCheckout.value = listCartItemCheckout;
     }
+
+    if (listPaymentCard != null) {
+      this.listPaymentCard.value = listPaymentCard;
+    }
   }
 
 // accept null
@@ -143,5 +154,9 @@ class GetxAppController extends GetxController {
 
   void setUserLogged(UserModel? userLogged) {
     this.userLogged.value = userLogged;
+  }
+
+  void setPaymentCardDefault(PaymentCardModel paymentCardDefault) {
+    this.paymentCardDefault.value = paymentCardDefault;
   }
 }

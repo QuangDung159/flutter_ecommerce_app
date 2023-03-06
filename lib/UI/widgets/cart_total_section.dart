@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_info_row_text.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
@@ -53,9 +53,10 @@ class _CartTotalSectionState extends State<CartTotalSection> {
 
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimension.contentPadding,
-        vertical: AppDimension.contentPadding,
+      padding: EdgeInsets.only(
+        left: AppDimension.contentPadding,
+        right: AppDimension.contentPadding,
+        top: AppDimension.contentPadding,
       ),
       child: Column(
         children: [
@@ -168,14 +169,17 @@ class _CartTotalSectionState extends State<CartTotalSection> {
           SizedBox(
             height: AppDimension.contentPadding,
           ),
-          ButtonWidget(
-            title: widget.buttonTitle,
+          LoadingButtonWidget(
+            label: widget.buttonTitle,
             backgroundColor: getxAppController.listCartItemCheckout.isEmpty
                 ? AppColors.greyMid
                 : AppColors.primary,
-            opTap: () {
-              widget.onTapButton();
+            onTap: () {
+              return widget.onTapButton();
             },
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).padding.bottom + 12,
           ),
         ],
       ),

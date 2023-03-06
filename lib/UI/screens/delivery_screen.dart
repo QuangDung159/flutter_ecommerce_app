@@ -10,6 +10,7 @@ import 'package:flutter_ecommerce_app/UI/widgets/shipping_policy_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:get/get.dart';
@@ -93,6 +94,17 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
           CartTotalSection(
             buttonTitle: 'Payment',
             onTapButton: () {
+              AddressModel? addressSelected =
+                  getxAppController.addressSelected.value;
+
+              if (getxAppController.shippingPolicySelected.value.deliveryInfo !=
+                  'Self-Pickup') {
+                if (addressSelected == null ||
+                    addressSelected.receiverName == '') {
+                  return;
+                }
+              }
+
               if (getxAppController.listCartItemCheckout.isNotEmpty) {
                 Get.to(() => CheckoutScreen());
               }

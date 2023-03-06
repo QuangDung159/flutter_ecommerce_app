@@ -79,8 +79,8 @@ class _ListOrderState extends State<ListOrder> {
                     children: [
                       Image.asset(
                         AssetHelper.iconVisa,
-                        height: 14,
-                        width: 27,
+                        height: 20,
+                        width: 20,
                       ),
                       SizedBox(
                         width: 2,

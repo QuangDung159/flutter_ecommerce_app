@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/order_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/order_model.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_transaction.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
@@ -803,7 +806,7 @@ List<PromotionUserModel> listPromotionUserDummy = [
 
 List<PaymentMethodModel> listPaymentMethodDummy = [
   PaymentMethodModel(id: 1, title: 'Cash', type: 'cash'),
-  PaymentMethodModel(id: 2, title: 'Flutter E-Wallet App', type: 'e_wallet'),
+  // PaymentMethodModel(id: 2, title: 'Payment Card', type: 'payment_card'),
 ];
 
 List<CityModel> listCityDummy = [
@@ -1397,5 +1400,93 @@ List<NotificationModel> listNotificationDummy = [
     content: 'Lu CTO used your refer code',
     sendAt: '2023-02-20 12:32:16',
     id: 20,
+  ),
+];
+
+String stripePublishableKey =
+    'pk_test_51JmJfZAuFtBplfKrgE6iUmueVzqWbiTosG1kDBZ4SwX3XRaGpqGPDHXtOsVz1LH3y1OgArtVlYzhg6PE6JJGf6xj00HzAHLgRp';
+
+bool isAndroid = Platform.isAndroid;
+
+List<PaymentCardModel> listPaymentCardDummy = [
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 1,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 2,
+    cardType: 'Mastercard',
+    cardNumber: '5463070230000335',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 3,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 4,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 5,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 6,
+    cardType: 'JBC',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 7,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 8,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 9,
+    cardType: 'Visa',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
+  ),
+  PaymentCardModel(
+    expiryDate: '04/24',
+    cvvCode: '444',
+    id: 10,
+    cardType: 'JBC',
+    cardNumber: '4242424242424242',
+    clientSecret: 'clientSecret',
   ),
 ];

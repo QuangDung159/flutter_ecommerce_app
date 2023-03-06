@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/main_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
@@ -8,8 +10,11 @@ import 'package:flutter_ecommerce_app/UI/widgets/payment_method_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
+import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/payment_service.dart';
 import 'package:get/get.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -48,21 +53,55 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             CartTotalSection(
               buttonTitle: 'Checkout',
-              onTapButton: () {
-                Get.offAll(() => MainScreen());
-                CartServices.checkout();
-                Future.delayed(
-                  Duration(seconds: 1),
-                  () => showSnackBar(
-                    title: 'Payment success',
-                    content:
-                        'Your order has been created, thanks for your shopping!',
-                  ),
-                );
-              },
+              onTapButton: onCheckout,
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Future<void> onCheckout() async {
+    try {
+      PaymentMethodModel paymentMethodSelected =
+          getxAppController.paymentMethodSelected.value;
+      PaymentCardModel? paymentCardDefault =
+          getxAppController.paymentCardDefault.value;
+
+      if (paymentMethodSelected.type == 'payment_card') {
+        if (paymentCardDefault == null) {
+          showSnackBar(
+            content: 'Please choose payment card',
+            isSuccess: false,
+          );
+          return;
+        }
+
+        await PaymentService.handlePayment(
+          cardNumber: paymentCardDefault.cardNumber,
+          cvvCode: paymentCardDefault.cvvCode,
+          onPaymentSuccess: () {
+            onCheckoutSuccess();
+          },
+          expiryDate: paymentCardDefault.expiryDate,
+        );
+      } else {
+        onCheckoutSuccess();
+      }
+    } catch (e) {
+      log(e.toString());
+      return;
+    }
+  }
+
+  void onCheckoutSuccess() {
+    Get.offAll(() => MainScreen());
+    CartServices.checkout();
+    Future.delayed(
+      Duration(milliseconds: 400),
+      () => showSnackBar(
+        title: 'Create order success',
+        content: 'Your order has been created, thanks for your shopping!',
       ),
     );
   }
@@ -77,17 +116,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 18,
-          ),
-          Text(
-            'Payment methods',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(
-            height: 18,
+            height: 12,
           ),
           Obx(
             () => Column(

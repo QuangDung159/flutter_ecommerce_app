@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/card_form_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
@@ -74,7 +75,8 @@ class _CartIconState extends State<CartIcon> {
               child: Obx(
                 () => Center(
                   child: renderNumberCartItem(
-                      getxAppController.listCartItem.length),
+                    getxAppController.listCartItem.length,
+                  ),
                 ),
               ),
             ),

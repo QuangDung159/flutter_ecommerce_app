@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 
 class BottomButton extends StatefulWidget {
@@ -20,17 +20,18 @@ class _BottomButtonState extends State<BottomButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 93,
+      height: 93 + 15,
+      alignment: Alignment.bottomCenter,
       color: Colors.white,
       padding: EdgeInsets.only(
         left: AppDimension.contentPadding,
         right: AppDimension.contentPadding,
-        bottom: 30,
+        bottom: MediaQuery.of(context).padding.bottom + 12,
         top: 15,
       ),
-      child: ButtonWidget(
-        title: widget.title,
-        opTap: () {
+      child: LoadingButtonWidget(
+        label: widget.title,
+        onTap: () {
           if (widget.onTap != null) {
             widget.onTap!();
           }

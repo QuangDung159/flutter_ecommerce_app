@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/common/button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
@@ -163,9 +163,9 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                                             SizedBox(
                                               height: 16,
                                             ),
-                                            ButtonWidget(
-                                              title: 'Use',
-                                              opTap: () {
+                                            LoadingButtonWidget(
+                                              label: 'Use',
+                                              onTap: () {
                                                 getxAppController
                                                     .setPromotionSelected(
                                                   widget.promotionUserModel,

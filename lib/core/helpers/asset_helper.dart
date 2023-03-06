@@ -15,9 +15,13 @@ class AssetHelper {
   static const String panelHome3 = '$imageDir/panel_home_3.png';
   static const String imageVoucherActive = '$imageDir/image_voucher_active.png';
   static const String imageAvatar = '$imageDir/image_avatar.png';
-  static const String imageGradientProfile = '$imageDir/image_gradient_profile.png';
-  static const String imageReferBackground = '$imageDir/image_refer_background.png';
+  static const String imageGradientProfile =
+      '$imageDir/image_gradient_profile.png';
+  static const String imageReferBackground =
+      '$imageDir/image_refer_background.png';
   static const String imageSigninScreen = '$imageDir/image_signin_screen.png';
+  static const String imageCardBackground =
+      '$imageDir/image_card_background.png';
 
   static const String iconFilter = '$iconDir/icon_filter.png';
   static const String iconBottomSheet = '$iconDir/icon_bottom_sheet.png';
@@ -47,4 +51,6 @@ class AssetHelper {
   static const String iconFeedback = '$iconDir/icon_feedback.png';
   static const String iconCalendar = '$iconDir/icon_calendar.png';
   static const String iconTime = '$iconDir/icon_time.png';
+  static const String iconMastercard = '$iconDir/icon_mastercard.png';
+  static const String iconCardDefault = '$iconDir/icon_card.png';
 }

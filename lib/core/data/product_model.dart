@@ -11,6 +11,7 @@ class ProductModel {
   final String thumbnail;
   final List<ProductImageModel> productImages;
   final int quantity;
+  final bool? active;
 
   ProductModel({
     required this.originalPrice,
@@ -23,6 +24,7 @@ class ProductModel {
     required this.shippingInfo,
     required this.thumbnail,
     required this.productImages,
+    this.active,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
