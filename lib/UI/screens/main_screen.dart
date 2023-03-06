@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
       DynamicLinkServices.onReceiveTerminateAppDynamicLink();
     });
 
-    CartServices.getListCart();
+    CartServices.fetchListCart();
   }
 
   @override

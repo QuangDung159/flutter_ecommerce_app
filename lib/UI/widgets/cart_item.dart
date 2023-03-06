@@ -40,10 +40,8 @@ class _CartItemState extends State<CartItem> {
             openThreshold: 0.1,
             closeThreshold: 0.8,
             dismissible: DismissiblePane(onDismissed: () {
-              CartServices.removeCart(
-                product: widget.cartItem.product,
-                quantity: 1,
-                removeAll: true,
+              CartServices.removeCartItem(
+                cartItem: widget.cartItem,
               );
             }),
             motion: BehindMotion(),
@@ -51,10 +49,8 @@ class _CartItemState extends State<CartItem> {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    CartServices.removeCart(
-                      product: widget.cartItem.product,
-                      quantity: 1,
-                      removeAll: true,
+                    CartServices.removeCartItem(
+                      cartItem: widget.cartItem,
                     );
                   },
                   child: Container(
@@ -221,7 +217,7 @@ class _CartItemState extends State<CartItem> {
                                 return;
                               }
 
-                              CartServices.removeCart(
+                              CartServices.decreaseCartItemQuantity(
                                 product: widget.cartItem.product,
                                 quantity: 1,
                                 isShowSnackBar: false,

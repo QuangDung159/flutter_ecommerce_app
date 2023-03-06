@@ -41,3 +41,11 @@ Future<Response> httpGet({required String uri}) async {
 
   return res;
 }
+
+Future<Response> httpDelete({required String uri}) async {
+  final res = await http.delete(
+    parseUri(uri),
+  );
+
+  return res;
+}
