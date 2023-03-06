@@ -17,9 +17,8 @@ class CartItemModel {
     {
       return CartItemModel(
         id: json['_id'],
-        product: json['product'],
+        product: ProductModel.fromJson(json['product_id']),
         quantity: json['quantity'],
-        variant: json['variant'],
       );
     }
   }

@@ -226,7 +226,7 @@ class _CartItemState extends State<CartItem> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              CartServices.addCart(
+                              CartServices.addToCart(
                                 product: widget.cartItem.product,
                                 quantity: 1,
                                 isShowSnackBar: false,

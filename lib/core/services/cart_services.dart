@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/address_model.dart';
@@ -19,42 +21,28 @@ class CartServices {
       getxAppController.listCartItemCheckout;
   static GetStorage localStorage = GetStorage();
 
-  static addCart({
-    required ProductModel product,
-    required int quantity,
-    bool? isShowSnackBar,
-  }) {
-    int theSameItemId =
-        listCart.indexWhere((element) => element.product.id == product.id);
-
-    if (theSameItemId != -1) {
-      CartItemModel cartItemToUpdate = CartItemModel(
-        id: product.id,
-        product: product,
-        quantity: listCart[theSameItemId].quantity + quantity,
+  static Future<List<CartItemModel>> getListCart() async {
+    try {
+      final res = await httpGet(
+        uri: '$baseUrl/cartItem/${getxAppController.userLogged.value!.id}',
       );
 
-      listCart.replaceRange(
-        theSameItemId,
-        theSameItemId + 1,
-        [cartItemToUpdate],
-      );
+      if (isRequestSuccess(res)) {
+        Iterable list = jsonDecode(res.body)['data']['listCartItem'];
 
-      updateQuantityCartCheckout(
-        cartItemToUpdate,
-        cartItemToUpdate.quantity,
-      );
-    } else {
-      listCart.add(
-        CartItemModel(id: product.id, product: product, quantity: quantity),
-      );
-    }
+        List<CartItemModel> listCart = List<CartItemModel>.from(
+          list.map(
+            (e) => CartItemModel.fromJson(e),
+          ),
+        );
 
-    if (isShowSnackBar ?? true) {
-      showSnackBar(
-        title: 'Add to cart success',
-        content: product.name,
-      );
+        getxAppController.setData(listCartItem: listCart);
+
+        return listCart;
+      }
+      return [];
+    } catch (e) {
+      throw Exception(e);
     }
   }
 

@@ -18,3 +18,11 @@ Future<Response> httpPost({
 
   return res;
 }
+
+Future<Response> httpGet({required String uri}) async {
+  final res = await http.get(
+    parseUri(uri),
+  );
+
+  return res;
+}
