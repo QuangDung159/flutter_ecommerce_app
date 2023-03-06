@@ -55,15 +55,7 @@ class CartServices {
       int theSameItemIndex =
           listCart.indexWhere((element) => element.product.id == product.id);
 
-      print(theSameItemIndex);
-
       if (theSameItemIndex != -1) {
-        CartItemModel cartItemToUpdate = CartItemModel(
-          id: product.id,
-          product: product,
-          quantity: listCart[theSameItemIndex].quantity + quantity,
-        );
-
         Map<String, dynamic> reqBody = {
           'quantity': quantity,
         };
@@ -81,22 +73,7 @@ class CartServices {
           );
           return;
         }
-
-        listCart.replaceRange(
-          theSameItemIndex,
-          theSameItemIndex + 1,
-          [cartItemToUpdate],
-        );
-
-        updateQuantityCartCheckout(
-          cartItemToUpdate,
-          cartItemToUpdate.quantity,
-        );
       } else {
-        // listCart.add(
-        //   CartItemModel(id: product.id, product: product, quantity: quantity),
-        // );
-
         Map<String, dynamic> reqBody = {
           'product_id': product.id,
           'user_id': getxAppController.userLogged.value!.id,
