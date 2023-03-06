@@ -7,7 +7,6 @@ import 'package:flutter_ecommerce_app/UI/widgets/main_bottom_bar_notification_wi
 import 'package:flutter_ecommerce_app/UI/widgets/main_bottom_bar_profile_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
-import 'package:flutter_ecommerce_app/core/services/product_service.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -43,7 +42,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ProductService.fetchListProductHome();
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,

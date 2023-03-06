@@ -35,7 +35,7 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
   }
 
   void fetch() async {
-    List<ProductModel> list = await ProductService.fetchListProductHome();
+    List<ProductModel> list = await ProductService.fetchListProductHome(category: 'New Arrivals');
     setState(() {
       listProductFetched = list;
     });
