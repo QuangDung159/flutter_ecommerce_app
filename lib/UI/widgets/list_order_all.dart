@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_order.dart';
-import 'package:flutter_ecommerce_app/core/data/order_model.dart';
 
 class ListOrderAll extends StatefulWidget {
   const ListOrderAll({
     super.key,
-    required this.listOrder,
+    required this.orderStatus,
   });
 
-  final List<OrderModel> listOrder;
+  final String orderStatus;
 
   @override
   State<ListOrderAll> createState() => _ListOrderAllState();
@@ -20,7 +19,7 @@ class _ListOrderAllState extends State<ListOrderAll>
   Widget build(BuildContext context) {
     super.build(context);
     return ListOrder(
-      listOrderModel: widget.listOrder,
+      orderStatus: widget.orderStatus,
     );
   }
 

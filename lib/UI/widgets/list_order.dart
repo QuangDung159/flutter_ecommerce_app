@@ -1,47 +1,79 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/smart_refresher_custom.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/order_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/data/order_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/order_service.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ListOrder extends StatefulWidget {
   const ListOrder({
     super.key,
-    required this.listOrderModel,
+    required this.orderStatus,
   });
 
-  final List<OrderModel> listOrderModel;
+  final String orderStatus;
 
   @override
   State<ListOrder> createState() => _ListOrderState();
 }
 
 class _ListOrderState extends State<ListOrder> {
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+  List<OrderModel> listOrder = [];
+
+  void fetchListOrder() async {
+    List<OrderModel> list =
+        await OrderService.fetchListOrder(orderStatus: widget.orderStatus);
+
+    setState(() {
+      listOrder = list;
+    });
+
+    _refreshController.refreshCompleted();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    fetchListOrder();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: AppDimension.contentPadding / 2,
-        ),
-        child: Column(
-          children: renderListOrder(),
+    return SmartRefresherCustom(
+      enablePullDown: true,
+      // enablePullUp: true,
+      refreshController: _refreshController,
+      onRefresh: () => fetchListOrder(),
+      child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            vertical: AppDimension.contentPadding / 2,
+          ),
+          child: Column(
+            children: renderListOrder(),
+          ),
         ),
       ),
     );
+    ;
   }
 
   List<Widget> renderListOrder() {
     List<Widget> listRendered = [];
 
-    for (var i = 0; i < widget.listOrderModel.length; i++) {
+    for (var i = 0; i < listOrder.length; i++) {
       listRendered.add(
         renderOrder(
-          orderModel: widget.listOrderModel[i],
+          orderModel: listOrder[i],
         ),
       );
     }

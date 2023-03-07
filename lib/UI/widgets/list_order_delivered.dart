@@ -1,6 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_order.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 
 class ListOrderDelivered extends StatefulWidget {
   const ListOrderDelivered({super.key});
@@ -15,7 +16,7 @@ class _ListOrderDeliveredState extends State<ListOrderDelivered>
   Widget build(BuildContext context) {
     super.build(context);
     return ListOrder(
-      listOrderModel: listOrderDeliveredDummy,
+      orderStatus: 'all',
     );
   }
 
