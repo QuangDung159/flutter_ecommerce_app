@@ -61,10 +61,10 @@ class _ListOrderScreenState extends State<ListOrderScreen>
                   text: 'All',
                 ),
                 Tab(
-                  text: 'Shipping',
+                  text: 'Processing',
                 ),
                 Tab(
-                  text: 'Delivered',
+                  text: 'Completed',
                 )
               ],
               controller: _tabController,
