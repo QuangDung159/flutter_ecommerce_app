@@ -32,6 +32,18 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
   final receiverNameInputController = TextEditingController();
   final phoneInputController = TextEditingController();
 
+  Future<void> onSubmitAddress() async {
+    await AddressService.submitCreateAddress(
+      addressLine: addressLineInputController.text,
+      phone: phoneInputController.text,
+      receiverName: receiverNameInputController.text,
+    );
+
+    addressLineInputController.text = '';
+    receiverNameInputController.text = '';
+    phoneInputController.text = '';
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -159,10 +171,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                 'ward', getxAppController.wardSelected.value.id),
             LoadingButtonWidget(
                 label: 'Add',
-                onTap: () {
-                  List<AddressModel> listAddress =
-                      getxAppController.listAddress;
-
+                onTap: () async {
                   if (addressLineInputController.text == '' ||
                       receiverNameInputController.text == '' ||
                       phoneInputController.text == '') {
@@ -174,22 +183,24 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     return;
                   }
 
-                  AddressModel address = AddressModel(
-                    addressLine: addressLineInputController.text,
-                    city: getxAppController.citySelected.value,
-                    district: getxAppController.districtSelected.value,
-                    ward: getxAppController.wardSelected.value,
-                    id: listAddress.length,
-                    receiverName: receiverNameInputController.text,
-                    phone: phoneInputController.text,
-                  );
+                  return onSubmitAddress();
 
-                  listAddress.add(address);
-                  getxAppController.setAddressSelected(address);
+                  // AddressModel address = AddressModel(
+                  //   addressLine: addressLineInputController.text,
+                  //   city: getxAppController.citySelected.value,
+                  //   district: getxAppController.districtSelected.value,
+                  //   ward: getxAppController.wardSelected.value,
+                  //   id: listAddress.length,
+                  //   receiverName: receiverNameInputController.text,
+                  //   phone: phoneInputController.text,
+                  // );
 
-                  addressLineInputController.text = '';
-                  receiverNameInputController.text = '';
-                  phoneInputController.text = '';
+                  // listAddress.add(address);
+                  // getxAppController.setAddressSelected(address);
+
+                  // addressLineInputController.text = '';
+                  // receiverNameInputController.text = '';
+                  // phoneInputController.text = '';
                 }),
             SizedBox(
               height: MediaQuery.of(context).padding.bottom + 12,
