@@ -15,6 +15,7 @@ import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/address_service.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -71,7 +72,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               child: SingleChildScrollView(
                 child: Container(
                   color: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  // padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   margin: EdgeInsets.only(bottom: 12),
                   child: Obx(
                     () => Column(
@@ -95,19 +96,59 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
 
     for (var i = 0; i < listAddress.length; i++) {
       listRendered.add(
-        AddressItem(
-          isSelected: addressSelected == null
-              ? false
-              : addressSelected.id == listAddress[i].id,
-          addressModel: listAddress[i],
+        Slidable(
+          key: ValueKey(listAddress[i].id),
+          endActionPane: ActionPane(
+            extentRatio: 64 / MediaQuery.of(context).size.width,
+            openThreshold: 0.1,
+            closeThreshold: 0.8,
+            dismissible: DismissiblePane(onDismissed: () {
+              AddressService.removeAddress(addressId: listAddress[i].id);
+            }),
+            motion: BehindMotion(),
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    AddressService.removeAddress(addressId: listAddress[i].id);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    color: AppColors.orangeSecondary,
+                    child: Image.asset(
+                      AssetHelper.iconTrash,
+                      width: 24,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          child: Container(
+            padding: EdgeInsets.only(
+              left: 12,
+              right: 12,
+              top: i == 0 ? 12 : 6,
+              bottom: listAddress.length - 1 == i ? 12 : 6,
+            ),
+            child: AddressItem(
+              isSelected: addressSelected == null
+                  ? false
+                  : addressSelected.id == listAddress[i].id,
+              addressModel: listAddress[i],
+            ),
+          ),
         ),
       );
     }
 
     if (listRendered.isEmpty) {
       return [
-        Center(
-          child: Text('Address book empty'),
+        SizedBox(
+          height: 50,
+          child: Center(
+            child: Text('Address book empty'),
+          ),
         ),
       ];
     }

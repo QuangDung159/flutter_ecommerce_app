@@ -142,7 +142,7 @@ class AddressService {
   static void removeAddress({required String addressId}) async {
     try {
       final res = await httpDelete(
-        uri: '$baseUrl/${getxApp.userLogged.value?.id ?? '1'}/$addressId',
+        uri: '$baseUrl/address/${getxApp.userLogged.value?.id ?? '1'}/$addressId',
       );
 
       if (isRequestSuccess(res)) {
