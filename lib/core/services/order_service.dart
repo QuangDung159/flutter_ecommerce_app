@@ -8,10 +8,13 @@ import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 
 class OrderService {
   static GetxAppController getxApp = Get.find<GetxAppController>();
   static String uri = '$baseUrl/order';
+
+  static UserModel userLogged = getxApp.userLogged.value!;
 
   static Future<List<OrderModel>> fetchListOrder({
     required String orderStatus,
@@ -25,7 +28,7 @@ class OrderService {
     };
 
     final res = await httpPost(
-      uri: '$uri/${getxApp.userLogged.value!.id}',
+      uri: '$uri/${userLogged.id}',
       reqBody: reqBody,
     );
 
@@ -63,7 +66,7 @@ class OrderService {
 
       Map<String, dynamic> reqBody = {
         'listCartItem': listCartItem,
-        'userId': getxApp.userLogged.value!.id,
+        'userId': userLogged.id,
         'promoCode': '123',
         'subTotal': CartServices.calSubtotal(listCartItemCheckout),
         'total': CartServices.calTotal(),
@@ -78,6 +81,17 @@ class OrderService {
           onSuccess();
         }
       }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<int> countOrder() async {
+    try {
+      int count = 0;
+      final res = await httpGet(uri: '$uri/${userLogged.id}');
+      count = jsonDecode(res.body)['data']['result'];
+      return count;
     } catch (e) {
       throw Exception(e);
     }
