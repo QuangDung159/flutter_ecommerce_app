@@ -68,7 +68,7 @@ class OrderService {
         'subTotal': CartServices.calSubtotal(listCartItemCheckout),
         'total': CartServices.calTotal(),
         'description': 'Order',
-        'shippingFee': 5,
+        'shippingFee': getxApp.shippingPolicySelected.value.fee,
       };
 
       final res = await httpPost(uri: uri, reqBody: reqBody);
