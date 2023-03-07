@@ -34,14 +34,14 @@ class AddressService {
       String? addressDefaultId =
           LocalStorageHelper.getValue('ADDRESS_DEFAULT_ID');
 
-      print(addressDefaultId);
-
       if (listAddress.isNotEmpty) {
         if (addressDefaultId != null) {
-          AddressModel address = listAddress
-              .firstWhere((element) => element.id == addressDefaultId);
+          int addressIndex = listAddress
+              .indexWhere((element) => element.id == addressDefaultId);
 
-          getxApp.setAddressSelected(address);
+          if (addressIndex != -1) {
+            getxApp.setAddressSelected(listAddress[addressIndex]);
+          }
         }
       }
     }
