@@ -68,15 +68,15 @@ class OrderItem extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
-                        height: 7,
-                      ),
-                      Text(
-                        'Black, Size S',
-                        style: TextStyle(
-                          color: AppColors.grey,
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 7,
+                      // ),
+                      // Text(
+                      //   'Black, Size S',
+                      //   style: TextStyle(
+                      //     color: AppColors.grey,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

@@ -30,8 +30,8 @@ class OrderModel {
     {
       return OrderModel(
         id: json['id'],
-        subTotalAmount: json['sub_total_amount']?.toString() ?? '100',
-        totalAmount: json['total_amount']?.toString() ?? '100',
+        subTotalAmount: json['sub_total']?.toString() ?? '0',
+        totalAmount: json['total']?.toString() ?? '0',
         createdAt: json['createdAt'],
         promotionAmount: json['promotion_amount']?.toString() ?? '100',
         orderItems: List<dynamic>.from(json['list_order_item'])

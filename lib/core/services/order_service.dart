@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/order_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 
 class OrderService {
@@ -46,10 +47,10 @@ class OrderService {
   }) async {
     try {
       List<Map<String, dynamic>> listCartItem = [];
-      List<CartItemModel> listCart = getxApp.listCartItemCheckout;
+      List<CartItemModel> listCartItemCheckout = getxApp.listCartItemCheckout;
 
-      for (var i = 0; i < listCart.length; i++) {
-        CartItemModel cartItem = listCart[i];
+      for (var i = 0; i < listCartItemCheckout.length; i++) {
+        CartItemModel cartItem = listCartItemCheckout[i];
         listCartItem.add({
           'quantity': cartItem.quantity,
           'product': {
@@ -64,6 +65,10 @@ class OrderService {
         'listCartItem': listCartItem,
         'userId': getxApp.userLogged.value!.id,
         'promoCode': '123',
+        'subTotal': CartServices.calSubtotal(listCartItemCheckout),
+        'total': CartServices.calTotal(),
+        'description': 'Order',
+        'shippingFee': 5,
       };
 
       final res = await httpPost(uri: uri, reqBody: reqBody);
