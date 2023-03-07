@@ -100,7 +100,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   void onCheckoutSuccess() async {
     Get.offAll(() => MainScreen());
     // CartServices.checkout();
-    
+
+    getxAppController.setData(listCartItemCheckout: []);
+
     Future.delayed(
       Duration(milliseconds: 400),
       () => showSnackBar(

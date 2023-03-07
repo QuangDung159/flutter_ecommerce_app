@@ -260,10 +260,6 @@ class CartServices {
     return listProductDummy[index];
   }
 
-  static void checkout() {
-    getxAppController.setData(listCartItemCheckout: []);
-  }
-
   static void selectAllCartItem({
     required bool isDeselect,
   }) {
