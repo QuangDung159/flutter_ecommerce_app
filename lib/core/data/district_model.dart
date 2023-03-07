@@ -16,7 +16,7 @@ class DistrictModel {
       return DistrictModel(
         name: json['district_name'],
         id: json['_id'],
-        listWard: List<dynamic>.from(json['list_ward'])
+        listWard: List<dynamic>.from(json['list_ward'] ?? [])
             .map((e) => WardModel.fromJson(e))
             .toList(),
       );

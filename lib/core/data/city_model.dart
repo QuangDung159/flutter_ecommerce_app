@@ -16,7 +16,7 @@ class CityModel {
       return CityModel(
         id: json['_id'],
         name: json['city_name'],
-        listDistrict: List.from(json['list_district'])
+        listDistrict: List.from(json['list_district'] ?? [])
             .map((e) => DistrictModel.fromJson(e))
             .toList(),
       );

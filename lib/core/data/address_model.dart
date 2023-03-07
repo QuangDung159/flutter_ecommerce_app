@@ -4,7 +4,7 @@ import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 
 class AddressModel {
   final String addressLine;
-  final int id;
+  final String id;
   final CityModel city;
   final DistrictModel district;
   final WardModel ward;
@@ -25,10 +25,10 @@ class AddressModel {
     {
       return AddressModel(
         addressLine: json['address_line'],
-        city: CityModel.fromJson(json['city']),
-        district: DistrictModel.fromJson(json['district']),
-        ward: WardModel.fromJson(json['ward']),
-        id: json['id'],
+        city: CityModel.fromJson(json['city_id']),
+        district: DistrictModel.fromJson(json['district_id']),
+        ward: WardModel.fromJson(json['ward_id']),
+        id: json['_id'],
         receiverName: json['receiver_name'],
         phone: json['phone'],
       );

@@ -25,6 +25,10 @@ class AddressService {
     );
 
     getxApp.setData(listAddress: listAddress);
+
+    if (listAddress.isNotEmpty) {
+      getxApp.setAddressSelected(listAddress[listAddress.length - 1]);
+    }
   }
 
   static Future<List<CityModel>> fetchListCity() async {
