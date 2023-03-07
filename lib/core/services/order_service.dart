@@ -9,12 +9,14 @@ import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_ecommerce_app/core/data/user_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
 
 class OrderService {
   static GetxAppController getxApp = Get.find<GetxAppController>();
   static String uri = '$baseUrl/order';
 
   static UserModel userLogged = getxApp.userLogged.value!;
+  static PromotionModel? promotion = getxApp.promotionSelected.value?.promotion;
 
   static Future<List<OrderModel>> fetchListOrder({
     required String orderStatus,
@@ -67,7 +69,8 @@ class OrderService {
       Map<String, dynamic> reqBody = {
         'listCartItem': listCartItem,
         'userId': userLogged.id,
-        'promoCode': '123',
+        'promoCode': promotion?.code ?? '',
+        'promotionAmount': promotion?.value ?? '0',
         'subTotal': CartServices.calSubtotal(listCartItemCheckout),
         'total': CartServices.calTotal(),
         'description': 'Order',
