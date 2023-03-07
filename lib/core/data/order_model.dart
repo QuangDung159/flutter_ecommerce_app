@@ -12,6 +12,7 @@ class OrderModel {
   final String? description;
   final String? promotionCode;
   final String? deliveryAt;
+  final String? shippingFee;
 
   OrderModel({
     required this.id,
@@ -24,6 +25,7 @@ class OrderModel {
     this.description,
     this.promotionCode,
     this.deliveryAt,
+    this.shippingFee,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
@@ -33,7 +35,7 @@ class OrderModel {
         subTotalAmount: json['sub_total']?.toString() ?? '0',
         totalAmount: json['total']?.toString() ?? '0',
         createdAt: json['createdAt'],
-        promotionAmount: json['promotion_amount']?.toString() ?? '100',
+        promotionAmount: json['promotion_amount']?.toString() ?? '0',
         orderItems: List<dynamic>.from(json['list_order_item'])
             .map(
               (e) => OrderItemModel.fromJson(e),
@@ -55,6 +57,7 @@ class OrderModel {
         description: json['description'],
         promotionCode: json['promotion_code'],
         deliveryAt: json['delivery_at'],
+        shippingFee: json['shipping_fee']?.toString() ?? '0',
       );
     }
   }

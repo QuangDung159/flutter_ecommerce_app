@@ -138,6 +138,20 @@ class _ListOrderState extends State<ListOrder> {
                       ),
                     ),
                     Text(
+                      'Delivery fee: ${formatPrice(orderModel.shippingFee!)}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColors.grey,
+                      ),
+                    ),
+                    Text(
+                      'Discount: ${formatPrice(orderModel.promotionAmount)}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColors.grey,
+                      ),
+                    ),
+                    Text(
                       formatPrice(orderModel.totalAmount),
                       style: TextStyle(
                         fontSize: 16,
