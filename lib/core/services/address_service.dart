@@ -8,6 +8,7 @@ import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:get/get.dart';
 
 class AddressService {
@@ -16,7 +17,7 @@ class AddressService {
   static DistrictModel districtDefault = listCityDummy[0].listDistrict[0];
   static WardModel wardDefault = listCityDummy[0].listDistrict[0].listWard[0];
 
-  static void getListAddressFromResponse(res) async {
+  static void getListAddressFromResponse(res, isAddNew) async {
     Iterable listJson = jsonDecode(res.body)['data']['listAddress'];
     List<AddressModel> listAddress = List<AddressModel>.from(
       listJson.map(
@@ -24,11 +25,28 @@ class AddressService {
       ),
     );
 
-    getxApp.setData(listAddress: listAddress);
+    if (isAddNew) {
+      // add new
+      if (listAddress.isNotEmpty) {
+        getxApp.setAddressSelected(listAddress[listAddress.length - 1]);
+      }
+    } else {
+      String? addressDefaultId =
+          LocalStorageHelper.getValue('ADDRESS_DEFAULT_ID');
 
-    if (listAddress.isNotEmpty) {
-      getxApp.setAddressSelected(listAddress[listAddress.length - 1]);
+      print(addressDefaultId);
+
+      if (listAddress.isNotEmpty) {
+        if (addressDefaultId != null) {
+          AddressModel address = listAddress
+              .firstWhere((element) => element.id == addressDefaultId);
+
+          getxApp.setAddressSelected(address);
+        }
+      }
     }
+
+    getxApp.setData(listAddress: listAddress);
   }
 
   static Future<List<CityModel>> fetchListCity() async {
@@ -87,7 +105,7 @@ class AddressService {
         uri: '$baseUrl/address/${getxApp.userLogged.value?.id ?? '1'}',
       );
       if (isRequestSuccess(res)) {
-        getListAddressFromResponse(res);
+        getListAddressFromResponse(res, false);
       }
     } catch (e) {
       throw Exception(e);
@@ -113,7 +131,7 @@ class AddressService {
       final res = await httpPost(uri: '$baseUrl/address', reqBody: requestBody);
 
       if (isRequestSuccess(res)) {
-        getListAddressFromResponse(res);
+        getListAddressFromResponse(res, true);
         showSnackBar(content: 'Submit address success');
       }
     } catch (e) {

@@ -13,6 +13,7 @@ import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
+import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:get/get.dart';
 
 class GetxAppController extends GetxController {
@@ -173,6 +174,8 @@ class GetxAppController extends GetxController {
 
   // accept null
   void setAddressSelected(AddressModel? addressSelected) {
+
+    LocalStorageHelper.setValue('ADDRESS_DEFAULT_ID', addressSelected?.id);
     this.addressSelected.value = addressSelected;
   }
 
