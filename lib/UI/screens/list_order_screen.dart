@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_order_all.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/list_order_delivered.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/list_order_shipping.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:get/get.dart';
@@ -61,10 +59,10 @@ class _ListOrderScreenState extends State<ListOrderScreen>
                   text: 'All',
                 ),
                 Tab(
-                  text: 'Shipping',
+                  text: 'Processing',
                 ),
                 Tab(
-                  text: 'Delivered',
+                  text: 'Completed',
                 )
               ],
               controller: _tabController,
@@ -76,9 +74,17 @@ class _ListOrderScreenState extends State<ListOrderScreen>
             child: TabBarView(
               controller: _tabController,
               children: [
-                ListOrderAll(),
-                ListOrderShipping(),
-                ListOrderDelivered(),
+                ListOrderAll(
+                  orderStatus: 'all',
+                ),
+                ListOrderAll(
+                  orderStatus: 'created',
+                ),
+                ListOrderAll(
+                  orderStatus: 'completed',
+                ),
+                // ListOrderShipping(),
+                // ListOrderDelivered(),
               ],
             ),
           ),

@@ -48,16 +48,16 @@ void printCustom({String? title, content}) {
   }
 }
 
-int getIdFromUrl(String? payloadUrl) {
+String getIdFromUrl(String? payloadUrl) {
   if (payloadUrl != null) {
     List<String> listSegment = payloadUrl.split('/');
 
     if (listSegment.length >= 3) {
-      return int.parse(listSegment[2]);
+      return listSegment[2];
     }
   }
 
-  return -1;
+  return '';
 }
 
 String getReferCodeFromUrl(String? payloadUrl) {
@@ -94,7 +94,7 @@ Widget? getScreen(
     case 'cart_screen':
       return CartScreen();
     case 'product_detail_screen':
-      int id = getIdFromUrl(payload);
+      String id = getIdFromUrl(payload);
 
       ProductModel? product = CartServices.getProductById(id);
       if (product == null) {
@@ -232,7 +232,7 @@ DateTimeModel getDateTimeFromString(String dateTime) {
   );
 }
 
-int findCartInListCart(List<CartItemModel> listCartItem, int cartId) {
+int findCartInListCart(List<CartItemModel> listCartItem, String cartId) {
   return listCartItem.indexWhere((element) => element.id == cartId);
 }
 
@@ -274,4 +274,12 @@ String getCardLogo(String cardNumber) {
     default:
       return AssetHelper.iconCardDefault;
   }
+}
+
+Uri parseUri(String url) {
+  return Uri.parse(url);
+}
+
+bool isRequestSuccess(res) {
+  return res.statusCode == 200 || res.statusCode == 201;
 }

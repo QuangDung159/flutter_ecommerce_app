@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/address_model.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -17,43 +20,97 @@ class CartServices {
   static List<CartItemModel> listCartItemCheckout =
       getxAppController.listCartItemCheckout;
   static GetStorage localStorage = GetStorage();
+  static String uri = '$baseUrl/cartItem';
 
-  static addCart({
+  static List<CartItemModel> getListCartFromRes(res) {
+    if (isRequestSuccess(res)) {
+      Iterable list = jsonDecode(res.body)['data']['listCartItem'];
+
+      List<CartItemModel> listCart = List<CartItemModel>.from(
+        list.map(
+          (e) => CartItemModel.fromJson(e),
+        ),
+      );
+
+      getxAppController.setData(listCartItem: listCart);
+
+      return listCart;
+    }
+    return [];
+  }
+
+  static Future<List<CartItemModel>> fetchListCart() async {
+    try {
+      final res = await httpGet(
+        uri: '$baseUrl/cartItem/${getxAppController.userLogged.value!.id}',
+      );
+
+      return getListCartFromRes(res);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static void addToCart({
     required ProductModel product,
     required int quantity,
     bool? isShowSnackBar,
-  }) {
-    int theSameItemId =
-        listCart.indexWhere((element) => element.product.id == product.id);
+  }) async {
+    try {
+      int theSameItemIndex =
+          listCart.indexWhere((element) => element.product.id == product.id);
 
-    if (theSameItemId != -1) {
-      CartItemModel cartItemToUpdate = CartItemModel(
-        id: product.id,
-        product: product,
-        quantity: listCart[theSameItemId].quantity + quantity,
-      );
+      dynamic res;
 
-      listCart.replaceRange(
-        theSameItemId,
-        theSameItemId + 1,
-        [cartItemToUpdate],
-      );
+      if (theSameItemIndex != -1) {
+        Map<String, dynamic> reqBody = {
+          'quantity': listCart[theSameItemIndex].quantity + quantity,
+        };
 
-      updateQuantityCartCheckout(
-        cartItemToUpdate,
-        cartItemToUpdate.quantity,
-      );
-    } else {
-      listCart.add(
-        CartItemModel(id: product.id, product: product, quantity: quantity),
-      );
-    }
+        res = await httpPut(
+          uri:
+              '$baseUrl/cartItem/${getxAppController.userLogged.value!.id}/${listCart[theSameItemIndex].id}',
+          reqBody: reqBody,
+        );
 
-    if (isShowSnackBar ?? true) {
-      showSnackBar(
-        title: 'Add to cart success',
-        content: product.name,
-      );
+        if (!isRequestSuccess(res)) {
+          showSnackBar(
+            content: 'Something went wrong!',
+            isSuccess: false,
+          );
+          return;
+        }
+      } else {
+        Map<String, dynamic> reqBody = {
+          'product_id': product.id,
+          'user_id': getxAppController.userLogged.value!.id,
+          'quantity': quantity,
+        };
+
+        res = await httpPost(uri: '$baseUrl/cartItem', reqBody: reqBody);
+
+        if (!isRequestSuccess(res)) {
+          showSnackBar(
+            content: 'Something went wrong!',
+            isSuccess: false,
+          );
+          return;
+        }
+      }
+
+      // fetchListCart();
+
+      List<CartItemModel> listCarItem = getListCartFromRes(res);
+      getxAppController.setData(listCartItem: listCarItem);
+
+      if (isShowSnackBar ?? true) {
+        showSnackBar(
+          title: 'Add to cart success',
+          content: product.name,
+        );
+      }
+    } catch (e) {
+      throw Exception(e);
     }
   }
 
@@ -84,14 +141,6 @@ class CartServices {
     );
   }
 
-  static removeCartCheckout(CartItemModel cartItem) {
-    int index = findCartInList(listCartItemCheckout, cartItem);
-    if (index == -1) {
-      return;
-    }
-    listCartItemCheckout.removeAt(index);
-  }
-
   static updateCartCheckout({
     required CartItemModel cartItem,
   }) {
@@ -104,43 +153,60 @@ class CartServices {
     }
   }
 
-  static removeCart({
+  static void decreaseCartItemQuantity({
     required ProductModel product,
     required int quantity,
     bool? isShowSnackBar,
-    bool? removeAll,
-  }) {
-    int theSameItemId =
+  }) async {
+    int theSameItemIndex =
         listCart.indexWhere((element) => element.product.id == product.id);
 
-    if (theSameItemId != -1) {
-      if (removeAll ?? false) {
-        removeCartCheckout(listCart[theSameItemId]);
-        listCart.removeAt(theSameItemId);
-      } else {
-        CartItemModel cartItemToUpdate = CartItemModel(
-          id: product.id,
-          product: product,
-          quantity: listCart[theSameItemId].quantity - 1,
-        );
+    if (theSameItemIndex != -1) {
+      Map<String, dynamic> reqBody = {
+        'quantity': listCart[theSameItemIndex].quantity - quantity,
+      };
 
-        listCart.replaceRange(
-          theSameItemId,
-          theSameItemId + 1,
-          [cartItemToUpdate],
-        );
+      final res = await httpPut(
+        uri:
+            '$baseUrl/cartItem/${getxAppController.userLogged.value!.id}/${listCart[theSameItemIndex].id}',
+        reqBody: reqBody,
+      );
 
-        updateQuantityCartCheckout(
-          cartItemToUpdate,
-          cartItemToUpdate.quantity,
+      if (!isRequestSuccess(res)) {
+        showSnackBar(
+          content: 'Something went wrong!',
+          isSuccess: false,
+        );
+        return;
+      }
+
+      List<CartItemModel> listCarItem = getListCartFromRes(res);
+      getxAppController.setData(listCartItem: listCarItem);
+
+      if (isShowSnackBar ?? true) {
+        showSnackBar(
+          title: 'Remove product success',
+          content: product.name,
         );
       }
     }
+  }
+
+  static void removeCartItem({
+    required CartItemModel cartItem,
+    bool? isShowSnackBar,
+  }) async {
+    final res = await httpDelete(
+      uri: '$uri/${getxAppController.userLogged.value!.id}/${cartItem.id}',
+    );
+
+    List<CartItemModel> listCarItem = getListCartFromRes(res);
+    getxAppController.setData(listCartItem: listCarItem);
 
     if (isShowSnackBar ?? true) {
       showSnackBar(
         title: 'Remove product success',
-        content: product.name,
+        content: cartItem.product.name,
       );
     }
   }
@@ -182,7 +248,7 @@ class CartServices {
     return fullAddress;
   }
 
-  static ProductModel? getProductById(int id) {
+  static ProductModel? getProductById(String id) {
     int index = listProductDummy.indexWhere(
       (item) => item.id == id,
     );
@@ -192,19 +258,6 @@ class CartServices {
     }
 
     return listProductDummy[index];
-  }
-
-  static void checkout() {
-    for (var i = 0; i < listCartItemCheckout.length; i++) {
-      CartServices.removeCart(
-        product: listCartItemCheckout[i].product,
-        quantity: listCartItemCheckout[i].quantity,
-        removeAll: true,
-        isShowSnackBar: false,
-      );
-    }
-
-    getxAppController.setData(listCartItemCheckout: []);
   }
 
   static void selectAllCartItem({

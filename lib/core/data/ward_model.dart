@@ -1,5 +1,5 @@
 class WardModel {
-  final int id;
+  final String id;
   final String name;
 
   WardModel({
@@ -10,8 +10,8 @@ class WardModel {
   factory WardModel.fromJson(Map<String, dynamic> json) {
     {
       return WardModel(
-        id: json['id'],
-        name: json['name'],
+        id: json['_id'],
+        name: json['ward_name'],
       );
     }
   }

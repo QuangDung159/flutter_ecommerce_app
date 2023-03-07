@@ -7,7 +7,6 @@ import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.da
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
@@ -15,6 +14,8 @@ import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/address_service.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -31,6 +32,18 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
   final addressLineInputController = TextEditingController();
   final receiverNameInputController = TextEditingController();
   final phoneInputController = TextEditingController();
+
+  Future<void> onSubmitAddress() async {
+    await AddressService.submitCreateAddress(
+      addressLine: addressLineInputController.text,
+      phone: phoneInputController.text,
+      receiverName: receiverNameInputController.text,
+    );
+
+    addressLineInputController.text = '';
+    receiverNameInputController.text = '';
+    phoneInputController.text = '';
+  }
 
   @override
   void dispose() {
@@ -59,7 +72,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
               child: SingleChildScrollView(
                 child: Container(
                   color: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  // padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   margin: EdgeInsets.only(bottom: 12),
                   child: Obx(
                     () => Column(
@@ -83,19 +96,59 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
 
     for (var i = 0; i < listAddress.length; i++) {
       listRendered.add(
-        AddressItem(
-          isSelected: addressSelected == null
-              ? false
-              : addressSelected.id == listAddress[i].id,
-          addressModel: listAddress[i],
+        Slidable(
+          key: ValueKey(listAddress[i].id),
+          endActionPane: ActionPane(
+            extentRatio: 64 / MediaQuery.of(context).size.width,
+            openThreshold: 0.1,
+            closeThreshold: 0.8,
+            dismissible: DismissiblePane(onDismissed: () {
+              AddressService.removeAddress(addressId: listAddress[i].id);
+            }),
+            motion: BehindMotion(),
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    AddressService.removeAddress(addressId: listAddress[i].id);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    color: AppColors.orangeSecondary,
+                    child: Image.asset(
+                      AssetHelper.iconTrash,
+                      width: 24,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          child: Container(
+            padding: EdgeInsets.only(
+              left: 12,
+              right: 12,
+              top: i == 0 ? 12 : 6,
+              bottom: listAddress.length - 1 == i ? 12 : 6,
+            ),
+            child: AddressItem(
+              isSelected: addressSelected == null
+                  ? false
+                  : addressSelected.id == listAddress[i].id,
+              addressModel: listAddress[i],
+            ),
+          ),
         ),
       );
     }
 
     if (listRendered.isEmpty) {
       return [
-        Center(
-          child: Text('Address book empty'),
+        SizedBox(
+          height: 50,
+          child: Center(
+            child: Text('Address book empty'),
+          ),
         ),
       ];
     }
@@ -151,21 +204,15 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
             renderDropdownButton(
               getxAppController.citySelected.value.name,
               'city',
+              getxAppController.citySelected.value.id,
             ),
-            renderDropdownButton(
-              getxAppController.districtSelected.value.name,
-              'district',
-            ),
-            renderDropdownButton(
-              getxAppController.wardSelected.value.name,
-              'ward',
-            ),
+            renderDropdownButton(getxAppController.districtSelected.value.name,
+                'district', getxAppController.districtSelected.value.id),
+            renderDropdownButton(getxAppController.wardSelected.value.name,
+                'ward', getxAppController.wardSelected.value.id),
             LoadingButtonWidget(
                 label: 'Add',
-                onTap: () {
-                  List<AddressModel> listAddress =
-                      getxAppController.listAddress;
-
+                onTap: () async {
                   if (addressLineInputController.text == '' ||
                       receiverNameInputController.text == '' ||
                       phoneInputController.text == '') {
@@ -177,22 +224,24 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                     return;
                   }
 
-                  AddressModel address = AddressModel(
-                    addressLine: addressLineInputController.text,
-                    city: getxAppController.citySelected.value,
-                    district: getxAppController.districtSelected.value,
-                    ward: getxAppController.wardSelected.value,
-                    id: listAddress.length,
-                    receiverName: receiverNameInputController.text,
-                    phone: phoneInputController.text,
-                  );
+                  return onSubmitAddress();
 
-                  listAddress.add(address);
-                  getxAppController.setAddressSelected(address);
+                  // AddressModel address = AddressModel(
+                  //   addressLine: addressLineInputController.text,
+                  //   city: getxAppController.citySelected.value,
+                  //   district: getxAppController.districtSelected.value,
+                  //   ward: getxAppController.wardSelected.value,
+                  //   id: listAddress.length,
+                  //   receiverName: receiverNameInputController.text,
+                  //   phone: phoneInputController.text,
+                  // );
 
-                  addressLineInputController.text = '';
-                  receiverNameInputController.text = '';
-                  phoneInputController.text = '';
+                  // listAddress.add(address);
+                  // getxAppController.setAddressSelected(address);
+
+                  // addressLineInputController.text = '';
+                  // receiverNameInputController.text = '';
+                  // phoneInputController.text = '';
                 }),
             SizedBox(
               height: MediaQuery.of(context).padding.bottom + 12,
@@ -203,9 +252,17 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     );
   }
 
-  Widget renderDropdownButton(String title, String locationType) {
+  Widget renderDropdownButton(
+    String title,
+    String locationType,
+    String itemId,
+  ) {
     return GestureDetector(
       onTap: () {
+        if (itemId == '1') {
+          return;
+        }
+
         FocusManager.instance.primaryFocus?.unfocus();
         showMaterialModalBottomSheet(
           context: context,
@@ -304,19 +361,27 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     DistrictModel districtSelected = getx.districtSelected.value;
     WardModel wardSelected = getx.wardSelected.value;
 
-    List<DistrictModel> listDistrict = citySelected.listDistrict ?? [];
-    List<WardModel> listWard = districtSelected.listWard ?? [];
+    List<DistrictModel> listDistrict = citySelected.listDistrict;
+    List<WardModel> listWard = districtSelected.listWard;
 
     switch (locationType) {
       case 'city':
-        for (var cityItem in listCityDummy) {
+        for (var cityItem in getx.listCity) {
           listRender.add(
             GestureDetector(
               onTap: () {
+                DistrictModel district =
+                    AddressService.getDistrictDefault(cityItem);
+                WardModel ward = AddressService.getWardDefault(district);
+
+                if (cityItem.id == citySelected.id) {
+                  return;
+                }
+
                 getx.setData(
                   citySelected: cityItem,
-                  districtSelected: cityItem.listDistrict![0],
-                  wardSelected: cityItem.listDistrict![0].listWard![0],
+                  districtSelected: district,
+                  wardSelected: ward,
                 );
                 Navigator.of(context).pop();
               },
@@ -333,9 +398,15 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           listRender.add(
             GestureDetector(
               onTap: () {
+                WardModel ward = AddressService.getWardDefault(districtItem);
+
+                if (districtItem.id == districtSelected.id) {
+                  return;
+                }
+
                 getx.setData(
                   districtSelected: districtItem,
-                  wardSelected: districtItem.listWard![0],
+                  wardSelected: ward,
                 );
                 Navigator.of(context).pop();
               },
@@ -352,6 +423,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           listRender.add(
             GestureDetector(
               onTap: () {
+                if (wardItem.id == wardSelected.id) {
+                  return;
+                }
+
                 getx.setData(
                   wardSelected: wardItem,
                 );

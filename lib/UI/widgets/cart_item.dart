@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
@@ -38,16 +39,18 @@ class _CartItemState extends State<CartItem> {
             extentRatio: 64 / MediaQuery.of(context).size.width,
             openThreshold: 0.1,
             closeThreshold: 0.8,
-            // dismissible: DismissiblePane(onDismissed: () {}),
+            dismissible: DismissiblePane(onDismissed: () {
+              CartServices.removeCartItem(
+                cartItem: widget.cartItem,
+              );
+            }),
             motion: BehindMotion(),
             children: [
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    CartServices.removeCart(
-                      product: widget.cartItem.product,
-                      quantity: 1,
-                      removeAll: true,
+                    CartServices.removeCartItem(
+                      cartItem: widget.cartItem,
                     );
                   },
                   child: Container(
@@ -124,10 +127,18 @@ class _CartItemState extends State<CartItem> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.cartItem.product.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                GestureDetector(
+                  onTap: () => Get.to(
+                    () => ProductDetailScreen(
+                      product: widget.cartItem.product,
+                    ),
+                    preventDuplicates: false,
+                  ),
+                  child: Text(
+                    widget.cartItem.product.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 // SizedBox(
@@ -206,7 +217,7 @@ class _CartItemState extends State<CartItem> {
                                 return;
                               }
 
-                              CartServices.removeCart(
+                              CartServices.decreaseCartItemQuantity(
                                 product: widget.cartItem.product,
                                 quantity: 1,
                                 isShowSnackBar: false,
@@ -226,7 +237,7 @@ class _CartItemState extends State<CartItem> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              CartServices.addCart(
+                              CartServices.addToCart(
                                 product: widget.cartItem.product,
                                 quantity: 1,
                                 isShowSnackBar: false,

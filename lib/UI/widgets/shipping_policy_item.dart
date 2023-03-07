@@ -40,7 +40,7 @@ class ShippingPolicyItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            AssetHelper.iconMap,
+            isSelfPickup ? AssetHelper.iconMap : AssetHelper.iconDelivery,
             width: 24,
           ),
           SizedBox(

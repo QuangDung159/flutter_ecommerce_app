@@ -90,7 +90,7 @@ class ProductItemVertical extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              CartServices.addCart(
+              CartServices.addToCart(
                 product: product,
                 quantity: 1,
               );

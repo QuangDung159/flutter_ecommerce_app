@@ -65,7 +65,9 @@ class _CartTotalSectionState extends State<CartTotalSection> {
             children: [
               GestureDetector(
                 onTap: () => Get.to(
-                  () => VoucherScreen(),
+                  () => VoucherScreen(
+                    navigationFrom: 'delivery_screen',
+                  ),
                 ),
                 child: Text(
                   promotionSelected?.promotion.code ?? 'Choose promo code',

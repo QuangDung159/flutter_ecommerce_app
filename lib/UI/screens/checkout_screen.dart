@@ -14,6 +14,7 @@ import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:flutter_ecommerce_app/core/services/payment_service.dart';
 import 'package:get/get.dart';
 
@@ -86,7 +87,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           expiryDate: paymentCardDefault.expiryDate,
         );
       } else {
-        onCheckoutSuccess();
+        return OrderService.createOrder(
+          onSuccess: onCheckoutSuccess,
+        );
       }
     } catch (e) {
       log(e.toString());
@@ -94,9 +97,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     }
   }
 
-  void onCheckoutSuccess() {
+  void onCheckoutSuccess() async {
     Get.offAll(() => MainScreen());
-    CartServices.checkout();
+    // CartServices.checkout();
+
+    getxAppController.setData(listCartItemCheckout: []);
+
     Future.delayed(
       Duration(milliseconds: 400),
       () => showSnackBar(
