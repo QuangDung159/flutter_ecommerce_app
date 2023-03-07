@@ -138,4 +138,18 @@ class AddressService {
       throw Exception(e);
     }
   }
+
+  static void removeAddress({required String addressId}) async {
+    try {
+      final res = await httpDelete(
+        uri: '$baseUrl/${getxApp.userLogged.value?.id ?? '1'}/$addressId',
+      );
+
+      if (isRequestSuccess(res)) {
+        getListAddressFromResponse(res, true);
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }
