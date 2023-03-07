@@ -43,6 +43,7 @@ class _MainScreenState extends State<MainScreen> {
 
     CartServices.fetchListCart();
     AddressService.fetchListCity();
+    AddressService.fetchListAddress();
   }
 
   @override
