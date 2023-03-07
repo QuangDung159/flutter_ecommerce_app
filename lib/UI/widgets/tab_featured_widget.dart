@@ -226,20 +226,20 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
                   ),
                 ),
               ),
-              SizedBox(
-                height: 30,
-              ),
-              ListProductHorizontal(
-                title: 'Recently Viewed',
-                listProduct: listProductDummy,
-                isShowSeeAll: true,
-                onTapSeeAll: () => Get.to(
-                  () => ListProductScreen(
-                    title: 'Recently Viewed',
-                    category: 'Recently',
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: 30,
+              // ),
+              // ListProductHorizontal(
+              //   title: 'Recently Viewed',
+              //   listProduct: listProductDummy,
+              //   isShowSeeAll: true,
+              //   onTapSeeAll: () => Get.to(
+              //     () => ListProductScreen(
+              //       title: 'Recently Viewed',
+              //       category: 'Recently',
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 30,
               ),

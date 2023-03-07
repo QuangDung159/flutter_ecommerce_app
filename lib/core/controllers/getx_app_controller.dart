@@ -41,10 +41,10 @@ class GetxAppController extends GetxController {
 
   final citySelected = Rx<CityModel>(listCityDummy[0]);
 
-  final districtSelected = Rx<DistrictModel>(listCityDummy[0].listDistrict![0]);
+  final districtSelected = Rx<DistrictModel>(listCityDummy[0].listDistrict[0]);
 
   final wardSelected = Rx<WardModel>(
-    listCityDummy[0].listDistrict![0].listWard![0],
+    listCityDummy[0].listDistrict[0].listWard[0],
   );
 
   final listAddress = RxList<AddressModel>([]);

@@ -1,11 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/search_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_icon.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/list_product_horizontal.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
@@ -206,21 +204,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               'Delivery & Return Policy',
               product.shippingInfo,
             ),
-            Container(
-              color: Colors.white,
-              padding: EdgeInsets.symmetric(
-                vertical: AppDimension.contentPadding,
-              ),
-              margin: EdgeInsets.only(bottom: 12),
-              child: ListProductHorizontal(
-                title: 'Recently Viewed',
-                listProduct: listProductDummy,
-                isShowSeeAll: true,
-                onTapSeeAll: () => Get.to(
-                  () => ListProductScreen(title: 'Recently Viewed'),
-                ),
-              ),
-            ),
+            // Container(
+            //   color: Colors.white,
+            //   padding: EdgeInsets.symmetric(
+            //     vertical: AppDimension.contentPadding,
+            //   ),
+            //   margin: EdgeInsets.only(bottom: 12),
+            //   child: ListProductHorizontal(
+            //     title: 'Recently Viewed',
+            //     listProduct: listProductDummy,
+            //     isShowSeeAll: true,
+            //     onTapSeeAll: () => Get.to(
+            //       () => ListProductScreen(title: 'Recently Viewed'),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -107,24 +107,24 @@ class _MainBottomBarDealsWidgetState extends State<MainBottomBarDealsWidget> {
                       ),
                     ),
                   ),
-                  Container(
-                    color: Colors.white,
-                    padding: EdgeInsets.symmetric(
-                      vertical: AppDimension.contentPadding,
-                    ),
-                    child: ListProductHorizontal(
-                      title: 'Recently Viewed',
-                      listProduct: listProductDummy,
-                      isShowSeeAll: true,
-                      onTapSeeAll: () => Get.to(
-                        () => ListProductScreen(title: 'Recently Viewed'),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 30,
-                    color: Colors.white,
-                  ),
+                  // Container(
+                  //   color: Colors.white,
+                  //   padding: EdgeInsets.symmetric(
+                  //     vertical: AppDimension.contentPadding,
+                  //   ),
+                  //   child: ListProductHorizontal(
+                  //     title: 'Recently Viewed',
+                  //     listProduct: listProductDummy,
+                  //     isShowSeeAll: true,
+                  //     onTapSeeAll: () => Get.to(
+                  //       () => ListProductScreen(title: 'Recently Viewed'),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Container(
+                  //   height: 30,
+                  //   color: Colors.white,
+                  // ),
                   Container(
                     color: Colors.white,
                     child: BenefitBanner(),
