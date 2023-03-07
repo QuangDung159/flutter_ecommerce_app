@@ -2,13 +2,13 @@ import 'package:flutter_ecommerce_app/core/data/order_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_transaction.dart';
 
 class OrderModel {
-  final int id;
+  final String id;
   final String subTotalAmount;
   final String totalAmount;
   final String createdAt;
   final String promotionAmount;
   final List<OrderItemModel> orderItems;
-  final PaymentTransaction paymentTransaction;
+  final PaymentTransaction? paymentTransaction;
   final String? description;
   final String? promotionCode;
   final String? deliveryAt;
@@ -20,7 +20,7 @@ class OrderModel {
     required this.createdAt,
     required this.promotionAmount,
     required this.orderItems,
-    required this.paymentTransaction,
+    this.paymentTransaction,
     this.description,
     this.promotionCode,
     this.deliveryAt,
@@ -30,17 +30,27 @@ class OrderModel {
     {
       return OrderModel(
         id: json['id'],
-        subTotalAmount: json['sub_total_amount'],
-        totalAmount: json['total_amount'],
-        createdAt: json['created_at'],
-        promotionAmount: json['promotion_amount'],
-        orderItems: List<dynamic>.from(json['order_items'])
+        subTotalAmount: json['sub_total_amount']?.toString() ?? '100',
+        totalAmount: json['total_amount']?.toString() ?? '100',
+        createdAt: json['createdAt'],
+        promotionAmount: json['promotion_amount']?.toString() ?? '100',
+        orderItems: List<dynamic>.from(json['list_order_item'])
             .map(
               (e) => OrderItemModel.fromJson(e),
             )
             .toList(),
-        paymentTransaction: PaymentTransaction.fromJson(
-          json['last_payment_transaction'],
+        paymentTransaction: PaymentTransaction(
+          id: 1,
+          amountRequest: '1',
+          amountCaptured: '1',
+          cardLast4: '1',
+          cardBrand: '1',
+          description: '1',
+          userId: 1,
+          createdAt: '',
+          updatedAt: '',
+          sourceableType: 'sourceableType',
+          sourceableId: 1,
         ),
         description: json['description'],
         promotionCode: json['promotion_code'],

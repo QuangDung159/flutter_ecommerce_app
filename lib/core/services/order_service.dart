@@ -12,9 +12,20 @@ class OrderService {
   static GetxAppController getxApp = Get.find<GetxAppController>();
   static String uri = '$baseUrl/order';
 
-  static Future<List<OrderModel>> fetchListOrder(String orderStatus) async {
-    final res = await httpGet(
-      uri: '$uri/${getxApp.userLogged.value!.id}/$orderStatus',
+  static Future<List<OrderModel>> fetchListOrder({
+    required String orderStatus,
+    String? limit,
+    String? page,
+  }) async {
+    Map<String, dynamic> reqBody = {
+      'orderStatus': orderStatus,
+      'limit': limit ?? 1,
+      'page': page ?? 1,
+    };
+
+    final res = await httpPost(
+      uri: '$uri/${getxApp.userLogged.value!.id}',
+      reqBody: reqBody,
     );
 
     if (isRequestSuccess(res)) {

@@ -9,6 +9,7 @@ import 'package:flutter_ecommerce_app/UI/widgets/payment_method_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/order_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
@@ -96,9 +97,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     }
   }
 
-  void onCheckoutSuccess() {
+  void onCheckoutSuccess() async {
     // Get.offAll(() => MainScreen());
     // CartServices.checkout();
+
+    List<OrderModel> listOrder = await OrderService.fetchListOrder(
+      orderStatus: 'created',
+    );
+
     Future.delayed(
       Duration(milliseconds: 400),
       () => showSnackBar(

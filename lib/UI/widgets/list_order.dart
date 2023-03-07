@@ -86,7 +86,7 @@ class _ListOrderState extends State<ListOrder> {
                         width: 2,
                       ),
                       Text(
-                        orderModel.paymentTransaction.cardLast4,
+                        orderModel.paymentTransaction?.cardLast4 ?? '4242',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
