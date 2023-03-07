@@ -14,12 +14,12 @@ class OrderService {
 
   static Future<List<OrderModel>> fetchListOrder({
     required String orderStatus,
-    String? limit,
-    String? page,
+    int? limit,
+    int? page,
   }) async {
     Map<String, dynamic> reqBody = {
       'orderStatus': orderStatus,
-      'limit': limit ?? 1,
+      'limit': limit ?? 10,
       'page': page ?? 1,
     };
 

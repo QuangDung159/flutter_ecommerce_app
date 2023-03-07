@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_order_all.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/list_order_delivered.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/list_order_shipping.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/order_model.dart';
+import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:get/get.dart';
 
 class ListOrderScreen extends StatefulWidget {
@@ -21,16 +21,46 @@ class _ListOrderScreenState extends State<ListOrderScreen>
   GetxAppController getxAppController = Get.find<GetxAppController>();
   late TabController _tabController;
 
+  List<OrderModel> listAll = [];
+  List<OrderModel> listCreated = [];
+  List<OrderModel> listCompleted = [];
+
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
     super.initState();
+
+    fetchListOrder('all');
+    fetchListOrder('created');
+    fetchListOrder('completed');
   }
 
   @override
   void dispose() {
     super.dispose();
     _tabController.dispose();
+  }
+
+  void fetchListOrder(String orderStatus) async {
+    List<OrderModel> listOrder =
+        await OrderService.fetchListOrder(orderStatus: orderStatus, page: 1, limit: 100);
+
+    switch (orderStatus) {
+      case 'created':
+        setState(() {
+          listCreated = listOrder;
+        });
+        break;
+      case 'completed':
+        setState(() {
+          listCompleted = listOrder;
+        });
+        break;
+      default:
+        setState(() {
+          listAll = listOrder;
+        });
+    }
   }
 
   @override
@@ -76,9 +106,17 @@ class _ListOrderScreenState extends State<ListOrderScreen>
             child: TabBarView(
               controller: _tabController,
               children: [
-                ListOrderAll(),
-                ListOrderShipping(),
-                ListOrderDelivered(),
+                ListOrderAll(
+                  listOrder: listAll,
+                ),
+                ListOrderAll(
+                  listOrder: listCreated,
+                ),
+                ListOrderAll(
+                  listOrder: listCompleted,
+                ),
+                // ListOrderShipping(),
+                // ListOrderDelivered(),
               ],
             ),
           ),
