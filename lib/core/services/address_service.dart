@@ -83,7 +83,9 @@ class AddressService {
 
   static void fetchListAddress() async {
     try {
-      final res = await httpGet(uri: '$baseUrl/address');
+      final res = await httpGet(
+        uri: '$baseUrl/address/${getxApp.userLogged.value?.id ?? '1'}',
+      );
       if (isRequestSuccess(res)) {
         getListAddressFromResponse(res);
       }
