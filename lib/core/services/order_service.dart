@@ -30,7 +30,9 @@ class OrderService {
     return [];
   }
 
-  static void createOrder() async {
+  static void createOrder({
+    Function()? onSuccess,
+  }) async {
     try {
       List<Map<String, dynamic>> listCartItem = [];
       List<CartItemModel> listCart = getxApp.listCartItemCheckout;
@@ -55,7 +57,11 @@ class OrderService {
 
       final res = await httpPost(uri: uri, reqBody: reqBody);
 
-      if (isRequestSuccess(res)) {}
+      if (isRequestSuccess(res)) {
+        if (onSuccess != null) {
+          onSuccess();
+        }
+      }
     } catch (e) {
       throw Exception(e);
     }
