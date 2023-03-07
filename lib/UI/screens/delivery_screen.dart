@@ -5,14 +5,12 @@ import 'package:flutter_ecommerce_app/UI/screens/checkout_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_item_delivery.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_total_section.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/shipping_policy_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
-import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:get/get.dart';
 
 class DeliveryScreen extends StatefulWidget {
@@ -24,21 +22,6 @@ class DeliveryScreen extends StatefulWidget {
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
   GetxAppController getxAppController = Get.find<GetxAppController>();
-  List<Widget> renderListFilterLevel1() {
-    List<Widget> listFilterLevel1Render = [];
-
-    List listFilterLevel1 = getxAppController.listFilterLevel1;
-
-    for (FilterItemModel item in listFilterLevel1) {
-      listFilterLevel1Render.add(
-        FilterItemLevel1(
-          filterItemLevel1: item,
-        ),
-      );
-    }
-
-    return listFilterLevel1Render;
-  }
 
   @override
   Widget build(BuildContext context) {

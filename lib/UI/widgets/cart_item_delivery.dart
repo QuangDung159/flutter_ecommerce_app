@@ -58,22 +58,22 @@ class CartItemDelivery extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    Text(
-                      'Black, Size S',
-                      style: TextStyle(
-                        color: AppColors.grey,
-                      ),
-                    )
+                    // SizedBox(
+                    //   height: 7,
+                    // ),
+                    // Text(
+                    //   'Black, Size S',
+                    //   style: TextStyle(
+                    //     color: AppColors.grey,
+                    //   ),
+                    // )
                   ],
                 ),
               ),
               SizedBox(
                 width: 12,
               ),
-              Text('x1'),
+              Text('x${cartItem.quantity}'),
             ],
           ),
           SizedBox(
