@@ -243,7 +243,9 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
   }
 
   Widget renderListRecentlyViewed() {
-    if (getxApp.listRecentlyViewed.isEmpty) {
+    List<ProductModel> listRecentlyViewed = getxApp.listRecentlyViewed;
+
+    if (listRecentlyViewed.isEmpty) {
       return Container();
     }
 
@@ -254,14 +256,7 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
         ),
         ListProductHorizontal(
           title: 'Recently Viewed',
-          listProduct: getxApp.listRecentlyViewed,
-          isShowSeeAll: true,
-          onTapSeeAll: () => Get.to(
-            () => ListProductScreen(
-              title: 'Recently Viewed',
-              category: 'Recently',
-            ),
-          ),
+          listProduct: listRecentlyViewed,
         ),
       ],
     );
