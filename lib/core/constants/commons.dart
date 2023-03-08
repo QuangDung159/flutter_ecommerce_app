@@ -657,9 +657,9 @@ List<PaymentCardModel> listPaymentCardDummy = [
   ),
 ];
 
-// const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
-const String baseUrl = 'http://localhost:5001/api/v1';
+const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
+// const String baseUrl = 'http://localhost:5001/api/v1';
 
-// const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
-String stripeBaseUrl =
-    isAndroid ? 'http://10.0.2.2:4242' : 'http://localhost:4242';
+const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
+// String stripeBaseUrl =
+//     isAndroid ? 'http://10.0.2.2:4242' : 'http://localhost:4242';
