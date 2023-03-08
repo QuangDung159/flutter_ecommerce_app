@@ -78,16 +78,23 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           return;
         }
 
-        await PaymentService.handlePayment(
-          cardNumber: paymentCardDefault.cardNumber,
-          cvvCode: paymentCardDefault.cvvCode,
-          onPaymentSuccess: () {
-            onCheckoutSuccess();
-          },
-          expiryDate: paymentCardDefault.expiryDate,
-        );
+        bool isSuccess = await OrderService.createOrder(
+            // onSuccess: onCheckoutSuccess,
+            );
+
+        if (isSuccess) {
+          return PaymentService.handlePayment(
+            cardNumber: paymentCardDefault.cardNumber,
+            cvvCode: paymentCardDefault.cvvCode,
+            onPaymentSuccess: () {
+              onCheckoutSuccess();
+            },
+            expiryDate: paymentCardDefault.expiryDate,
+          );
+        }
+        return;
       } else {
-        return OrderService.createOrder(
+        await OrderService.createOrder(
           onSuccess: onCheckoutSuccess,
         );
       }

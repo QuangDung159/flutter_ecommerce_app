@@ -47,7 +47,7 @@ class OrderService {
     return [];
   }
 
-  static void createOrder({
+  static Future<bool> createOrder({
     Function()? onSuccess,
   }) async {
     try {
@@ -84,6 +84,8 @@ class OrderService {
           onSuccess();
         }
       }
+
+      return isRequestSuccess(res);
     } catch (e) {
       throw Exception(e);
     }
