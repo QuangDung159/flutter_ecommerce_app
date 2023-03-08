@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter_ecommerce_app/config.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
@@ -134,7 +134,6 @@ class PaymentService {
         useStripeSdk: true,
         paymentMethodId: paymentMethod.id,
         currency: 'usd', // mocked data
-        items: ['id-1'],
         total: (CartServices.calTotal() * 100).round(),
       );
 
@@ -199,7 +198,7 @@ class PaymentService {
     List<String>? items,
     required int total,
   }) async {
-    final url = Uri.parse('$kApiUrl/pay-without-webhooks');
+    final url = Uri.parse('$stripeBaseUrl/pay-without-webhooks');
     final response = await http.post(
       url,
       headers: {
@@ -235,7 +234,7 @@ class PaymentService {
   static Future<Map<String, dynamic>> callNoWebhookPayEndpointIntentId({
     required String paymentIntentId,
   }) async {
-    final url = Uri.parse('$kApiUrl/charge-card-off-session');
+    final url = Uri.parse('$stripeBaseUrl/charge-card-off-session');
     final response = await http.post(
       url,
       headers: {
