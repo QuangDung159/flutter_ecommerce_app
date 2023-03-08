@@ -113,11 +113,12 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
                 ),
               ),
               renderTopPanel(
-                'Under Amour',
+                'Hot Deals',
                 AssetHelper.panelHome1,
                 onTapShopNow: () => Get.to(
                   () => ListProductScreen(
-                    title: 'Under Amour',
+                    title: 'Hot Deals',
+                    category: 'Sale',
                   ),
                 ),
               ),
@@ -224,6 +225,7 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
                   onTapShopNow: () => Get.to(
                     () => ListProductScreen(
                       title: 'New Arrivals',
+                      category: 'New Arrivals',
                     ),
                   ),
                 ),
