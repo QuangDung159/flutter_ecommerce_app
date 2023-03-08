@@ -16,7 +16,6 @@ class OrderService {
   static String uri = '$baseUrl/order';
 
   static UserModel userLogged = getxApp.userLogged.value!;
-  static PromotionModel? promotion = getxApp.promotionSelected.value?.promotion;
 
   static Future<List<OrderModel>> fetchListOrder({
     required String orderStatus,
@@ -53,6 +52,7 @@ class OrderService {
     try {
       List<Map<String, dynamic>> listCartItem = [];
       List<CartItemModel> listCartItemCheckout = getxApp.listCartItemCheckout;
+      PromotionModel? promotion = getxApp.promotionSelected.value?.promotion;
 
       for (var i = 0; i < listCartItemCheckout.length; i++) {
         CartItemModel cartItem = listCartItemCheckout[i];

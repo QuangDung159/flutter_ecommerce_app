@@ -107,6 +107,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     // CartServices.checkout();
 
     getxAppController.setData(listCartItemCheckout: []);
+    getxAppController.setPromotionSelected(null);
 
     Future.delayed(
       Duration(milliseconds: 400),
