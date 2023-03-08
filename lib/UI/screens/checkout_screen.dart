@@ -78,16 +78,21 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           return;
         }
 
-        await PaymentService.handlePayment(
-          cardNumber: paymentCardDefault.cardNumber,
-          cvvCode: paymentCardDefault.cvvCode,
-          onPaymentSuccess: () {
-            onCheckoutSuccess();
-          },
-          expiryDate: paymentCardDefault.expiryDate,
-        );
+        bool isSuccess = await OrderService.createOrder();
+
+        if (isSuccess) {
+          return PaymentService.handlePayment(
+            cardNumber: paymentCardDefault.cardNumber,
+            cvvCode: paymentCardDefault.cvvCode,
+            onPaymentSuccess: () {
+              onCheckoutSuccess();
+            },
+            expiryDate: paymentCardDefault.expiryDate,
+          );
+        }
+        return;
       } else {
-        return OrderService.createOrder(
+        await OrderService.createOrder(
           onSuccess: onCheckoutSuccess,
         );
       }
@@ -102,6 +107,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     // CartServices.checkout();
 
     getxAppController.setData(listCartItemCheckout: []);
+    getxAppController.setPromotionSelected(null);
 
     Future.delayed(
       Duration(milliseconds: 400),

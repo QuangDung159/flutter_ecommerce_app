@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/search_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/cart_icon.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/list_product_horizontal.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/constants/commons.dart';
@@ -33,17 +35,29 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   final PageController _pageController = PageController();
+  GetxAppController getxApp = Get.find<GetxAppController>();
+
+  void updateRecentlyViewed() {
+    List<ProductModel> listRecentlyViewed = getxApp.listRecentlyViewed;
+    int index = listRecentlyViewed
+        .indexWhere((element) => element.id == widget.product.id);
+
+    if (index == -1) {
+      listRecentlyViewed.insert(0, widget.product);
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+
+    Future.delayed(Duration(seconds: 1), () => updateRecentlyViewed());
   }
 
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     ProductModel product = widget.product;
-    GetxAppController getxApp = Get.find<GetxAppController>();
 
     bool isSale = product.originalPrice != '';
 
@@ -204,22 +218,34 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               'Delivery & Return Policy',
               product.shippingInfo,
             ),
-            // Container(
-            //   color: Colors.white,
-            //   padding: EdgeInsets.symmetric(
-            //     vertical: AppDimension.contentPadding,
-            //   ),
-            //   margin: EdgeInsets.only(bottom: 12),
-            //   child: ListProductHorizontal(
-            //     title: 'Recently Viewed',
-            //     listProduct: listProductDummy,
-            //     isShowSeeAll: true,
-            //     onTapSeeAll: () => Get.to(
-            //       () => ListProductScreen(title: 'Recently Viewed'),
-            //     ),
-            //   ),
-            // ),
+            Obx(
+              () => renderListRecentlyViewed(),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget renderListRecentlyViewed() {
+    List<ProductModel> listRecentlyViewed = getxApp.listRecentlyViewed;
+
+    if (listRecentlyViewed.isEmpty) {
+      return Container();
+    }
+
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+        vertical: AppDimension.contentPadding,
+      ),
+      margin: EdgeInsets.only(bottom: 12),
+      child: ListProductHorizontal(
+        title: 'Recently Viewed',
+        listProduct: listRecentlyViewed,
+        isShowSeeAll: true,
+        onTapSeeAll: () => Get.to(
+          () => ListProductScreen(title: 'Recently Viewed'),
         ),
       ),
     );

@@ -34,8 +34,8 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
 
     return Container(
       margin: EdgeInsets.only(
-        top: 12,
-        bottom: widget.isLastItem ? 12 : 0,
+        top: 6,
+        bottom: widget.isLastItem ? 6 : 0,
       ),
       color: Colors.white,
       child: Slidable(
@@ -83,19 +83,22 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
         ? false
         : paymentCardDefault.id == paymentCardModel.id;
 
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppDimension.contentPadding,
-        vertical: 12,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          GestureDetector(
-            onTap: () {
-              getxApp.setPaymentCardDefault(paymentCardModel);
-            },
-            child: Row(
+    return GestureDetector(
+      onTap: () {
+        getxApp.setPaymentCardDefault(paymentCardModel);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppDimension.contentPadding,
+          vertical: 12,
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(width: 0, color: Colors.white),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
               children: [
                 Image.asset(
                   getCardLogo(paymentCardModel.cardNumber),
@@ -125,16 +128,16 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
                 ),
               ],
             ),
-          ),
-          if (isDefaultCard)
-            Text(
-              'Default',
-              style: TextStyle(
-                color: AppColors.primary,
-                fontWeight: FontWeight.bold,
+            if (isDefaultCard)
+              Text(
+                'Default',
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -262,7 +262,7 @@ List<PromotionUserModel> listPromotionUserDummy = [
 
 List<PaymentMethodModel> listPaymentMethodDummy = [
   PaymentMethodModel(id: 1, title: 'Cash/COD', type: 'cash'),
-  // PaymentMethodModel(id: 2, title: 'Payment Card', type: 'payment_card'),
+  PaymentMethodModel(id: 2, title: 'Payment Card', type: 'payment_card'),
 ];
 
 List<CityModel> listCityDummy = [
@@ -658,4 +658,8 @@ List<PaymentCardModel> listPaymentCardDummy = [
 ];
 
 const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
-// const String baseUrl = 'http://localhost:5003/api/v1';
+// const String baseUrl = 'http://localhost:5001/api/v1';
+
+const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
+// String stripeBaseUrl =
+//     isAndroid ? 'http://10.0.2.2:4242' : 'http://localhost:4242';

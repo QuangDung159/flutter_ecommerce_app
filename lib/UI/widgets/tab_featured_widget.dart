@@ -10,7 +10,7 @@ import 'package:flutter_ecommerce_app/UI/widgets/list_category.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_product_horizontal.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/product_service.dart';
@@ -28,6 +28,8 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
     with AutomaticKeepAliveClientMixin {
   List<ProductModel> listArrivalsFetched = [];
   List<ProductModel> listSaleItemsFetched = [];
+
+  final GetxAppController getxApp = Get.find<GetxAppController>();
 
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -111,11 +113,12 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
                 ),
               ),
               renderTopPanel(
-                'Under Amour',
+                'Hot Deals',
                 AssetHelper.panelHome1,
                 onTapShopNow: () => Get.to(
                   () => ListProductScreen(
-                    title: 'Under Amour',
+                    title: 'Hot Deals',
+                    category: 'Sale',
                   ),
                 ),
               ),
@@ -222,24 +225,14 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
                   onTapShopNow: () => Get.to(
                     () => ListProductScreen(
                       title: 'New Arrivals',
+                      category: 'New Arrivals',
                     ),
                   ),
                 ),
               ),
-              // SizedBox(
-              //   height: 30,
-              // ),
-              // ListProductHorizontal(
-              //   title: 'Recently Viewed',
-              //   listProduct: listProductDummy,
-              //   isShowSeeAll: true,
-              //   onTapSeeAll: () => Get.to(
-              //     () => ListProductScreen(
-              //       title: 'Recently Viewed',
-              //       category: 'Recently',
-              //     ),
-              //   ),
-              // ),
+              Obx(
+                () => renderListRecentlyViewed(),
+              ),
               SizedBox(
                 height: 30,
               ),
@@ -248,6 +241,26 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
           ),
         ),
       ),
+    );
+  }
+
+  Widget renderListRecentlyViewed() {
+    List<ProductModel> listRecentlyViewed = getxApp.listRecentlyViewed;
+
+    if (listRecentlyViewed.isEmpty) {
+      return Container();
+    }
+
+    return Column(
+      children: [
+        SizedBox(
+          height: 30,
+        ),
+        ListProductHorizontal(
+          title: 'Recently Viewed',
+          listProduct: listRecentlyViewed,
+        ),
+      ],
     );
   }
 
