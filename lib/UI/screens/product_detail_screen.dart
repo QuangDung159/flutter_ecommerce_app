@@ -39,7 +39,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   void updateRecentlyViewed() {
     List<ProductModel> listRecentlyViewed = getxApp.listRecentlyViewed;
-    listRecentlyViewed.insert(0, widget.product);
+    int index = listRecentlyViewed
+        .indexWhere((element) => element.id == widget.product.id);
+
+    if (index == -1) {
+      listRecentlyViewed.insert(0, widget.product);
+    }
   }
 
   @override
