@@ -78,9 +78,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           return;
         }
 
-        bool isSuccess = await OrderService.createOrder(
-            // onSuccess: onCheckoutSuccess,
-            );
+        bool isSuccess = await OrderService.createOrder();
 
         if (isSuccess) {
           return PaymentService.handlePayment(
