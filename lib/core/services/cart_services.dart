@@ -17,8 +17,6 @@ import 'package:get_storage/get_storage.dart';
 class CartServices {
   static GetxAppController getxAppController = Get.find<GetxAppController>();
   static List listCart = getxAppController.listCartItem;
-  static List<CartItemModel> listCartItemCheckout =
-      getxAppController.listCartItemCheckout;
   static GetStorage localStorage = GetStorage();
   static String uri = '$baseUrl/cartItem';
 
@@ -122,6 +120,8 @@ class CartServices {
   }
 
   static updateQuantityCartCheckout(CartItemModel cartItem, int quantity) {
+    List<CartItemModel> listCartItemCheckout =
+        getxAppController.listCartItemCheckout;
     int index = findCartInList(listCartItemCheckout, cartItem);
 
     if (index == -1) {
@@ -144,6 +144,8 @@ class CartServices {
   static updateCartCheckout({
     required CartItemModel cartItem,
   }) {
+    List<CartItemModel> listCartItemCheckout =
+        getxAppController.listCartItemCheckout;
     int index = findCartInList(listCartItemCheckout, cartItem);
 
     if (index == -1) {
@@ -192,6 +194,16 @@ class CartServices {
     }
   }
 
+  static void removeCartItemCheckout(CartItemModel cartItem) {
+    List<CartItemModel> listCartItemCheckout =
+        getxAppController.listCartItemCheckout;
+
+    int index = findCartInList(listCartItemCheckout, cartItem);
+    if (index != -1) {
+      listCartItemCheckout.removeAt(index);
+    }
+  }
+
   static void removeCartItem({
     required CartItemModel cartItem,
     bool? isShowSnackBar,
@@ -201,7 +213,9 @@ class CartServices {
     );
 
     List<CartItemModel> listCarItem = getListCartFromRes(res);
+
     getxAppController.setData(listCartItem: listCarItem);
+    removeCartItemCheckout(cartItem);
 
     if (isShowSnackBar ?? true) {
       showSnackBar(
@@ -220,6 +234,8 @@ class CartServices {
   }
 
   static double calTotal() {
+    List<CartItemModel> listCartItemCheckout =
+        getxAppController.listCartItemCheckout;
     ShippingPolicyModel shippingSelected =
         getxAppController.shippingPolicySelected.value;
 
@@ -263,6 +279,9 @@ class CartServices {
   static void selectAllCartItem({
     required bool isDeselect,
   }) {
+    List<CartItemModel> listCartItemCheckout =
+        getxAppController.listCartItemCheckout;
+
     getxAppController.setData(listCartItemCheckout: []);
 
     if (!isDeselect) {
