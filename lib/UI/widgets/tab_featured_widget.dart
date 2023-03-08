@@ -228,8 +228,9 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
                   ),
                 ),
               ),
-              if (getxApp.listRecentlyViewed.isNotEmpty)
-                renderListRecentlyViewed(),
+              Obx(
+                () => renderListRecentlyViewed(),
+              ),
               SizedBox(
                 height: 30,
               ),
@@ -242,6 +243,10 @@ class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
   }
 
   Widget renderListRecentlyViewed() {
+    if (getxApp.listRecentlyViewed.isEmpty) {
+      return Container();
+    }
+
     return Column(
       children: [
         SizedBox(

@@ -39,21 +39,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   void updateRecentlyViewed() {
     List<ProductModel> listRecentlyViewed = getxApp.listRecentlyViewed;
-    listRecentlyViewed.add(widget.product);
+    listRecentlyViewed.insert(0, widget.product);
   }
 
   @override
   void initState() {
     super.initState();
 
-    updateRecentlyViewed();
+    Future.delayed(Duration(seconds: 1), () => updateRecentlyViewed());
   }
 
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     ProductModel product = widget.product;
-    GetxAppController getxApp = Get.find<GetxAppController>();
 
     bool isSale = product.originalPrice != '';
 
