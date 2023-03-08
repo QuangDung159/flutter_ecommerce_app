@@ -213,17 +213,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               'Delivery & Return Policy',
               product.shippingInfo,
             ),
-            // if (getxApp.listRecentlyViewed.isNotEmpty)
-            //   Obx(
-            //     () => renderListRecentlyViewed(getxApp.listRecentlyViewed),
-            //   ),
+            Obx(
+              () => renderListRecentlyViewed(),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget renderListRecentlyViewed(List<ProductModel> listRecentlyViewed) {
+  Widget renderListRecentlyViewed() {
+    List<ProductModel> listRecentlyViewed = getxApp.listRecentlyViewed;
+
+    if (listRecentlyViewed.isEmpty) {
+      return Container();
+    }
+
     return Container(
       color: Colors.white,
       padding: EdgeInsets.symmetric(

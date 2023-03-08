@@ -110,10 +110,9 @@ class _MainBottomBarDealsWidgetState extends State<MainBottomBarDealsWidget> {
                     ),
                   ),
                 ),
-                // if (getxApp.listRecentlyViewed.isNotEmpty)
-                //   Obx(
-                //     () => renderListRecentlyViewed(getxApp.listRecentlyViewed),
-                //   ),
+                Obx(
+                  () => renderListRecentlyViewed(),
+                ),
                 Container(
                   height: 30,
                   color: Colors.white,
@@ -130,7 +129,13 @@ class _MainBottomBarDealsWidgetState extends State<MainBottomBarDealsWidget> {
     );
   }
 
-  Widget renderListRecentlyViewed(List<ProductModel> listRecentlyViewed) {
+  Widget renderListRecentlyViewed() {
+    List<ProductModel> listRecentlyViewed = getxApp.listRecentlyViewed;
+
+    if (listRecentlyViewed.isEmpty) {
+      return Container();
+    }
+
     return Container(
       color: Colors.white,
       padding: EdgeInsets.symmetric(
@@ -139,10 +144,6 @@ class _MainBottomBarDealsWidgetState extends State<MainBottomBarDealsWidget> {
       child: ListProductHorizontal(
         title: 'Recently Viewed',
         listProduct: listRecentlyViewed,
-        isShowSeeAll: true,
-        onTapSeeAll: () => Get.to(
-          () => ListProductScreen(title: 'Recently Viewed'),
-        ),
       ),
     );
   }
