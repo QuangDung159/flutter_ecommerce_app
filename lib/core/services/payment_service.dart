@@ -150,11 +150,6 @@ class PaymentService {
       if (paymentIntentResult['clientSecret'] != null &&
           paymentIntentResult['requiresAction'] == null) {
         // Payment succeed
-
-        // showSnackBar(
-        //   content: 'Success! The payment was confirmed successfully!',
-        // );
-
         onPaymentSuccess();
         return;
       }
