@@ -13,6 +13,9 @@ class OrderModel {
   final String? promotionCode;
   final String? deliveryAt;
   final String? shippingFee;
+  final String paymentType;
+  final String paymentCardLast4;
+  final String paymentCardType;
 
   OrderModel({
     required this.id,
@@ -26,6 +29,9 @@ class OrderModel {
     this.promotionCode,
     this.deliveryAt,
     this.shippingFee,
+    required this.paymentCardLast4,
+    required this.paymentCardType,
+    required this.paymentType,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
@@ -58,6 +64,9 @@ class OrderModel {
         promotionCode: json['promotion_code'],
         deliveryAt: json['delivery_at'],
         shippingFee: json['shipping_fee']?.toString() ?? '0',
+        paymentCardLast4: json['payment_card_last_4'],
+        paymentCardType: json['payment_card_type'],
+        paymentType: json['payment_type'],
       );
     }
   }

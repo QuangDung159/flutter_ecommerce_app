@@ -29,8 +29,12 @@ class _ListOrderState extends State<ListOrder> {
   List<OrderModel> listOrder = [];
 
   void fetchListOrder() async {
-    List<OrderModel> list =
-        await OrderService.fetchListOrder(orderStatus: widget.orderStatus);
+    int countOrderItem = await OrderService.countOrder();
+    List<OrderModel> list = await OrderService.fetchListOrder(
+      orderStatus: widget.orderStatus,
+      page: 1,
+      limit: countOrderItem + 10,
+    );
 
     setState(() {
       listOrder = list;
@@ -109,16 +113,25 @@ class _ListOrderState extends State<ListOrder> {
                 Expanded(
                   child: Row(
                     children: [
-                      Image.asset(
-                        AssetHelper.iconVisa,
-                        height: 20,
-                        width: 20,
-                      ),
-                      SizedBox(
-                        width: 2,
-                      ),
+                      if (orderModel.paymentType == 'payment_card')
+                        Row(
+                          children: [
+                            Text(
+                              orderModel.paymentCardType,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 2,
+                            ),
+                          ],
+                        ),
                       Text(
-                        orderModel.paymentTransaction?.cardLast4 ?? '4242',
+                        orderModel.paymentCardLast4 != ''
+                            ? '  **** ${orderModel.paymentCardLast4}'
+                            : 'Cash/COD',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
