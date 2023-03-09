@@ -69,15 +69,13 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
             ),
           ],
         ),
-        child: Obx(
-          () => renderCardInfo(paymentCardModel),
-        ),
+        child: renderCardInfo(paymentCardModel),
       ),
     );
   }
 
   Widget renderCardInfo(PaymentCardModel paymentCardModel) {
-    PaymentCardModel? paymentCardDefault = getxApp.paymentCardDefault.value;
+    PaymentCardModel? paymentCardDefault;
 
     bool isDefaultCard = paymentCardDefault == null
         ? false
@@ -112,7 +110,7 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '**** **** **** ${getLast4(paymentCardModel.cardNumber)}',
+                      '**** **** **** ${paymentCardModel.cardNumber}',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

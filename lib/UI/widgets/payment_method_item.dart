@@ -45,7 +45,7 @@ class PaymentMethodItem extends StatelessWidget {
   Widget renderPaymentMethod(bool isPaymentCard) {
     PaymentCardModel? paymentCardDefault = getxApp.paymentCardDefault.value;
     String title = paymentCardDefault != null
-        ? '${paymentCardDefault.cardType} | **** ${getLast4(paymentCardDefault.cardNumber)}'
+        ? '${paymentCardDefault.cardType} | **** ${paymentCardDefault.cardNumber}'
         : paymentMethodItem.title;
 
     String iconName = getCardLogo(
