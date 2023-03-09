@@ -97,9 +97,10 @@ class PaymentService {
 
       Map<String, dynamic> reqBody = {
         'card_type': getCardType(cardNumberString),
-        'card_last_4': getLast4(cardNumberString),
-        'client_secret': '',
+        'card_last_4': cardNumberString,
         'user_id': getxApp.userLogged.value!.id,
+        'cvv_code': cvvCode,
+        'expiry_date': expiryDate,
       };
 
       final res = await httpPost(uri: uri, reqBody: reqBody);

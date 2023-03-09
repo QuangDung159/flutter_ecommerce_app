@@ -97,8 +97,8 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
               children: [
                 Image.asset(
                   getCardLogo(paymentCardModel.cardNumber),
-                  width: 48,
-                  height: 48,
+                  width: 35,
+                  height: 35,
                 ),
                 SizedBox(
                   width: 12,
@@ -107,30 +107,32 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '**** **** **** ${paymentCardModel.cardNumber}',
+                      '**** **** **** ${getLast4(paymentCardModel.cardNumber)}',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        // color: AppColors.greyDisable
                       ),
                     ),
-                    Text(
-                      paymentCardModel.cardType,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
                   ],
                 ),
               ],
             ),
-            if (isDefaultCard)
-              Text(
-                'Default',
+            Text(
+                'Primary',
                 style: TextStyle(
-                  color: AppColors.primary,
+                  color: isDefaultCard ? AppColors.primary : AppColors.greyDisable,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+            // if (isDefaultCard)
+            //   Text(
+            //     'Default',
+            //     style: TextStyle(
+            //       color: AppColors.primary,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //   ),
           ],
         ),
       ),
