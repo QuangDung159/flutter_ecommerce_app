@@ -131,6 +131,10 @@ class PaymentService {
           uri: '$uri/${getxApp.userLogged.value!.id}/$paymentCardId');
 
       if (isRequestSuccess(res)) {
+        if (paymentCardId == getxApp.paymentCardDefault.value!.id) {
+          getxApp.setPaymentCardDefault(null);
+        }
+
         listPaymentCard = await fetchListPaymentCard();
       }
 

@@ -187,7 +187,7 @@ class GetxAppController extends GetxController {
     this.userLogged.value = userLogged;
   }
 
-  void setPaymentCardDefault(PaymentCardModel paymentCardDefault) {
+  void setPaymentCardDefault(PaymentCardModel? paymentCardDefault) {
     this.paymentCardDefault.value = paymentCardDefault;
   }
 }

@@ -104,7 +104,7 @@ class _CartItemState extends State<CartItem> {
                 },
                 child: Image.asset(
                   isChecked ? AssetHelper.iconCheck : AssetHelper.iconUncheck,
-                  width: 18,
+                  width: 24,
                 ),
               ),
             ],
