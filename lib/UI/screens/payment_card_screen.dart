@@ -9,6 +9,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/payment_service.dart';
 import 'package:get/get.dart';
 
 class PaymentCardScreen extends StatefulWidget {
@@ -19,6 +20,12 @@ class PaymentCardScreen extends StatefulWidget {
 }
 
 class _PaymentCardScreenState extends State<PaymentCardScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    PaymentService.fetchListPaymentCard();
+  }
   GetxAppController getxApp = Get.find<GetxAppController>();
   double total = CartServices.calTotal();
 

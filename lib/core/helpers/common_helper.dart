@@ -242,7 +242,7 @@ String toPrettyString(Map<String, dynamic> json) {
 }
 
 String getLast4(String cardNumber) {
-  String newString = cardNumber.substring(cardNumber.length - 5);
+  String newString = cardNumber.substring(cardNumber.length - 4);
   return newString;
 }
 

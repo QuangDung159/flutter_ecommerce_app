@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -15,6 +16,7 @@ import 'package:http/http.dart' as http;
 
 class PaymentService {
   static final GetxAppController getxApp = Get.find<GetxAppController>();
+  static String uri = '$baseUrl/payment';
 
   static void getListCardPaymentFromLocalStore() {
     // updateListCardLocal([]);
@@ -35,6 +37,29 @@ class PaymentService {
     getxApp.setData(
       listPaymentCard: listPayment,
     );
+  }
+
+  static Future<List<PaymentCardModel>> fetchListPaymentCard() async {
+    try {
+      List<PaymentCardModel> listPaymentCard = [];
+
+      final res = await httpGet(uri: '$uri/${getxApp.userLogged.value!.id}');
+
+      if (isRequestSuccess(res)) {
+        Iterable listJson = jsonDecode(res.body)['data']['listPaymentCard'];
+        listPaymentCard = List<PaymentCardModel>.from(
+          listJson.map(
+            (e) => PaymentCardModel.fromJson(e),
+          ),
+        );
+
+        getxApp.setData(listPaymentCard: listPaymentCard);
+      }
+
+      return listPaymentCard;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   static void updateListCardLocal(List<PaymentCardModel> listPaymentCard) {
@@ -69,18 +94,18 @@ class PaymentService {
   }) {
     List<PaymentCardModel> listCardPayment = getxApp.listPaymentCard;
 
-    PaymentCardModel cardPayment = PaymentCardModel(
-      id: listCardPayment.length,
-      cardNumber: cardNumber.replaceAll(' ', ''),
-      cardType: getCardType(cardNumber),
-      clientSecret: 'clientSecret',
-      cvvCode: cvvCode,
-      expiryDate: expiryDate,
-    );
+    // PaymentCardModel cardPayment = PaymentCardModel(
+    //   id: listCardPayment.length,
+    //   cardNumber: cardNumber.replaceAll(' ', ''),
+    //   cardType: getCardType(cardNumber),
+    //   clientSecret: 'clientSecret',
+    //   cvvCode: cvvCode,
+    //   expiryDate: expiryDate,
+    // );
 
-    listCardPayment.add(cardPayment);
-    PaymentService.updateListCardLocal(listCardPayment);
-    getxApp.setPaymentCardDefault(cardPayment);
+    // listCardPayment.add(cardPayment);
+    // PaymentService.updateListCardLocal(listCardPayment);
+    // getxApp.setPaymentCardDefault(cardPayment);
 
     showSnackBar(
       content: 'Add payment card success',

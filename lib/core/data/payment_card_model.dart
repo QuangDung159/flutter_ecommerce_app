@@ -1,5 +1,5 @@
 class PaymentCardModel {
-  final int id;
+  final String id;
   final String cardType, cardNumber, clientSecret, cvvCode, expiryDate;
 
   PaymentCardModel({
@@ -14,9 +14,9 @@ class PaymentCardModel {
   factory PaymentCardModel.fromJson(Map<String, dynamic> json) {
     {
       return PaymentCardModel(
-        id: json['id'],
+        id: json['_id'],
         cardType: json['card_type'],
-        cardNumber: json['card_number'],
+        cardNumber: json['card_last_4'],
         clientSecret: json['client_secret'],
         cvvCode: json['cvv_code'],
         expiryDate: json['expiry_date'],
