@@ -69,6 +69,8 @@ class GetxAppController extends GetxController {
 
   final listCity = RxList<CityModel>([]);
 
+  final paymentCardDefaultId = RxnString();
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -167,12 +169,12 @@ class GetxAppController extends GetxController {
     }
   }
 
-// accept null
+  // allow null
   void setPromotionSelected(PromotionUserModel? promotionSelected) {
     this.promotionSelected.value = promotionSelected;
   }
 
-  // accept null
+  // allow null
   void setAddressSelected(AddressModel? addressSelected) {
 
     LocalStorageHelper.setValue('ADDRESS_DEFAULT_ID', addressSelected?.id);
@@ -189,5 +191,9 @@ class GetxAppController extends GetxController {
 
   void setPaymentCardDefault(PaymentCardModel paymentCardDefault) {
     this.paymentCardDefault.value = paymentCardDefault;
+  }
+
+  void setPaymentCardDefaultId(String paymentCardDefaultId) {
+    this.paymentCardDefaultId.value = paymentCardDefaultId;
   }
 }

@@ -19,8 +19,6 @@ class PaymentService {
   static String uri = '$baseUrl/payment';
 
   static void getListCardPaymentFromLocalStore() {
-    // updateListCardLocal([]);
-    // return;
     List<String> listPaymentCardJson =
         LocalStorageHelper.getValue('LIST_PAYMENT_CARD') ?? [];
 
@@ -115,10 +113,20 @@ class PaymentService {
     );
   }
 
-  static void removeCard(PaymentCardModel paymentCardModel) {
-    List<PaymentCardModel> listPaymentCard = getxApp.listPaymentCard;
-    listPaymentCard.remove(paymentCardModel);
-    PaymentService.updateListCardLocal(listPaymentCard);
+  static Future<List<PaymentCardModel>> removeCard(String paymentCardId) async {
+    try {
+      List<PaymentCardModel> listPaymentCard = [];
+      final res = await httpDelete(uri: '$uri/${getxApp.userLogged.value!.id}/$paymentCardId');
+
+      if (isRequestSuccess(res)) {
+        listPaymentCard = await fetchListPaymentCard();
+        getxApp.setData(listPaymentCard: listPaymentCard);
+      }
+
+      return listPaymentCard;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   static Future<void> handlePayment({

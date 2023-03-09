@@ -47,7 +47,7 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
           closeThreshold: 0.8,
           dismissible: DismissiblePane(
             onDismissed: () {
-              PaymentService.removeCard(paymentCardModel);
+              PaymentService.removeCard(paymentCardModel.id);
             },
           ),
           motion: BehindMotion(),
@@ -55,7 +55,7 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  PaymentService.removeCard(paymentCardModel);
+                  PaymentService.removeCard(paymentCardModel.id);
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -69,21 +69,18 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
             ),
           ],
         ),
-        child: renderCardInfo(paymentCardModel),
+        child: Obx(() => renderCardInfo(paymentCardModel)),
       ),
     );
   }
 
   Widget renderCardInfo(PaymentCardModel paymentCardModel) {
-    PaymentCardModel? paymentCardDefault;
-
-    bool isDefaultCard = paymentCardDefault == null
-        ? false
-        : paymentCardDefault.id == paymentCardModel.id;
+    bool isDefaultCard =
+        getxApp.paymentCardDefaultId.value == paymentCardModel.id;
 
     return GestureDetector(
       onTap: () {
-        getxApp.setPaymentCardDefault(paymentCardModel);
+        getxApp.setPaymentCardDefaultId(paymentCardModel.id);
       },
       child: Container(
         padding: EdgeInsets.symmetric(
