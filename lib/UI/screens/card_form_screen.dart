@@ -109,14 +109,15 @@ class _CardFormScreenState extends State<CardFormScreen> {
                 label: 'Add card',
                 onTap: () async {
                   if (!PaymentService.isCardValid(
-                      cardNumber: cardNumber,
-                      cvvCode: cvvCode,
-                      expiryDate: expiryDate)) {
+                    cardNumber: cardNumber,
+                    cvvCode: cvvCode,
+                    expiryDate: expiryDate,
+                  )) {
                     showSnackBar(
                       content: 'Please fill all input',
                       isSuccess: false,
                     );
-                    return;
+                    return [];
                   }
 
                   Get.back();

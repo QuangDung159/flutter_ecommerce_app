@@ -85,43 +85,60 @@ class PaymentService {
     return true;
   }
 
-  static void addCard({
+  static Future<List<PaymentCardModel>> addCard({
     required String cardNumber,
     required String cvvCode,
     required String expiryDate,
-  }) {
-    List<PaymentCardModel> listCardPayment = getxApp.listPaymentCard;
+  }) async {
+    try {
+      List<PaymentCardModel> listPaymentCard = [];
 
-    // PaymentCardModel cardPayment = PaymentCardModel(
-    //   id: listCardPayment.length,
-    //   cardNumber: cardNumber.replaceAll(' ', ''),
-    //   cardType: getCardType(cardNumber),
-    //   clientSecret: 'clientSecret',
-    //   cvvCode: cvvCode,
-    //   expiryDate: expiryDate,
-    // );
+      String cardNumberString = cardNumber.replaceAll(' ', '');
 
-    // listCardPayment.add(cardPayment);
-    // PaymentService.updateListCardLocal(listCardPayment);
-    // getxApp.setPaymentCardDefault(cardPayment);
+      Map<String, dynamic> reqBody = {
+        'card_type': getCardType(cardNumberString),
+        'card_last_4': getLast4(cardNumberString),
+        'client_secret': '',
+        'user_id': getxApp.userLogged.value!.id,
+      };
 
-    showSnackBar(
-      content: 'Add payment card success',
-      duration: Duration(
-        milliseconds: 1200,
-      ),
-    );
+      final res = await httpPost(uri: uri, reqBody: reqBody);
+      if (isRequestSuccess(res)) {
+        listPaymentCard = await fetchListPaymentCard();
+        getxApp.setPaymentCardDefaultId(
+          listPaymentCard[listPaymentCard.length - 1].id,
+        );
+      }
+
+      showSnackBar(
+        content: 'Add payment card success',
+        duration: Duration(
+          milliseconds: 1200,
+        ),
+      );
+
+      return listPaymentCard;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   static Future<List<PaymentCardModel>> removeCard(String paymentCardId) async {
     try {
       List<PaymentCardModel> listPaymentCard = [];
-      final res = await httpDelete(uri: '$uri/${getxApp.userLogged.value!.id}/$paymentCardId');
+      final res = await httpDelete(
+          uri: '$uri/${getxApp.userLogged.value!.id}/$paymentCardId');
 
       if (isRequestSuccess(res)) {
         listPaymentCard = await fetchListPaymentCard();
-        getxApp.setData(listPaymentCard: listPaymentCard);
       }
+
+      showSnackBar(
+        content: 'Remove payment card success',
+        duration: Duration(
+          milliseconds: 1200,
+        ),
+      );
 
       return listPaymentCard;
     } catch (e) {
