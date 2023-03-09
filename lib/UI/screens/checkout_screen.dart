@@ -79,10 +79,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           return;
         }
 
-        bool isSuccess = await OrderService.createOrder();
+        String? orderCreatedId = await OrderService.createOrder();
 
-        if (isSuccess) {
-          return PaymentService.handlePayment(
+        if (orderCreatedId != null) {
+          bool isPaymentSuccess = await PaymentService.handlePayment(
             cardNumber: paymentCardDefault.cardNumber,
             cvvCode: paymentCardDefault.cvvCode,
             onPaymentSuccess: () {
@@ -90,6 +90,20 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             },
             expiryDate: paymentCardDefault.expiryDate,
           );
+
+          if (isPaymentSuccess) {
+            Map<String, dynamic> reqBody = {
+              'payment_type': 'payment_card',
+              'payment_card_last_4': getLast4(paymentCardDefault.cardNumber),
+              'payment_card_type': getCardType(paymentCardDefault.cardNumber),
+            };
+
+            await OrderService.updateOrder(
+              reqBody: reqBody,
+              orderId: orderCreatedId,
+            );
+          }
+          return;
         }
         return;
       } else {

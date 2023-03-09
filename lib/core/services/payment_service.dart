@@ -151,7 +151,7 @@ class PaymentService {
     }
   }
 
-  static Future<void> handlePayment({
+  static Future<bool> handlePayment({
     required String cardNumber,
     required String cvvCode,
     required Function() onPaymentSuccess,
@@ -198,14 +198,14 @@ class PaymentService {
           content: 'Error: ${paymentIntentResult['error']}',
           isSuccess: false,
         );
-        return;
+        return false;
       }
 
       if (paymentIntentResult['clientSecret'] != null &&
           paymentIntentResult['requiresAction'] == null) {
         // Payment succeed
         onPaymentSuccess();
-        return;
+        return true;
       }
 
       if (paymentIntentResult['clientSecret'] != null &&
@@ -226,12 +226,17 @@ class PaymentService {
           // 5. Call API to confirm intent
           await confirmIntent(paymentIntent.id);
           onPaymentSuccess();
+          return true;
         } else {
           showSnackBar(
             content: 'Error: ${paymentIntentResult['error']}',
             isSuccess: false,
           );
+
+          return false;
         }
+      } else {
+        return false;
       }
     } catch (e) {
       var error = jsonDecode(jsonEncode(e));
@@ -242,7 +247,7 @@ class PaymentService {
         duration: Duration(seconds: 3),
       );
       log('Error: $e');
-      return;
+      return false;
     }
   }
 

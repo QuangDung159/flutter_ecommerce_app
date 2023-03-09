@@ -46,7 +46,7 @@ class OrderService {
     return [];
   }
 
-  static Future<bool> createOrder({
+  static Future<String?> createOrder({
     Function()? onSuccess,
   }) async {
     try {
@@ -80,12 +80,16 @@ class OrderService {
       final res = await httpPost(uri: uri, reqBody: reqBody);
 
       if (isRequestSuccess(res)) {
+        String? orderCreatedId = jsonDecode(res.body)['data']['orderCreatedId'];
+
         if (onSuccess != null) {
           onSuccess();
         }
+
+        return orderCreatedId;
       }
 
-      return isRequestSuccess(res);
+      return null;
     } catch (e) {
       throw Exception(e);
     }
@@ -97,6 +101,29 @@ class OrderService {
       final res = await httpGet(uri: '$uri/${userLogged.id}');
       count = jsonDecode(res.body)['data']['result'];
       return count;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<void> updateOrder({
+    required Map<String, dynamic> reqBody,
+    required String orderId,
+    Function()? onSuccess,
+    Function()? onFail,
+  }) async {
+    try {
+      final res = await httpPut(uri: '$uri/$orderId', reqBody: reqBody);
+
+      if (isRequestSuccess(res)) {
+        if (onSuccess != null) {
+          onSuccess();
+        }
+      } else {
+        if (onFail != null) {
+          onFail();
+        }
+      }
     } catch (e) {
       throw Exception(e);
     }
