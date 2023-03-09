@@ -75,12 +75,13 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
   }
 
   Widget renderCardInfo(PaymentCardModel paymentCardModel) {
-    bool isDefaultCard =
-        getxApp.paymentCardDefaultId.value == paymentCardModel.id;
+    bool isDefaultCard = getxApp.paymentCardDefault.value == null
+        ? false
+        : getxApp.paymentCardDefault.value!.id == paymentCardModel.id;
 
     return GestureDetector(
       onTap: () {
-        getxApp.setPaymentCardDefaultId(paymentCardModel.id);
+        getxApp.setPaymentCardDefault(paymentCardModel);
       },
       child: Container(
         padding: EdgeInsets.symmetric(
@@ -119,12 +120,13 @@ class _PaymentCardItemState extends State<PaymentCardItem> {
               ],
             ),
             Text(
-                'Primary',
-                style: TextStyle(
-                  color: isDefaultCard ? AppColors.primary : AppColors.greyDisable,
-                  fontWeight: FontWeight.bold,
-                ),
+              'Primary',
+              style: TextStyle(
+                color:
+                    isDefaultCard ? AppColors.primary : AppColors.greyDisable,
+                fontWeight: FontWeight.bold,
               ),
+            ),
             // if (isDefaultCard)
             //   Text(
             //     'Default',

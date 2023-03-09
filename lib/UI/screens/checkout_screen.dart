@@ -66,6 +66,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     try {
       PaymentMethodModel paymentMethodSelected =
           getxAppController.paymentMethodSelected.value;
+
       PaymentCardModel? paymentCardDefault =
           getxAppController.paymentCardDefault.value;
 

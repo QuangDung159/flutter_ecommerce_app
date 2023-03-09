@@ -69,8 +69,6 @@ class GetxAppController extends GetxController {
 
   final listCity = RxList<CityModel>([]);
 
-  final paymentCardDefaultId = RxnString();
-
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -191,9 +189,5 @@ class GetxAppController extends GetxController {
 
   void setPaymentCardDefault(PaymentCardModel paymentCardDefault) {
     this.paymentCardDefault.value = paymentCardDefault;
-  }
-
-  void setPaymentCardDefaultId(String paymentCardDefaultId) {
-    this.paymentCardDefaultId.value = paymentCardDefaultId;
   }
 }

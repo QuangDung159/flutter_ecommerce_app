@@ -106,8 +106,8 @@ class PaymentService {
       final res = await httpPost(uri: uri, reqBody: reqBody);
       if (isRequestSuccess(res)) {
         listPaymentCard = await fetchListPaymentCard();
-        getxApp.setPaymentCardDefaultId(
-          listPaymentCard[listPaymentCard.length - 1].id,
+        getxApp.setPaymentCardDefault(
+          listPaymentCard[listPaymentCard.length - 1],
         );
       }
 
