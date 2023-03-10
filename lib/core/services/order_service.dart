@@ -15,13 +15,17 @@ class OrderService {
   static GetxAppController getxApp = Get.find<GetxAppController>();
   static String uri = '$baseUrl/order';
 
-  static UserModel userLogged = getxApp.userLogged.value!;
+  static UserModel? userLogged = getxApp.userLogged.value;
 
   static Future<List<OrderModel>> fetchListOrder({
     required String orderStatus,
     int? limit,
     int? page,
   }) async {
+    if (userLogged == null) {
+      return [];
+    }
+
     Map<String, dynamic> reqBody = {
       'orderStatus': orderStatus,
       'limit': limit ?? 10,
@@ -29,7 +33,7 @@ class OrderService {
     };
 
     final res = await httpPost(
-      uri: '$uri/${userLogged.id}',
+      uri: '$uri/${userLogged!.id}',
       reqBody: reqBody,
     );
 
@@ -50,6 +54,10 @@ class OrderService {
     Function()? onSuccess,
   }) async {
     try {
+      if (userLogged == null) {
+        return null;
+      }
+
       List<Map<String, dynamic>> listCartItem = [];
       List<CartItemModel> listCartItemCheckout = getxApp.listCartItemCheckout;
       PromotionModel? promotion = getxApp.promotionSelected.value?.promotion;
@@ -68,7 +76,7 @@ class OrderService {
 
       Map<String, dynamic> reqBody = {
         'listCartItem': listCartItem,
-        'userId': userLogged.id,
+        'userId': userLogged!.id,
         'promoCode': promotion?.code ?? '',
         'promotionAmount': promotion?.value ?? '0',
         'subTotal': CartServices.calSubtotal(listCartItemCheckout),
@@ -97,8 +105,15 @@ class OrderService {
 
   static Future<int> countOrder() async {
     try {
+      if (userLogged == null) {
+        return 0;
+      }
+      // GetxAppController getx = Get.find<GetxAppController>();
+
+      print(getxApp.userLogged.value!.id);
+
       int count = 0;
-      final res = await httpGet(uri: '$uri/${userLogged.id}');
+      final res = await httpGet(uri: '$uri/${getxApp.userLogged.value!.id}');
       count = jsonDecode(res.body)['data']['result'];
       return count;
     } catch (e) {

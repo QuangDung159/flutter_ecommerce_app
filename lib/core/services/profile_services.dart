@@ -1,16 +1,20 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_signin_method.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
@@ -23,6 +27,48 @@ class ProfileService {
   static String clientId = Platform.isIOS
       ? '721966385478-sv49lrmg59rktbt7kejvcb81f2e1nab5.apps.googleusercontent.com'
       : '';
+  static String uri = '$baseUrl/user';
+
+  static Future<UserModel?> getOneByEmailOrCreate({
+    required String email,
+    required String displayName,
+    required String photoUrl,
+    required String clientId,
+    required String loginType,
+  }) async {
+    try {
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+      UserModel? user;
+
+      Map<String, dynamic> reqBody = {
+        'email': email,
+        'display_name': displayName,
+        'photo_url': photoUrl,
+        'client_id': clientId,
+        'login_type': loginType,
+        'fcm_token': fcmToken,
+      };
+
+      final res = await httpPost(uri: uri, reqBody: reqBody);
+
+      if (isRequestSuccess(res)) {
+        user = UserModel.from(jsonDecode(res.body)['data']['user']);
+
+        getxApp.setUserLogged(user);
+        storeUserLogged(
+          photoUrl: photoUrl,
+          email: email,
+          displayName: displayName,
+          id: user.id,
+          clientId: clientId,
+        );
+      }
+
+      return user;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 
   // google signin
   static final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -35,11 +81,12 @@ class ProfileService {
     if (displayName != null && displayName != '') {
       getxApp.setUserLogged(
         UserModel(
-          email: LocalStorageHelper.getValue('EMAIL'),
+          email: LocalStorageHelper.getValue('EMAIL') ?? '',
           displayName: displayName ?? 'No name',
-          photoUrl: LocalStorageHelper.getValue('PHOTO_URL'),
-          // id: LocalStorageHelper.getValue('OPEN_ID'),
-          id: '640437434936ae9c96c8d610',
+          photoUrl: LocalStorageHelper.getValue('PHOTO_URL') ?? '',
+          id: LocalStorageHelper.getValue('ID') ?? '',
+          clientId: LocalStorageHelper.getValue('OPEN_ID') ?? '',
+          loginType: LocalStorageHelper.getValue('LOGIN_TYPE') ?? '',
         ),
       );
     }
@@ -107,18 +154,26 @@ class ProfileService {
     required String email,
     required String displayName,
     required String id,
+    String? clientId,
+    String? loginType,
   }) {
     LocalStorageHelper.setValue('PHOTO_URL', photoUrl);
     LocalStorageHelper.setValue('EMAIL', email);
     LocalStorageHelper.setValue('DISPLAY_NAME', displayName);
-    LocalStorageHelper.setValue('OPEN_ID', id);
+    LocalStorageHelper.setValue('OPEN_ID', clientId);
+    LocalStorageHelper.setValue('ID', id);
+    LocalStorageHelper.setValue('LOGIN_TYPE', loginType);
+
+    printCustom(title: 'id :>>', content: id);
 
     getxApp.setUserLogged(
       UserModel(
         email: email,
         displayName: displayName,
         photoUrl: photoUrl,
-        id: '640437434936ae9c96c8d610',
+        id: id,
+        clientId: clientId,
+        loginType: loginType,
       ),
     );
 
@@ -146,11 +201,12 @@ class ProfileService {
       String displayName = userData['name'];
       String id = userData['id'];
 
-      storeUserLogged(
-        photoUrl: photoUrl,
+      getOneByEmailOrCreate(
         email: email,
         displayName: displayName,
-        id: id,
+        photoUrl: photoUrl,
+        clientId: id,
+        loginType: 'facebook',
       );
     } else {
       showSnackBar(
@@ -165,11 +221,12 @@ class ProfileService {
     try {
       var res = await _googleSignIn.signIn();
       if (res != null) {
-        storeUserLogged(
-          photoUrl: res.photoUrl ?? '',
+        getOneByEmailOrCreate(
           email: res.email,
-          displayName: res.displayName ?? '',
-          id: res.id,
+          displayName: res.displayName ?? 'N/a',
+          photoUrl: res.photoUrl ?? '',
+          clientId: res.id,
+          loginType: 'google',
         );
       }
       return res;

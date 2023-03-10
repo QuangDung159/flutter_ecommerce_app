@@ -39,6 +39,10 @@ class CartServices {
 
   static Future<List<CartItemModel>> fetchListCart() async {
     try {
+      if (getxAppController.userLogged.value == null) {
+        return [];
+      }
+
       final res = await httpGet(
         uri: '$baseUrl/cartItem/${getxAppController.userLogged.value!.id}',
       );
