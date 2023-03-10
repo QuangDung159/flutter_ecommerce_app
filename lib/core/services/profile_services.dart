@@ -16,6 +16,8 @@ import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/address_service.dart';
+import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -62,6 +64,10 @@ class ProfileService {
           id: user.id,
           clientId: clientId,
         );
+
+        CartServices.fetchListCart();
+        AddressService.fetchListCity();
+        AddressService.fetchListAddress();
       }
 
       return user;
@@ -163,8 +169,6 @@ class ProfileService {
     LocalStorageHelper.setValue('OPEN_ID', clientId);
     LocalStorageHelper.setValue('ID', id);
     LocalStorageHelper.setValue('LOGIN_TYPE', loginType);
-
-    printCustom(title: 'id :>>', content: id);
 
     getxApp.setUserLogged(
       UserModel(

@@ -108,9 +108,6 @@ class OrderService {
       if (userLogged == null) {
         return 0;
       }
-      // GetxAppController getx = Get.find<GetxAppController>();
-
-      print(getxApp.userLogged.value!.id);
 
       int count = 0;
       final res = await httpGet(uri: '$uri/${getxApp.userLogged.value!.id}');

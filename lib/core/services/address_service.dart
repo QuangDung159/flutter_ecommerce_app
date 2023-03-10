@@ -101,8 +101,12 @@ class AddressService {
 
   static void fetchListAddress() async {
     try {
+      if (getxApp.userLogged.value == null) {
+        return;
+      }
+
       final res = await httpGet(
-        uri: '$baseUrl/address/${getxApp.userLogged.value?.id ?? '1'}',
+        uri: '$baseUrl/address/${getxApp.userLogged.value!.id}',
       );
       if (isRequestSuccess(res)) {
         getListAddressFromResponse(res, false);
@@ -142,7 +146,8 @@ class AddressService {
   static void removeAddress({required String addressId}) async {
     try {
       final res = await httpDelete(
-        uri: '$baseUrl/address/${getxApp.userLogged.value?.id ?? '1'}/$addressId',
+        uri:
+            '$baseUrl/address/${getxApp.userLogged.value?.id ?? '1'}/$addressId',
       );
 
       if (isRequestSuccess(res)) {
