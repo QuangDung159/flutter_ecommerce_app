@@ -5,11 +5,7 @@ import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
 import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
-import 'package:flutter_ecommerce_app/core/data/order_item_model.dart';
-import 'package:flutter_ecommerce_app/core/data/order_model.dart';
-import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
-import 'package:flutter_ecommerce_app/core/data/payment_transaction.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
@@ -474,20 +470,9 @@ String stripePublishableKey =
 
 bool isAndroid = Platform.isAndroid;
 
-List<PaymentCardModel> listPaymentCardDummy = [
-  PaymentCardModel(
-    expiryDate: '04/24',
-    cvvCode: '444',
-    id: '1',
-    cardType: 'Visa',
-    cardNumber: '4242424242424242',
-    clientSecret: 'clientSecret',
-  ),
-];
+const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
+// const String baseUrl = 'http://localhost:5004/api/v1';
 
-// const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
-const String baseUrl = 'http://localhost:5004/api/v1';
-
-// const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
-String stripeBaseUrl =
-    isAndroid ? 'http://10.0.2.2:4242' : 'http://localhost:4242';
+const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
+// String stripeBaseUrl =
+//     isAndroid ? 'http://10.0.2.2:4242' : 'http://localhost:4242';
