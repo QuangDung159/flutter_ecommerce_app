@@ -69,6 +69,8 @@ class GetxAppController extends GetxController {
 
   final listCity = RxList<CityModel>([]);
 
+  final countOrder = RxInt(0);
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -89,6 +91,7 @@ class GetxAppController extends GetxController {
     List<ProductModel>? listSaleItems,
     List<ProductModel>? listRecentlyViewed,
     List<CityModel>? listCity,
+    int? countOrder,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -165,6 +168,10 @@ class GetxAppController extends GetxController {
     if (listCity != null) {
       this.listCity.value = listCity;
     }
+
+    if (countOrder != null) {
+      this.countOrder.value = countOrder;
+    }
   }
 
   // allow null
@@ -174,7 +181,6 @@ class GetxAppController extends GetxController {
 
   // allow null
   void setAddressSelected(AddressModel? addressSelected) {
-
     LocalStorageHelper.setValue('ADDRESS_DEFAULT_ID', addressSelected?.id);
     this.addressSelected.value = addressSelected;
   }

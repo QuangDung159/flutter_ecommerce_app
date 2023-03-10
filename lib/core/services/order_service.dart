@@ -33,7 +33,7 @@ class OrderService {
     };
 
     final res = await httpPost(
-      uri: '$uri/${userLogged!.id}',
+      uri: '$uri/${userLogged.id}',
       reqBody: reqBody,
     );
 
@@ -115,7 +115,10 @@ class OrderService {
 
       int count = 0;
       final res = await httpGet(uri: '$uri/${userLogged.id}');
+
       count = jsonDecode(res.body)['data']['result'];
+      getxApp.setData(countOrder: count);
+
       return count;
     } catch (e) {
       throw Exception(e);

@@ -5,10 +5,12 @@ import 'package:flutter_ecommerce_app/UI/widgets/common/smart_refresher_custom.d
 import 'package:flutter_ecommerce_app/UI/widgets/order_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/order_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/order_service.dart';
+import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ListOrder extends StatefulWidget {
@@ -27,13 +29,13 @@ class _ListOrderState extends State<ListOrder> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   List<OrderModel> listOrder = [];
+  final GetxAppController getxApp = Get.find<GetxAppController>();
 
   void fetchListOrder() async {
-    int countOrderItem = await OrderService.countOrder();
     List<OrderModel> list = await OrderService.fetchListOrder(
       orderStatus: widget.orderStatus,
       page: 1,
-      limit: countOrderItem + 10,
+      limit: getxApp.countOrder.value + 10,
     );
 
     setState(() {

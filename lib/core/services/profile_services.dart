@@ -18,6 +18,7 @@ import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/address_service.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -68,6 +69,7 @@ class ProfileService {
         CartServices.fetchListCart();
         AddressService.fetchListCity();
         AddressService.fetchListAddress();
+        OrderService.countOrder();
       }
 
       return user;
