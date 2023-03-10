@@ -4,24 +4,28 @@ import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/order_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
+import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:get/get.dart';
-import 'package:flutter_ecommerce_app/core/data/user_model.dart';
-import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
 
 class OrderService {
   static GetxAppController getxApp = Get.find<GetxAppController>();
   static String uri = '$baseUrl/order';
-
-  static UserModel userLogged = getxApp.userLogged.value!;
 
   static Future<List<OrderModel>> fetchListOrder({
     required String orderStatus,
     int? limit,
     int? page,
   }) async {
+    UserModel? userLogged = getxApp.userLogged.value;
+
+    if (userLogged == null) {
+      return [];
+    }
+
     Map<String, dynamic> reqBody = {
       'orderStatus': orderStatus,
       'limit': limit ?? 10,
@@ -50,6 +54,12 @@ class OrderService {
     Function()? onSuccess,
   }) async {
     try {
+      UserModel? userLogged = getxApp.userLogged.value;
+
+      if (userLogged == null) {
+        return null;
+      }
+
       List<Map<String, dynamic>> listCartItem = [];
       List<CartItemModel> listCartItemCheckout = getxApp.listCartItemCheckout;
       PromotionModel? promotion = getxApp.promotionSelected.value?.promotion;
@@ -97,9 +107,18 @@ class OrderService {
 
   static Future<int> countOrder() async {
     try {
+      UserModel? userLogged = getxApp.userLogged.value;
+
+      if (userLogged == null) {
+        return 0;
+      }
+
       int count = 0;
       final res = await httpGet(uri: '$uri/${userLogged.id}');
+
       count = jsonDecode(res.body)['data']['result'];
+      getxApp.setData(countOrder: count);
+
       return count;
     } catch (e) {
       throw Exception(e);

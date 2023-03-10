@@ -18,7 +18,6 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
-import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:get/get.dart';
 
@@ -34,19 +33,9 @@ class _MainBottomBarProfileWidgetState
     extends State<MainBottomBarProfileWidget> {
   GetxAppController getx = Get.find<GetxAppController>();
 
-  int countOrder = 0;
-
   @override
   void initState() {
     super.initState();
-    getInitData();
-  }
-
-  void getInitData() async {
-    var count = await OrderService.countOrder();
-    setState(() {
-      countOrder = count;
-    });
   }
 
   @override
@@ -218,7 +207,7 @@ class _MainBottomBarProfileWidgetState
           ),
           renderAccountShoppingInfoItem(
             'Orders',
-            countOrder.toString(),
+            getx.countOrder.value.toString(),
             Image.asset(
               AssetHelper.iconOrder,
               width: 20,
