@@ -2,13 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/smart_refresher_custom.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/voucher_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
+import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class VoucherScreen extends StatefulWidget {
   const VoucherScreen({
@@ -27,6 +30,8 @@ class _VoucherScreenState extends State<VoucherScreen> {
   String promoCodeInput = '';
 
   final textFieldController = TextEditingController();
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -39,6 +44,11 @@ class _VoucherScreenState extends State<VoucherScreen> {
     // widget tree.
     textFieldController.dispose();
     super.dispose();
+  }
+
+  void fetchListPromoCode() async {
+    await PromoCodeService.fetchListPromoCodeUser();
+    _refreshController.refreshCompleted();
   }
 
   @override
@@ -57,19 +67,26 @@ class _VoucherScreenState extends State<VoucherScreen> {
           ),
           renderInputPromoCode(),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: AppDimension.contentPadding / 2,
-                  ),
-                  Column(
-                    children: renderListVoucherItem(),
-                  ),
-                ],
+            child: SmartRefresherCustom(
+              enablePullDown: true,
+              onRefresh: () => fetchListPromoCode(),
+              refreshController: _refreshController,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: AppDimension.contentPadding / 2,
+                    ),
+                    Obx(
+                      () => Column(
+                        children: renderListVoucherItem(),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );

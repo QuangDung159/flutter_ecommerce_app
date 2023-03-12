@@ -48,7 +48,6 @@ class _ListOrderState extends State<ListOrder> {
   @override
   void initState() {
     super.initState();
-
     fetchListOrder();
   }
 
