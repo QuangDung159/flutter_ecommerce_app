@@ -6,12 +6,15 @@ import 'package:flutter_ecommerce_app/UI/widgets/main_bottom_bar_home_widget.dar
 import 'package:flutter_ecommerce_app/UI/widgets/main_bottom_bar_notification_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/main_bottom_bar_profile_widget.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/services/address_service.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
+import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -122,22 +125,36 @@ class _MainScreenState extends State<MainScreen> {
                     Icons.notifications,
                     size: 20,
                   ),
-                  Positioned(
-                    right: 0,
-                    child: Container(
-                      width: 6,
-                      height: 6,
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                    ),
-                  ),
+                  Obx(() => renderNotiDot()),
                 ],
               ),
               title: Text('Notification'),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget renderNotiDot() {
+    GetxAppController getxApp = Get.find<GetxAppController>();
+
+    List<NotificationModel> listNoti = getxApp.listNoti;
+    int countUnread = 0;
+    for (var element in listNoti) {
+      if (!element.isRead) {
+        countUnread += 1;
+      }
+    }
+
+    return Positioned(
+      right: 0,
+      child: Container(
+        width: 6,
+        height: 6,
+        decoration: BoxDecoration(
+          color: countUnread > 0 ? Colors.red : Colors.white,
+          borderRadius: BorderRadius.circular(7),
         ),
       ),
     );

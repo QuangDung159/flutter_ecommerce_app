@@ -391,9 +391,46 @@ class NotificationServices {
     try {
       UserModel? user = getxApp.userLogged.value;
       final res = await httpGet(uri: '$uri/${user!.id}');
-      List<NotificationModel> listNotification =
-          getListNotificationFromRes(res);
-      getxApp.setData(listNoti: listNotification);
+      if (isRequestSuccess(res)) {
+        List<NotificationModel> listNotification =
+            getListNotificationFromRes(res);
+        getxApp.setData(listNoti: listNotification);
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<void> onUserReadNotification(String notificationId) async {
+    try {
+      UserModel? user = getxApp.userLogged.value;
+      List<NotificationModel> listNoti = getxApp.listNoti;
+      int index =
+          listNoti.indexWhere((element) => element.id == notificationId);
+
+      if (index == -1) {
+        return;
+      }
+
+      NotificationModel noti = NotificationModel(
+        type: listNoti[index].type,
+        title: listNoti[index].title,
+        subTitle: listNoti[index].subTitle,
+        content: listNoti[index].content,
+        sendAt: listNoti[index].sendAt,
+        id: listNoti[index].id,
+        isRead: true,
+        payloadUrl: listNoti[index].payloadUrl,
+      );
+
+      listNoti[index] = noti;
+
+      Map<String, dynamic> reqBody = {'is_read': true};
+
+      httpPut(
+        uri: '$uri/${user!.id}/$notificationId',
+        reqBody: reqBody,
+      );
     } catch (e) {
       throw Exception(e);
     }
