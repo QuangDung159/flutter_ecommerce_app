@@ -249,7 +249,7 @@ class CartServices {
     bool hasSelectedPromotion = promotionSelected != null;
 
     double discount = hasSelectedPromotion
-        ? double.parse(promotionSelected.promotion.value)
+        ? promotionSelected.promotion.discountValue
         : 0.0;
     double subtotal = CartServices.calSubtotal(listCartItemCheckout);
     double total = subtotal + double.parse(shippingSelected.fee) - discount;

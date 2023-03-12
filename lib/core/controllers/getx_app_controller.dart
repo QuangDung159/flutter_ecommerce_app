@@ -71,6 +71,8 @@ class GetxAppController extends GetxController {
 
   final countOrder = RxInt(0);
 
+  final listPromoCode = RxList<PromotionUserModel>([]);
+
   void setData({
     String? sortSelectedValue,
     SortItemModel? sortSelected,
@@ -92,6 +94,7 @@ class GetxAppController extends GetxController {
     List<ProductModel>? listRecentlyViewed,
     List<CityModel>? listCity,
     int? countOrder,
+    List<PromotionUserModel>? listPromoCode,
   }) {
     if (sortSelectedValue != null) {
       this.sortSelectedValue.value = sortSelectedValue;
@@ -171,6 +174,10 @@ class GetxAppController extends GetxController {
 
     if (countOrder != null) {
       this.countOrder.value = countOrder;
+    }
+
+    if (listPromoCode != null) {
+      this.listPromoCode.value = listPromoCode;
     }
   }
 

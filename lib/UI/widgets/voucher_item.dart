@@ -91,7 +91,7 @@ class VoucherItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Redeem by ${promotionUserModel.redeemAt}',
+                          'Expiry date: ',
                           style: TextStyle(
                             fontSize: 12,
                             color: AppColors.greyScale,

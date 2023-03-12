@@ -127,133 +127,21 @@ List<ShippingPolicyModel> listShippingPolicyDummy = [
 List<PromotionModel> listPromotionDummy = [
   PromotionModel(
     desc: '<p>This is promotion\'s description</p>',
-    id: 1,
-    qty: 100,
-    isClaimed: true,
-    isValid: true,
+    id: '1',
+    quantity: 100,
     code: 'code1',
-    discountType: 'special_value',
+    promoType: 'special_value',
     endDate: '2023-09-15 00:00:00',
-    sourceType: 'products',
     startDate: '2023-01-30 00:00:00',
     title: 'Discount \$10 next order',
-    value: '10.0',
-  ),
-  PromotionModel(
-    desc: '<p>This is promotion\'s description</p>',
-    id: 1,
-    qty: 100,
-    isClaimed: true,
-    isValid: true,
-    code: 'code1',
-    discountType: 'special_value',
-    endDate: '2023-09-15 00:00:00',
-    sourceType: 'products',
-    startDate: '2023-01-30 00:00:00',
-    title: 'Discount \$10 next order',
-    value: '10.0',
-  ),
-  PromotionModel(
-    desc: '<p>This is promotion\'s description</p>',
-    id: 2,
-    qty: 100,
-    isClaimed: true,
-    isValid: true,
-    code: 'code2',
-    discountType: 'special_value',
-    endDate: '2023-09-15 00:00:00',
-    sourceType: 'products',
-    startDate: '2023-01-30 00:00:00',
-    title: 'Discount \$12 next order',
-    value: '12.0',
-  ),
-  PromotionModel(
-    desc: '<p>This is promotion\'s description</p>',
-    id: 3,
-    qty: 100,
-    isClaimed: true,
-    isValid: true,
-    code: 'code3',
-    discountType: 'special_value',
-    endDate: '2023-09-15 00:00:00',
-    sourceType: 'products',
-    startDate: '2023-01-30 00:00:00',
-    title: 'Discount \$13 next order',
-    value: '13.0',
-  ),
-  PromotionModel(
-    desc: '<p>This is promotion\'s description</p>',
-    id: 4,
-    qty: 100,
-    isClaimed: true,
-    isValid: true,
-    code: 'code4',
-    discountType: 'special_value',
-    endDate: '2023-09-15 00:00:00',
-    sourceType: 'products',
-    startDate: '2023-01-30 00:00:00',
-    title: 'Discount \$14 next order',
-    value: '14.0',
-  ),
-  PromotionModel(
-    desc: '<p>This is promotion\'s description</p>',
-    id: 5,
-    qty: 100,
-    isClaimed: true,
-    isValid: true,
-    code: 'code5',
-    discountType: 'special_value',
-    endDate: '2023-09-15 00:00:00',
-    sourceType: 'products',
-    startDate: '2023-01-30 00:00:00',
-    title: 'Discount \$15 next order',
-    value: '15.0',
-  ),
-  PromotionModel(
-    desc: '<p>This is promotion\'s description</p>',
-    id: 6,
-    qty: 100,
-    isClaimed: true,
-    isValid: true,
-    code: 'code6',
-    discountType: 'special_value',
-    endDate: '2023-09-15 00:00:00',
-    sourceType: 'products',
-    startDate: '2023-01-30 00:00:00',
-    title: 'Discount \$16 next order',
-    value: '16.0',
-  ),
-  PromotionModel(
-    desc: '<p>This is promotion\'s description</p>',
-    id: 7,
-    qty: 100,
-    isClaimed: true,
-    isValid: true,
-    code: 'code7',
-    discountType: 'special_value',
-    endDate: '2023-09-15 00:00:00',
-    sourceType: 'products',
-    startDate: '2023-01-30 00:00:00',
-    title: 'Discount \$17 next order',
-    value: '17.0',
+    discountValue: 10.0,
+    subTotalMin: 100,
+    maxDiscount: 10,
   ),
 ];
 
 List<PromotionUserModel> listPromotionUserDummy = [
-  PromotionUserModel(
-      id: 1, promotion: listPromotionDummy[0], redeemAt: '2023-01-30'),
-  PromotionUserModel(
-      id: 2, promotion: listPromotionDummy[1], redeemAt: '2023-01-30'),
-  PromotionUserModel(
-      id: 3, promotion: listPromotionDummy[2], redeemAt: '2023-01-30'),
-  PromotionUserModel(
-      id: 4, promotion: listPromotionDummy[3], redeemAt: '2023-01-30'),
-  PromotionUserModel(
-      id: 5, promotion: listPromotionDummy[4], redeemAt: '2023-01-30'),
-  PromotionUserModel(
-      id: 6, promotion: listPromotionDummy[5], redeemAt: '2023-01-30'),
-  PromotionUserModel(
-      id: 7, promotion: listPromotionDummy[6], redeemAt: '2023-01-30'),
+  PromotionUserModel(id: '1', promotion: listPromotionDummy[0]),
 ];
 
 List<PaymentMethodModel> listPaymentMethodDummy = [
@@ -470,9 +358,9 @@ String stripePublishableKey =
 
 bool isAndroid = Platform.isAndroid;
 
-const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
-// const String baseUrl = 'http://localhost:5004/api/v1';
+// const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
+const String baseUrl = 'http://localhost:5004/api/v1';
 
-const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
-// String stripeBaseUrl =
-//     isAndroid ? 'http://10.0.2.2:4242' : 'http://localhost:4242';
+// const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
+String stripeBaseUrl =
+    isAndroid ? 'http://10.0.2.2:4242' : 'http://localhost:4242';

@@ -80,7 +80,7 @@ class OrderService {
         'listCartItem': listCartItem,
         'userId': userLogged.id,
         'promoCode': promotion?.code ?? '',
-        'promotionAmount': promotion?.value ?? '0',
+        'promotionAmount': promotion?.discountValue ?? '0',
         'subTotal': CartServices.calSubtotal(listCartItemCheckout),
         'total': CartServices.calTotal(),
         'description': 'Order',

@@ -19,6 +19,7 @@ import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/address_service.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_ecommerce_app/core/services/order_service.dart';
+import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -70,6 +71,7 @@ class ProfileService {
         AddressService.fetchListCity();
         AddressService.fetchListAddress();
         OrderService.countOrder();
+        PromoCodeService.fetchListPromoCodeUser();
       }
 
       return user;
@@ -247,8 +249,6 @@ class ProfileService {
 
   static Future logout() async {
     try {
-      getxApp.setUserLogged(null);
-
       LocalStorageHelper.setValue('PHOTO_URL', '');
       LocalStorageHelper.setValue('EMAIL', '');
       LocalStorageHelper.setValue('DISPLAY_NAME', '');
@@ -256,6 +256,22 @@ class ProfileService {
 
       _googleSignIn.disconnect();
       await FacebookAuth.instance.logOut();
+
+      getxApp.setUserLogged(null);
+      getxApp.setAddressSelected(null);
+      getxApp.setPaymentCardDefault(null);
+      getxApp.setPromotionSelected(null);
+      getxApp.setReferCodeReceived(null);
+      getxApp.setData(
+        listAddress: [],
+        listCartItem: [],
+        listCartItemCheckout: [],
+        listFilterSelected: [],
+        listNoti: [],
+        listPaymentCard: [],
+        listPromoCode: [],
+        listRecentlyViewed: [],
+      );
     } catch (e) {
       throw Exception(e);
     }
