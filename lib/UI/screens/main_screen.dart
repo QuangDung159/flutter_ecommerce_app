@@ -10,6 +10,7 @@ import 'package:flutter_ecommerce_app/core/services/address_service.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/order_service.dart';
+import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -45,7 +46,8 @@ class _MainScreenState extends State<MainScreen> {
     CartServices.fetchListCart();
     AddressService.fetchListCity();
     AddressService.fetchListAddress();
-    OrderService.countOrder(); 
+    OrderService.countOrder();
+    PromoCodeService.fetchListPromoCodeUser();
   }
 
   @override

@@ -5,8 +5,11 @@ import 'package:flutter_ecommerce_app/UI/screens/voucher_detail_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:get/get.dart';
 
 class VoucherItem extends StatelessWidget {
@@ -30,6 +33,11 @@ class VoucherItem extends StatelessWidget {
       isUsed = getxAppController.promotionSelected.value!.id ==
           promotionUserModel.id;
     }
+
+    PromotionModel promotion = promotionUserModel.promotion;
+    DateTimeModel endDate = getDateTimeFromString(
+      promotion.endDate,
+    );
 
     return Container(
       margin: EdgeInsets.only(
@@ -82,7 +90,7 @@ class VoucherItem extends StatelessWidget {
                             ),
                             children: [
                               TextSpan(
-                                text: '- ${promotionUserModel.promotion.title}',
+                                text: '| ${promotionUserModel.promotion.title}',
                                 style: TextStyle(
                                   color: AppColors.blackPrimary,
                                 ),
@@ -91,7 +99,7 @@ class VoucherItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Expiry date: ',
+                          'Expiry date: ${endDate.year}-${endDate.month}-${endDate.day}',
                           style: TextStyle(
                             fontSize: 12,
                             color: AppColors.greyScale,

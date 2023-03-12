@@ -6,8 +6,8 @@ import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/voucher_item.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:get/get.dart';
 
 class VoucherScreen extends StatefulWidget {
@@ -118,16 +118,17 @@ class _VoucherScreenState extends State<VoucherScreen> {
 
   List<Widget> renderListVoucherItem() {
     List<Widget> listRender = [];
+    List<PromotionUserModel> listPromoCode = getxAppController.listPromoCode;
 
     String? navigationFrom = widget.navigationFrom;
     bool showUseButton =
         navigationFrom == null ? false : navigationFrom == 'delivery_screen';
 
-    for (var i = 0; i < listPromotionUserDummy.length; i++) {
+    for (var i = 0; i < listPromoCode.length; i++) {
       listRender.add(
         VoucherItem(
-          promotionUserModel: listPromotionUserDummy[i],
-          isLastItem: i == listPromotionUserDummy.length - 1,
+          promotionUserModel: listPromoCode[i],
+          isLastItem: i == listPromoCode.length - 1,
           showUseButton: showUseButton,
         ),
       );
