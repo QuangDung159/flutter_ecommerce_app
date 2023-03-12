@@ -435,4 +435,42 @@ class NotificationServices {
       throw Exception(e);
     }
   }
+
+  static Future<void> onUserReadAllNotification() async {
+    try {
+      UserModel? user = getxApp.userLogged.value;
+      List<NotificationModel> listNoti = getxApp.listNoti;
+      List<String> listNotiId = [];
+
+      for (var item in listNoti) {
+        if (!item.isRead) {
+          listNotiId.add(item.id);
+        }
+      }
+
+      if (listNotiId.isEmpty) {
+        return;
+      }
+
+      Map<String, dynamic> reqBody = {
+        'is_read': true,
+        'listNotificationId': listNotiId,
+      };
+
+      final res = await httpPut(
+        uri: '$uri/updateMany/${user!.id}',
+        reqBody: reqBody,
+      );
+
+      if (isRequestSuccess(res)) {
+        List<NotificationModel> listNotification =
+            getListNotificationFromRes(res);
+        getxApp.setData(listNoti: listNotification);
+
+        showSnackBar(content: 'Read all notification');
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }
