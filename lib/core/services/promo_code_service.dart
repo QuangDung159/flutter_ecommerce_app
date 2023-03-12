@@ -72,4 +72,18 @@ class PromoCodeService {
       throw Exception(e);
     }
   }
+
+  static Future<void> onDeletePromoCode(String promoCodeUserId) async {
+    try {
+      UserModel? user = getxApp.userLogged.value;
+      final res = await httpDelete(uri: '$uri/${user!.id}/$promoCodeUserId');
+      List<PromotionUserModel> listPromoCodeByUser =
+          getListPromoCodeUserFromRes(res);
+      getxApp.setData(listPromoCode: listPromoCodeByUser);
+
+      showSnackBar(content: 'Promo code deleted');
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

@@ -11,6 +11,7 @@ import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
 import 'package:get/get.dart';
 
 class VoucherItem extends StatelessWidget {
@@ -136,7 +137,7 @@ class VoucherItem extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   if (isInActiveVoucher) {
-                    // todo: delete
+                    PromoCodeService.onDeletePromoCode(promotionUserModel.id);
                     return;
                   }
 
