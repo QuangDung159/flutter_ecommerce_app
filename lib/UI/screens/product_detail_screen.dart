@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/list_product_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/search_product_screen.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
+import 'package:flutter_ecommerce_app/core/services/product_service.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
@@ -24,10 +26,12 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({
     super.key,
-    required this.product,
+    this.product,
+    this.productId,
   });
 
-  final ProductModel product;
+  final ProductModel? product;
+  final String? productId;
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -36,14 +40,40 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   final PageController _pageController = PageController();
   GetxAppController getxApp = Get.find<GetxAppController>();
+  ProductModel? product;
+  bool isLoading = true;
 
   void updateRecentlyViewed() {
+    if (widget.product == null) {
+      return;
+    }
+
     List<ProductModel> listRecentlyViewed = getxApp.listRecentlyViewed;
     int index = listRecentlyViewed
-        .indexWhere((element) => element.id == widget.product.id);
+        .indexWhere((element) => element.id == widget.product!.id);
 
     if (index == -1) {
-      listRecentlyViewed.insert(0, widget.product);
+      listRecentlyViewed.insert(0, widget.product!);
+    }
+  }
+
+  void getProduct() async {
+    if (widget.product != null) {
+      setState(() {
+        product = widget.product!;
+        isLoading = false;
+      });
+
+      return;
+    }
+
+    if (widget.productId != null) {
+      ProductModel? productDetail =
+          await ProductService.getProductById(widget.productId!);
+      setState(() {
+        product = productDetail;
+        isLoading = false;
+      });
     }
   }
 
@@ -51,15 +81,31 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   void initState() {
     super.initState();
 
+    getProduct();
     Future.delayed(Duration(seconds: 1), () => updateRecentlyViewed());
+
+    // timeout
+    Future.delayed(Duration(seconds: 5), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    double statusBarHeight = MediaQuery.of(context).padding.top;
-    ProductModel product = widget.product;
+    if (product == null) {
+      return Scaffold(
+        body: Center(
+          child: isLoading
+              ? CupertinoActivityIndicator()
+              : Text('Product not found'),
+        ),
+      );
+    }
 
-    bool isSale = product.originalPrice != '';
+    bool isSale = product!.originalPrice != '';
+    double statusBarHeight = MediaQuery.of(context).padding.top;
 
     return Scaffold(
       body: Column(
@@ -68,7 +114,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             height: MediaQuery.of(context).size.height - (93 + 13),
             child: Stack(
               children: [
-                renderMainContent(context, product, isSale),
+                renderMainContent(context, product!, isSale),
                 renderTopBar(statusBarHeight),
               ],
             ),
@@ -91,13 +137,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       onSignInSuccess: () {
                     Navigator.pop(context);
                     CartServices.addToCart(
-                      product: product,
+                      product: product!,
                       quantity: 1,
                     );
                   });
                 } else {
                   return CartServices.addToCart(
-                    product: product,
+                    product: product!,
                     quantity: 1,
                   );
                 }
