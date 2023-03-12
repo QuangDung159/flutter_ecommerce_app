@@ -54,7 +54,7 @@ class CartServices {
     }
   }
 
-  static void addToCart({
+  static Future<void> addToCart({
     required ProductModel product,
     required int quantity,
     bool? isShowSnackBar,
@@ -134,16 +134,12 @@ class CartServices {
     }
 
     CartItemModel cartItemToUpdate = CartItemModel(
-      id: cartItem.product.id,
+      id: cartItem.id,
       product: cartItem.product,
       quantity: quantity,
     );
 
-    listCartItemCheckout.replaceRange(
-      index,
-      index + 1,
-      [cartItemToUpdate],
-    );
+    listCartItemCheckout[index] = cartItemToUpdate;
   }
 
   static updateCartCheckout({
@@ -160,7 +156,7 @@ class CartServices {
     }
   }
 
-  static void decreaseCartItemQuantity({
+  static Future<void> decreaseCartItemQuantity({
     required ProductModel product,
     required int quantity,
     bool? isShowSnackBar,

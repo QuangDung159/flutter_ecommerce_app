@@ -212,15 +212,20 @@ class _CartItemState extends State<CartItem> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               if (widget.cartItem.quantity == 1) {
                                 return;
                               }
 
-                              CartServices.decreaseCartItemQuantity(
+                              await CartServices.decreaseCartItemQuantity(
                                 product: widget.cartItem.product,
                                 quantity: 1,
                                 isShowSnackBar: false,
+                              );
+
+                              CartServices.updateQuantityCartCheckout(
+                                widget.cartItem,
+                                widget.cartItem.quantity - 1,
                               );
                             },
                             child: Image.asset(
@@ -236,11 +241,16 @@ class _CartItemState extends State<CartItem> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              CartServices.addToCart(
+                            onTap: () async {
+                              await CartServices.addToCart(
                                 product: widget.cartItem.product,
                                 quantity: 1,
                                 isShowSnackBar: false,
+                              );
+
+                              CartServices.updateQuantityCartCheckout(
+                                widget.cartItem,
+                                widget.cartItem.quantity + 1,
                               );
                             },
                             child: Image.asset(
