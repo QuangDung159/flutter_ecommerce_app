@@ -9,6 +9,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -113,12 +114,17 @@ class _VoucherScreenState extends State<VoucherScreen> {
             width: 24,
           ),
           GestureDetector(
-            onTap: () {
-              setState(() {
-                promoCodeInput = '';
-              });
-
-              textFieldController.text = '';
+            onTap: () async {
+              await PromoCodeService.collectPromoCode(
+                promoCodeString: textFieldController.text,
+                onSuccess: (listPromoCode) {
+                  setState(() {
+                    promoCodeInput = '';
+                  });
+                  textFieldController.text = '';
+                  showSnackBar(content: 'Promo code collected');
+                },
+              );
             },
             child: Text(
               'Add',

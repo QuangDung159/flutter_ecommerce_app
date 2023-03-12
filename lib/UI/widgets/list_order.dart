@@ -69,7 +69,6 @@ class _ListOrderState extends State<ListOrder> {
         ),
       ),
     );
-    ;
   }
 
   List<Widget> renderListOrder() {

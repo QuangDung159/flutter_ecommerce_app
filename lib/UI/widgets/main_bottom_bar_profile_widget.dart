@@ -219,16 +219,18 @@ class _MainBottomBarProfileWidgetState
           SizedBox(
             width: 10,
           ),
-          renderAccountShoppingInfoItem(
-            'Vouchers',
-            listPromotionUserDummy.length.toString(),
-            Image.asset(
-              AssetHelper.iconPromo,
-              width: 20,
-              height: 20,
-              color: AppColors.primary,
+          Obx(
+            () => renderAccountShoppingInfoItem(
+              'Vouchers',
+              getx.listPromoCode.length.toString(),
+              Image.asset(
+                AssetHelper.iconPromo,
+                width: 20,
+                height: 20,
+                color: AppColors.primary,
+              ),
+              () => Get.to(() => VoucherScreen()),
             ),
-            () => Get.to(() => VoucherScreen()),
           ),
         ],
       ),
