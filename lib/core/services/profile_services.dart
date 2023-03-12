@@ -18,6 +18,7 @@ import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/address_service.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -72,6 +73,7 @@ class ProfileService {
         AddressService.fetchListAddress();
         OrderService.countOrder();
         PromoCodeService.fetchListPromoCodeUser();
+        NotificationServices.fetchListNotificationByUser();
       }
 
       return user;

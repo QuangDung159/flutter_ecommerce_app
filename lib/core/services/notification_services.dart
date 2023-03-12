@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_element
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,8 +8,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/received_notification_model.dart';
+import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
@@ -17,6 +23,9 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationServices {
+  static GetxAppController getxApp = Get.find<GetxAppController>();
+  static String uri = '$baseUrl/notification';
+
   static tz.TZDateTime _nextInstanceOfTenAM() {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduledDate =
@@ -365,5 +374,28 @@ class NotificationServices {
       return;
     }
     navigationByUrl(message.data['payload']);
+  }
+
+  static List<NotificationModel> getListNotificationFromRes(res) {
+    Iterable listJson = jsonDecode(res.body)['data']['listNotification'];
+    List<NotificationModel> listNotification = List<NotificationModel>.from(
+      listJson.map(
+        (e) => NotificationModel.fromJson(e),
+      ),
+    );
+
+    return listNotification;
+  }
+
+  static Future<void> fetchListNotificationByUser() async {
+    try {
+      UserModel? user = getxApp.userLogged.value;
+      final res = await httpGet(uri: '$uri/${user!.id}');
+      List<NotificationModel> listNotification =
+          getListNotificationFromRes(res);
+      getxApp.setData(listNoti: listNotification);
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }
