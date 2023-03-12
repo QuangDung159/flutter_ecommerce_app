@@ -124,26 +124,6 @@ List<ShippingPolicyModel> listShippingPolicyDummy = [
   ),
 ];
 
-List<PromotionModel> listPromotionDummy = [
-  PromotionModel(
-    desc: '<p>This is promotion\'s description</p>',
-    id: '1',
-    quantity: 100,
-    code: 'code1',
-    promoType: 'special_value',
-    endDate: '2023-09-15 00:00:00',
-    startDate: '2023-01-30 00:00:00',
-    title: 'Discount \$10 next order',
-    discountValue: 10.0,
-    subTotalMin: 100,
-    maxDiscount: 10,
-  ),
-];
-
-List<PromotionUserModel> listPromotionUserDummy = [
-  PromotionUserModel(id: '1', promotion: listPromotionDummy[0]),
-];
-
 List<PaymentMethodModel> listPaymentMethodDummy = [
   PaymentMethodModel(id: 1, title: 'Cash/COD', type: 'cash'),
   PaymentMethodModel(id: 2, title: 'Payment Card', type: 'payment_card'),

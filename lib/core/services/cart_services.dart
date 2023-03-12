@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
@@ -237,6 +238,25 @@ class CartServices {
     return subtotal;
   }
 
+  static double calDiscount(PromotionModel promotion, double subTotal) {
+    String discountType = promotion.promoType;
+    double discount = promotion.discountValue;
+
+    if (subTotal < promotion.subTotalMin) {
+      return 0;
+    }
+
+    if (discountType == 'percent') {
+      discount = subTotal * (promotion.discountValue / 100);
+
+      if (discount > promotion.maxDiscount) {
+        discount = promotion.maxDiscount;
+      }
+    }
+
+    return discount;
+  }
+
   static double calTotal() {
     List<CartItemModel> listCartItemCheckout =
         getxAppController.listCartItemCheckout;
@@ -248,10 +268,11 @@ class CartServices {
 
     bool hasSelectedPromotion = promotionSelected != null;
 
-    double discount = hasSelectedPromotion
-        ? promotionSelected.promotion.discountValue
-        : 0.0;
     double subtotal = CartServices.calSubtotal(listCartItemCheckout);
+
+    double discount = hasSelectedPromotion
+        ? calDiscount(promotionSelected.promotion, subtotal)
+        : 0.0;
     double total = subtotal + double.parse(shippingSelected.fee) - discount;
 
     return total;

@@ -64,6 +64,10 @@ class OrderService {
       List<CartItemModel> listCartItemCheckout = getxApp.listCartItemCheckout;
       PromotionModel? promotion = getxApp.promotionSelected.value?.promotion;
 
+      double subTotal = CartServices.calSubtotal(listCartItemCheckout);
+      double discount =
+          promotion != null ? CartServices.calDiscount(promotion, subTotal) : 0;
+
       for (var i = 0; i < listCartItemCheckout.length; i++) {
         CartItemModel cartItem = listCartItemCheckout[i];
         listCartItem.add({
@@ -80,8 +84,8 @@ class OrderService {
         'listCartItem': listCartItem,
         'userId': userLogged.id,
         'promoCode': promotion?.code ?? '',
-        'promotionAmount': promotion?.discountValue ?? '0',
-        'subTotal': CartServices.calSubtotal(listCartItemCheckout),
+        'promotionAmount': discount,
+        'subTotal': subTotal,
         'total': CartServices.calTotal(),
         'description': 'Order',
         'shippingFee': getxApp.shippingPolicySelected.value.fee,

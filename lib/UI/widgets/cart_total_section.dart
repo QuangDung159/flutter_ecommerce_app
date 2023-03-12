@@ -45,9 +45,10 @@ class _CartTotalSectionState extends State<CartTotalSection> {
 
     bool hasSelectedPromotion = promotionSelected != null;
 
-    double discount =
-        hasSelectedPromotion ? promotionSelected.promotion.discountValue : 0.0;
     double subtotal = CartServices.calSubtotal(listCartItemCheckout);
+    double discount = hasSelectedPromotion
+        ? CartServices.calDiscount(promotionSelected.promotion, subtotal)
+        : 0.0;
     double total = CartServices.calTotal();
 
     return Container(
