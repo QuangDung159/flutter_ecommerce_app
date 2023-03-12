@@ -14,6 +14,7 @@ class AssetHelper {
   static const String panelHome2 = '$imageDir/panel_home_2.png';
   static const String panelHome3 = '$imageDir/panel_home_3.png';
   static const String imageVoucherActive = '$imageDir/image_voucher_active.png';
+  static const String imageVoucherInActive = '$imageDir/image_voucher_inactive.png';
   static const String imageAvatar = '$imageDir/image_avatar.png';
   static const String imageGradientProfile =
       '$imageDir/image_gradient_profile.png';
