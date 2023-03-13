@@ -74,6 +74,8 @@ class ProfileService {
         OrderService.countOrder();
         PromoCodeService.fetchListPromoCodeUser();
         NotificationServices.fetchListNotificationByUser();
+
+        await updateUser(reqBody: {'fcm_token': fcmToken});
       }
 
       return user;
