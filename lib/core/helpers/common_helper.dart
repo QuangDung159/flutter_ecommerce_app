@@ -12,9 +12,7 @@ import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
-import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
-import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 
@@ -96,13 +94,9 @@ Widget? getScreen(
     case 'product_detail_screen':
       String id = getIdFromUrl(payload);
 
-      ProductModel? product = CartServices.getProductById(id);
-      if (product == null) {
-        return null;
-      }
-
       return ProductDetailScreen(
-        product: product,
+        product: null,
+        productId: id,
       );
     case 'profile_screen':
       String referCode = getReferCodeFromUrl(payload);
@@ -133,6 +127,10 @@ Widget? getScreen(
 }
 
 void navigationByUrl(String? payload) {
+  if (payload == '') {
+    return;
+  }
+
   String screenName = getScreenFromUrl(payload);
   Widget? screen = getScreen(
     screenName,
@@ -142,6 +140,7 @@ void navigationByUrl(String? payload) {
   if (screen == null) {
     showSnackBar(
       content: 'No screen has been navigator!',
+      isSuccess: false,
       duration: Duration(
         seconds: 3,
       ),

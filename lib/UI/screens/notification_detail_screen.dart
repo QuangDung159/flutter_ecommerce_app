@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/loading_button_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/notification_icon.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -34,6 +35,8 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
     DateTimeModel dateTimeModel = getDateTimeFromString(
       widget.notificationModel.sendAt,
     );
+
+    String payloadUrl = widget.notificationModel.payloadUrl;
 
     return Scaffold(
       backgroundColor: AppColors.primary,
@@ -153,6 +156,18 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
                                       renderHtml(
                                         widget.notificationModel.content,
                                       ),
+                                      if (payloadUrl != '')
+                                        Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 16,
+                                            ),
+                                            LoadingButtonWidget(
+                                              label: 'Go to',
+                                              onTap: () => navigationByUrl(payloadUrl),
+                                            ),
+                                          ],
+                                        ),
                                       SizedBox(
                                         height: 16,
                                       ),

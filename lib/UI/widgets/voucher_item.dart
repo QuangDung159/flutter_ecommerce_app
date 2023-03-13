@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_detail_screen.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
+import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
 import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
 import 'package:get/get.dart';
 
 class VoucherItem extends StatelessWidget {
@@ -31,6 +36,24 @@ class VoucherItem extends StatelessWidget {
           promotionUserModel.id;
     }
 
+    PromotionModel promotion = promotionUserModel.promotion;
+    DateTimeModel endDate = getDateTimeFromString(
+      promotion.endDate,
+    );
+
+    bool isVoucherOutStock = promotion.quantity == 0;
+    bool isVoucherExpired = DateTime.now().microsecondsSinceEpoch >
+        dateStringToTimestamp(promotion.endDate);
+    bool isInActiveVoucher = isVoucherOutStock || isVoucherExpired;
+
+    String buttonTitle = isInActiveVoucher
+        ? 'Delete'
+        : showUseButton
+            ? isUsed
+                ? 'Used'
+                : 'Use'
+            : 'Detail';
+
     return Container(
       margin: EdgeInsets.only(
         top: 12,
@@ -43,7 +66,9 @@ class VoucherItem extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              AssetHelper.imageVoucherActive,
+              isInActiveVoucher
+                  ? AssetHelper.imageVoucherInActive
+                  : AssetHelper.imageVoucherActive,
             ),
             fit: BoxFit.fill,
           ),
@@ -78,20 +103,24 @@ class VoucherItem extends StatelessWidget {
                             text: '${promotionUserModel.promotion.code} ',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: AppColors.primary,
+                              color: isInActiveVoucher
+                                  ? AppColors.greyScale
+                                  : AppColors.primary,
                             ),
                             children: [
                               TextSpan(
-                                text: '- ${promotionUserModel.promotion.title}',
+                                text: '| ${promotionUserModel.promotion.title}',
                                 style: TextStyle(
-                                  color: AppColors.blackPrimary,
+                                  color: isInActiveVoucher
+                                      ? AppColors.greyScale
+                                      : AppColors.blackPrimary,
                                 ),
                               ),
                             ],
                           ),
                         ),
                         Text(
-                          'Expiry date: ',
+                          'Expiry date: ${endDate.year}-${endDate.month}-${endDate.day}',
                           style: TextStyle(
                             fontSize: 12,
                             color: AppColors.greyScale,
@@ -107,6 +136,11 @@ class VoucherItem extends StatelessWidget {
               flex: 80,
               child: GestureDetector(
                 onTap: () {
+                  if (isInActiveVoucher) {
+                    PromoCodeService.onDeletePromoCode(promotionUserModel.id);
+                    return;
+                  }
+
                   if (showUseButton) {
                     getxAppController.setPromotionSelected(promotionUserModel);
                     Get.back();
@@ -121,11 +155,7 @@ class VoucherItem extends StatelessWidget {
                 },
                 child: Center(
                   child: Text(
-                    showUseButton
-                        ? isUsed
-                            ? 'Used'
-                            : 'Use'
-                        : 'Detail',
+                    buttonTitle,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.orangeSecondary,

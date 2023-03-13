@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 class ProductService {
   static GetxAppController getxApp = Get.find<GetxAppController>();
+  static String uri = '$baseUrl/product';
 
   static Future<List<ProductModel>> fetchListProductHome({
     int? page,
@@ -57,5 +58,19 @@ class ProductService {
         getxApp.setData(listRecentlyViewed: listProduct);
         break;
     }
+  }
+
+  static Future<ProductModel?> getProductById(String productId) async {
+    final res = await httpGet(uri: '$uri/$productId');
+
+    if (isRequestSuccess(res)) {
+      ProductModel? product = ProductModel.fromJson(
+        jsonDecode(res.body)['data']['product'],
+      );
+
+      return product;
+    }
+
+    return null;
   }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_element
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,8 +8,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
+import 'package:flutter_ecommerce_app/core/constants/commons.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
+import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/received_notification_model.dart';
+import 'package:flutter_ecommerce_app/core/data/user_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
@@ -17,6 +23,9 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationServices {
+  static GetxAppController getxApp = Get.find<GetxAppController>();
+  static String uri = '$baseUrl/notification';
+
   static tz.TZDateTime _nextInstanceOfTenAM() {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduledDate =
@@ -58,6 +67,8 @@ class NotificationServices {
     Duration? duration,
   }) async {
     bool isPlayCustomSound = usingCustomSound != null && usingCustomSound;
+
+    NotificationServices.fetchListNotificationByUser();
 
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
@@ -365,5 +376,107 @@ class NotificationServices {
       return;
     }
     navigationByUrl(message.data['payload']);
+  }
+
+  static List<NotificationModel> getListNotificationFromRes(res) {
+    Iterable listJson = jsonDecode(res.body)['data']['listNotification'];
+    List<NotificationModel> listNotification = List<NotificationModel>.from(
+      listJson.map(
+        (e) => NotificationModel.fromJson(e),
+      ),
+    );
+
+    return listNotification;
+  }
+
+  static Future<void> fetchListNotificationByUser() async {
+    try {
+      UserModel? user = getxApp.userLogged.value;
+      if (user == null) {
+        return;
+      }
+
+      final res = await httpGet(uri: '$uri/${user!.id}');
+      if (isRequestSuccess(res)) {
+        List<NotificationModel> listNotification =
+            getListNotificationFromRes(res);
+        getxApp.setData(listNoti: listNotification);
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<void> onUserReadNotification(String notificationId) async {
+    try {
+      UserModel? user = getxApp.userLogged.value;
+      List<NotificationModel> listNoti = getxApp.listNoti;
+      int index =
+          listNoti.indexWhere((element) => element.id == notificationId);
+
+      if (index == -1) {
+        return;
+      }
+
+      NotificationModel noti = NotificationModel(
+        type: listNoti[index].type,
+        title: listNoti[index].title,
+        subTitle: listNoti[index].subTitle,
+        content: listNoti[index].content,
+        sendAt: listNoti[index].sendAt,
+        id: listNoti[index].id,
+        isRead: true,
+        payloadUrl: listNoti[index].payloadUrl,
+      );
+
+      listNoti[index] = noti;
+
+      Map<String, dynamic> reqBody = {'is_read': true};
+
+      httpPut(
+        uri: '$uri/${user!.id}/$notificationId',
+        reqBody: reqBody,
+      );
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<void> onUserReadAllNotification() async {
+    try {
+      UserModel? user = getxApp.userLogged.value;
+      List<NotificationModel> listNoti = getxApp.listNoti;
+      List<String> listNotiId = [];
+
+      for (var item in listNoti) {
+        if (!item.isRead) {
+          listNotiId.add(item.id);
+        }
+      }
+
+      if (listNotiId.isEmpty) {
+        return;
+      }
+
+      Map<String, dynamic> reqBody = {
+        'is_read': true,
+        'listNotificationId': listNotiId,
+      };
+
+      final res = await httpPut(
+        uri: '$uri/updateMany/${user!.id}',
+        reqBody: reqBody,
+      );
+
+      if (isRequestSuccess(res)) {
+        List<NotificationModel> listNotification =
+            getListNotificationFromRes(res);
+        getxApp.setData(listNoti: listNotification);
+
+        showSnackBar(content: 'Read all notification');
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }

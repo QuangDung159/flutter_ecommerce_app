@@ -8,8 +8,6 @@ import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
-import 'package:flutter_ecommerce_app/core/data/promotion_model.dart';
-import 'package:flutter_ecommerce_app/core/data/promotion_user_model.dart';
 import 'package:flutter_ecommerce_app/core/data/shipping_policy_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/ward_model.dart';
@@ -124,26 +122,6 @@ List<ShippingPolicyModel> listShippingPolicyDummy = [
   ),
 ];
 
-List<PromotionModel> listPromotionDummy = [
-  PromotionModel(
-    desc: '<p>This is promotion\'s description</p>',
-    id: '1',
-    quantity: 100,
-    code: 'code1',
-    promoType: 'special_value',
-    endDate: '2023-09-15 00:00:00',
-    startDate: '2023-01-30 00:00:00',
-    title: 'Discount \$10 next order',
-    discountValue: 10.0,
-    subTotalMin: 100,
-    maxDiscount: 10,
-  ),
-];
-
-List<PromotionUserModel> listPromotionUserDummy = [
-  PromotionUserModel(id: '1', promotion: listPromotionDummy[0]),
-];
-
 List<PaymentMethodModel> listPaymentMethodDummy = [
   PaymentMethodModel(id: 1, title: 'Cash/COD', type: 'cash'),
   PaymentMethodModel(id: 2, title: 'Payment Card', type: 'payment_card'),
@@ -173,184 +151,185 @@ List<NotificationModel> listNotificationDummy = [
     subTitle: 'Your order\'s status changed',
     content: '<p>Your order\'s status changed</p>',
     sendAt: '2023-02-20 12:32:16',
-    id: 1,
+    id: '1',
+    payloadUrl: '',
   ),
-  NotificationModel(
-    isRead: true,
-    type: 'Update',
-    title: 'So happy, new update has been installed',
-    subTitle: 'New update has been installed',
-    content:
-        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
-    sendAt: '2023-02-21 12:32:40',
-    id: 2,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Promotion',
-    title: 'We send you a promo code',
-    subTitle: 'We send you a promo code',
-    content: '<p>We send you a promo code</p>',
-    sendAt: '2023-02-20 12:32:16',
-    id: 3,
-  ),
-  NotificationModel(
-    isRead: false,
-    type: 'Notification',
-    title: 'Common notification',
-    subTitle: 'Common notification',
-    content: 'Lu CTO used your refer code',
-    sendAt: '2023-02-20 12:32:16',
-    id: 4,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Order',
-    title: 'Your order\'s status changed',
-    subTitle: 'Your order\'s status changed',
-    content: '<p>Your order\'s status changed</p>',
-    sendAt: '2023-02-20 12:32:16',
-    id: 5,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Update',
-    title: 'So happy, new update has been installed',
-    subTitle: 'New update has been installed',
-    content:
-        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
-    sendAt: '2023-02-21 12:32:40',
-    id: 6,
-  ),
-  NotificationModel(
-    isRead: false,
-    type: 'Promotion',
-    title: 'We send you a promo code',
-    subTitle: 'We send you a promo code',
-    content: '<p>We send you a promo code</p>',
-    sendAt: '2023-02-20 12:32:16',
-    id: 7,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Notification',
-    title: 'Common notification',
-    subTitle: 'Common notification',
-    content: 'Lu CTO used your refer code',
-    sendAt: '2023-02-20 12:32:16',
-    id: 8,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Order',
-    title: 'Your order\'s status changed',
-    subTitle: 'Your order\'s status changed',
-    content: '<p>Your order\'s status changed</p>',
-    sendAt: '2023-02-20 12:32:16',
-    id: 9,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Update',
-    title: 'So happy, new update has been installed',
-    subTitle: 'New update has been installed',
-    content:
-        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
-    sendAt: '2023-02-21 12:32:40',
-    id: 10,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Promotion',
-    title: 'We send you a promo code',
-    subTitle: 'We send you a promo code',
-    content: '<p>We send you a promo code</p>',
-    sendAt: '2023-02-20 12:32:16',
-    id: 11,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Notification',
-    title: 'Common notification',
-    subTitle: 'Common notification',
-    content: 'Lu CTO used your refer code',
-    sendAt: '2023-02-20 12:32:16',
-    id: 12,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Order',
-    title: 'Your order\'s status changed',
-    subTitle: 'Your order\'s status changed',
-    content: '<p>Your order\'s status changed</p>',
-    sendAt: '2023-02-20 12:32:16',
-    id: 13,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Update',
-    title: 'So happy, new update has been installed',
-    subTitle: 'New update has been installed',
-    content:
-        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
-    sendAt: '2023-02-21 12:32:40',
-    id: 14,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Promotion',
-    title: 'We send you a promo code',
-    subTitle: 'We send you a promo code',
-    content: '<p>We send you a promo code</p>',
-    sendAt: '2023-02-20 12:32:16',
-    id: 15,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Notification',
-    title: 'Common notification',
-    subTitle: 'Common notification',
-    content: 'Lu CTO used your refer code',
-    sendAt: '2023-02-20 12:32:16',
-    id: 16,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Order',
-    title: 'Your order\'s status changed',
-    subTitle: 'Your order\'s status changed',
-    content: '<p>Your order\'s status changed</p>',
-    sendAt: '2023-02-20 12:32:16',
-    id: 17,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Update',
-    title: 'So happy, new update has been installed',
-    subTitle: 'New update has been installed',
-    content:
-        '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
-    sendAt: '2023-02-21 12:32:40',
-    id: 18,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Promotion',
-    title: 'We send you a promo code',
-    subTitle: 'We send you a promo code',
-    content: '<p>We send you a promo code</p>',
-    sendAt: '2023-02-20 12:32:16',
-    id: 19,
-  ),
-  NotificationModel(
-    isRead: true,
-    type: 'Notification',
-    title: 'Common notification',
-    subTitle: 'Common notification',
-    content: 'Lu CTO used your refer code',
-    sendAt: '2023-02-20 12:32:16',
-    id: 20,
-  ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Update',
+  //   title: 'So happy, new update has been installed',
+  //   subTitle: 'New update has been installed',
+  //   content:
+  //       '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+  //   sendAt: '2023-02-21 12:32:40',
+  //   id: 2,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Promotion',
+  //   title: 'We send you a promo code',
+  //   subTitle: 'We send you a promo code',
+  //   content: '<p>We send you a promo code</p>',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 3,
+  // ),
+  // NotificationModel(
+  //   isRead: false,
+  //   type: 'Notification',
+  //   title: 'Common notification',
+  //   subTitle: 'Common notification',
+  //   content: 'Lu CTO used your refer code',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 4,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Order',
+  //   title: 'Your order\'s status changed',
+  //   subTitle: 'Your order\'s status changed',
+  //   content: '<p>Your order\'s status changed</p>',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 5,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Update',
+  //   title: 'So happy, new update has been installed',
+  //   subTitle: 'New update has been installed',
+  //   content:
+  //       '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+  //   sendAt: '2023-02-21 12:32:40',
+  //   id: 6,
+  // ),
+  // NotificationModel(
+  //   isRead: false,
+  //   type: 'Promotion',
+  //   title: 'We send you a promo code',
+  //   subTitle: 'We send you a promo code',
+  //   content: '<p>We send you a promo code</p>',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 7,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Notification',
+  //   title: 'Common notification',
+  //   subTitle: 'Common notification',
+  //   content: 'Lu CTO used your refer code',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 8,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Order',
+  //   title: 'Your order\'s status changed',
+  //   subTitle: 'Your order\'s status changed',
+  //   content: '<p>Your order\'s status changed</p>',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 9,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Update',
+  //   title: 'So happy, new update has been installed',
+  //   subTitle: 'New update has been installed',
+  //   content:
+  //       '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+  //   sendAt: '2023-02-21 12:32:40',
+  //   id: 10,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Promotion',
+  //   title: 'We send you a promo code',
+  //   subTitle: 'We send you a promo code',
+  //   content: '<p>We send you a promo code</p>',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 11,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Notification',
+  //   title: 'Common notification',
+  //   subTitle: 'Common notification',
+  //   content: 'Lu CTO used your refer code',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 12,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Order',
+  //   title: 'Your order\'s status changed',
+  //   subTitle: 'Your order\'s status changed',
+  //   content: '<p>Your order\'s status changed</p>',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 13,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Update',
+  //   title: 'So happy, new update has been installed',
+  //   subTitle: 'New update has been installed',
+  //   content:
+  //       '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+  //   sendAt: '2023-02-21 12:32:40',
+  //   id: 14,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Promotion',
+  //   title: 'We send you a promo code',
+  //   subTitle: 'We send you a promo code',
+  //   content: '<p>We send you a promo code</p>',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 15,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Notification',
+  //   title: 'Common notification',
+  //   subTitle: 'Common notification',
+  //   content: 'Lu CTO used your refer code',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 16,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Order',
+  //   title: 'Your order\'s status changed',
+  //   subTitle: 'Your order\'s status changed',
+  //   content: '<p>Your order\'s status changed</p>',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 17,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Update',
+  //   title: 'So happy, new update has been installed',
+  //   subTitle: 'New update has been installed',
+  //   content:
+  //       '<p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p><p>So happy, new update has been installed</p>',
+  //   sendAt: '2023-02-21 12:32:40',
+  //   id: 18,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Promotion',
+  //   title: 'We send you a promo code',
+  //   subTitle: 'We send you a promo code',
+  //   content: '<p>We send you a promo code</p>',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 19,
+  // ),
+  // NotificationModel(
+  //   isRead: true,
+  //   type: 'Notification',
+  //   title: 'Common notification',
+  //   subTitle: 'Common notification',
+  //   content: 'Lu CTO used your refer code',
+  //   sendAt: '2023-02-20 12:32:16',
+  //   id: 20,
+  // ),
 ];
 
 String stripePublishableKey =
@@ -358,9 +337,15 @@ String stripePublishableKey =
 
 bool isAndroid = Platform.isAndroid;
 
+// const String baseUrl = 'https://nodejs-e-commerce-dev.onrender.com/api/v1';
 // const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
 const String baseUrl = 'http://localhost:5004/api/v1';
 
 // const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
 String stripeBaseUrl =
     isAndroid ? 'http://10.0.2.2:4242' : 'http://localhost:4242';
+
+int dateStringToTimestamp(String dateString) {
+  DateTime date = DateTime.parse(dateString);
+  return date.microsecondsSinceEpoch;
+}

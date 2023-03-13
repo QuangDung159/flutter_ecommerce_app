@@ -18,6 +18,7 @@ import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/address_service.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -72,6 +73,9 @@ class ProfileService {
         AddressService.fetchListAddress();
         OrderService.countOrder();
         PromoCodeService.fetchListPromoCodeUser();
+        NotificationServices.fetchListNotificationByUser();
+
+        await updateUser(reqBody: {'fcm_token': fcmToken});
       }
 
       return user;
@@ -188,6 +192,39 @@ class ProfileService {
     showSnackBar(content: 'Welcome $displayName');
   }
 
+  static Future<UserModel?> updateUser({
+    required Map<String, dynamic> reqBody,
+    Function()? onSuccess,
+    Function()? onFail,
+  }) async {
+    try {
+      UserModel? user = getxApp.userLogged.value;
+      if (user == null) {
+        return null;
+      }
+
+      final res = await httpPut(uri: '$uri/${user.id}', reqBody: reqBody);
+      if (isRequestSuccess(res)) {
+        UserModel userUpdated =
+            UserModel.from(jsonDecode(res.body)['data']['userUpdated']);
+
+        if (onSuccess != null) {
+          onSuccess();
+        }
+
+        return userUpdated;
+      } else {
+        if (onFail != null) {
+          onFail();
+        }
+      }
+
+      return null;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   static Future<LoginResult> facebookLogin() async {
     final result = await FacebookAuth.i.login(
       permissions: [
@@ -249,6 +286,8 @@ class ProfileService {
 
   static Future logout() async {
     try {
+      updateUser(reqBody: {'fcm_token': ''});
+
       LocalStorageHelper.setValue('PHOTO_URL', '');
       LocalStorageHelper.setValue('EMAIL', '');
       LocalStorageHelper.setValue('DISPLAY_NAME', '');

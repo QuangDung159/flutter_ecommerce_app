@@ -48,7 +48,6 @@ class _ListOrderState extends State<ListOrder> {
   @override
   void initState() {
     super.initState();
-
     fetchListOrder();
   }
 
@@ -70,7 +69,6 @@ class _ListOrderState extends State<ListOrder> {
         ),
       ),
     );
-    ;
   }
 
   List<Widget> renderListOrder() {

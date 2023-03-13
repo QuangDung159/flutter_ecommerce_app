@@ -7,6 +7,7 @@ import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
+import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:get/get.dart';
 
 class NotificationItem extends StatelessWidget {
@@ -31,6 +32,7 @@ class NotificationItem extends StatelessWidget {
             notificationModel: notificationModel,
           ),
         );
+        NotificationServices.onUserReadNotification(notificationModel.id);
       },
       child: Container(
         padding: EdgeInsets.symmetric(
