@@ -396,7 +396,7 @@ class NotificationServices {
         return;
       }
 
-      final res = await httpGet(uri: '$uri/${user!.id}');
+      final res = await httpGet(uri: '$uri/${user.id}');
       if (isRequestSuccess(res)) {
         List<NotificationModel> listNotification =
             getListNotificationFromRes(res);
