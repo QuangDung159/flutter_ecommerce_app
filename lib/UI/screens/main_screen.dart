@@ -32,6 +32,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 1;
+  GetxAppController getxApp = Get.find<GetxAppController>();
 
   @override
   void initState() {
@@ -47,27 +48,33 @@ class _MainScreenState extends State<MainScreen> {
       DynamicLinkServices.onReceiveTerminateAppDynamicLink();
     });
 
-    CartServices.fetchListCart();
-    AddressService.fetchListCity();
-    AddressService.fetchListAddress();
-    OrderService.countOrder();
-    PromoCodeService.fetchListPromoCodeUser();
-    NotificationServices.fetchListNotificationByUser();
+    if (getxApp.userLogged.value != null) {
+      CartServices.fetchListCart();
+      AddressService.fetchListCity();
+      AddressService.fetchListAddress();
+      OrderService.countOrder();
+      PromoCodeService.fetchListPromoCodeUser();
+      NotificationServices.fetchListNotificationByUser();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: [
-          MainBottomBarDealsWidget(),
-          MainBottomBarHomeWidget(),
-          MainBottomBarProfileWidget(),
-          MainBottomBarNotificationWidget(),
-        ],
-      ),
+      body: Obx(() => renderIndexStackBottomTab()),
       bottomNavigationBar: renderBottomTab(),
+    );
+  }
+
+  Widget renderIndexStackBottomTab() {
+    return IndexedStack(
+      index: _currentIndex,
+      children: [
+        MainBottomBarDealsWidget(),
+        MainBottomBarHomeWidget(),
+        MainBottomBarProfileWidget(),
+        if (getxApp.userLogged.value != null) MainBottomBarNotificationWidget(),
+      ],
     );
   }
 
@@ -83,56 +90,61 @@ class _MainScreenState extends State<MainScreen> {
       ),
       child: Container(
         color: Colors.white,
-        child: SalomonBottomBar(
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          currentIndex: _currentIndex,
-          selectedItemColor: AppColors.primary,
-          unselectedItemColor: AppColors.greyScale,
-          margin: EdgeInsets.symmetric(
-            horizontal: 28,
-            vertical: 10,
-          ),
-          items: [
-            SalomonBottomBarItem(
-              icon: Icon(
-                Icons.shopify_outlined,
-                size: 20,
-              ),
-              title: Text('Deals'),
-            ),
-            SalomonBottomBarItem(
-              icon: Icon(
-                Icons.home_sharp,
-                size: 20,
-              ),
-              title: Text('Home'),
-            ),
-            SalomonBottomBarItem(
-              icon: Icon(
-                Icons.account_circle,
-                size: 20,
-              ),
-              title: Text('Profile'),
-            ),
-            SalomonBottomBarItem(
-              icon: Stack(
-                children: [
-                  Icon(
-                    Icons.notifications,
-                    size: 20,
-                  ),
-                  Obx(() => renderNotiDot()),
-                ],
-              ),
-              title: Text('Notification'),
-            ),
-          ],
-        ),
+        child: Obx(() => renderBottomTabIcon()),
       ),
+    );
+  }
+
+  SalomonBottomBar renderBottomTabIcon() {
+    return SalomonBottomBar(
+      onTap: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      currentIndex: _currentIndex,
+      selectedItemColor: AppColors.primary,
+      unselectedItemColor: AppColors.greyScale,
+      margin: EdgeInsets.symmetric(
+        horizontal: 28,
+        vertical: 10,
+      ),
+      items: [
+        SalomonBottomBarItem(
+          icon: Icon(
+            Icons.shopify_outlined,
+            size: 20,
+          ),
+          title: Text('Deals'),
+        ),
+        SalomonBottomBarItem(
+          icon: Icon(
+            Icons.home_sharp,
+            size: 20,
+          ),
+          title: Text('Home'),
+        ),
+        SalomonBottomBarItem(
+          icon: Icon(
+            Icons.account_circle,
+            size: 20,
+          ),
+          title: Text('Profile'),
+        ),
+        if (getxApp.userLogged.value != null)
+          SalomonBottomBarItem(
+            icon: Stack(
+              children: [
+                Icon(
+                  Icons.notifications,
+                  size: 20,
+                ),
+                Obx(() => renderNotiDot()),
+              ],
+            ),
+            title: Text('Notification'),
+          ),
+      ],
     );
   }
 
