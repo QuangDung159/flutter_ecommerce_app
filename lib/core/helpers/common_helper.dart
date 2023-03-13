@@ -127,6 +127,10 @@ Widget? getScreen(
 }
 
 void navigationByUrl(String? payload) {
+  if (payload == '') {
+    return;
+  }
+
   String screenName = getScreenFromUrl(payload);
   Widget? screen = getScreen(
     screenName,
@@ -136,6 +140,7 @@ void navigationByUrl(String? payload) {
   if (screen == null) {
     showSnackBar(
       content: 'No screen has been navigator!',
+      isSuccess: false,
       duration: Duration(
         seconds: 3,
       ),

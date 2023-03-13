@@ -68,6 +68,8 @@ class NotificationServices {
   }) async {
     bool isPlayCustomSound = usingCustomSound != null && usingCustomSound;
 
+    NotificationServices.fetchListNotificationByUser();
+
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
       'your channel id',

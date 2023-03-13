@@ -136,7 +136,7 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   bool _notificationsEnabled = false;
 
   @override
@@ -158,6 +158,23 @@ class _MyAppState extends State<MyApp> {
 
     // DynamicLinkServices.onReceiveTerminateAppDynamicLink();
     DynamicLinkServices.onReceiveDynamicLink();
+
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    didReceiveLocalNotificationStream.close();
+    selectNotificationStream.close();
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      NotificationServices.fetchListNotificationByUser();
+    }
   }
 
   Future<void> _isAndroidPermissionGranted() async {
@@ -202,13 +219,6 @@ class _MyAppState extends State<MyApp> {
         _notificationsEnabled = granted ?? false;
       });
     }
-  }
-
-  @override
-  void dispose() {
-    didReceiveLocalNotificationStream.close();
-    selectNotificationStream.close();
-    super.dispose();
   }
 
   @override
