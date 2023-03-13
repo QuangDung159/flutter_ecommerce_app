@@ -73,4 +73,25 @@ class ProductService {
 
     return null;
   }
+
+  static Future<List<ProductModel>> onSearch(String queryString) async {
+    try {
+      final res = await httpGet(uri: '$uri/search/$queryString');
+
+      if (!isRequestSuccess(res)) {
+        return [];
+      }
+
+      Iterable listJson = jsonDecode(res.body)['data']['listProduct'];
+      List<ProductModel> listProduct = List<ProductModel>.from(
+        listJson.map(
+          (e) => ProductModel.fromJson(e),
+        ),
+      );
+
+      return listProduct;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

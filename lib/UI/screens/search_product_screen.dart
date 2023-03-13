@@ -6,9 +6,9 @@ import 'package:flutter_ecommerce_app/UI/widgets/common/textfield_widget.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/product_item_vertical.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/services/product_service.dart';
 import 'package:get/get.dart';
 
 class SearchProductScreen extends StatefulWidget {
@@ -25,11 +25,11 @@ class SearchProductScreen extends StatefulWidget {
 
 class _SearchProductScreenState extends State<SearchProductScreen> {
   GetxAppController getxAppController = Get.find<GetxAppController>();
-  String promoCodeInput = '';
+  String queryStringInput = '';
 
   final textFieldController = TextEditingController();
 
-  List<ProductModel> listSearch = [];
+  List<ProductModel> listProduct = [];
 
   @override
   void initState() {
@@ -42,6 +42,19 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
     // widget tree.
     textFieldController.dispose();
     super.dispose();
+  }
+
+  Future<void> onSearch(String queryString) async {
+    if (queryString == '') {
+      return;
+    }
+
+    List<ProductModel> listProductSearched =
+        await ProductService.onSearch(queryString);
+
+    setState(() {
+      listProduct = listProductSearched;
+    });
   }
 
   @override
@@ -90,7 +103,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
               hintText: 'Enter product name',
               onChanged: (value) {
                 setState(() {
-                  promoCodeInput = value;
+                  queryStringInput = value;
                 });
               },
             ),
@@ -100,9 +113,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
           ),
           GestureDetector(
             onTap: () {
-              setState(() {
-                listSearch = listProductDummy;
-              });
+              onSearch(queryStringInput);
             },
             child: Text(
               'Search',
@@ -120,7 +131,7 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
   List<Widget> renderListProductItem() {
     List<Widget> listRender = [];
 
-    if (listSearch.isEmpty) {
+    if (listProduct.isEmpty) {
       return [
         Container(
             margin: EdgeInsets.only(
@@ -130,14 +141,14 @@ class _SearchProductScreenState extends State<SearchProductScreen> {
       ];
     }
 
-    for (var i = 0; i < listSearch.length; i++) {
+    for (var i = 0; i < listProduct.length; i++) {
       listRender.add(
         Container(
           margin: EdgeInsets.only(
-            bottom: i == listSearch.length - 1 ? 12 : 0,
+            bottom: i == listProduct.length - 1 ? 12 : 0,
           ),
           child: ProductItemVertical(
-            product: listSearch[i],
+            product: listProduct[i],
           ),
         ),
       );
