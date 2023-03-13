@@ -190,6 +190,39 @@ class ProfileService {
     showSnackBar(content: 'Welcome $displayName');
   }
 
+  static Future<UserModel?> updateUser({
+    required Map<String, dynamic> reqBody,
+    Function()? onSuccess,
+    Function()? onFail,
+  }) async {
+    try {
+      UserModel? user = getxApp.userLogged.value;
+      if (user == null) {
+        return null;
+      }
+
+      final res = await httpPut(uri: '$uri/${user.id}', reqBody: reqBody);
+      if (isRequestSuccess(res)) {
+        UserModel userUpdated =
+            UserModel.from(jsonDecode(res.body)['data']['userUpdated']);
+
+        if (onSuccess != null) {
+          onSuccess();
+        }
+
+        return userUpdated;
+      } else {
+        if (onFail != null) {
+          onFail();
+        }
+      }
+
+      return null;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   static Future<LoginResult> facebookLogin() async {
     final result = await FacebookAuth.i.login(
       permissions: [
@@ -251,6 +284,8 @@ class ProfileService {
 
   static Future logout() async {
     try {
+      updateUser(reqBody: {'fcm_token': ''});
+
       LocalStorageHelper.setValue('PHOTO_URL', '');
       LocalStorageHelper.setValue('EMAIL', '');
       LocalStorageHelper.setValue('DISPLAY_NAME', '');

@@ -392,6 +392,10 @@ class NotificationServices {
   static Future<void> fetchListNotificationByUser() async {
     try {
       UserModel? user = getxApp.userLogged.value;
+      if (user == null) {
+        return;
+      }
+
       final res = await httpGet(uri: '$uri/${user!.id}');
       if (isRequestSuccess(res)) {
         List<NotificationModel> listNotification =
