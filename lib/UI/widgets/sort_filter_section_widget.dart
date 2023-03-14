@@ -61,10 +61,30 @@ class _SortFilterSectionWidgetState extends State<SortFilterSectionWidget> {
         ),
         GestureDetector(
           onTap: () => Get.to(() => FilterScreen()),
-          child: Image.asset(
-            AssetHelper.iconFilter,
-            width: 20,
-            height: 20,
+          child: Stack(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Image.asset(
+                  AssetHelper.iconFilter,
+                  width: 18,
+                  height: 18,
+                ),
+              ),
+              Positioned(
+                right: 0,
+                child: Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: getxAppController.listFilterItemSelected.isNotEmpty
+                        ? Colors.red
+                        : Colors.white,
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                ),
+              )
+            ],
           ),
         )
       ],
