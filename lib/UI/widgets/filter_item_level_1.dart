@@ -26,6 +26,35 @@ class _FilterItemLevel1State extends State<FilterItemLevel1> {
   bool showListLevel2 = false;
   GetxAppController getxApp = Get.find<GetxAppController>();
 
+  @override
+  void initState() {
+    super.initState();
+    autoExpand();
+  }
+
+  void autoExpand() {
+    FilterItemLevel1Model filterLevel1 = widget.filterItemLevel1;
+    List<FilterItemLevel2Model> listFilterLevel2 =
+        filterLevel1.listFilterLevel2 ?? [];
+    List<String> listFilterItemSelected = getxApp.listFilterItemSelected;
+
+    for (var filter in listFilterLevel2) {
+      int index =
+          listFilterItemSelected.indexWhere((element) => element == filter.id);
+
+      if (index != -1) {
+        Future.delayed(
+          Duration(microseconds: 1000),
+          () => setState(() {
+            showListLevel2 = true;
+          }),
+        );
+
+        break;
+      }
+    }
+  }
+
   void onTapFilterItem(List<String> listFilterSelected, filterLevel2) {
     int index =
         listFilterSelected.indexWhere((element) => element == filterLevel2.id);
