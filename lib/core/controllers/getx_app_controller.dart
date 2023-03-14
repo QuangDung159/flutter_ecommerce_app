@@ -69,6 +69,8 @@ class GetxAppController extends GetxController {
 
   final listFilterItemSelected = RxList<String>([]);
 
+  final isLoading = RxBool(false);
+
   void setData({
     SortItemModel? sortSelected,
     List<FilterItemLevel1Model>? listFilterLevel1,
@@ -92,6 +94,7 @@ class GetxAppController extends GetxController {
     List<PromotionUserModel>? listPromoCode,
     List<FilterItemLevel1Model>? listFilterItemLevel1,
     List<String>? listFilterItemSelected,
+    bool? isLoading,
   }) {
     if (sortSelected != null) {
       this.sortSelected.value = sortSelected;
@@ -167,6 +170,10 @@ class GetxAppController extends GetxController {
 
     if (listFilterItemSelected != null) {
       this.listFilterItemSelected.value = listFilterItemSelected;
+    }
+
+    if (isLoading != null) {
+      this.isLoading.value = isLoading;
     }
   }
 

@@ -38,7 +38,8 @@ class _ListProductScreenState extends State<ListProductScreen> {
   void initState() {
     super.initState();
 
-    // fetchListListProduct(widget.category ?? '', 1);
+    getxApp.setData(isLoading: true);
+    fetchListListProduct(widget.category ?? '', 1);
 
     getxApp.sortSelected.listen((p0) {
       setState(() {
@@ -47,12 +48,12 @@ class _ListProductScreenState extends State<ListProductScreen> {
       fetchListListProduct(widget.category ?? '', 1);
     });
 
-    // getxApp.listFilterItemSelected.listen((p0) {
-    //   setState(() {
-    //     listProduct = [];
-    //   });
-    //   fetchListListProduct(widget.category ?? '', 1);
-    // });
+    getxApp.listFilterItemSelected.listen((p0) {
+      setState(() {
+        listProduct = [];
+      });
+      fetchListListProduct(widget.category ?? '', 1);
+    });
   }
 
   @override
@@ -82,6 +83,8 @@ class _ListProductScreenState extends State<ListProductScreen> {
     setState(() {
       listProduct = [...listProduct, ...list];
     });
+
+    getxApp.setData(isLoading: false);
   }
 
   void _onRefresh() async {
@@ -106,9 +109,6 @@ class _ListProductScreenState extends State<ListProductScreen> {
   @override
   Widget build(BuildContext context) {
     return FocusDetector(
-      onFocusGained: () {
-        fetchListListProduct(widget.category ?? '', 1);
-      },
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
