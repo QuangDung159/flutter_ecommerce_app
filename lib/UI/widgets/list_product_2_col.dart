@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/product_item_horizontal.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/sort_filter_section_widget.dart';
@@ -126,6 +127,10 @@ class _ListProduct2ColState extends State<ListProduct2Col> {
           SizedBox(
             height: 18,
           ),
+          if (widget.listProduct.isEmpty)
+            Center(
+              child: CupertinoActivityIndicator(),
+            ),
           Column(
             children: listRow(),
           )

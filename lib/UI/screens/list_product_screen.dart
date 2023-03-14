@@ -8,6 +8,7 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
 import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:flutter_ecommerce_app/core/services/product_service.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -37,7 +38,7 @@ class _ListProductScreenState extends State<ListProductScreen> {
   void initState() {
     super.initState();
 
-    fetchListListProduct(widget.category ?? '', 1);
+    // fetchListListProduct(widget.category ?? '', 1);
 
     getxApp.sortSelected.listen((p0) {
       setState(() {
@@ -46,12 +47,12 @@ class _ListProductScreenState extends State<ListProductScreen> {
       fetchListListProduct(widget.category ?? '', 1);
     });
 
-    getxApp.listFilterItemSelected.listen((p0) {
-      setState(() {
-        listProduct = [];
-      });
-      fetchListListProduct(widget.category ?? '', 1);
-    });
+    // getxApp.listFilterItemSelected.listen((p0) {
+    //   setState(() {
+    //     listProduct = [];
+    //   });
+    //   fetchListListProduct(widget.category ?? '', 1);
+    // });
   }
 
   @override
@@ -104,38 +105,43 @@ class _ListProductScreenState extends State<ListProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).padding.top,
-          ),
-          MyAppBar(
-            hasBackButton: true,
-            title: widget.title,
-          ),
-          Expanded(
-            child: SmartRefresherCustom(
-              enablePullDown: true,
-              enablePullUp: true,
-              refreshController: _refreshController,
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ListProduct2Col(
-                      listProduct: listProduct,
-                      paddingBottom: MediaQuery.of(context).padding.bottom,
-                    ),
-                  ],
+    return FocusDetector(
+      onFocusGained: () {
+        fetchListListProduct(widget.category ?? '', 1);
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              height: MediaQuery.of(context).padding.top,
+            ),
+            MyAppBar(
+              hasBackButton: true,
+              title: widget.title,
+            ),
+            Expanded(
+              child: SmartRefresherCustom(
+                enablePullDown: true,
+                enablePullUp: true,
+                refreshController: _refreshController,
+                onRefresh: _onRefresh,
+                onLoading: _onLoading,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListProduct2Col(
+                        listProduct: listProduct,
+                        paddingBottom: MediaQuery.of(context).padding.bottom,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
