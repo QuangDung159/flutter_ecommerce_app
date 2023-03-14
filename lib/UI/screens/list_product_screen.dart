@@ -62,11 +62,13 @@ class _ListProductScreenState extends State<ListProductScreen> {
 
   Future<void> fetchListListProduct(String category, int page) async {
     SortItemModel sortSelected = getxApp.sortSelected.value;
+    List<String> listFilterId = getxApp.listFilterItemSelected;
 
     List<ProductModel> list = await ProductService.fetchListProductHome(
       category: category,
       page: page,
       sortValue: sortSelected.value,
+      listFilterId: listFilterId,
     );
 
     setState(() {

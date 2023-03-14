@@ -81,7 +81,9 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             BottomButton(
               title: 'Search',
-              onTap: () {},
+              onTap: () {
+                Get.back();
+              },
             )
           ],
         ),

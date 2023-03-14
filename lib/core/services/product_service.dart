@@ -16,6 +16,7 @@ class ProductService {
     int? limit,
     String? category,
     String? sortValue,
+    List<String>? listFilterId,
   }) async {
     try {
       Map<String, dynamic> reqBody = {
@@ -23,6 +24,7 @@ class ProductService {
         'limit': limit ?? 10,
         'category': category ?? '',
         'sort': sortValue ?? 'latest',
+        'listFilterId': listFilterId,
       };
 
       final res =
