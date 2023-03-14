@@ -19,12 +19,6 @@ import 'package:get/get.dart';
 class GetxAppController extends GetxController {
   final Rx<SortItemModel> sortSelected = listSortDummy[0].obs;
 
-  final RxList listFilterLevel1 = [].obs;
-
-  final RxList listFilterLevel2 = [].obs;
-
-  final RxList listFilterSelected = [].obs;
-
   final RxList listCartItem = [].obs;
 
   final Rx<ShippingPolicyModel> shippingPolicySelected =
@@ -101,18 +95,6 @@ class GetxAppController extends GetxController {
   }) {
     if (sortSelected != null) {
       this.sortSelected.value = sortSelected;
-    }
-
-    if (listFilterLevel1 != null) {
-      this.listFilterLevel1.value = listFilterLevel1;
-    }
-
-    if (listFilterLevel2 != null) {
-      this.listFilterLevel2.value = listFilterLevel2;
-    }
-
-    if (listFilterSelected != null) {
-      this.listFilterSelected.value = listFilterSelected;
     }
 
     if (listCartItem != null) {

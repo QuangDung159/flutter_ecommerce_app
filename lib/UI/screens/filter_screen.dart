@@ -47,7 +47,7 @@ class _FilterScreenState extends State<FilterScreen> {
               title: 'Filter',
               action: GestureDetector(
                 onTap: () {
-                  getxAppController.setData(listFilterSelected: []);
+                  getxAppController.setData(listFilterItemSelected: []);
                 },
                 child: Text(
                   'Reset all',
