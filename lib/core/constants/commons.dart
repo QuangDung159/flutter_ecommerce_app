@@ -54,11 +54,9 @@ List<ProductModel> listProductDummy = [
 ];
 
 List<SortItemModel> listSortDummy = [
-  SortItemModel(title: 'Recommended', value: 'recommended'),
   SortItemModel(title: 'Latest', value: 'latest'),
   SortItemModel(title: 'Price (high)', value: 'price_high'),
   SortItemModel(title: 'Price (low)', value: 'price_low'),
-  SortItemModel(title: 'Sale', value: 'sale'),
 ];
 
 List<FilterItemModel> listFilterDummy = [

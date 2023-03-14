@@ -17,8 +17,6 @@ import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:get/get.dart';
 
 class GetxAppController extends GetxController {
-  final sortSelectedValue = RxString('recommended');
-
   final Rx<SortItemModel> sortSelected = listSortDummy[0].obs;
 
   final RxList listFilterLevel1 = [].obs;
@@ -74,7 +72,6 @@ class GetxAppController extends GetxController {
   final listPromoCode = RxList<PromotionUserModel>([]);
 
   void setData({
-    String? sortSelectedValue,
     SortItemModel? sortSelected,
     List<FilterItemModel>? listFilterLevel1,
     List<FilterItemModel>? listFilterLevel2,
@@ -96,10 +93,6 @@ class GetxAppController extends GetxController {
     int? countOrder,
     List<PromotionUserModel>? listPromoCode,
   }) {
-    if (sortSelectedValue != null) {
-      this.sortSelectedValue.value = sortSelectedValue;
-    }
-
     if (sortSelected != null) {
       this.sortSelected.value = sortSelected;
     }

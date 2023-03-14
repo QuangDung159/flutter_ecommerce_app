@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/common/smart_refresher_custom.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/list_product_2_col.dart';
+import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/data/product_model.dart';
+import 'package:flutter_ecommerce_app/core/data/sort_item_model.dart';
 import 'package:flutter_ecommerce_app/core/services/product_service.dart';
+import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ListProductScreen extends StatefulWidget {
@@ -25,6 +28,7 @@ class ListProductScreen extends StatefulWidget {
 class _ListProductScreenState extends State<ListProductScreen> {
   List<ProductModel> listProduct = [];
   int page = 1;
+  GetxAppController getxApp = Get.find<GetxAppController>();
 
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -34,13 +38,37 @@ class _ListProductScreenState extends State<ListProductScreen> {
     super.initState();
 
     fetchListListProduct(widget.category ?? '', 1);
+
+    getxApp.sortSelected.listen((p0) {
+      setState(() {
+        listProduct = [];
+      });
+      fetchListListProduct(widget.category ?? '', 1);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // getxApp.dispose();
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
   }
 
   Future<void> fetchListListProduct(String category, int page) async {
+    SortItemModel sortSelected = getxApp.sortSelected.value;
+
     List<ProductModel> list = await ProductService.fetchListProductHome(
       category: category,
       page: page,
+      sortValue: sortSelected.value,
     );
+
     setState(() {
       listProduct = [...listProduct, ...list];
     });

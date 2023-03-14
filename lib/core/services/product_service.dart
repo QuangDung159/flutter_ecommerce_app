@@ -15,12 +15,14 @@ class ProductService {
     int? page,
     int? limit,
     String? category,
+    String? sortValue,
   }) async {
     try {
       Map<String, dynamic> reqBody = {
         'page': page ?? 1,
         'limit': limit ?? 10,
         'category': category ?? '',
+        'sort': sortValue ?? 'latest',
       };
 
       final res =
