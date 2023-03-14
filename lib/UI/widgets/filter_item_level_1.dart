@@ -5,9 +5,9 @@ import 'package:flutter_ecommerce_app/UI/widgets/expanded_section.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_2.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
-import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/filter_item_level_1_model.dart';
+import 'package:flutter_ecommerce_app/core/data/filter_item_level_2_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
-import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
 import 'package:get/get.dart';
 
 class FilterItemLevel1 extends StatefulWidget {
@@ -16,7 +16,7 @@ class FilterItemLevel1 extends StatefulWidget {
     required this.filterItemLevel1,
   }) : super(key: key);
 
-  final FilterItemModel filterItemLevel1;
+  final FilterItemLevel1Model filterItemLevel1;
 
   @override
   State<FilterItemLevel1> createState() => _FilterItemLevel1State();
@@ -24,37 +24,35 @@ class FilterItemLevel1 extends StatefulWidget {
 
 class _FilterItemLevel1State extends State<FilterItemLevel1> {
   bool showListLevel2 = false;
+  GetxAppController getxApp = Get.find<GetxAppController>();
 
-  void onTapFilterItem(listFilterSelected, filterItem) {
-    List<int> listSelected = listFilterSelected;
-    if (SortFilterServices.isFilterSelected(
-      listFilterSelected,
-      filterItem,
-    )) {
-      listSelected.remove(filterItem.id);
+  void onTapFilterItem(List<String> listFilterSelected, filterLevel2) {
+    int index =
+        listFilterSelected.indexWhere((element) => element == filterLevel2.id);
+
+    if (index == -1) {
+      listFilterSelected.add(filterLevel2.id);
     } else {
-      listSelected.add(filterItem.id);
+      listFilterSelected.removeAt(index);
     }
   }
 
-  List<Widget> renderListFilterLevel2() {
-    GetxAppController getxAppController = Get.find<GetxAppController>();
+  List<Widget> renderListFilterLevel2(FilterItemLevel1Model filterLevel1) {
+    List<FilterItemLevel2Model> listFilterLevel2 =
+        filterLevel1.listFilterLevel2 ?? [];
     List<Widget> listLevel2Render = [];
-    List listFilterLevel2 = getxAppController.listFilterLevel2;
-    List<int> listFilterSelected =
-        getxAppController.listFilterSelected.cast<int>();
 
-    for (FilterItemModel item in listFilterLevel2) {
-      if (item.parentId == widget.filterItemLevel1.id) {
-        listLevel2Render.add(
-          GestureDetector(
-            onTap: () => onTapFilterItem(listFilterSelected, item),
-            child: FilterItemLevel2(
-              filterItemLevel2: item,
-            ),
+    List<String> listFilterSelected = getxApp.listFilterItemSelected;
+
+    for (var filterLevel2 in listFilterLevel2) {
+      listLevel2Render.add(
+        GestureDetector(
+          onTap: () => onTapFilterItem(listFilterSelected, filterLevel2),
+          child: FilterItemLevel2(
+            filterItemLevel2: filterLevel2,
           ),
-        );
-      }
+        ),
+      );
     }
 
     return listLevel2Render;
@@ -93,16 +91,14 @@ class _FilterItemLevel1State extends State<FilterItemLevel1> {
               SizedBox(
                 height: 18,
               ),
-              Obx(
-                () => GridView.count(
-                  primary: false,
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  shrinkWrap: true,
-                  childAspectRatio: (102 / 34),
-                  children: renderListFilterLevel2(),
-                ),
+              GridView.count(
+                primary: false,
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                shrinkWrap: true,
+                childAspectRatio: (102 / 34),
+                children: renderListFilterLevel2(widget.filterItemLevel1),
               ),
             ],
           ),

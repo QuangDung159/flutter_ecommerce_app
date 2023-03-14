@@ -3,7 +3,7 @@ import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
-import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/filter_item_level_1_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
@@ -71,10 +71,14 @@ class GetxAppController extends GetxController {
 
   final listPromoCode = RxList<PromotionUserModel>([]);
 
+  final listFilterItemLevel1 = RxList<FilterItemLevel1Model>([]);
+
+  final listFilterItemSelected = RxList<String>([]);
+
   void setData({
     SortItemModel? sortSelected,
-    List<FilterItemModel>? listFilterLevel1,
-    List<FilterItemModel>? listFilterLevel2,
+    List<FilterItemLevel1Model>? listFilterLevel1,
+    List<FilterItemLevel1Model>? listFilterLevel2,
     List<int>? listFilterSelected,
     List<CartItemModel>? listCartItem,
     ShippingPolicyModel? shippingPolicySelected,
@@ -92,6 +96,8 @@ class GetxAppController extends GetxController {
     List<CityModel>? listCity,
     int? countOrder,
     List<PromotionUserModel>? listPromoCode,
+    List<FilterItemLevel1Model>? listFilterItemLevel1,
+    List<String>? listFilterItemSelected,
   }) {
     if (sortSelected != null) {
       this.sortSelected.value = sortSelected;
@@ -171,6 +177,14 @@ class GetxAppController extends GetxController {
 
     if (listPromoCode != null) {
       this.listPromoCode.value = listPromoCode;
+    }
+
+    if (listFilterItemLevel1 != null) {
+      this.listFilterItemLevel1.value = listFilterItemLevel1;
+    }
+
+    if (listFilterItemSelected != null) {
+      this.listFilterItemSelected.value = listFilterItemSelected;
     }
   }
 

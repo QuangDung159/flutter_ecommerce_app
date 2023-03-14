@@ -17,7 +17,6 @@ import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
-import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
@@ -143,8 +142,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     Get.put(GetxAppController());
-
-    SortFilterServices.initListFilter();
 
     _isAndroidPermissionGranted();
     _requestPermissions();

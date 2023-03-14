@@ -7,7 +7,7 @@ import 'package:flutter_ecommerce_app/UI/widgets/filter_item_level_1.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
-import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/filter_item_level_1_model.dart';
 import 'package:get/get.dart';
 
 class FilterScreen extends StatefulWidget {
@@ -22,9 +22,9 @@ class _FilterScreenState extends State<FilterScreen> {
   List<Widget> renderListFilterLevel1() {
     List<Widget> listFilterLevel1Render = [];
 
-    List listFilterLevel1 = getxAppController.listFilterLevel1;
+    List listFilterLevel1 = getxAppController.listFilterItemLevel1;
 
-    for (FilterItemModel item in listFilterLevel1) {
+    for (FilterItemLevel1Model item in listFilterLevel1) {
       listFilterLevel1Render.add(
         FilterItemLevel1(
           filterItemLevel1: item,
