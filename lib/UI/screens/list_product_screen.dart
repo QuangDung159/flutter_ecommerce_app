@@ -45,6 +45,13 @@ class _ListProductScreenState extends State<ListProductScreen> {
       });
       fetchListListProduct(widget.category ?? '', 1);
     });
+
+    getxApp.listFilterItemSelected.listen((p0) {
+      setState(() {
+        listProduct = [];
+      });
+      fetchListListProduct(widget.category ?? '', 1);
+    });
   }
 
   @override
