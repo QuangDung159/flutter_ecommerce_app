@@ -148,7 +148,7 @@ class _MainBottomBarProfileWidgetState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: AppDimension.contentPadding,
+                        height: 16,
                       ),
                       Text(
                         'Refer a friend and get reward.',
