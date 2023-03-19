@@ -2,10 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar_store.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/tab_featured_widget.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/tab_new_arrivals_widget.dart';
-import 'package:flutter_ecommerce_app/UI/widgets/tab_sale_widget.dart';
-import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/featured_main_content.dart';
 
 class MainBottomBarHomeWidget extends StatefulWidget {
   const MainBottomBarHomeWidget({super.key});
@@ -40,40 +37,8 @@ class _MainBottomBarHomeWidgetState extends State<MainBottomBarHomeWidget>
           height: MediaQuery.of(context).padding.top,
         ),
         AppBarStore(),
-        Container(
-          color: Colors.white,
-          child: TabBar(
-            unselectedLabelColor: AppColors.greyScale,
-            labelColor: AppColors.primary,
-            labelStyle: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-            tabs: [
-              Tab(
-                text: 'Featured',
-              ),
-              Tab(
-                text: 'New Arrivals',
-              ),
-              Tab(
-                text: 'Sale',
-              )
-            ],
-            controller: _tabController,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorColor: AppColors.primary,
-          ),
-        ),
         Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              TabFeaturedWidget(),
-              TabNewArrivalsWidget(),
-              TabSaleWidget(),
-            ],
-          ),
+          child: FeaturedMainContent(),
         ),
       ],
     );

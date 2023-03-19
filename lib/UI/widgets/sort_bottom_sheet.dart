@@ -53,15 +53,6 @@ class _SortBottomSheetState extends State<SortBottomSheet> {
           height: 4,
         ),
         SizedBox(
-          height: 10,
-        ),
-        Text(
-          'Sort',
-          style: TextStyle(
-            fontSize: 16,
-          ),
-        ),
-        SizedBox(
           height: 36,
         ),
         Container(

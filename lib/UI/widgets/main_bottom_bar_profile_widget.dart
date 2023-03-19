@@ -20,6 +20,7 @@ import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainBottomBarProfileWidget extends StatefulWidget {
   const MainBottomBarProfileWidget({super.key});
@@ -32,10 +33,17 @@ class MainBottomBarProfileWidget extends StatefulWidget {
 class _MainBottomBarProfileWidgetState
     extends State<MainBottomBarProfileWidget> {
   GetxAppController getx = Get.find<GetxAppController>();
+  final Uri _url = Uri.parse('https://www.linkedin.com/in/lu-quang-dung-884124152/');
 
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 
   @override
@@ -99,7 +107,7 @@ class _MainBottomBarProfileWidgetState
             ProfileMenuItem(
               title: 'Enter refer code',
               onTap: () =>
-                  ProfileService.showReferCodeInputBottomSheet(context),
+                  ProfileService.showReferCodeInputBottomSheet(context, mounted),
             ),
             ProfileMenuItem(
               title: 'Address book',
@@ -148,7 +156,7 @@ class _MainBottomBarProfileWidgetState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: AppDimension.contentPadding,
+                        height: 16,
                       ),
                       Text(
                         'Refer a friend and get reward.',
@@ -161,12 +169,17 @@ class _MainBottomBarProfileWidgetState
                       SizedBox(
                         height: 6,
                       ),
-                      Text(
-                        'Terms and conditions apply.',
-                        style: TextStyle(
-                          color: Colors.white,
+                      GestureDetector(
+                        onTap: () {
+                          _launchUrl();
+                        },
+                        child: Text(
+                          'Terms and conditions apply.',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),

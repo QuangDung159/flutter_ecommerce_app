@@ -14,6 +14,7 @@ import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
+import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
 import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -56,6 +57,8 @@ class _MainScreenState extends State<MainScreen> {
       PromoCodeService.fetchListPromoCodeUser();
       NotificationServices.fetchListNotificationByUser();
     }
+
+    SortFilterServices.fetchListFilter();
   }
 
   @override

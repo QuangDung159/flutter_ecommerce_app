@@ -17,14 +17,14 @@ import 'package:flutter_ecommerce_app/core/services/product_service.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class TabFeaturedWidget extends StatefulWidget {
-  const TabFeaturedWidget({super.key});
+class FeaturedMainContent extends StatefulWidget {
+  const FeaturedMainContent({super.key});
 
   @override
-  State<TabFeaturedWidget> createState() => _TabFeaturedWidgetState();
+  State<FeaturedMainContent> createState() => _FeaturedMainContentState();
 }
 
-class _TabFeaturedWidgetState extends State<TabFeaturedWidget>
+class _FeaturedMainContentState extends State<FeaturedMainContent>
     with AutomaticKeepAliveClientMixin {
   List<ProductModel> listArrivalsFetched = [];
   List<ProductModel> listSaleItemsFetched = [];

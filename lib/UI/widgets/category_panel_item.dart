@@ -25,6 +25,7 @@ class _CategoryPanelItemState extends State<CategoryPanelItem> {
       onTap: () => Get.to(
         () => ListProductScreen(
           title: widget.title,
+          category: widget.title,
         ),
       ),
       child: Container(

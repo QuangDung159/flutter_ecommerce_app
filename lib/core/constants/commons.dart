@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
-import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/filter_item_level_1_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
 import 'package:flutter_ecommerce_app/core/data/product_image_model.dart';
@@ -54,42 +54,13 @@ List<ProductModel> listProductDummy = [
 ];
 
 List<SortItemModel> listSortDummy = [
-  SortItemModel(title: 'Recommended', value: 'recommended'),
   SortItemModel(title: 'Latest', value: 'latest'),
   SortItemModel(title: 'Price (high)', value: 'price_high'),
   SortItemModel(title: 'Price (low)', value: 'price_low'),
-  SortItemModel(title: 'Sale', value: 'sale'),
 ];
 
-List<FilterItemModel> listFilterDummy = [
-  FilterItemModel(id: 1, name: 'Sport', slug: 'sport', parentId: null),
-  FilterItemModel(id: 2, name: 'Gender', slug: 'gender', parentId: null),
-  FilterItemModel(id: 3, name: 'Brand', slug: 'brand', parentId: null),
-  FilterItemModel(id: 4, name: 'Category', slug: 'category', parentId: null),
-  FilterItemModel(
-      id: 5, name: 'Product type', slug: 'product_type', parentId: null),
-  FilterItemModel(id: 6, name: 'Bike', slug: 'bike', parentId: 1),
-  FilterItemModel(id: 7, name: 'Fitness', slug: 'fitness', parentId: 1),
-  FilterItemModel(id: 8, name: 'Run', slug: 'run', parentId: 1),
-  FilterItemModel(id: 9, name: 'Swim', slug: 'swim', parentId: 1),
-  FilterItemModel(id: 10, name: 'Men', slug: 'men', parentId: 2),
-  FilterItemModel(id: 11, name: 'Women', slug: 'women', parentId: 2),
-  FilterItemModel(id: 12, name: 'Unisex', slug: 'unisex', parentId: 2),
-  FilterItemModel(id: 13, name: '2XU', slug: '2xu', parentId: 3),
-  FilterItemModel(id: 14, name: 'Adidas', slug: 'adidas', parentId: 3),
-  FilterItemModel(id: 15, name: 'Brooks', slug: 'brooks', parentId: 3),
-  FilterItemModel(id: 16, name: 'Nike', slug: 'nike', parentId: 3),
-  FilterItemModel(id: 17, name: 'Gear', slug: 'gear', parentId: 4),
-  FilterItemModel(id: 18, name: 'Tech', slug: 'tech', parentId: 4),
-  FilterItemModel(id: 19, name: 'Short', slug: 'short', parentId: 4),
-  FilterItemModel(id: 20, name: 'Bags', slug: 'bags', parentId: 5),
-  FilterItemModel(id: 21, name: 'Tanks', slug: 'tanks', parentId: 5),
-  FilterItemModel(id: 22, name: 'Bags', slug: 'bags', parentId: 5),
-  FilterItemModel(id: 23, name: 'Tanks', slug: 'tanks', parentId: 5),
-  FilterItemModel(id: 24, name: 'Bags', slug: 'bags', parentId: 5),
-  FilterItemModel(id: 25, name: 'Tanks', slug: 'tanks', parentId: 5),
-  FilterItemModel(id: 26, name: 'Bags', slug: 'bags', parentId: 5),
-  FilterItemModel(id: 27, name: 'Tanks', slug: 'tanks', parentId: 5),
+List<FilterItemLevel1Model> listFilterDummy = [
+  FilterItemLevel1Model(id: '1', name: 'Sport'),
 ];
 
 List<CartItemModel> listCartItemDummy = [
@@ -338,8 +309,8 @@ String stripePublishableKey =
 bool isAndroid = Platform.isAndroid;
 
 // const String baseUrl = 'https://nodejs-e-commerce-dev.onrender.com/api/v1';
-const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
-// const String baseUrl = 'http://localhost:5004/api/v1';
+// const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
+const String baseUrl = 'http://localhost:5004/api/v1';
 
 const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
 // String stripeBaseUrl =

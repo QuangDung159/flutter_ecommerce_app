@@ -15,12 +15,16 @@ class ProductService {
     int? page,
     int? limit,
     String? category,
+    String? sortValue,
+    List<String>? listFilterId,
   }) async {
     try {
       Map<String, dynamic> reqBody = {
         'page': page ?? 1,
         'limit': limit ?? 10,
         'category': category ?? '',
+        'sort': sortValue ?? 'latest',
+        'listFilterId': listFilterId,
       };
 
       final res =
@@ -55,7 +59,6 @@ class ProductService {
         getxApp.setData(listSaleItems: listProduct);
         break;
       default:
-        getxApp.setData(listRecentlyViewed: listProduct);
         break;
     }
   }
@@ -72,5 +75,26 @@ class ProductService {
     }
 
     return null;
+  }
+
+  static Future<List<ProductModel>> onSearch(String queryString) async {
+    try {
+      final res = await httpGet(uri: '$uri/search/$queryString');
+
+      if (!isRequestSuccess(res)) {
+        return [];
+      }
+
+      Iterable listJson = jsonDecode(res.body)['data']['listProduct'];
+      List<ProductModel> listProduct = List<ProductModel>.from(
+        listJson.map(
+          (e) => ProductModel.fromJson(e),
+        ),
+      );
+
+      return listProduct;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }

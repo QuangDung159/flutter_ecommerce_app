@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
-import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/filter_item_level_2_model.dart';
 import 'package:flutter_ecommerce_app/core/services/sort_filter_services.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +13,7 @@ class FilterItemLevel2 extends StatefulWidget {
     required this.filterItemLevel2,
   }) : super(key: key);
 
-  final FilterItemModel filterItemLevel2;
+  final FilterItemLevel2Model filterItemLevel2;
 
   @override
   State<FilterItemLevel2> createState() => _FilterItemLevel2State();
@@ -23,7 +23,7 @@ class _FilterItemLevel2State extends State<FilterItemLevel2> {
   Widget renderListFilterLevel2() {
     GetxAppController getxAppController = Get.find<GetxAppController>();
 
-    List listFilterSelected = getxAppController.listFilterSelected;
+    List listFilterSelected = getxAppController.listFilterItemSelected;
 
     bool isSelected = SortFilterServices.isFilterSelected(
       listFilterSelected,

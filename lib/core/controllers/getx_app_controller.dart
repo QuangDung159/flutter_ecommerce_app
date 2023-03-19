@@ -3,7 +3,7 @@ import 'package:flutter_ecommerce_app/core/data/address_model.dart';
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/city_model.dart';
 import 'package:flutter_ecommerce_app/core/data/district_model.dart';
-import 'package:flutter_ecommerce_app/core/data/filter_item_model.dart';
+import 'package:flutter_ecommerce_app/core/data/filter_item_level_1_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_card_model.dart';
 import 'package:flutter_ecommerce_app/core/data/payment_method_model.dart';
@@ -17,15 +17,7 @@ import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:get/get.dart';
 
 class GetxAppController extends GetxController {
-  final sortSelectedValue = RxString('recommended');
-
   final Rx<SortItemModel> sortSelected = listSortDummy[0].obs;
-
-  final RxList listFilterLevel1 = [].obs;
-
-  final RxList listFilterLevel2 = [].obs;
-
-  final RxList listFilterSelected = [].obs;
 
   final RxList listCartItem = [].obs;
 
@@ -51,7 +43,7 @@ class GetxAppController extends GetxController {
 
   final referCodeReceived = RxnString();
 
-  final listNoti = RxList<NotificationModel>(listNotificationDummy);
+  final listNoti = RxList<NotificationModel>([]);
 
   final listCartItemCheckout = RxList<CartItemModel>([]);
 
@@ -73,11 +65,16 @@ class GetxAppController extends GetxController {
 
   final listPromoCode = RxList<PromotionUserModel>([]);
 
+  final listFilterItemLevel1 = RxList<FilterItemLevel1Model>([]);
+
+  final listFilterItemSelected = RxList<String>([]);
+
+  final isLoading = RxBool(false);
+
   void setData({
-    String? sortSelectedValue,
     SortItemModel? sortSelected,
-    List<FilterItemModel>? listFilterLevel1,
-    List<FilterItemModel>? listFilterLevel2,
+    List<FilterItemLevel1Model>? listFilterLevel1,
+    List<FilterItemLevel1Model>? listFilterLevel2,
     List<int>? listFilterSelected,
     List<CartItemModel>? listCartItem,
     ShippingPolicyModel? shippingPolicySelected,
@@ -95,25 +92,12 @@ class GetxAppController extends GetxController {
     List<CityModel>? listCity,
     int? countOrder,
     List<PromotionUserModel>? listPromoCode,
+    List<FilterItemLevel1Model>? listFilterItemLevel1,
+    List<String>? listFilterItemSelected,
+    bool? isLoading,
   }) {
-    if (sortSelectedValue != null) {
-      this.sortSelectedValue.value = sortSelectedValue;
-    }
-
     if (sortSelected != null) {
       this.sortSelected.value = sortSelected;
-    }
-
-    if (listFilterLevel1 != null) {
-      this.listFilterLevel1.value = listFilterLevel1;
-    }
-
-    if (listFilterLevel2 != null) {
-      this.listFilterLevel2.value = listFilterLevel2;
-    }
-
-    if (listFilterSelected != null) {
-      this.listFilterSelected.value = listFilterSelected;
     }
 
     if (listCartItem != null) {
@@ -178,6 +162,18 @@ class GetxAppController extends GetxController {
 
     if (listPromoCode != null) {
       this.listPromoCode.value = listPromoCode;
+    }
+
+    if (listFilterItemLevel1 != null) {
+      this.listFilterItemLevel1.value = listFilterItemLevel1;
+    }
+
+    if (listFilterItemSelected != null) {
+      this.listFilterItemSelected.value = listFilterItemSelected;
+    }
+
+    if (isLoading != null) {
+      this.isLoading.value = isLoading;
     }
   }
 
