@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
+import 'package:flutter_ecommerce_app/UI/widgets/common/smart_refresher_custom.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/notification_item.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/sign_in_section.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MainBottomBarNotificationWidget extends StatefulWidget {
   const MainBottomBarNotificationWidget({super.key});
@@ -21,6 +23,29 @@ class MainBottomBarNotificationWidget extends StatefulWidget {
 class _MainBottomBarNotificationWidgetState
     extends State<MainBottomBarNotificationWidget> {
   GetxAppController getx = Get.find<GetxAppController>();
+
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  onFetch() async {
+    if (getx.userLogged.value == null) {
+      return;
+    }
+    await NotificationServices.fetchListNotificationByUser();
+  }
+
+  void _onRefresh() async {
+    // monitor network fetch
+     await onFetch();
+    // if failed, use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    onFetch();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,15 +91,20 @@ class _MainBottomBarNotificationWidgetState
 
   Widget renderMainContent() {
     return Expanded(
-      child: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          padding: EdgeInsets.symmetric(
-            horizontal: AppDimension.contentPadding,
-          ),
-          margin: EdgeInsets.only(bottom: 12),
-          child: Column(
-            children: renderListNoti(getx.listNoti),
+      child: SmartRefresherCustom(
+        refreshController: _refreshController,
+        enablePullDown: true,
+        onRefresh: _onRefresh,
+        child: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(
+              horizontal: AppDimension.contentPadding,
+            ),
+            margin: EdgeInsets.only(bottom: 12),
+            child: Column(
+              children: renderListNoti(getx.listNoti),
+            ),
           ),
         ),
       ),
