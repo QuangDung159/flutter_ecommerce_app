@@ -121,7 +121,7 @@ class ProfileService {
         ),
         child: Container(
           color: Colors.white,
-          height: 220,
+          height: 200,
           child: Column(
             children: [
               SizedBox(
@@ -131,15 +131,6 @@ class ProfileService {
                 AssetHelper.iconBottomSheet,
                 width: 40,
                 height: 4,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Please sign in',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
               ),
               SizedBox(
                 height: 10,
