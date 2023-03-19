@@ -43,7 +43,7 @@ class GetxAppController extends GetxController {
 
   final referCodeReceived = RxnString();
 
-  final listNoti = RxList<NotificationModel>(listNotificationDummy);
+  final listNoti = RxList<NotificationModel>([]);
 
   final listCartItemCheckout = RxList<CartItemModel>([]);
 

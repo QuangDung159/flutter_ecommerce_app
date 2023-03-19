@@ -107,7 +107,7 @@ class _MainBottomBarProfileWidgetState
             ProfileMenuItem(
               title: 'Enter refer code',
               onTap: () =>
-                  ProfileService.showReferCodeInputBottomSheet(context),
+                  ProfileService.showReferCodeInputBottomSheet(context, mounted),
             ),
             ProfileMenuItem(
               title: 'Address book',

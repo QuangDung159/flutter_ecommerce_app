@@ -28,7 +28,7 @@ class ListSigninMethod extends StatelessWidget {
                 if (googleSigninAccount != null) {
                   // signin success
                   if (getx.referCodeReceived.value != null) {
-                    ProfileService.showReferCodeInputBottomSheet(context);
+                    ProfileService.showReferCodeInputBottomSheet(context, true);
                   }
                 }
               },
@@ -53,7 +53,7 @@ class ListSigninMethod extends StatelessWidget {
                 if (loginResult != null) {
                   // signin success
                   if (getx.referCodeReceived.value != null) {
-                    ProfileService.showReferCodeInputBottomSheet(context);
+                    ProfileService.showReferCodeInputBottomSheet(context, true);
                   }
                 }
               },

@@ -316,10 +316,44 @@ class ProfileService {
     }
   }
 
-  static void showReferCodeInputBottomSheet(BuildContext context) {
+  static Future<bool> onSubmitReferCode(String input) async {
+    try {
+      Map<String, dynamic> reqBody = {'referCode': input};
+
+      final res = await httpPost(
+          uri: '$uri/submitReferCode/${getxApp.userLogged.value!.id}',
+          reqBody: reqBody);
+
+      print(jsonDecode(res.body)['error']);
+
+      if (isRequestSuccess(res)) {
+        getxApp.setReferCodeReceived(null);
+        showSnackBar(
+          content: 'Using refer code success. Thank you.',
+          duration: Duration(
+            seconds: 3,
+          ),
+        );
+        return true;
+      } else {
+        showSnackBar(
+          content: jsonDecode(res.body)['error'],
+          duration: Duration(
+            seconds: 3,
+          ),
+          isSuccess: false,
+        );
+      }
+
+      return false;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static void showReferCodeInputBottomSheet(BuildContext context, mounted) {
     final referCodeInputController = TextEditingController();
-    GetxAppController getx = Get.find<GetxAppController>();
-    referCodeInputController.text = getx.referCodeReceived.value ?? '';
+    referCodeInputController.text = getxApp.referCodeReceived.value ?? '';
 
     showModalBottomSheet(
       isScrollControlled: true,
@@ -355,10 +389,6 @@ class ProfileService {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Refer code'),
-                    SizedBox(
-                      height: 8,
-                    ),
                     TextFieldWidget(
                       controller: referCodeInputController,
                       hintText: 'Enter refer code',
@@ -369,15 +399,13 @@ class ProfileService {
                     ),
                     LoadingButtonWidget(
                       label: 'Submit',
-                      onTap: () {
-                        getx.setReferCodeReceived(null);
-                        showSnackBar(
-                          content: 'Using refer code success. Thank you.',
-                          duration: Duration(
-                            seconds: 3,
-                          ),
-                        );
-                        Navigator.of(context).pop();
+                      onTap: () async {
+                        await onSubmitReferCode(referCodeInputController.text);
+
+                        if (!mounted) {
+                          return;
+                        }
+                        return Navigator.of(context).pop();
                       },
                     )
                   ],
