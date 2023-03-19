@@ -324,8 +324,6 @@ class ProfileService {
           uri: '$uri/submitReferCode/${getxApp.userLogged.value!.id}',
           reqBody: reqBody);
 
-      print(jsonDecode(res.body)['error']);
-
       if (isRequestSuccess(res)) {
         getxApp.setReferCodeReceived(null);
         showSnackBar(
@@ -400,7 +398,7 @@ class ProfileService {
                     LoadingButtonWidget(
                       label: 'Submit',
                       onTap: () async {
-                        await onSubmitReferCode(referCodeInputController.text);
+                        await onSubmitReferCode('640a9698a1af1edd4d14cb00');
 
                         if (!mounted) {
                           return;

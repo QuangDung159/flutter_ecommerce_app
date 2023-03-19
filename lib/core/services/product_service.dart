@@ -59,7 +59,6 @@ class ProductService {
         getxApp.setData(listSaleItems: listProduct);
         break;
       default:
-        getxApp.setData(listRecentlyViewed: listProduct);
         break;
     }
   }
