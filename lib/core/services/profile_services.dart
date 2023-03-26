@@ -18,6 +18,7 @@ import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/address_service.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
@@ -74,6 +75,7 @@ class ProfileService {
         OrderService.countOrder();
         PromoCodeService.fetchListPromoCodeUser();
         NotificationServices.fetchListNotificationByUser();
+        generateReferCode();
 
         await updateUser(reqBody: {'fcm_token': fcmToken});
       }
@@ -301,6 +303,7 @@ class ProfileService {
         listPaymentCard: [],
         listPromoCode: [],
         listRecentlyViewed: [],
+        referCode: '',
       );
     } catch (e) {
       throw Exception(e);
@@ -389,7 +392,7 @@ class ProfileService {
                     LoadingButtonWidget(
                       label: 'Submit',
                       onTap: () async {
-                        await onSubmitReferCode('640a9698a1af1edd4d14cb00');
+                        await onSubmitReferCode(referCodeInputController.text);
 
                         if (!mounted) {
                           return;
@@ -446,6 +449,16 @@ class ProfileService {
       return res;
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  static Future<void> generateReferCode() async {
+    if (getxApp.userLogged.value != null) {
+      String referCodeGenerated = await DynamicLinkServices.buildDynamicLink(
+        link: Uri.parse(
+            '$deepLinkDomain/profile_screen/${getxApp.userLogged.value!.id}'),
+      );
+      getxApp.setData(referCode: referCodeGenerated);
     }
   }
 }

@@ -71,6 +71,8 @@ class GetxAppController extends GetxController {
 
   final isLoading = RxBool(false);
 
+  final referCode = RxString('');
+
   void setData({
     SortItemModel? sortSelected,
     List<FilterItemLevel1Model>? listFilterLevel1,
@@ -95,6 +97,7 @@ class GetxAppController extends GetxController {
     List<FilterItemLevel1Model>? listFilterItemLevel1,
     List<String>? listFilterItemSelected,
     bool? isLoading,
+    String? referCode,
   }) {
     if (sortSelected != null) {
       this.sortSelected.value = sortSelected;
@@ -174,6 +177,10 @@ class GetxAppController extends GetxController {
 
     if (isLoading != null) {
       this.isLoading.value = isLoading;
+    }
+
+    if (referCode != null) {
+      this.referCode.value = referCode;
     }
   }
 
