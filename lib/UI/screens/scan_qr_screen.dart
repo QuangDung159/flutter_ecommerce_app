@@ -71,12 +71,10 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
                       LoadingButtonWidget(
                         label: 'Process',
                         onTap: () async {
-                          await Future.delayed(Duration(seconds: 2), () {
-                            triggerLaunchUrl(
-                              parseUri(url),
-                              LaunchMode.externalApplication,
-                            );
-                          });
+                          await triggerLaunchUrl(
+                            parseUri(url),
+                            LaunchMode.externalApplication,
+                          );
 
                           if (!mounted) {
                             return;

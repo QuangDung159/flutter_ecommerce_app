@@ -89,7 +89,11 @@ Widget? getScreen(
 
   switch (screenName) {
     case 'voucher_screen':
-      return VoucherScreen();
+      String voucherCode = getIdFromUrl(payload);
+      printCustom(content: voucherCode);
+      return VoucherScreen(
+        voucherCode: voucherCode,
+      );
     case 'cart_screen':
       return CartScreen();
     case 'product_detail_screen':

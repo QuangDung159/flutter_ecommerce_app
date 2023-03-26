@@ -18,9 +18,11 @@ class VoucherScreen extends StatefulWidget {
   const VoucherScreen({
     super.key,
     this.navigationFrom,
+    this.voucherCode,
   });
 
   final String? navigationFrom;
+  final String? voucherCode;
 
   @override
   State<VoucherScreen> createState() => _VoucherScreenState();
@@ -37,6 +39,9 @@ class _VoucherScreenState extends State<VoucherScreen> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      promoCodeInput = widget.voucherCode ?? '';
+    });
   }
 
   @override
