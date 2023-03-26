@@ -18,6 +18,7 @@ import 'package:flutter_ecommerce_app/core/helpers/http_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/address_service.dart';
 import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
+import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/notification_services.dart';
 import 'package:flutter_ecommerce_app/core/services/order_service.dart';
 import 'package:flutter_ecommerce_app/core/services/promo_code_service.dart';
@@ -447,5 +448,12 @@ class ProfileService {
     } catch (e) {
       throw Exception(e);
     }
+  }
+
+  static Future<String> generateReferCode() async {
+    return await DynamicLinkServices.buildDynamicLink(
+      link: Uri.parse(
+          '$deepLinkDomain/profile_screen/${getxApp.userLogged.value!.id}'),
+    );
   }
 }

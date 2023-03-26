@@ -13,13 +13,12 @@ import 'package:flutter_ecommerce_app/UI/widgets/sign_in_section.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/version_text.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_dimension.dart';
-import 'package:flutter_ecommerce_app/core/constants/commons.dart';
 import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
-import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:get/get.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainBottomBarProfileWidget extends StatefulWidget {
@@ -33,11 +32,21 @@ class MainBottomBarProfileWidget extends StatefulWidget {
 class _MainBottomBarProfileWidgetState
     extends State<MainBottomBarProfileWidget> {
   GetxAppController getx = Get.find<GetxAppController>();
-  final Uri _url = Uri.parse('https://www.linkedin.com/in/lu-quang-dung-884124152/');
+  final Uri _url =
+      Uri.parse('https://www.linkedin.com/in/lu-quang-dung-884124152/');
+  String dynamicLink = '';
 
   @override
   void initState() {
     super.initState();
+    generateReferCode();
+  }
+
+  void generateReferCode() async {
+    String referCodeLink = await ProfileService.generateReferCode();
+    setState(() {
+      dynamicLink = referCodeLink;
+    });
   }
 
   Future<void> _launchUrl() async {
@@ -101,13 +110,20 @@ class _MainBottomBarProfileWidgetState
               height: AppDimension.contentPadding,
             ),
             renderReferCodeSection(),
+            if (dynamicLink != '')
+              QrImage(
+                data: dynamicLink,
+                version: QrVersions.auto,
+                size: 150,
+                gapless: false,
+              ),
             SizedBox(
               height: AppDimension.contentPadding,
             ),
             ProfileMenuItem(
               title: 'Enter refer code',
-              onTap: () =>
-                  ProfileService.showReferCodeInputBottomSheet(context, mounted),
+              onTap: () => ProfileService.showReferCodeInputBottomSheet(
+                  context, mounted),
             ),
             ProfileMenuItem(
               title: 'Address book',
@@ -376,16 +392,19 @@ class _MainBottomBarProfileWidgetState
             ),
           ),
           GestureDetector(
-            onTap: () async {
-              String dynamicLink = await DynamicLinkServices.buildDynamicLink(
-                link: Uri.parse(
-                    '$deepLinkDomain/profile_screen/${getx.userLogged.value!.id}'),
-              );
-              share(
-                title: 'Click link to get promotion',
-                text: 'Flutter E-Commerce App - Referrer link',
-                linkUrl: dynamicLink,
-              );
+            onTap: () {
+              if (dynamicLink != '') {
+                share(
+                  title: 'Click link to get promotion',
+                  text: 'Flutter E-Commerce App - Referrer link',
+                  linkUrl: dynamicLink,
+                );
+              } else {
+                showSnackBar(
+                  content: 'Something went wrong, please try again later',
+                  isSuccess: false,
+                );
+              }
             },
             child: Image.asset(
               AssetHelper.iconShare,
