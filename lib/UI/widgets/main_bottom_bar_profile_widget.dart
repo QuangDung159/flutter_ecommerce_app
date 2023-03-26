@@ -53,12 +53,6 @@ class _MainBottomBarProfileWidgetState
     });
   }
 
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -219,7 +213,7 @@ class _MainBottomBarProfileWidgetState
                       ),
                       GestureDetector(
                         onTap: () {
-                          _launchUrl();
+                          triggerLaunchUrl(_url, LaunchMode.externalApplication);
                         },
                         child: Text(
                           'Terms and conditions apply.',

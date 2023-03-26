@@ -390,7 +390,7 @@ class ProfileService {
                     LoadingButtonWidget(
                       label: 'Submit',
                       onTap: () async {
-                        await onSubmitReferCode('640a9698a1af1edd4d14cb00');
+                        await onSubmitReferCode(referCodeInputController.text);
 
                         if (!mounted) {
                           return;

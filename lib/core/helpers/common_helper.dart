@@ -15,6 +15,7 @@ import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 String formatPrice(String price) {
   return '\$${double.parse(price)}';
@@ -281,4 +282,10 @@ Uri parseUri(String url) {
 
 bool isRequestSuccess(res) {
   return res.statusCode == 200 || res.statusCode == 201;
+}
+
+Future<void> triggerLaunchUrl(Uri url, LaunchMode mode) async {
+  if (!await launchUrl(url, mode: mode)) {
+    throw Exception('Could not launch $url');
+  }
 }
