@@ -6,6 +6,7 @@ import 'package:flutter_ecommerce_app/UI/screens/cart_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/delivery_address_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/list_order_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/payment_card_screen.dart';
+import 'package:flutter_ecommerce_app/UI/screens/scan_qr_screen.dart';
 import 'package:flutter_ecommerce_app/UI/screens/voucher_screen.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/app_bar.dart';
 import 'package:flutter_ecommerce_app/UI/widgets/profile_menu_item.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
 import 'package:get/get.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -35,6 +37,8 @@ class _MainBottomBarProfileWidgetState
   final Uri _url =
       Uri.parse('https://www.linkedin.com/in/lu-quang-dung-884124152/');
   String dynamicLink = '';
+
+  MobileScannerController cameraController = MobileScannerController();
 
   @override
   void initState() {
@@ -113,6 +117,10 @@ class _MainBottomBarProfileWidgetState
             renderQRCodeReferFriends(),
             SizedBox(
               height: AppDimension.contentPadding,
+            ),
+            ProfileMenuItem(
+              title: 'Scan code',
+              onTap: () => Get.to(() => ScanQRScreen()),
             ),
             ProfileMenuItem(
               title: 'Enter refer code',
