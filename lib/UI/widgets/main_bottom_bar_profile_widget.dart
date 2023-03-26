@@ -110,13 +110,7 @@ class _MainBottomBarProfileWidgetState
               height: AppDimension.contentPadding,
             ),
             renderReferCodeSection(),
-            if (dynamicLink != '')
-              QrImage(
-                data: dynamicLink,
-                version: QrVersions.auto,
-                size: 150,
-                gapless: false,
-              ),
+            renderQRCodeReferFriends(),
             SizedBox(
               height: AppDimension.contentPadding,
             ),
@@ -140,6 +134,36 @@ class _MainBottomBarProfileWidgetState
         ),
       ),
     );
+  }
+
+  Widget renderQRCodeReferFriends() {
+    if (dynamicLink != '') {
+      return Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppDimension.contentPadding,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Share with your friends to scan and get your code!',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            QrImage(
+              data: dynamicLink,
+              version: QrVersions.auto,
+              size: 150,
+              gapless: false,
+            ),
+          ],
+        ),
+      );
+    }
+    return Container();
   }
 
   Widget renderReferCodeSection() {
