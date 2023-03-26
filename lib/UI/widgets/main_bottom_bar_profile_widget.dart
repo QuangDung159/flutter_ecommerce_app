@@ -36,21 +36,12 @@ class _MainBottomBarProfileWidgetState
   GetxAppController getx = Get.find<GetxAppController>();
   final Uri _url =
       Uri.parse('https://www.linkedin.com/in/lu-quang-dung-884124152/');
-  String dynamicLink = '';
 
   MobileScannerController cameraController = MobileScannerController();
 
   @override
   void initState() {
     super.initState();
-    generateReferCode();
-  }
-
-  void generateReferCode() async {
-    String referCodeLink = await ProfileService.generateReferCode();
-    setState(() {
-      dynamicLink = referCodeLink;
-    });
   }
 
   @override
@@ -139,7 +130,8 @@ class _MainBottomBarProfileWidgetState
   }
 
   Widget renderQRCodeReferFriends() {
-    if (dynamicLink != '') {
+    String referCode = getx.referCode.value;
+    if (referCode != '') {
       return Padding(
         padding: EdgeInsets.symmetric(
           horizontal: AppDimension.contentPadding,
@@ -156,7 +148,7 @@ class _MainBottomBarProfileWidgetState
               ),
             ),
             QrImage(
-              data: dynamicLink,
+              data: referCode,
               version: QrVersions.auto,
               size: 150,
               gapless: false,
@@ -390,6 +382,7 @@ class _MainBottomBarProfileWidgetState
   }
 
   Widget renderReferCode() {
+    String referCode = getx.referCode.value;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -419,11 +412,11 @@ class _MainBottomBarProfileWidgetState
           ),
           GestureDetector(
             onTap: () {
-              if (dynamicLink != '') {
+              if (referCode != '') {
                 share(
                   title: 'Click link to get promotion',
                   text: 'Flutter E-Commerce App - Referrer link',
-                  linkUrl: dynamicLink,
+                  linkUrl: referCode,
                 );
               } else {
                 showSnackBar(

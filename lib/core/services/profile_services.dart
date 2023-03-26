@@ -75,6 +75,7 @@ class ProfileService {
         OrderService.countOrder();
         PromoCodeService.fetchListPromoCodeUser();
         NotificationServices.fetchListNotificationByUser();
+        generateReferCode();
 
         await updateUser(reqBody: {'fcm_token': fcmToken});
       }
@@ -302,6 +303,7 @@ class ProfileService {
         listPaymentCard: [],
         listPromoCode: [],
         listRecentlyViewed: [],
+        referCode: '',
       );
     } catch (e) {
       throw Exception(e);
@@ -450,10 +452,13 @@ class ProfileService {
     }
   }
 
-  static Future<String> generateReferCode() async {
-    return await DynamicLinkServices.buildDynamicLink(
-      link: Uri.parse(
-          '$deepLinkDomain/profile_screen/${getxApp.userLogged.value!.id}'),
-    );
+  static Future<void> generateReferCode() async {
+    if (getxApp.userLogged.value != null) {
+      String referCodeGenerated = await DynamicLinkServices.buildDynamicLink(
+        link: Uri.parse(
+            '$deepLinkDomain/profile_screen/${getxApp.userLogged.value!.id}'),
+      );
+      getxApp.setData(referCode: referCodeGenerated);
+    }
   }
 }
