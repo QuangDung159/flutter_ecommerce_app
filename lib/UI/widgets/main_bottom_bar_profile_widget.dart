@@ -142,7 +142,7 @@ class _MainBottomBarProfileWidgetState
               child: Text(
                 'Share with your friends to scan and get your code!',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -406,7 +406,7 @@ class _MainBottomBarProfileWidgetState
           Text(
             getx.userLogged.value!.id,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 13,
               fontWeight: FontWeight.bold,
             ),
           ),
