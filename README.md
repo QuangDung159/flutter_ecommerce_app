@@ -17,6 +17,9 @@ samples, guidance on mobile development, and a full API reference.
 
 # Deep link/notification link template
 Product detail => https://flutter-ecommerce-app.page.link/product_detail_screen/[productId]
+
 Voucher screen => https://flutter-ecommerce-app.page.link/voucher_screen
+
 Cart screen => https://flutter-ecommerce-app.page.link/cart_screen
+
 Refer friend => https://flutter-ecommerce-app.page.link/profile_screen/[referCode]
