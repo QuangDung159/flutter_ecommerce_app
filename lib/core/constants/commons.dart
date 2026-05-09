@@ -308,8 +308,8 @@ String stripePublishableKey =
 
 bool isAndroid = Platform.isAndroid;
 
-const String baseUrl = 'https://nodejs-e-commerce-dev.onrender.com/api/v1';
-// const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
+// const String baseUrl = 'https://nodejs-e-commerce-dev.onrender.com/api/v1';
+const String baseUrl = 'https://nodejs-e-commerce.onrender.com/api/v1';
 // const String baseUrl = 'http://localhost:5004/api/v1';
 
 const String stripeBaseUrl = 'https://nodejs-stripe.onrender.com';
