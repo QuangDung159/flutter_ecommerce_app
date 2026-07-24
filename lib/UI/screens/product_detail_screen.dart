@@ -19,7 +19,7 @@ import 'package:flutter_ecommerce_app/core/services/cart_services.dart';
 import 'package:flutter_ecommerce_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_ecommerce_app/core/services/product_service.dart';
 import 'package:flutter_ecommerce_app/core/services/profile_services.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -406,20 +406,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     if (productDesc == '') {
       return Text('No information');
     }
-    Widget html = Html(
-      data: productDesc,
-      style: {
-        'body': Style(
-          padding: EdgeInsets.zero,
-          margin: Margins.zero,
-        ),
-        'p': Style(
-          padding: EdgeInsets.zero,
-          margin: Margins.zero,
-        ),
-      },
+    return HtmlWidget(
+      productDesc,
+      textStyle: const TextStyle(fontSize: 14),
     );
-    return html;
   }
 
   Widget renderInfoSection(String title, String content) {

@@ -147,7 +147,7 @@ class _MainBottomBarProfileWidgetState
                 ),
               ),
             ),
-            QrImage(
+            QrImageView(
               data: referCode,
               version: QrVersions.auto,
               size: 150,

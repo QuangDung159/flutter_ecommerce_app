@@ -11,7 +11,7 @@ import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/data/notification_modal.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
 import 'package:flutter_ecommerce_app/core/helpers/common_helper.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 
 class NotificationDetailScreen extends StatefulWidget {
@@ -195,20 +195,10 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
   }
 
   Widget renderHtml(String content) {
-    Widget html = Html(
-      data: content,
-      style: {
-        'body': Style(
-          padding: EdgeInsets.zero,
-          margin: Margins.zero,
-        ),
-        'p': Style(
-          padding: EdgeInsets.zero,
-          margin: Margins.zero,
-        ),
-      },
+    return HtmlWidget(
+      content,
+      textStyle: const TextStyle(fontSize: 14),
     );
-    return html;
   }
 
   Widget renderIcon() {
