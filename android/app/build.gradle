@@ -47,6 +47,14 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+        externalNativeBuild {
+            cmake {
+                arguments "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+            }
+            ndkBuild {
+                arguments "APP_LDFLAGS+=-Wl,-z,max-page-size=16384"
+            }
+        }
     }
 
     signingConfigs {

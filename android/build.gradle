@@ -22,6 +22,16 @@ subprojects {
             }
             p.android {
                 compileSdkVersion 36
+                defaultConfig {
+                    externalNativeBuild {
+                        cmake {
+                            arguments "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+                        }
+                        ndkBuild {
+                            arguments "APP_LDFLAGS+=-Wl,-z,max-page-size=16384"
+                        }
+                    }
+                }
                 buildFeatures {
                     buildConfig = true
                 }
