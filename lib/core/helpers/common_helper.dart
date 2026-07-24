@@ -13,7 +13,7 @@ import 'package:flutter_ecommerce_app/core/controllers/getx_app_controller.dart'
 import 'package:flutter_ecommerce_app/core/data/cart_item_model.dart';
 import 'package:flutter_ecommerce_app/core/data/datetime_model.dart';
 import 'package:flutter_ecommerce_app/core/helpers/asset_helper.dart';
-import 'package:flutter_share/flutter_share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -163,10 +163,9 @@ Future<void> share({
   required String title,
   required String linkUrl,
 }) async {
-  await FlutterShare.share(
-    title: title,
-    text: text,
-    linkUrl: linkUrl,
+  await Share.share(
+    '$text $linkUrl',
+    subject: title,
   );
 }
 
