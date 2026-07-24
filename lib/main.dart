@@ -211,7 +211,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>();
 
-      final bool? granted = await androidImplementation?.requestPermission();
+      final bool? granted =
+          await androidImplementation?.requestNotificationsPermission();
       setState(() {
         _notificationsEnabled = granted ?? false;
       });
@@ -237,7 +238,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         // primarySwatch: Colors.blue,
         primaryColor: AppColors.primary,
         scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
-        backgroundColor: AppColors.scaffoldBackgroundColor,
       ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
